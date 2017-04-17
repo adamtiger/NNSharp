@@ -60,7 +60,6 @@ namespace NNSharp.IO
                             (int)layer.SelectToken("stride_vl"), (int)layer.SelectToken("stride_hz"),
                             (int)layer.SelectToken("kernel_height"), (int)layer.SelectToken("kernel_width"));
                         break;
-
                     case "Convolution2D":
                         descriptor = new Convolution2D((int)layer.SelectToken("padding_vl"), (int)layer.SelectToken("padding_hz"),
                             (int)layer.SelectToken("stride_vl"), (int)layer.SelectToken("stride_hz"),

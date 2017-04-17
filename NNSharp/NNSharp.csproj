@@ -59,12 +59,14 @@
     <Compile Include="KernelDescriptors\Flatten.cs" />
     <Compile Include="KernelDescriptors\Input2D.cs" />
     <Compile Include="KernelDescriptors\MaxPooling2D.cs" />
+    <Compile Include="KernelDescriptors\MinPooling2D.cs" />
     <Compile Include="KernelDescriptors\Softmax.cs" />
     <Compile Include="Kernels\CPUKernels\Bias2DKernel.cs" />
     <Compile Include="Kernels\CPUKernels\Conv2DKernel.cs" />
     <Compile Include="Kernels\CPUKernels\Dense2DKernel.cs" />
     <Compile Include="Kernels\CPUKernels\FlattenKernel.cs" />
     <Compile Include="Kernels\CPUKernels\MaxPool2DKernel.cs" />
+    <Compile Include="Kernels\CPUKernels\MinPool2DKernel.cs" />
     <Compile Include="Kernels\CPUKernels\ReLuKernel.cs" />
     <Compile Include="Kernels\CPUKernels\SoftmaxKernel.cs" />
     <Compile Include="SequentialBased\SequentialExecutors\DeafultAbstractLayerFactory.cs" />
@@ -87,6 +89,8 @@
     <Compile Include="SequentialBased\SequentialLayers\Input2DLayer.cs" />
     <Compile Include="SequentialBased\SequentialLayers\MaxPool2DLayer.cs" />
     <Compile Include="SequentialBased\SequentialLayers\MaxPool2DLayerFactory.cs" />
+    <Compile Include="SequentialBased\SequentialLayers\MinPool2DLayer.cs" />
+    <Compile Include="SequentialBased\SequentialLayers\MinPool2DLayerFactory.cs" />
     <Compile Include="SequentialBased\SequentialLayers\ReLuLayer.cs" />
     <Compile Include="SequentialBased\SequentialLayers\ReLuLayerFactory.cs" />
     <Compile Include="SequentialBased\SequentialExecutors\IAbstractLayerFactory.cs" />
