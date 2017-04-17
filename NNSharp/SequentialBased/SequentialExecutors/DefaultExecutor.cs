@@ -10,6 +10,7 @@ using NNSharp.IO;
 
 namespace NNSharp.SequentialBased.SequentialExecutors
 {
+    [Serializable()]
     public class DefaultExecutor : ISequentialExecutor
     {
         public DefaultExecutor()
@@ -67,7 +68,11 @@ namespace NNSharp.SequentialBased.SequentialExecutors
         }
 
         private List<ILayer> layers;
+
+        [field: NonSerialized()]
         private IAbstractLayerFactory factory;
+
+        [field: NonSerialized()]
         IData initInput = null;
     }
 }

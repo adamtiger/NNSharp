@@ -13,9 +13,9 @@ namespace NNSharp.SequentialBased.SequentialLayers
      * The data containes zeros as default values 
      */
 
+    [Serializable()]
     public class Input2DLayer : ILayer
     {
-
         public Input2DLayer()
         {
             zerosInput = null;

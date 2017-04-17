@@ -8,6 +8,7 @@ using static NNSharp.DataTypes.Data2D;
 
 namespace NNSharp.Kernels.CPUKernels
 {
+    [Serializable()]
     public class MaxPool2DKernel : IKernel
     {
         public void Execute()

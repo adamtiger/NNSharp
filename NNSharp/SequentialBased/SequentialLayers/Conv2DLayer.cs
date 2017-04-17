@@ -9,6 +9,7 @@ using static NNSharp.DataTypes.Data2D;
 
 namespace NNSharp.SequentialBased.SequentialLayers
 {
+    [Serializable()]
     public class Conv2DLayer : Conv2DKernel, ILayer
     {
         public Conv2DLayer(int paddingVertical, int paddingHorizontal, 

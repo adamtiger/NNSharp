@@ -9,6 +9,7 @@ using static NNSharp.DataTypes.Data2D;
 
 namespace NNSharp.SequentialBased.SequentialLayers
 {
+    [Serializable()]
     public class FlattenLayer : FlattenKernel, ILayer
     {
 

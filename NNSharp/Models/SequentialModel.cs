@@ -10,6 +10,7 @@ using NNSharp.DataTypes;
 
 namespace NNSharp.Models
 {
+    [Serializable()]
     public class SequentialModel
     {
         public SequentialModel()
@@ -38,7 +39,7 @@ namespace NNSharp.Models
             return compiled.Execute(input);
         }
 
-
+        [field: NonSerialized()]
         private List<IKernelDescriptor> descriptors;
         private ISequentialExecutor compiled;
 
