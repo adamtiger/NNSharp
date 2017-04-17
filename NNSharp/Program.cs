@@ -39,6 +39,12 @@ namespace NNSharp
             inp[0, 7, 0, 0] = 2;
 
             IData ou = testModel.ExecuteNetwork(inp);
+
+            TestConv1();
+            TestConv2();
+            TestPool1();
+            TestPool2();
+            
             Console.WriteLine("Finished.");
         }
 
@@ -46,7 +52,11 @@ namespace NNSharp
         {
             var reader = new ReaderKerasModel(fpath);
 
-            SequentialModel model = reader.GetSequentialExecutor();
+            SequentialModel model1 = reader.GetSequentialExecutor();
+
+            PersistSequentialModel.SerializeModel(model1, "test.bin");
+
+            SequentialModel model = PersistSequentialModel.DeserializeModel("test.bin");
 
             Data2D inp = new Data2D(4, 5, 2, 1);
 

@@ -9,7 +9,7 @@ using static NNSharp.DataTypes.Data2D;
 namespace NNSharp.Kernels.CPUKernels
 {
     [Serializable()]
-    public class MaxPool2DKernel : IKernel
+    public class MinPool2DKernel : IKernel
     {
         public void Execute()
         {
@@ -28,14 +28,14 @@ namespace NNSharp.Kernels.CPUKernels
                         {
                             stH = w * strideHorizontal - paddingHorizontal;
                             stV = h * strideVertical - paddingVertical;
-                            output[h, w, channel, batch] = Double.MinValue;
+                            output[h, w, channel, batch] = Double.MaxValue;
 
                             for (int idxH = stH; idxH < stH + kernelDim.w; ++idxH)
                             {
                                 for (int idxV = stV; idxV < stV + kernelDim.h; ++idxV)
                                 {
-                                     output[h, w, channel, batch] = Math.Max(input[idxV, idxH, channel, batch],
-                                                                         output[h, w, channel, batch]);
+                                    output[h, w, channel, batch] = Math.Min(input[idxV, idxH, channel, batch],
+                                                                        output[h, w, channel, batch]);
                                 }
                             }
 
