@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,8 +19,12 @@ namespace NNSharp
         public static void Main(string[] args)
         {
             var reader = new ReaderKerasModel("tests/test_dense_model.json");
-
             SequentialModel model = reader.GetSequentialExecutor();
+
+            PersistSequentialModel.SerializeModel(model, "test.bin");
+
+            SequentialModel testModel = PersistSequentialModel.DeserializeModel("test.bin");
+           
 
             Data2D inp = new Data2D(1, 8, 1, 1);
 
@@ -33,8 +38,7 @@ namespace NNSharp
             inp[0, 6, 0, 0] = 1;
             inp[0, 7, 0, 0] = 2;
 
-            IData ou = model.ExecuteNetwork(inp);
-
+            IData ou = testModel.ExecuteNetwork(inp);
             Console.WriteLine("Finished.");
         }
 

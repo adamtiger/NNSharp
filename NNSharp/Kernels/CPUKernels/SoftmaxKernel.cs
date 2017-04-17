@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace NNSharp.Kernels.CPUKernels
 {
+    [Serializable()]
     public class SoftmaxKernel : IKernel
     {
         public void Execute()

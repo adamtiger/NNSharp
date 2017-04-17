@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace NNSharp.DataTypes
 {
+    [Serializable()]
     public class DataArray : IData, IEnumerable<double>
     {
 

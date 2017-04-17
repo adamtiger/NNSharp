@@ -8,6 +8,7 @@ using NNSharp.Kernels.CPUKernels;
 
 namespace NNSharp.SequentialBased.SequentialLayers
 {
+    [Serializable()]
     public class Bias2DLayer : Bias2DKernel, ILayer
     {
 

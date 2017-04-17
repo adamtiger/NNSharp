@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NNSharp.DataTypes
 {
-
+    [Serializable()]
     public class Data2D : IData
     {
 
@@ -80,6 +80,7 @@ namespace NNSharp.DataTypes
 
         private double[,,,] tensor;
 
+        [Serializable()]
         public struct Dimension
         {
             public Dimension(int h, int w, int c, int b)

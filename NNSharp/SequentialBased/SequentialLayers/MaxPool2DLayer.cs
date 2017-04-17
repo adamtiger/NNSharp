@@ -9,6 +9,7 @@ using static NNSharp.DataTypes.Data2D;
 
 namespace NNSharp.SequentialBased.SequentialLayers
 {
+    [Serializable()]
     public class MaxPool2DLayer : MaxPool2DKernel, ILayer
     {
 

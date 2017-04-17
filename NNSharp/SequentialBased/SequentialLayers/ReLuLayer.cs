@@ -8,6 +8,7 @@ using NNSharp.DataTypes;
 
 namespace NNSharp.SequentialBased.SequentialLayers
 {
+    [Serializable()]
     public class ReLuLayer : ReLuKernel, ILayer
     {
 

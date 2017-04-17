@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace NNSharp.Kernels.CPUKernels
 {
+    [Serializable()]
     public class ReLuKernel : IKernel
     {
         public void Execute()
