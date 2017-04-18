@@ -14,7 +14,7 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public void TestMethod_ToZeros()
+        public void Test_ToZeros()
         {
             data.ToZeros();
 
@@ -24,7 +24,7 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public void TestMethod_ApplyToAll()
+        public void Test_ApplyToAll()
         {
             for (int idx = 0; idx < data.GetLength(); ++idx)
             {
@@ -41,7 +41,7 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public void TestMethod_Foreach()
+        public void Test_Foreach()
         {
             double sum = 0.0;
             data.ToZeros();

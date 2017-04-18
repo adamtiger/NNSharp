@@ -51,6 +51,18 @@ namespace NNSharp.DataTypes
             }
         }
 
+        public static explicit operator Data2D(DataArray arr)
+        {
+            Data2D casted = new Data2D(1, 1, arr.GetLength(), 1);
+
+            for (int idx = 0; idx < arr.GetLength(); ++idx)
+            {
+                casted[0, 0, idx, 0] = arr[idx];
+            }
+
+            return casted;
+        }
+
         public void ApplyToAll(Operation operation)
         {
             for (int b = 0; b < D.b; ++b)

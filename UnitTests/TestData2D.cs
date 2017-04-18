@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NNSharp.Kernels;
 using NNSharp.DataTypes;
+using static NNSharp.DataTypes.Data2D;
 
 namespace UnitTests
 {
@@ -15,7 +16,7 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public void TestMethod_ToZeros()
+        public void Test_ToZeros()
         {
             data.ToZeros();
 
@@ -25,7 +26,7 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public void TestMethod_ApplyToAll()
+        public void Test_ApplyToAll()
         {
             for (int b = 0; b < data.GetDimension().b; ++b)
             {
@@ -46,6 +47,27 @@ namespace UnitTests
             Assert.AreEqual(data[1, 0, 1, 0], 1.0, 0.00000001);
             Assert.AreEqual(data[1, 3, 1, 0], 1.0, 0.00000001);
             Assert.AreEqual(data[3, 2, 0, 0], 1.0, 0.00000001);
+        }
+
+        [TestMethod]
+        public void Test_Data2DCast()
+        {
+            DataArray array = new DataArray(5);
+            array[0] = 1;
+            array[1] = 2;
+            array[2] = 3;
+            array[3] = 0;
+            array[4] = 7;
+
+            Data2D casted = (Data2D)array;
+
+            Assert.AreEqual(casted.GetDimension(), new Dimension(1,1,5,1));
+
+            Assert.AreEqual(casted[0, 0, 0, 0], 1.0, 0.00000001);
+            Assert.AreEqual(casted[0, 0, 1, 0], 2.0, 0.00000001);
+            Assert.AreEqual(casted[0, 0, 2, 0], 3.0, 0.00000001);
+            Assert.AreEqual(casted[0, 0, 3, 0], 0.0, 0.00000001);
+            Assert.AreEqual(casted[0, 0, 4, 0], 7.0, 0.00000001);
         }
 
         private Data2D data;
