@@ -68,5 +68,5 @@ This library aims for connecting the models trained in Python with Tensorflow, T
 
 ## Licence
 
-This project runs under the MIT licence. You can use it in any Open Source project.
+This project runs under the [MIT licence](https://github.com/adamtiger/NNSharp/blob/master/LICENSE). You can use it in any Open Source project.
 
