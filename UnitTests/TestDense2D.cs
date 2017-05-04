@@ -93,7 +93,8 @@ namespace UnitTests
             weights[0, 0, 16, 1] = 3;
             weights[0, 0, 17, 1] = 2;
 
-            Dense2DLayer dens = new Dense2DLayer(weights);
+            Dense2DLayer dens = new Dense2DLayer(2);
+            dens.SetWeights(weights);
             dens.SetInput(data);
             dens.Execute();
             Data2D output = dens.GetOutput() as Data2D;
@@ -115,7 +116,8 @@ namespace UnitTests
         {
             Data2D data = null;
             Data2D weights = new Data2D(3, 3, 3, 3);
-            Dense2DLayer dens = new Dense2DLayer(weights);
+            Dense2DLayer dens = new Dense2DLayer(3);
+            dens.SetWeights(weights);
             dens.SetInput(data);
         }
 
@@ -124,7 +126,8 @@ namespace UnitTests
         public void Test_NullConv_Weights()
         {
             Data2D weights = null;
-            Dense2DLayer dens = new Dense2DLayer(weights);
+            Dense2DLayer dens = new Dense2DLayer(0);
+            dens.SetWeights(weights);
         }
 
         [TestMethod]
@@ -133,7 +136,8 @@ namespace UnitTests
         {
             DataArray data = new DataArray(5);
             Data2D weights = new Data2D(3, 3, 3, 3);
-            Dense2DLayer dens = new Dense2DLayer(weights);
+            Dense2DLayer dens = new Dense2DLayer(3);
+            dens.SetWeights(weights);
             dens.SetInput(data);
         }
 
@@ -142,7 +146,8 @@ namespace UnitTests
         public void Test_DifferentData_Weights()
         {
             DataArray weights = new DataArray(5);
-            Dense2DLayer dens = new Dense2DLayer(weights);
+            Dense2DLayer dens = new Dense2DLayer(1);
+            dens.SetWeights(weights);
         }
     }
 }

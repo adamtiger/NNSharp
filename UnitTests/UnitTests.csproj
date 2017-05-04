@@ -55,6 +55,7 @@
     <Compile Include="TestData2D.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestDataArray.cs" />
+    <Compile Include="TestELu.cs" />
     <Compile Include="TestReLu.cs" />
     <Compile Include="TestSoftmax.cs" />
     <Compile Include="TestBias2D.cs" />

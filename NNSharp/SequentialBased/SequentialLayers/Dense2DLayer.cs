@@ -13,14 +13,9 @@ namespace NNSharp.SequentialBased.SequentialLayers
     public class Dense2DLayer : Dense2DKernel, ILayer
     {
 
-        public Dense2DLayer(IData weights)
+        public Dense2DLayer(int units)
         {
-            if (weights == null)
-                throw new Exception("Dense2DLayer: weights is null.");
-            else if (!(weights is Data2D))
-                throw new Exception("Dense2DLayer: weights is not Data2D.");
-
-            this.weights = weights as Data2D;
+            this.units = units;
         }
 
         public IData GetOutput()
@@ -61,8 +56,12 @@ namespace NNSharp.SequentialBased.SequentialLayers
                 throw new Exception("Dense2DLayer: weights is null.");
             else if (!(weights is Data2D))
                 throw new Exception("Dense2DLayer: weights is not Data2D.");
+            else if (((Data2D)weights).GetDimension().b != units)
+                throw new Exception("Dense2DLayer: batch size of weights is not appropriate.");
 
             this.weights = weights as Data2D;
         }
+
+        private int units;
     }
 }
