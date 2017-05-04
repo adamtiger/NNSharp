@@ -12,7 +12,7 @@ Therefore this library aims for using the weights and structure created with the
 
 ## Installation
 
-The package is [available](https://www.nuget.org/packages/NNSharp/) as a NuGet package from nuget.org. 
+The package is [available](https://www.nuget.org/packages/NNSharp/) as a NuGet package from nuget.org. The current NuGet package was built on Windows8.1, Visual Studio 2015 and .Net Framework4.5.2.
 
 ## Current abilities
 
@@ -23,6 +23,7 @@ The library supports the following layers (only forward direction):
 * MinPooling (2 D)
 * Flatten ([Keras](https://keras.io/) like)
 * Dense
+* ELu
 * ReLu
 * Softmax
 
@@ -60,6 +61,7 @@ Of course new models can be built but the weights should come from outside.
 * Extend the library for Theano backend.
 * Extend to PyTorch, Sonnet and raw Tensorflow models. The latter should be done with [TensorflowSharp](https://github.com/migueldeicaza/TensorFlowSharp).
 * Better kernels in C#. Currently simple implementations are used. Other packages can help: [ConvNetSharp](https://github.com/cbovar/ConvNetSharp), [SharpLearning](https://www.nuget.org/packages/SharpLearning.Neural/).
+* Threading
 * More documentation.
 
 ## Summary
