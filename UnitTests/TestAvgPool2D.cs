@@ -7,7 +7,7 @@ using static NNSharp.DataTypes.Data2D;
 namespace UnitTests
 {
     [TestClass]
-    public class AvgPool2D
+    public class TestAvgPool2D
     {
         [TestMethod]
         public void Test_AvgPool2D_Execute()

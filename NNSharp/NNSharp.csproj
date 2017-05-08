@@ -63,6 +63,7 @@
     <Compile Include="KernelDescriptors\MaxPooling2D.cs" />
     <Compile Include="KernelDescriptors\MinPooling2D.cs" />
     <Compile Include="KernelDescriptors\Softmax.cs" />
+    <Compile Include="KernelDescriptors\TanH.cs" />
     <Compile Include="Kernels\CPUKernels\AvgPool2DKernel.cs" />
     <Compile Include="Kernels\CPUKernels\Bias2DKernel.cs" />
     <Compile Include="Kernels\CPUKernels\Conv2DKernel.cs" />
@@ -73,11 +74,13 @@
     <Compile Include="Kernels\CPUKernels\MinPool2DKernel.cs" />
     <Compile Include="Kernels\CPUKernels\ReLuKernel.cs" />
     <Compile Include="Kernels\CPUKernels\SoftmaxKernel.cs" />
+    <Compile Include="Kernels\CPUKernels\TanHKernel.cs" />
     <Compile Include="SequentialBased\SequentialExecutors\DeafultAbstractLayerFactory.cs" />
     <Compile Include="SequentialBased\SequentialLayers\AvgPool2DLayer.cs" />
     <Compile Include="SequentialBased\SequentialLayers\AvgPool2DLayerFactory.cs" />
     <Compile Include="SequentialBased\SequentialLayers\Bias2DLayer.cs" />
     <Compile Include="SequentialBased\SequentialLayers\Bias2DLayerFactory.cs" />
+    <Compile Include="SequentialBased\SequentialLayers\TanHLayer.cs" />
     <Compile Include="SequentialBased\SequentialLayers\Conv2DLayer.cs" />
     <Compile Include="SequentialBased\SequentialLayers\Conv2DLayerFactory.cs" />
     <Compile Include="SequentialBased\SequentialLayers\Dense2DLayer.cs" />
@@ -110,6 +113,7 @@
     <Compile Include="SequentialBased\SequentialExecutors\ISequentialExecutor.cs" />
     <Compile Include="SequentialBased\SequentialLayers\SoftmaxLayerFactory.cs" />
     <Compile Include="SequentialBased\SequentialLayers\SoftmaxLayer.cs" />
+    <Compile Include="SequentialBased\SequentialLayers\TanHLayerFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -26,6 +26,7 @@ namespace NNSharp.SequentialBased.SequentialExecutors
             factories.Add(new MinPool2DLayerFactory());
             factories.Add(new ReLuLayerFactory());
             factories.Add(new SoftmaxLayerFactory());
+            factories.Add(new TanHLayerFactory());
             factories.Add(new FlattenLayerFactory());
         }
 
