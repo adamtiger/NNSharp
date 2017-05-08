@@ -2,7 +2,7 @@
 
 [![Build status](https://ci.appveyor.com/api/projects/status/m7albu3gen3orswj/branch/master?svg=true)](https://ci.appveyor.com/project/adamtiger/nnsharp/branch/master)
 
-Library for running pre-trained neural networks. 
+A lightweight package for running pre-trained neural networks. 
 
 ## Philosophy
 
@@ -59,14 +59,14 @@ Of course new models can be built but the weights should come from outside.
 ## Plans and contributions
 
 * Extend the library for Theano backend.
-* Extend to PyTorch, Sonnet and raw Tensorflow models. The latter should be done with [TensorflowSharp](https://github.com/migueldeicaza/TensorFlowSharp).
-* Better kernels in C#. Currently simple implementations are used. Other packages can help: [ConvNetSharp](https://github.com/cbovar/ConvNetSharp), [SharpLearning](https://www.nuget.org/packages/SharpLearning.Neural/).
+* Extend to PyTorch, Sonnet and raw Tensorflow models.
+* Better kernels in C#. Currently simple implementations are used. 
 * Threading
 * More documentation.
 
 ## Summary
 
-This library aims for connecting the models trained in Python with Tensorflow, Theano, Pytorch, Sonnet with C#. It is able to run the models but training has low priority in this project.
+This library aims for connecting the models trained in Python with Tensorflow, Theano, Pytorch, Sonnet with C#. It is able to run the models but training has no priority in this project.
 
 ## Licence
 
