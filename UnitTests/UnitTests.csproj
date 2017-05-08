@@ -64,6 +64,7 @@
     <Compile Include="TestMaxPool2D.cs" />
     <Compile Include="TestDense2D.cs" />
     <Compile Include="TestMinPool2D.cs" />
+    <Compile Include="AvgPool2D.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NNSharp\NNSharp.csproj">

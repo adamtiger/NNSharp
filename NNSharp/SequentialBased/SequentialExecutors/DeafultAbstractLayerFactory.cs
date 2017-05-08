@@ -16,6 +16,7 @@ namespace NNSharp.SequentialBased.SequentialExecutors
         {
             factories = new List<ILayerFactory>();
 
+            factories.Add(new AvgPool2DLayerFactory());
             factories.Add(new Bias2DLayerFactory());
             factories.Add(new Conv2DLayerFactory());
             factories.Add(new Dense2DLayerFactory());
