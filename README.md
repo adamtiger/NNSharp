@@ -1,4 +1,4 @@
-# ![logo](https://drive.google.com/uc?export=download&id=0B97L9zqg-lnwal9MYXhwaHdaOTA) NNSharp
+![logo](https://drive.google.com/uc?export=download&id=0B97L9zqg-lnwMkIxRVB2YV9nMFU)
 
 [![Build status](https://ci.appveyor.com/api/projects/status/m7albu3gen3orswj/branch/master?svg=true)](https://ci.appveyor.com/project/adamtiger/nnsharp/branch/master)
 
