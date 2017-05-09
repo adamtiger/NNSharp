@@ -19,6 +19,7 @@ The package is [available](https://www.nuget.org/packages/NNSharp/) as a NuGet p
 The library supports the following layers (only forward direction):
 
 * Convolution (2-dimensional)
+* AvgPooling (2 D)
 * MaxPooling (2 D)
 * MinPooling (2 D)
 * Flatten ([Keras](https://keras.io/) like)
@@ -26,6 +27,7 @@ The library supports the following layers (only forward direction):
 * ELu
 * ReLu
 * Softmax
+* Tanh
 
 This release version supports Keras models with Tensorflow backend.
 
