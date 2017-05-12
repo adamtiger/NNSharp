@@ -112,7 +112,7 @@ namespace UnitTests
 
         [TestMethod]
         [ExpectedException(typeof(System.Exception))]
-        public void Test_NullDense_Input()
+        public void Test_Dense2D_Null_Input()
         {
             Data2D data = null;
             Data2D weights = new Data2D(3, 3, 3, 3);
@@ -123,7 +123,7 @@ namespace UnitTests
 
         [TestMethod]
         [ExpectedException(typeof(System.Exception))]
-        public void Test_NullConv_Weights()
+        public void Test_Dense2D_Null_Weights()
         {
             Data2D weights = null;
             Dense2DLayer dens = new Dense2DLayer(0);
@@ -132,7 +132,7 @@ namespace UnitTests
 
         [TestMethod]
         [ExpectedException(typeof(System.Exception))]
-        public void Test_DifferentData_Input()
+        public void Test_Dense2D_DifferentData_Input()
         {
             DataArray data = new DataArray(5);
             Data2D weights = new Data2D(3, 3, 3, 3);
@@ -143,7 +143,7 @@ namespace UnitTests
 
         [TestMethod]
         [ExpectedException(typeof(System.Exception))]
-        public void Test_DifferentData_Weights()
+        public void Test_Dense2D_DifferentData_Weights()
         {
             DataArray weights = new DataArray(5);
             Dense2DLayer dens = new Dense2DLayer(1);

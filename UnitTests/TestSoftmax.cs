@@ -50,7 +50,7 @@ namespace UnitTests
 
         [TestMethod]
         [ExpectedException(typeof(System.Exception))]
-        public void Test_NullData()
+        public void Test_Softmax_NullData()
         {
             DataArray data = null;
             SoftmaxLayer soft = new SoftmaxLayer();
@@ -59,7 +59,7 @@ namespace UnitTests
 
         [TestMethod]
         [ExpectedException(typeof(System.Exception))]
-        public void Test_DifferentData_Softmax()
+        public void Test_Softmax_DifferentData()
         {
             Data2D data = new Data2D(5,4,5,10);
             SoftmaxLayer soft = new SoftmaxLayer();

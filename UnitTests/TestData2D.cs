@@ -16,7 +16,7 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public void Test_ToZeros()
+        public void Test_Data2D_ToZeros()
         {
             data.ToZeros();
 
@@ -26,7 +26,7 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public void Test_ApplyToAll()
+        public void Test_Data2D_ApplyToAll()
         {
             for (int b = 0; b < data.GetDimension().b; ++b)
             {
@@ -50,7 +50,7 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public void Test_Data2DCast()
+        public void Test_Data2D_Cast()
         {
             DataArray array = new DataArray(5);
             array[0] = 1;

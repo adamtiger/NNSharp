@@ -65,7 +65,7 @@ namespace UnitTests
 
         [TestMethod]
         [ExpectedException(typeof(System.Exception))]
-        public void Test_NullMaxPool_Input()
+        public void Test_MaxPool2D_Null_Input()
         {
             Data2D data = null;
             MaxPool2DLayer pool = new MaxPool2DLayer(1, 1, 1, 1, 2,2);
@@ -74,7 +74,7 @@ namespace UnitTests
 
         [TestMethod]
         [ExpectedException(typeof(System.Exception))]
-        public void Test_DifferentDataMaxPool_Input()
+        public void Test_MaxPool2D_DifferentData_Input()
         {
             DataArray data = new DataArray(5);
             MaxPool2DLayer pool = new MaxPool2DLayer(1, 1, 1, 1, 2,2);

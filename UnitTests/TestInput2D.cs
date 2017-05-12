@@ -10,7 +10,7 @@ namespace UnitTests
     {
         [TestMethod]
         [ExpectedException(typeof(System.Exception))]
-        public void Test_NullInput()
+        public void Test_Input2D_NullInput()
         {
             Data2D data = null;
             Input2DLayer inp = new Input2DLayer();
@@ -19,7 +19,7 @@ namespace UnitTests
 
         [TestMethod]
         [ExpectedException(typeof(System.Exception))]
-        public void Test_DifferentData_Input()
+        public void Test_input2D_DifferentData_Input()
         {
             DataArray data = new DataArray(5);
             Input2DLayer inp = new Input2DLayer();

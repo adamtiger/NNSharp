@@ -53,7 +53,7 @@ namespace UnitTests
 
         [TestMethod]
         [ExpectedException(typeof(System.Exception))]
-        public void Test_NullData()
+        public void Test_Bias2D_NullData()
         {
             Data2D data = null;
 
@@ -68,7 +68,7 @@ namespace UnitTests
 
         [TestMethod]
         [ExpectedException(typeof(System.Exception))]
-        public void Test_NullBias()
+        public void Test_Bias2D_NullBias()
         {
             DataArray biases = null;
             Bias2DLayer bias = new Bias2DLayer();
@@ -77,7 +77,7 @@ namespace UnitTests
 
         [TestMethod]
         [ExpectedException(typeof(System.Exception))]
-        public void Test_DifferentData_Bias()
+        public void Test_Bias2D_DifferentData()
         {
             Data2D biases = null;
             Bias2DLayer bias = new Bias2DLayer();
@@ -86,7 +86,7 @@ namespace UnitTests
 
         [TestMethod]
         [ExpectedException(typeof(System.Exception))]
-        public void Test_DifferentData_Input()
+        public void Test_Bias2D_DifferentData_Input()
         {
             DataArray data = new DataArray(5);
 
@@ -101,7 +101,7 @@ namespace UnitTests
 
         [TestMethod]
         [ExpectedException(typeof(System.Exception))]
-        public void Test_DifferentSizes()
+        public void Test_Bias2D_DifferentSizes()
         {
             Data2D data = new Data2D(4, 5, 1, 5);
 
