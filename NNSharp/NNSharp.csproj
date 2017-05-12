@@ -63,6 +63,7 @@
     <Compile Include="KernelDescriptors\MaxPooling2D.cs" />
     <Compile Include="KernelDescriptors\MinPooling2D.cs" />
     <Compile Include="KernelDescriptors\Softmax.cs" />
+    <Compile Include="KernelDescriptors\SoftSign.cs" />
     <Compile Include="KernelDescriptors\TanH.cs" />
     <Compile Include="Kernels\CPUKernels\AvgPool2DKernel.cs" />
     <Compile Include="Kernels\CPUKernels\Bias2DKernel.cs" />
@@ -74,12 +75,15 @@
     <Compile Include="Kernels\CPUKernels\MinPool2DKernel.cs" />
     <Compile Include="Kernels\CPUKernels\ReLuKernel.cs" />
     <Compile Include="Kernels\CPUKernels\SoftmaxKernel.cs" />
+    <Compile Include="Kernels\CPUKernels\SoftsignKernel.cs" />
     <Compile Include="Kernels\CPUKernels\TanHKernel.cs" />
     <Compile Include="SequentialBased\SequentialExecutors\DeafultAbstractLayerFactory.cs" />
     <Compile Include="SequentialBased\SequentialLayers\AvgPool2DLayer.cs" />
     <Compile Include="SequentialBased\SequentialLayers\AvgPool2DLayerFactory.cs" />
     <Compile Include="SequentialBased\SequentialLayers\Bias2DLayer.cs" />
     <Compile Include="SequentialBased\SequentialLayers\Bias2DLayerFactory.cs" />
+    <Compile Include="SequentialBased\SequentialLayers\SoftsignLayer.cs" />
+    <Compile Include="SequentialBased\SequentialLayers\SoftsignLayerFactory.cs" />
     <Compile Include="SequentialBased\SequentialLayers\TanHLayer.cs" />
     <Compile Include="SequentialBased\SequentialLayers\Conv2DLayer.cs" />
     <Compile Include="SequentialBased\SequentialLayers\Conv2DLayerFactory.cs" />
