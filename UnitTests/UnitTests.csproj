@@ -68,6 +68,7 @@
     <Compile Include="TestTanH.cs" />
     <Compile Include="TestSoftsign.cs" />
     <Compile Include="TestSoftPlus.cs" />
+    <Compile Include="TestSigmoid.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NNSharp\NNSharp.csproj">
