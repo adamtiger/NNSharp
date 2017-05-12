@@ -26,7 +26,11 @@ The library supports the following layers (only forward direction):
 * Dense
 * ELu
 * ReLu
+* Sigmoid
+* HardSigmoid
 * Softmax
+* SoftPlus
+* Softsign
 * Tanh
 
 This release version supports Keras models with Tensorflow backend.
@@ -63,7 +67,7 @@ Of course new models can be built but the weights should come from outside.
 * Extend the library for Theano backend.
 * Extend to PyTorch, Sonnet and raw Tensorflow models.
 * Better kernels in C#. Currently simple implementations are used. 
-* Threading
+* Multi-Threading
 * More documentation.
 
 ## Summary
