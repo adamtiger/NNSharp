@@ -59,6 +59,7 @@
     <Compile Include="KernelDescriptors\Dense2D.cs" />
     <Compile Include="KernelDescriptors\ELu.cs" />
     <Compile Include="KernelDescriptors\Flatten.cs" />
+    <Compile Include="KernelDescriptors\HardSigmoid.cs" />
     <Compile Include="KernelDescriptors\Input2D.cs" />
     <Compile Include="KernelDescriptors\MaxPooling2D.cs" />
     <Compile Include="KernelDescriptors\MinPooling2D.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="Kernels\CPUKernels\Dense2DKernel.cs" />
     <Compile Include="Kernels\CPUKernels\ELuKernel.cs" />
     <Compile Include="Kernels\CPUKernels\FlattenKernel.cs" />
+    <Compile Include="Kernels\CPUKernels\HardSigmoidKernel.cs" />
     <Compile Include="Kernels\CPUKernels\MaxPool2DKernel.cs" />
     <Compile Include="Kernels\CPUKernels\MinPool2DKernel.cs" />
     <Compile Include="Kernels\CPUKernels\ReLuKernel.cs" />
@@ -86,6 +88,8 @@
     <Compile Include="SequentialBased\SequentialLayers\AvgPool2DLayerFactory.cs" />
     <Compile Include="SequentialBased\SequentialLayers\Bias2DLayer.cs" />
     <Compile Include="SequentialBased\SequentialLayers\Bias2DLayerFactory.cs" />
+    <Compile Include="SequentialBased\SequentialLayers\HardSigmoidLayer.cs" />
+    <Compile Include="SequentialBased\SequentialLayers\HardSigmoidLayerFactory.cs" />
     <Compile Include="SequentialBased\SequentialLayers\SigmoidLayer.cs" />
     <Compile Include="SequentialBased\SequentialLayers\SigmoidLayerFactory.cs" />
     <Compile Include="SequentialBased\SequentialLayers\SoftPlusLayer.cs" />
