@@ -9,7 +9,7 @@ namespace UnitTests
     public class TestHardSigmoid
     {
         [TestMethod]
-        public void Test_Sigmoid_Execute()
+        public void Test_HardSigmoid_Execute()
         {
             hardsigmoid = new HardSigmoidLayer();
 

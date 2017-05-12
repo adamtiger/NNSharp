@@ -65,7 +65,7 @@ namespace UnitTests
 
         [TestMethod]
         [ExpectedException(typeof(System.Exception))]
-        public void Test_NullAvgPool_Input()
+        public void Test_AvgPool2D_Null_Input()
         {
             Data2D data = null;
             AvgPool2DLayer pool = new AvgPool2DLayer(1, 1, 1, 1, 2, 2);
@@ -74,7 +74,7 @@ namespace UnitTests
 
         [TestMethod]
         [ExpectedException(typeof(System.Exception))]
-        public void Test_DifferentDataAvgPool_Input()
+        public void Test_AvgPool2D_DifferentData_Input()
         {
             DataArray data = new DataArray(5);
             AvgPool2DLayer pool = new AvgPool2DLayer(1, 1, 1, 1, 2, 2);

@@ -65,7 +65,7 @@ namespace UnitTests
 
         [TestMethod]
         [ExpectedException(typeof(System.Exception))]
-        public void Test_NullMinPool_Input()
+        public void Test_MinPool2D_Null_Input()
         {
             Data2D data = null;
             MinPool2DLayer pool = new MinPool2DLayer(1, 1, 1, 1, 2, 2);
@@ -74,7 +74,7 @@ namespace UnitTests
 
         [TestMethod]
         [ExpectedException(typeof(System.Exception))]
-        public void Test_DifferentDataMinPool_Input()
+        public void Test_MinPool2D_DifferentData_Input()
         {
             DataArray data = new DataArray(5);
             MinPool2DLayer pool = new MinPool2DLayer(1, 1, 1, 1, 2, 2);
