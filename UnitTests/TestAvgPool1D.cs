@@ -40,7 +40,6 @@ namespace UnitTests
 
             Assert.AreEqual(output[0, 0, 1, 0], 2.5, 0.0000001);
             Assert.AreEqual(output[0, 1, 1, 0], 3.0, 0.0000001);
-
         }
 
         [TestMethod]

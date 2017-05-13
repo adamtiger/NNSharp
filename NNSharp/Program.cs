@@ -10,33 +10,9 @@ namespace NNSharp
     {
         public static void Main(string[] args)
         {
-            var reader = new ReaderKerasModel("tests/test_dense_model.json");
-            SequentialModel model = reader.GetSequentialExecutor();
 
-            PersistSequentialModel.SerializeModel(model, "test.bin");
+            TestAvgPool2D1();
 
-            SequentialModel testModel = PersistSequentialModel.DeserializeModel("test.bin");
-           
-
-            Data2D inp = new Data2D(1, 8, 1, 1);
-
-            inp[0, 0, 0, 0] = 1;
-            inp[0, 1, 0, 0] = 2;
-            inp[0, 2, 0, 0] = -1;
-            inp[0, 3, 0, 0] = 0;
-
-            inp[0, 4, 0, 0] = 3;
-            inp[0, 5, 0, 0] = 1;
-            inp[0, 6, 0, 0] = 1;
-            inp[0, 7, 0, 0] = 2;
-
-            IData ou = testModel.ExecuteNetwork(inp);
-
-            TestConv1();
-            TestConv2();
-            TestPool1();
-            TestPool2();
-            
             Console.WriteLine("Finished.");
         }
 
@@ -102,24 +78,34 @@ namespace NNSharp
             IData ou = model.ExecuteNetwork(inp);
         }
 
-        private static void TestConv1()
+        private static void TestConv2D1()
         {
-            Common("tests/test_conv_1_model.json");
+            Common("tests/test_conv_2D_1_model.json");
         }
 
-        private static void TestConv2()
+        private static void TestConv2D2()
         {
-            Common("tests/test_conv_2_model.json");
+            Common("tests/test_conv_2D_2_model.json");
         }
 
-        private static void TestPool1()
+        private static void TestAvgPool2D1()
         {
-            Common("tests/test_pool_1_model.json");
+            Common("tests/test_avgpool_2D_1_model.json");
         }
 
-        private static void TestPool2()
+        private static void TestAvgPool2D2()
         {
-            Common("tests/test_pool_2_model.json");
+            Common("tests/test_avgpool_2D_2_model.json");
+        }
+
+        private static void TestMaxPool2D1()
+        {
+            Common("tests/test_maxpool_2D_1_model.json");
+        }
+
+        private static void TestMaxPool2D2()
+        {
+            Common("tests/test_maxpool_2D_2_model.json");
         }
 
         private static void TestFlatten()
@@ -147,5 +133,7 @@ namespace NNSharp
 
             IData ou = model.ExecuteNetwork(inp);
         }
+
+
     }
 }

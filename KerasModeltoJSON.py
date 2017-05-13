@@ -27,7 +27,11 @@ class JSONwriter:
         
         # First the input layer
         inp_sizes = conf[0]['config']['batch_input_shape']
-        layer_input = {'layer':'Input2D', 'height':inp_sizes[1], 'width':inp_sizes[2], 'channel':inp_sizes[3]}
+        layer_input = {}
+        if len(inp_sizes) == 3:
+            layer_input = {'layer':'Input2D', 'height':1, 'width':inp_sizes[1], 'channel':inp_sizes[2]}
+        elif len(inp_sizes) == 4:
+            layer_input = {'layer':'Input2D', 'height':inp_sizes[1], 'width':inp_sizes[2], 'channel':inp_sizes[3]}
         if inp_sizes[0] is None:
             layer_input['batch'] = 1
         else:
@@ -51,7 +55,18 @@ class JSONwriter:
         layers = []
         name = layer_descr['class_name']
         
-        if 'Conv2D' == name:
+        if 'Conv1D' == name:
+            k_s = layer_descr['config']['kernel_size'][0]
+            k_num = layer_descr['config']['filters']
+            stride = layer_descr['config']['strides'][0]
+            layers.append({'layer':'Convolution1D', 'kernel_size':k_s, 'kernel_num':k_num, 'stride':stride, 'padding':0})
+            
+            if layer_descr['config']['use_bias']:
+                layers.append({'layer':'Bias2D', 'units':k_num})
+            self.__get_activation(layers, layer_descr)
+            return layers
+        
+        elif 'Conv2D' == name:
             k_h = layer_descr['config']['kernel_size'][0]
             k_w = layer_descr['config']['kernel_size'][1]
             k_num = layer_descr['config']['filters']
@@ -61,31 +76,49 @@ class JSONwriter:
             
             if layer_descr['config']['use_bias']:
                 layers.append({'layer':'Bias2D', 'units':k_num})
+            self.__get_activation(layers, layer_descr)
             return layers 
             
         elif 'Activation' == name:
-            if layer_descr['config']['activation'] == 'relu':
-                layers.append({'layer':'ReLu'})
-            elif layer_descr['config']['activation'] == 'softmax':
-                layers.append({'layer':'Softmax'})
-            else:
-                raise NotImplementedError("Unknown Activation type.")
+            self.__get_activation(layers, layer_descr)
             return layers
             
         elif 'Dense' == name:
             layers.append({'layer':'Dense2D', 'units':layer_descr['config']['units']})
             if layer_descr['config']['use_bias']:
                 layers.append({'layer':'Bias2D', 'units':layer_descr['config']['units']})
+            self.__get_activation(layers, layer_descr)
             return layers
-             
+            
+        elif 'AveragePooling1D' == name:
+            k_s = layer_descr['config']['pool_size'][0]
+            stride = layer_descr['config']['strides'][0]
+            layers.append({'layer':'AvgPooling1D1D', 'kernel_size':k_s, 'stride':stride, 'padding':0})
+            return layers
+            
+        elif 'AveragePooling2D' == name:
+            k_h = layer_descr['config']['pool_size'][0]
+            k_w = layer_descr['config']['pool_size'][1]
+            s_h = layer_descr['config']['strides'][1]
+            s_v = layer_descr['config']['strides'][0]
+            layers.append({'layer':'AvgPooling2D', 'kernel_height':k_h, 'kernel_width':k_w, 'stride_hz':s_h, 'stride_vl':s_v, 'padding_hz':0, 'padding_vl':0})
+            return layers 
+            
+        elif 'MaxPooling1D' == name:
+            k_s = layer_descr['config']['pool_size'][0]
+            stride = layer_descr['config']['strides'][0]
+            layers.append({'layer':'MaxPooling1D1D', 'kernel_size':k_s, 'stride':stride, 'padding':0})
+            return layers
+            
         elif 'MaxPooling2D' == name:
             k_h = layer_descr['config']['pool_size'][0]
             k_w = layer_descr['config']['pool_size'][1]
             s_h = layer_descr['config']['strides'][1]
             s_v = layer_descr['config']['strides'][0]
             layers.append({'layer':'MaxPooling2D', 'kernel_height':k_h, 'kernel_width':k_w, 'stride_hz':s_h, 'stride_vl':s_v, 'padding_hz':0, 'padding_vl':0})
-            
             return layers 
+        
+            
         elif 'Flatten' == name:
             layers.append({'layer':'Flatten'})
             
@@ -96,7 +129,18 @@ class JSONwriter:
     def __get_weight(self, weights, w_org, config):
         name = config['class_name']
         
-        if 'Conv2D' == name:
+        if 'Conv1D' == name:
+            w = np.ndarray((1,w_org[self.idx].shape[0], w_org[self.idx].shape[1], w_org[self.idx].shape[2]))
+            w[0,:,:, :] = w_org[self.idx][:,:,:]
+            weights.append(w.tolist())
+            self.idx += 1
+            if config['config']['use_bias']:
+                w = np.ndarray((1,1,1,w_org[self.idx].shape[0]))
+                w[0,0,0, :] = w_org[self.idx][:]
+                weights.append(w.tolist())
+                self.idx += 1
+        
+        elif 'Conv2D' == name:
             weights.append(w_org[self.idx].tolist())
             self.idx += 1
             if config['config']['use_bias']:
@@ -104,8 +148,7 @@ class JSONwriter:
                 w[0,0,0, :] = w_org[self.idx][:]
                 weights.append(w.tolist())
                 self.idx += 1
-             
-            
+                
         elif 'Dense' == name:
             w = np.ndarray((1,1,w_org[self.idx].shape[0], w_org[self.idx].shape[1]))
             w[0,0,:, :] = w_org[self.idx][:,:]
@@ -117,7 +160,28 @@ class JSONwriter:
                 weights.append(w.tolist())
                 self.idx += 1
             
-             
+    def __get_activation(self, layers, layer_dscp):
+        activation_name = layer_dscp['config']['activation']
+        if activation_name == 'linear':
+            pass
+        elif activation_name == 'relu':
+            layers.append({'layer':'ReLu'})
+        elif activation_name == 'softmax':
+            layers.append({'layer':'Softmax'})
+        elif activation_name == 'elu':
+            layers.append({'layer':'ELu'})
+        elif activation_name == 'hard_sigmoid':
+            layers.append({'layer':'HardSigmoid'})
+        elif activation_name == 'sigmoid':
+            layers.append({'layer':'Sigmoid'})
+        elif activation_name == 'softplus':
+            layers.append({'layer':'SoftPlus'})
+        elif activation_name == 'softsign':
+            layers.append({'layer':'SoftSign'})
+        elif activation_name == 'tanh':
+            layers.append({'layer':'TanH'})
+        else:
+            raise NotImplementedError("Unknown Activation type.")      
     
     def __save_json_string(self):
         with open(self.fname, 'w') as f:

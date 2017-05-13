@@ -55,10 +55,34 @@ namespace NNSharp.IO
 
                 switch (layerName)
                 {
+                    case "AvgPooling1D":
+                        descriptor = new AvgPooling1D(
+                            (int)layer.SelectToken("padding"),
+                            (int)layer.SelectToken("stride"),
+                            (int)layer.SelectToken("kernel_size"));
+                        break;
+                    case "AvgPooling2D":
+                        descriptor = new AvgPooling2D((int)layer.SelectToken("padding_vl"), (int)layer.SelectToken("padding_hz"),
+                            (int)layer.SelectToken("stride_vl"), (int)layer.SelectToken("stride_hz"),
+                            (int)layer.SelectToken("kernel_height"), (int)layer.SelectToken("kernel_width"));
+                        break;
+                    case "MaxPooling1D":
+                        descriptor = new MaxPooling1D(
+                            (int)layer.SelectToken("padding"),
+                            (int)layer.SelectToken("stride"), 
+                            (int)layer.SelectToken("kernel_size"));
+                        break;
                     case "MaxPooling2D":
                         descriptor = new MaxPooling2D((int)layer.SelectToken("padding_vl"), (int)layer.SelectToken("padding_hz"),
                             (int)layer.SelectToken("stride_vl"), (int)layer.SelectToken("stride_hz"),
                             (int)layer.SelectToken("kernel_height"), (int)layer.SelectToken("kernel_width"));
+                        break;
+                    case "Convolution1D":
+                        descriptor = new Convolution1D(
+                            (int)layer.SelectToken("padding"),
+                            (int)layer.SelectToken("stride"),
+                            (int)layer.SelectToken("kernel_size"),
+                            (int)layer.SelectToken("kernel_num"));
                         break;
                     case "Convolution2D":
                         descriptor = new Convolution2D((int)layer.SelectToken("padding_vl"), (int)layer.SelectToken("padding_hz"),
@@ -76,14 +100,32 @@ namespace NNSharp.IO
                     case "Bias2D":
                         descriptor = new Bias2D();
                         break;
+                    case "ELu":
+                        descriptor = new ELu(1);
+                        break;
+                    case "HardSigmoid":
+                        descriptor = new HardSigmoid();
+                        break;
                     case "ReLu":
                         descriptor = new ReLu();
+                        break;
+                    case "Sigmoid":
+                        descriptor = new Sigmoid();
                         break;
                     case "Flatten":
                         descriptor = new Flatten();
                         break;
                     case "Softmax":
                         descriptor = new Softmax();
+                        break;
+                    case "SoftPlus":
+                        descriptor = new SoftPlus();
+                        break;
+                    case "SoftSign":
+                        descriptor = new SoftPlus();
+                        break;
+                    case "TanH":
+                        descriptor = new TanH();
                         break;
                     default:
                         throw new Exception("Unknown layer type!");
@@ -114,7 +156,7 @@ namespace NNSharp.IO
             int idx = 0;
             for (int i = 1; i < dscps.Count; ++i)
             {
-                if ((dscps[i] is Convolution2D) || (dscps[i] is Dense2D))
+                if ((dscps[i] is Convolution2D) || (dscps[i] is Dense2D) || (dscps[i] is Convolution1D))
                 {
                     int rowNum = weightsList[idx].Count;
                     int colNum = weightsList[idx][0].Count;
