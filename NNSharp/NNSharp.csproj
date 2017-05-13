@@ -53,6 +53,7 @@
     <Compile Include="DataTypes\DataArray.cs" />
     <Compile Include="IO\PersistSequentialModel.cs" />
     <Compile Include="IO\ReaderKerasModel.cs" />
+    <Compile Include="KernelDescriptors\AvgPooling1D.cs" />
     <Compile Include="KernelDescriptors\AvgPooling2D.cs" />
     <Compile Include="KernelDescriptors\Bias2D.cs" />
     <Compile Include="KernelDescriptors\Convolution2D.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="KernelDescriptors\SoftPlus.cs" />
     <Compile Include="KernelDescriptors\SoftSign.cs" />
     <Compile Include="KernelDescriptors\TanH.cs" />
+    <Compile Include="Kernels\CPUKernels\AvgPool1DKernel.cs" />
     <Compile Include="Kernels\CPUKernels\AvgPool2DKernel.cs" />
     <Compile Include="Kernels\CPUKernels\Bias2DKernel.cs" />
     <Compile Include="Kernels\CPUKernels\Conv1DKernel.cs" />
@@ -88,6 +90,8 @@
     <Compile Include="Kernels\CPUKernels\SoftsignKernel.cs" />
     <Compile Include="Kernels\CPUKernels\TanHKernel.cs" />
     <Compile Include="SequentialBased\SequentialExecutors\DeafultAbstractLayerFactory.cs" />
+    <Compile Include="SequentialBased\SequentialLayers\AvgPool1DLayer.cs" />
+    <Compile Include="SequentialBased\SequentialLayers\AvgPool1DLayerFactory.cs" />
     <Compile Include="SequentialBased\SequentialLayers\AvgPool2DLayer.cs" />
     <Compile Include="SequentialBased\SequentialLayers\AvgPool2DLayerFactory.cs" />
     <Compile Include="SequentialBased\SequentialLayers\Bias2DLayer.cs" />

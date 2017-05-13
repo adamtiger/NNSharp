@@ -72,6 +72,7 @@
     <Compile Include="TestHardSigmoid.cs" />
     <Compile Include="TestConv1D.cs" />
     <Compile Include="TestMaxPool1D.cs" />
+    <Compile Include="TestAvgPool1D.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NNSharp\NNSharp.csproj">
