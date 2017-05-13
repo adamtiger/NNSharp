@@ -14,11 +14,11 @@ namespace NNSharp.SequentialBased.SequentialLayers
         {
             if (descriptor is MaxPooling2D)
             {
-                MaxPooling2D conv = descriptor as MaxPooling2D;
+                MaxPooling2D pool = descriptor as MaxPooling2D;
 
-                ILayer layer = new MaxPool2DLayer(conv.PaddingVertical, conv.PaddingHorizontal,
-                                               conv.StrideVertical, conv.StrideHorizontal, 
-                                               conv.KernelHeight, conv.KernelWidth);
+                ILayer layer = new MaxPool2DLayer(pool.PaddingVertical, pool.PaddingHorizontal,
+                                               pool.StrideVertical, pool.StrideHorizontal, 
+                                               pool.KernelHeight, pool.KernelWidth);
 
                 return layer;
             }
