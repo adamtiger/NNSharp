@@ -3,6 +3,9 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NNSharp.SequentialBased.SequentialLayers;
 using NNSharp.DataTypes;
 using static NNSharp.DataTypes.Data2D;
+using NNSharp.IO;
+using NNSharp.Models;
+using UnitTests.Properties;
 
 namespace UnitTests
 {
@@ -10,7 +13,7 @@ namespace UnitTests
     public class TestAvgPool1D
     {
         [TestMethod]
-        public void Test_AvgPool2D_Execute()
+        public void Test_AvgPool1D_Execute()
         {
             // Initialize data.
             Data2D data = new Data2D(1, 3, 2, 1);
@@ -58,6 +61,71 @@ namespace UnitTests
             DataArray data = new DataArray(5);
             AvgPool1DLayer pool = new AvgPool1DLayer(1, 1, 2);
             pool.SetInput(data);
+        }
+
+
+        [TestMethod]
+        public void Test_AvgPool1D_1_KerasModel()
+        {
+            string path = @"tests\test_avgpool_1D_1_model.json";
+            var reader = new ReaderKerasModel(path);
+            SequentialModel model = reader.GetSequentialExecutor();
+
+            Data2D inp = new Data2D(1, 5, 2, 1);
+
+            inp[0, 0, 0, 0] = 0;
+            inp[0, 0, 1, 0] = 1;
+            inp[0, 1, 0, 0] = 2;
+            inp[0, 1, 1, 0] = 1;
+            inp[0, 2, 0, 0] = 0;
+            inp[0, 2, 1, 0] = 0;
+            inp[0, 3, 0, 0] = 2;
+            inp[0, 3, 1, 0] = 1;
+            inp[0, 4, 0, 0] = 2;
+            inp[0, 4, 1, 0] = 1;
+
+            Data2D ou = model.ExecuteNetwork(inp) as Data2D;
+
+            Assert.AreEqual(ou.GetDimension().c, 2);
+            Assert.AreEqual(ou.GetDimension().w, 3);
+
+            Assert.AreEqual(ou[0, 0, 0, 0], 0.6666666865348816, 0.00001);
+            Assert.AreEqual(ou[0, 0, 1, 0], 0.6666666865348816, 0.00001);
+            Assert.AreEqual(ou[0, 1, 0, 0], 1.3333333730697632, 0.00001);
+            Assert.AreEqual(ou[0, 1, 1, 0], 0.6666666865348816, 0.00001);
+            Assert.AreEqual(ou[0, 2, 0, 0], 1.3333333730697632, 0.00001);
+            Assert.AreEqual(ou[0, 2, 1, 0], 0.6666666865348816, 0.00001);
+        }
+
+        [TestMethod]
+        public void Test_AvgPool1D_2_KerasModel()
+        {
+            string path = @"tests\test_avgpool_1D_2_model.json";
+            var reader = new ReaderKerasModel(path);
+            SequentialModel model = reader.GetSequentialExecutor();
+
+            Data2D inp = new Data2D(1, 5, 2, 1);
+
+            inp[0, 0, 0, 0] = 0;
+            inp[0, 0, 1, 0] = 1;
+            inp[0, 1, 0, 0] = 2;
+            inp[0, 1, 1, 0] = 1;
+            inp[0, 2, 0, 0] = 0;
+            inp[0, 2, 1, 0] = 0;
+            inp[0, 3, 0, 0] = 2;
+            inp[0, 3, 1, 0] = 1;
+            inp[0, 4, 0, 0] = 2;
+            inp[0, 4, 1, 0] = 1;
+
+            Data2D ou = model.ExecuteNetwork(inp) as Data2D;
+
+            Assert.AreEqual(ou.GetDimension().c, 2);
+            Assert.AreEqual(ou.GetDimension().w, 2);
+
+            Assert.AreEqual(ou[0, 0, 0, 0], 0.6666666865348816, 0.00001);
+            Assert.AreEqual(ou[0, 0, 1, 0], 0.6666666865348816, 0.00001);
+            Assert.AreEqual(ou[0, 1, 0, 0], 1.3333333730697632, 0.00001);
+            Assert.AreEqual(ou[0, 1, 1, 0], 0.6666666865348816, 0.00001);
         }
     }
 }

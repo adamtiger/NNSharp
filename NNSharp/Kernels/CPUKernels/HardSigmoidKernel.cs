@@ -12,7 +12,7 @@ namespace NNSharp.Kernels.CPUKernels
     {
         public void Execute()
         {
-            input.ApplyToAll(p => { return Math.Max(0.0, Math.Min(1, (p+1)/2)); });
+            input.ApplyToAll(p => { return Math.Max(0.0, Math.Min(1, 0.2*p+0.5)); });
             output = input;
         }
 

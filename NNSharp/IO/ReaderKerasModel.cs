@@ -122,7 +122,7 @@ namespace NNSharp.IO
                         descriptor = new SoftPlus();
                         break;
                     case "SoftSign":
-                        descriptor = new SoftPlus();
+                        descriptor = new Softsign();
                         break;
                     case "TanH":
                         descriptor = new TanH();

@@ -3,6 +3,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NNSharp.DataTypes;
 using NNSharp.SequentialBased.SequentialLayers;
 using static NNSharp.DataTypes.Data2D;
+using NNSharp.IO;
+using NNSharp.Models;
 
 namespace UnitTests
 {
@@ -61,6 +63,70 @@ namespace UnitTests
                 DataArray data = new DataArray(5);
                 MaxPool1DLayer pool = new MaxPool1DLayer(1, 1, 2);
                 pool.SetInput(data);
+            }
+
+            [TestMethod]
+            public void Test_MaxPool1D_1_KerasModel()
+            {
+                string path = @"tests\test_maxpool_1D_1_model.json";
+                var reader = new ReaderKerasModel(path);
+                SequentialModel model = reader.GetSequentialExecutor();
+
+                Data2D inp = new Data2D(1, 5, 2, 1);
+
+                inp[0, 0, 0, 0] = 0;
+                inp[0, 0, 1, 0] = 1;
+                inp[0, 1, 0, 0] = 2;
+                inp[0, 1, 1, 0] = 1;
+                inp[0, 2, 0, 0] = 0;
+                inp[0, 2, 1, 0] = 0;
+                inp[0, 3, 0, 0] = 2;
+                inp[0, 3, 1, 0] = 1;
+                inp[0, 4, 0, 0] = 2;
+                inp[0, 4, 1, 0] = 1;
+
+                Data2D ou = model.ExecuteNetwork(inp) as Data2D;
+
+                Assert.AreEqual(ou.GetDimension().c, 2);
+                Assert.AreEqual(ou.GetDimension().w, 3);
+
+                Assert.AreEqual(ou[0, 0, 0, 0], 2.0, 0.00001);
+                Assert.AreEqual(ou[0, 0, 1, 0], 1.0, 0.00001);
+                Assert.AreEqual(ou[0, 1, 0, 0], 2.0, 0.00001);
+                Assert.AreEqual(ou[0, 1, 1, 0], 1.0, 0.00001);
+                Assert.AreEqual(ou[0, 2, 0, 0], 2.0, 0.00001);
+                Assert.AreEqual(ou[0, 2, 1, 0], 1.0, 0.00001);
+            }
+
+            [TestMethod]
+            public void Test_MaxPool1D_2_KerasModel()
+            {
+                string path = @"tests\test_maxpool_1D_2_model.json";
+                var reader = new ReaderKerasModel(path);
+                SequentialModel model = reader.GetSequentialExecutor();
+
+                Data2D inp = new Data2D(1, 5, 2, 1);
+
+                inp[0, 0, 0, 0] = 0;
+                inp[0, 0, 1, 0] = 1;
+                inp[0, 1, 0, 0] = 2;
+                inp[0, 1, 1, 0] = 1;
+                inp[0, 2, 0, 0] = 0;
+                inp[0, 2, 1, 0] = 0;
+                inp[0, 3, 0, 0] = 2;
+                inp[0, 3, 1, 0] = 1;
+                inp[0, 4, 0, 0] = 2;
+                inp[0, 4, 1, 0] = 1;
+
+                Data2D ou = model.ExecuteNetwork(inp) as Data2D;
+
+                Assert.AreEqual(ou.GetDimension().c, 2);
+                Assert.AreEqual(ou.GetDimension().w, 2);
+
+                Assert.AreEqual(ou[0, 0, 0, 0], 2.0, 0.00001);
+                Assert.AreEqual(ou[0, 0, 1, 0], 1.0, 0.00001);
+                Assert.AreEqual(ou[0, 1, 0, 0], 2.0, 0.00001);
+                Assert.AreEqual(ou[0, 1, 1, 0], 1.0, 0.00001);
             }
         }
     }

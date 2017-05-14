@@ -3,6 +3,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NNSharp.DataTypes;
 using static NNSharp.DataTypes.Data2D;
 using NNSharp.SequentialBased.SequentialLayers;
+using NNSharp.IO;
+using NNSharp.Models;
 
 namespace UnitTests
 {
@@ -57,7 +59,7 @@ namespace UnitTests
             weights[0, 0, 9, 0] = 0;
             weights[0, 0, 10, 0] = 1;
             weights[0, 0, 11, 0] = 1;
-        
+
             weights[0, 0, 12, 0] = 2;
             weights[0, 0, 13, 0] = 3;
             weights[0, 0, 14, 0] = 0;
@@ -148,6 +150,37 @@ namespace UnitTests
             DataArray weights = new DataArray(5);
             Dense2DLayer dens = new Dense2DLayer(1);
             dens.SetWeights(weights);
+        }
+
+        [TestMethod]
+        public void Test_Dense2D_KerasModel()
+        {
+            string path = @"tests\test_dense_model.json";
+            var reader = new ReaderKerasModel(path);
+
+            SequentialModel model = reader.GetSequentialExecutor();
+
+            Data2D inp = new Data2D(1, 8, 1, 1);
+
+            inp[0, 0, 0, 0] = 1;
+            inp[0, 1, 0, 0] = 2;
+            inp[0, 2, 0, 0] = -1;
+            inp[0, 3, 0, 0] = 0;
+
+            inp[0, 4, 0, 0] = 3;
+            inp[0, 5, 0, 0] = 1;
+            inp[0, 6, 0, 0] = 1;
+            inp[0, 7, 0, 0] = 2;
+
+            Data2D ou = model.ExecuteNetwork(inp) as Data2D;
+
+            Assert.AreEqual(ou.GetDimension().c, 4);
+            Assert.AreEqual(ou.GetDimension().w, 1);
+
+            Assert.AreEqual(ou[0, 0, 0, 0], -1.0, 0.00001);
+            Assert.AreEqual(ou[0, 0, 1, 0], 5.5, 0.00001);
+            Assert.AreEqual(ou[0, 0, 2, 0], 18.5, 0.00001);
+            Assert.AreEqual(ou[0, 0, 3, 0], 9.0, 0.00001);
         }
     }
 }

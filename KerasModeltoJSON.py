@@ -93,7 +93,7 @@ class JSONwriter:
         elif 'AveragePooling1D' == name:
             k_s = layer_descr['config']['pool_size'][0]
             stride = layer_descr['config']['strides'][0]
-            layers.append({'layer':'AvgPooling1D1D', 'kernel_size':k_s, 'stride':stride, 'padding':0})
+            layers.append({'layer':'AvgPooling1D', 'kernel_size':k_s, 'stride':stride, 'padding':0})
             return layers
             
         elif 'AveragePooling2D' == name:
@@ -107,7 +107,7 @@ class JSONwriter:
         elif 'MaxPooling1D' == name:
             k_s = layer_descr['config']['pool_size'][0]
             stride = layer_descr['config']['strides'][0]
-            layers.append({'layer':'MaxPooling1D1D', 'kernel_size':k_s, 'stride':stride, 'padding':0})
+            layers.append({'layer':'MaxPooling1D', 'kernel_size':k_s, 'stride':stride, 'padding':0})
             return layers
             
         elif 'MaxPooling2D' == name:
