@@ -1,0 +1,1 @@
+{"descriptors": [{"channel": 2, "height": 4, "layer": "Input2D", "width": 5, "batch": 1}, {"kernel_width": 4, "kernel_height": 3, "padding_hz": 0, "layer": "MaxPooling2D", "stride_vl": 1, "padding_vl": 0, "stride_hz": 1}], "model_type": "Sequential", "weights": []}
