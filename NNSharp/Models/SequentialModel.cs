@@ -50,6 +50,12 @@ namespace NNSharp.Models
             return dim;
         }
 
+        public SequentialModelData GetSummary()
+        {
+            return compiled.GetSummary();
+        }
+
+
         [field: NonSerialized()]
         private List<IKernelDescriptor> descriptors;
         private ISequentialExecutor compiled;

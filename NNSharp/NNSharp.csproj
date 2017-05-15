@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataTypes\DataArray.cs" />
+    <Compile Include="DataTypes\SequentialModelData.cs" />
     <Compile Include="IO\PersistSequentialModel.cs" />
     <Compile Include="IO\ReaderKerasModel.cs" />
     <Compile Include="KernelDescriptors\AvgPooling1D.cs" />

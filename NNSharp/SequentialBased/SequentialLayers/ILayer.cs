@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static NNSharp.DataTypes.SequentialModelData;
 
 namespace NNSharp.SequentialBased.SequentialLayers
 {
@@ -13,5 +14,6 @@ namespace NNSharp.SequentialBased.SequentialLayers
         void SetInput(IData input);
         IData GetOutput();
         void SetWeights(IData weights);
+        LayerData GetLayerSummary();
     }
 }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using NNSharp.DataTypes;
 using NNSharp.Kernels.CPUKernels;
 using static NNSharp.DataTypes.Data2D;
+using static NNSharp.DataTypes.SequentialModelData;
 
 namespace NNSharp.SequentialBased.SequentialLayers
 {
@@ -36,6 +37,16 @@ namespace NNSharp.SequentialBased.SequentialLayers
         public void SetWeights(IData weights)
         {
             // No weights.
+        }
+
+        public LayerData GetLayerSummary()
+        {
+            // The input and the output have the same sizes as the output
+            // of the previous layer.
+            return new LayerData(
+                this.ToString(),
+                -1, -1, -1, -1, -1,
+                -1, -1, -1, -1, -1);
         }
     }
 }

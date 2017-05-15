@@ -7,6 +7,7 @@ using NNSharp.KernelDescriptors;
 using NNSharp.SequentialBased.SequentialLayers;
 using NNSharp.DataTypes;
 using NNSharp.IO;
+using System.Diagnostics;
 
 namespace NNSharp.SequentialBased.SequentialExecutors
 {
@@ -65,6 +66,32 @@ namespace NNSharp.SequentialBased.SequentialExecutors
             }
             else
                 throw new Exception("Different number of weights than layers!");
+        }
+
+        public SequentialModelData GetSummary()
+        {
+            // Measure time of execution.
+            double executionTime = 0.0;
+
+            Random r = new Random(2);
+            initInput.ApplyToAll(p => { return r.NextDouble(); });
+
+            Stopwatch clock = new Stopwatch();
+            clock.Start();
+            Execute(initInput);
+            clock.Stop();
+
+            executionTime = clock.ElapsedTicks;
+
+            // Query data of layers.
+            SequentialModelData seqModelData = new SequentialModelData(executionTime);
+
+            foreach(var layer in layers)
+            {
+                seqModelData.Add(layer.GetLayerSummary());
+            }
+
+            return seqModelData;
         }
 
         private List<ILayer> layers;

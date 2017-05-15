@@ -14,5 +14,6 @@ namespace NNSharp.SequentialBased.SequentialExecutors
         void Compile(List<IKernelDescriptor> descriptors);
         IData Execute(IData input);
         void SetWeights(List<IData> weights);
+        SequentialModelData GetSummary();
     }
 }

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static NNSharp.DataTypes.Data2D;
+using static NNSharp.DataTypes.SequentialModelData;
 
 namespace NNSharp.SequentialBased.SequentialLayers
 {
@@ -52,6 +53,17 @@ namespace NNSharp.SequentialBased.SequentialLayers
         {
             // No weights.
         }
+
+        public LayerData GetLayerSummary()
+        {
+            Dimension dimI = input.GetDimension();
+            Dimension dimO = output.GetDimension();
+            return new LayerData(
+                this.ToString(),
+                dimI.h, dimI.w, 1, dimI.c, dimI.b,
+                dimO.h, dimO.w, 1, dimO.c, dimO.b);
+        }
+
 
         private int CalculateOutputSize1D(int inpSize, int padding, int stride, int kernel)
         {

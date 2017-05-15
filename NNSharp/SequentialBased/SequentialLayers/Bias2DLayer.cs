@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using NNSharp.DataTypes;
 using NNSharp.Kernels.CPUKernels;
+using static NNSharp.DataTypes.SequentialModelData;
+using static NNSharp.DataTypes.Data2D;
 
 namespace NNSharp.SequentialBased.SequentialLayers
 {
@@ -44,5 +46,16 @@ namespace NNSharp.SequentialBased.SequentialLayers
 
             this.biases = weights as DataArray;
         }
+
+        public LayerData GetLayerSummary()
+        {
+            Dimension dimI = input.GetDimension();
+            Dimension dimO = input.GetDimension();
+            return new LayerData(
+                this.ToString(),
+                dimI.h, dimI.w, 1, dimI.c, dimI.b,
+                dimO.h, dimO.w, 1, dimO.c, dimO.b);
+        }
+
     }
 }

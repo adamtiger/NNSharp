@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NNSharp.DataTypes;
+using static NNSharp.DataTypes.SequentialModelData;
+using static NNSharp.DataTypes.Data2D;
 
 namespace NNSharp.SequentialBased.SequentialLayers
 {
@@ -44,6 +46,15 @@ namespace NNSharp.SequentialBased.SequentialLayers
         public void SetWeights(IData weights)
         {
             // No weights.
+        }
+
+        public LayerData GetLayerSummary()
+        {
+            Dimension dim = zerosInput.GetDimension();
+            return new LayerData(
+                this.ToString(),
+                dim.h, dim.w, 1, dim.c, dim.b,
+                dim.h, dim.w, 1, dim.c, dim.b);
         }
 
         private Data2D zerosInput;

@@ -2,7 +2,7 @@
 using NNSharp.IO;
 using NNSharp.Models;
 using System;
-
+using System.Text;
 
 namespace NNSharp
 {
@@ -11,7 +11,12 @@ namespace NNSharp
         public static void Main(string[] args)
         {
 
-            Console.WriteLine("Finished.");
+            ReaderKerasModel reader = new ReaderKerasModel("test_elu_model.json");
+            SequentialModel model = reader.GetSequentialExecutor();
+
+            Console.WriteLine(model.GetSummary().GetStringRepresentation());
+
+            Console.ReadKey();
         }
 
     }
