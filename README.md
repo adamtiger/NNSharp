@@ -1,4 +1,4 @@
-![logo](https://drive.google.com/uc?export=download&id=0B97L9zqg-lnwMkIxRVB2YV9nMFU)
+![logo](https://drive.google.com/uc?export=download&id=0B97L9zqg-lnweGpHSXFoT2JWS2c)
 
 [![Build status](https://ci.appveyor.com/api/projects/status/m7albu3gen3orswj/branch/master?svg=true)](https://ci.appveyor.com/project/adamtiger/nnsharp/branch/master)
 
@@ -18,8 +18,11 @@ The package is [available](https://www.nuget.org/packages/NNSharp/) as a NuGet p
 
 The library supports the following layers (only forward direction):
 
+* Convolution (1-dimensional)
 * Convolution (2-dimensional)
-* AvgPooling (2 D)
+* AveragePooling (1 D)
+* AveragePooling (2 D)
+* MaxPooling (1 D)
 * MaxPooling (2 D)
 * MinPooling (2 D)
 * Flatten ([Keras](https://keras.io/) like)
