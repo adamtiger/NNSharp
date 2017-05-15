@@ -18,14 +18,13 @@ namespace NNSharp.Kernels.CPUKernels
             Dimension dimO = output.GetDimension();
             int stH = 0;
             int stV = 0;
-
-            for (int batch = 0; batch < dimO.b; ++batch)
+            for (int h = 0; h < dimO.h; ++h)
             {
-                for (int filter = 0; filter < dimO.c; ++filter)
+                for (int w = 0; w < dimO.w; ++w)
                 {
-                    for (int w = 0; w < dimO.w; ++w)
+                    for (int filter = 0; filter < dimO.c; ++filter)
                     {
-                        for (int h = 0; h < dimO.h; ++h)
+                        for (int batch = 0; batch < dimO.b; ++batch)
                         {
                             stH = w * strideHorizontal - paddingHorizontal;
                             stV = h * strideVertical - paddingVertical;
@@ -33,16 +32,16 @@ namespace NNSharp.Kernels.CPUKernels
 
                             for (int idxH = stH; idxH < stH + dimK.w; ++idxH)
                             {
-                                 for (int idxV = stV; idxV < stV + dimK.h; ++idxV)
-                                 {
-                                     for (int idxC = 0; idxC < dimK.c; ++idxC)
-                                     {
+                                for (int idxV = stV; idxV < stV + dimK.h; ++idxV)
+                                {
+                                    for (int idxC = 0; idxC < dimK.c; ++idxC)
+                                    {
                                         output[h, w, filter, batch] += input[idxV, idxH, idxC, batch] *
                                                                             weights[idxV - stV, idxH - stH, idxC, filter];
-                                     }
-                                 }
+                                    }
+                                }
                             }
-                            
+
                         }
                     }
                 }

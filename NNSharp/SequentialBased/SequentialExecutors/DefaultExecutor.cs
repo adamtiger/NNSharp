@@ -81,7 +81,7 @@ namespace NNSharp.SequentialBased.SequentialExecutors
             Execute(initInput);
             clock.Stop();
 
-            executionTime = clock.ElapsedTicks;
+            executionTime = clock.ElapsedMilliseconds;
 
             // Query data of layers.
             SequentialModelData seqModelData = new SequentialModelData(executionTime);

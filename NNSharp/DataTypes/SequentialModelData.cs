@@ -46,7 +46,7 @@ namespace NNSharp.DataTypes
             StringBuilder builder = new StringBuilder();
 
             builder.AppendLine("Number of layers: " + info.GetNumberofLayers());
-            builder.AppendLine("Measured time of execution (ticks): " + info.GetExecutionTime());
+            builder.AppendLine("Measured time of execution (ms): " + info.GetExecutionTime());
 
             for (int idx = 0; idx < info.GetNumberofLayers(); ++idx)
             {
