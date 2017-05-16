@@ -44,7 +44,7 @@ namespace NNSharp.SequentialBased.SequentialLayers
             int outputH = 1;
             int outputW = CalculateOutputSize1D(dimI.w, padding, stride, kernelDim.w);
             int outputC = dimI.c;
-            int outputB = kernelDim.b;
+            int outputB = dimI.b;
 
             output = new Data2D(outputH, outputW, outputC, outputB);
         }

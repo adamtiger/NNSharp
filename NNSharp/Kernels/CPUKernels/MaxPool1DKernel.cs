@@ -13,7 +13,6 @@ namespace NNSharp.Kernels.CPUKernels
     {
         public void Execute()
         {
-            Dimension dimI = input.GetDimension();
             Dimension dimO = output.GetDimension();
             int stH = 0;
 
