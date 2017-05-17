@@ -63,6 +63,7 @@
     <Compile Include="KernelDescriptors\ELu.cs" />
     <Compile Include="KernelDescriptors\Flatten.cs" />
     <Compile Include="KernelDescriptors\GlobalMaxPooling1D.cs" />
+    <Compile Include="KernelDescriptors\GlobalMaxPooling2D.cs" />
     <Compile Include="KernelDescriptors\HardSigmoid.cs" />
     <Compile Include="KernelDescriptors\Input2D.cs" />
     <Compile Include="KernelDescriptors\MaxPooling1D.cs" />
@@ -82,6 +83,7 @@
     <Compile Include="Kernels\CPUKernels\ELuKernel.cs" />
     <Compile Include="Kernels\CPUKernels\FlattenKernel.cs" />
     <Compile Include="Kernels\CPUKernels\GlobalMaxPool1DKernel.cs" />
+    <Compile Include="Kernels\CPUKernels\GlobalMaxPool2DKernel.cs" />
     <Compile Include="Kernels\CPUKernels\HardSigmoidKernel.cs" />
     <Compile Include="Kernels\CPUKernels\MaxPool1DKernel.cs" />
     <Compile Include="Kernels\CPUKernels\MaxPool2DKernel.cs" />
@@ -103,6 +105,8 @@
     <Compile Include="SequentialBased\SequentialLayers\Conv1DLayerFactory.cs" />
     <Compile Include="SequentialBased\SequentialLayers\GlobalMaxPool1DLayer.cs" />
     <Compile Include="SequentialBased\SequentialLayers\GlobalMaxPool1DLayerFactory.cs" />
+    <Compile Include="SequentialBased\SequentialLayers\GlobalMaxPool2DLayer.cs" />
+    <Compile Include="SequentialBased\SequentialLayers\GlobalMaxPool2DLayerFactory.cs" />
     <Compile Include="SequentialBased\SequentialLayers\HardSigmoidLayer.cs" />
     <Compile Include="SequentialBased\SequentialLayers\HardSigmoidLayerFactory.cs" />
     <Compile Include="SequentialBased\SequentialLayers\MaxPool1DLayer.cs" />

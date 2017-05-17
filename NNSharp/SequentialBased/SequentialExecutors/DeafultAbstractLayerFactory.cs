@@ -24,6 +24,7 @@ namespace NNSharp.SequentialBased.SequentialExecutors
             factories.Add(new Dense2DLayerFactory());
             factories.Add(new ELuLayerFactory());
             factories.Add(new GlobalMaxPool1DLayerFactory());
+            factories.Add(new GlobalMaxPool2DLayerFactory());
             factories.Add(new HardSigmoidLayerFactory());
             factories.Add(new Input2DLayerFactory());
             factories.Add(new MaxPool1DLayerFactory());

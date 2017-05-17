@@ -3,28 +3,43 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NNSharp.DataTypes;
 using NNSharp.SequentialBased.SequentialLayers;
 using static NNSharp.DataTypes.Data2D;
-using NNSharp.IO;
-using NNSharp.Models;
 
 namespace UnitTests
 {
     [TestClass]
-    public class TestGlobalMaxPool1D
+    public class TestGlobalMaxPool2D
     {
         [TestMethod]
-        public void Test_GlobalMaxPool1D_Execute()
+        public void Test_GlobalMaxPool2D_Execute()
         {
             // Initialize data.
-            Data2D data = new Data2D(1, 3, 2, 1);
+            Data2D data = new Data2D(3, 3, 2, 1);
             data[0, 0, 0, 0] = 1;
-            data[0, 1, 0, 0] = 2;
-            data[0, 2, 0, 0] = 0;
+            data[1, 0, 0, 0] = 2;
+            data[2, 0, 0, 0] = 0;
 
-            data[0, 0, 1, 0] = 3;
-            data[0, 1, 1, 0] = 4;
-            data[0, 2, 1, 0] = 0;
+            data[0, 1, 0, 0] = 3;
+            data[1, 1, 0, 0] = 4;
+            data[2, 1, 0, 0] = 0;
 
-            GlobalMaxPool1DLayer pool = new GlobalMaxPool1DLayer();
+            data[0, 2, 0, 0] = 2;
+            data[1, 2, 0, 0] = 2;
+            data[2, 2, 0, 0] = 0;
+
+
+            data[0, 0, 1, 0] = 0;
+            data[1, 0, 1, 0] = 3;
+            data[2, 0, 1, 0] = 1;
+
+            data[0, 1, 1, 0] = 1;
+            data[1, 1, 1, 0] = 1;
+            data[2, 1, 1, 0] = -1;
+
+            data[0, 2, 1, 0] = -3;
+            data[1, 2, 1, 0] = -1;
+            data[2, 2, 1, 0] = 0;
+
+            GlobalMaxPool2DLayer pool = new GlobalMaxPool2DLayer();
             pool.SetInput(data);
             pool.Execute();
             Data2D output = pool.GetOutput() as Data2D;
@@ -37,30 +52,30 @@ namespace UnitTests
             Assert.AreEqual(dim.w, 1);
 
             // Checking calculation
-            Assert.AreEqual(output[0, 0, 0, 0], 2.0, 0.0000001);
-            Assert.AreEqual(output[0, 0, 1, 0], 4.0, 0.0000001);
+            Assert.AreEqual(output[0, 0, 0, 0], 4.0, 0.0000001);
+            Assert.AreEqual(output[0, 0, 1, 0], 3.0, 0.0000001);
         }
 
         [TestMethod]
         [ExpectedException(typeof(System.Exception))]
-        public void Test_GlobalMaxPool1D_Null_Input()
+        public void Test_GlobalMaxPool2D_Null_Input()
         {
             Data2D data = null;
-            GlobalMaxPool1DLayer pool = new GlobalMaxPool1DLayer();
+            GlobalMaxPool2DLayer pool = new GlobalMaxPool2DLayer();
             pool.SetInput(data);
         }
 
         [TestMethod]
         [ExpectedException(typeof(System.Exception))]
-        public void Test_GlobalMaxPool1D_DifferentData_Input()
+        public void Test_GlobalMaxPool2D_DifferentData_Input()
         {
             DataArray data = new DataArray(5);
-            GlobalMaxPool1DLayer pool = new GlobalMaxPool1DLayer();
+            GlobalMaxPool2DLayer pool = new GlobalMaxPool2DLayer();
             pool.SetInput(data);
         }
 
         /*[TestMethod]
-        public void Test_GlobalMaxPool1D_1_KerasModel()
+        public void Test_GlobalMaxPool2D_1_KerasModel()
         {
             string path = @"tests\test_maxpool_1D_1_model.json";
             var reader = new ReaderKerasModel(path);
@@ -93,7 +108,7 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public void Test_GlobalMaxPool1D_2_KerasModel()
+        public void Test_GlobalMaxPool2D_2_KerasModel()
         {
             string path = @"tests\test_maxpool_1D_2_model.json";
             var reader = new ReaderKerasModel(path);
