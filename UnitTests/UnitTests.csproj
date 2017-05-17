@@ -80,6 +80,7 @@
     <Compile Include="TestAvgPool1D.cs" />
     <Compile Include="TestGlobalMaxPool1D.cs" />
     <Compile Include="TestGlobalMaxPool2D.cs" />
+    <Compile Include="TestGlobalAvgPool1D.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NNSharp\NNSharp.csproj">
