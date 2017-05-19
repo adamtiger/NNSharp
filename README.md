@@ -21,9 +21,13 @@ The library supports the following layers (only forward direction):
 * Convolution (1-dimensional)
 * Convolution (2-dimensional)
 * AveragePooling (1 D)
+* GlobalAvgPooling (1 D)
 * AveragePooling (2 D)
+* GlobalAvgPooling (2 D)
 * MaxPooling (1 D)
+* GlobalMaxPooling (1 D)
 * MaxPooling (2 D)
+* GlobalMaxPooling (2 D)
 * MinPooling (2 D)
 * Flatten ([Keras](https://keras.io/) like)
 * Dense
