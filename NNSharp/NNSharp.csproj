@@ -71,6 +71,7 @@
     <Compile Include="KernelDescriptors\MaxPooling1D.cs" />
     <Compile Include="KernelDescriptors\MaxPooling2D.cs" />
     <Compile Include="KernelDescriptors\MinPooling2D.cs" />
+    <Compile Include="KernelDescriptors\Reshape2D.cs" />
     <Compile Include="KernelDescriptors\Sigmoid.cs" />
     <Compile Include="KernelDescriptors\Softmax.cs" />
     <Compile Include="KernelDescriptors\SoftPlus.cs" />
@@ -93,6 +94,7 @@
     <Compile Include="Kernels\CPUKernels\MaxPool2DKernel.cs" />
     <Compile Include="Kernels\CPUKernels\MinPool2DKernel.cs" />
     <Compile Include="Kernels\CPUKernels\ReLuKernel.cs" />
+    <Compile Include="Kernels\CPUKernels\Reshape2DKernel.cs" />
     <Compile Include="Kernels\CPUKernels\SigmoidKernel.cs" />
     <Compile Include="Kernels\CPUKernels\SoftmaxKernel.cs" />
     <Compile Include="Kernels\CPUKernels\SoftPlusKernel.cs" />
@@ -119,6 +121,8 @@
     <Compile Include="SequentialBased\SequentialLayers\HardSigmoidLayerFactory.cs" />
     <Compile Include="SequentialBased\SequentialLayers\MaxPool1DLayer.cs" />
     <Compile Include="SequentialBased\SequentialLayers\MaxPool1DLayerFactory.cs" />
+    <Compile Include="SequentialBased\SequentialLayers\Reshape2DLayer.cs" />
+    <Compile Include="SequentialBased\SequentialLayers\Reshape2DLayerFactory.cs" />
     <Compile Include="SequentialBased\SequentialLayers\SigmoidLayer.cs" />
     <Compile Include="SequentialBased\SequentialLayers\SigmoidLayerFactory.cs" />
     <Compile Include="SequentialBased\SequentialLayers\SoftPlusLayer.cs" />
