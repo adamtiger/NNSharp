@@ -71,6 +71,7 @@
     <Compile Include="KernelDescriptors\MaxPooling1D.cs" />
     <Compile Include="KernelDescriptors\MaxPooling2D.cs" />
     <Compile Include="KernelDescriptors\MinPooling2D.cs" />
+    <Compile Include="KernelDescriptors\RepeatVector.cs" />
     <Compile Include="KernelDescriptors\Reshape2D.cs" />
     <Compile Include="KernelDescriptors\Sigmoid.cs" />
     <Compile Include="KernelDescriptors\Softmax.cs" />
@@ -94,6 +95,7 @@
     <Compile Include="Kernels\CPUKernels\MaxPool2DKernel.cs" />
     <Compile Include="Kernels\CPUKernels\MinPool2DKernel.cs" />
     <Compile Include="Kernels\CPUKernels\ReLuKernel.cs" />
+    <Compile Include="Kernels\CPUKernels\RepeatVectorKernel.cs" />
     <Compile Include="Kernels\CPUKernels\Reshape2DKernel.cs" />
     <Compile Include="Kernels\CPUKernels\SigmoidKernel.cs" />
     <Compile Include="Kernels\CPUKernels\SoftmaxKernel.cs" />
