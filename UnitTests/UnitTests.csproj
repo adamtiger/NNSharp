@@ -84,6 +84,7 @@
     <Compile Include="TestGlobalAvgPool2D.cs" />
     <Compile Include="TestReshape2D.cs" />
     <Compile Include="TestRepeatVector.cs" />
+    <Compile Include="TestPermute.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NNSharp\NNSharp.csproj">

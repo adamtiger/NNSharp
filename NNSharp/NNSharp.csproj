@@ -71,6 +71,7 @@
     <Compile Include="KernelDescriptors\MaxPooling1D.cs" />
     <Compile Include="KernelDescriptors\MaxPooling2D.cs" />
     <Compile Include="KernelDescriptors\MinPooling2D.cs" />
+    <Compile Include="KernelDescriptors\Permute.cs" />
     <Compile Include="KernelDescriptors\RepeatVector.cs" />
     <Compile Include="KernelDescriptors\Reshape2D.cs" />
     <Compile Include="KernelDescriptors\Sigmoid.cs" />
@@ -94,6 +95,7 @@
     <Compile Include="Kernels\CPUKernels\MaxPool1DKernel.cs" />
     <Compile Include="Kernels\CPUKernels\MaxPool2DKernel.cs" />
     <Compile Include="Kernels\CPUKernels\MinPool2DKernel.cs" />
+    <Compile Include="Kernels\CPUKernels\PermuteKernel.cs" />
     <Compile Include="Kernels\CPUKernels\ReLuKernel.cs" />
     <Compile Include="Kernels\CPUKernels\RepeatVectorKernel.cs" />
     <Compile Include="Kernels\CPUKernels\Reshape2DKernel.cs" />
@@ -123,6 +125,8 @@
     <Compile Include="SequentialBased\SequentialLayers\HardSigmoidLayerFactory.cs" />
     <Compile Include="SequentialBased\SequentialLayers\MaxPool1DLayer.cs" />
     <Compile Include="SequentialBased\SequentialLayers\MaxPool1DLayerFactory.cs" />
+    <Compile Include="SequentialBased\SequentialLayers\PermuteLayer.cs" />
+    <Compile Include="SequentialBased\SequentialLayers\PermuteLayerFactory.cs" />
     <Compile Include="SequentialBased\SequentialLayers\RepeatVectorLayer.cs" />
     <Compile Include="SequentialBased\SequentialLayers\RepeatVectorLayerFactory.cs" />
     <Compile Include="SequentialBased\SequentialLayers\Reshape2DLayer.cs" />
