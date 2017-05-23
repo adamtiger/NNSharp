@@ -15,7 +15,10 @@ namespace NNSharp.Kernels.CPUKernels
             {
                 for (int repeat = 0; repeat < num; ++repeat)
                 {
-
+                    for (int channel = 0; channel < input.GetDimension().c; ++channel)
+                    {
+                        output[0, repeat, channel, batch] = input[0, 0, channel, batch];
+                    }
                 }
             }
         }

@@ -123,6 +123,8 @@
     <Compile Include="SequentialBased\SequentialLayers\HardSigmoidLayerFactory.cs" />
     <Compile Include="SequentialBased\SequentialLayers\MaxPool1DLayer.cs" />
     <Compile Include="SequentialBased\SequentialLayers\MaxPool1DLayerFactory.cs" />
+    <Compile Include="SequentialBased\SequentialLayers\RepeatVectorLayer.cs" />
+    <Compile Include="SequentialBased\SequentialLayers\RepeatVectorLayerFactory.cs" />
     <Compile Include="SequentialBased\SequentialLayers\Reshape2DLayer.cs" />
     <Compile Include="SequentialBased\SequentialLayers\Reshape2DLayerFactory.cs" />
     <Compile Include="SequentialBased\SequentialLayers\SigmoidLayer.cs" />
