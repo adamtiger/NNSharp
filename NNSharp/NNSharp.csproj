@@ -60,6 +60,7 @@
     <Compile Include="KernelDescriptors\Convolution2D.cs" />
     <Compile Include="KernelDescriptors\Convolution1D.cs" />
     <Compile Include="KernelDescriptors\Cropping1D.cs" />
+    <Compile Include="KernelDescriptors\Cropping2D.cs" />
     <Compile Include="KernelDescriptors\Dense2D.cs" />
     <Compile Include="KernelDescriptors\ELu.cs" />
     <Compile Include="KernelDescriptors\Flatten.cs" />
@@ -86,6 +87,7 @@
     <Compile Include="Kernels\CPUKernels\Conv1DKernel.cs" />
     <Compile Include="Kernels\CPUKernels\Conv2DKernel.cs" />
     <Compile Include="Kernels\CPUKernels\Cropping1DKernel.cs" />
+    <Compile Include="Kernels\CPUKernels\Cropping2DKernel.cs" />
     <Compile Include="Kernels\CPUKernels\Dense2DKernel.cs" />
     <Compile Include="Kernels\CPUKernels\ELuKernel.cs" />
     <Compile Include="Kernels\CPUKernels\FlattenKernel.cs" />
@@ -117,6 +119,8 @@
     <Compile Include="SequentialBased\SequentialLayers\Conv1DLayerFactory.cs" />
     <Compile Include="SequentialBased\SequentialLayers\Cropping1DLayer.cs" />
     <Compile Include="SequentialBased\SequentialLayers\Cropping1DLayerFactory.cs" />
+    <Compile Include="SequentialBased\SequentialLayers\Cropping2DLayer.cs" />
+    <Compile Include="SequentialBased\SequentialLayers\Cropping2DLayerFactory.cs" />
     <Compile Include="SequentialBased\SequentialLayers\GlobalAvgPool1DLayer.cs" />
     <Compile Include="SequentialBased\SequentialLayers\GlobalAvgPool1DLayerFactory.cs" />
     <Compile Include="SequentialBased\SequentialLayers\GlobalAvgPool2DLayer.cs" />

@@ -22,6 +22,7 @@ namespace NNSharp.SequentialBased.SequentialExecutors
             factories.Add(new Conv1DLayerFactory());
             factories.Add(new Conv2DLayerFactory());
             factories.Add(new Cropping1DLayerFactory());
+            factories.Add(new Cropping2DLayerFactory());
             factories.Add(new Dense2DLayerFactory());
             factories.Add(new ELuLayerFactory());
             factories.Add(new GlobalAvgPool1DLayerFactory());
