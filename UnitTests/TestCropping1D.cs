@@ -3,6 +3,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NNSharp.DataTypes;
 using NNSharp.SequentialBased.SequentialLayers;
 using static NNSharp.DataTypes.Data2D;
+using NNSharp.IO;
+using NNSharp.Models;
 
 namespace UnitTests
 {
@@ -93,5 +95,30 @@ namespace UnitTests
             crop.SetInput(data);
         }
 
+        [TestMethod]
+        public void Test_Cropping1D_KerasModel()
+        {
+            string path = @"tests\test_crop_1D_model.json";
+            var reader = new ReaderKerasModel(path);
+            SequentialModel model = reader.GetSequentialExecutor();
+
+            Data2D inp = new Data2D(1, 5, 2, 1);
+
+            for (int l = 0; l < 5; ++l)
+            {
+                inp[0, l, 0, 0] = l + 1;
+                inp[0, l, 1, 0] = -(l + 1);
+            }
+
+            Data2D ou = model.ExecuteNetwork(inp) as Data2D;
+
+            Assert.AreEqual(ou.GetDimension().c, 2);
+            Assert.AreEqual(ou.GetDimension().w, 2);
+
+            Assert.AreEqual(ou[0, 0, 0, 0], 2.0, 0.00001);
+            Assert.AreEqual(ou[0, 0, 1, 0], -2.0, 0.00001);
+            Assert.AreEqual(ou[0, 1, 0, 0], 3.0, 0.00001);
+            Assert.AreEqual(ou[0, 1, 1, 0], -3.0, 0.00001);
+        }
     }
 }

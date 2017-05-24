@@ -1,1 +1,1 @@
-{"model_type": "Sequential", "descriptors": [{"layer": "Input2D", "batch": 1, "height": 4, "width": 5, "channel": 2}, {"kernel_width": 4, "layer": "AvgPooling2D", "padding_vl": 0, "padding_hz": 0, "stride_vl": 1, "kernel_height": 3, "stride_hz": 1}], "weights": []}
+{"weights": [], "descriptors": [{"height": 4, "width": 5, "channel": 2, "layer": "Input2D", "batch": 1}, {"kernel_width": 4, "stride_hz": 1, "stride_vl": 1, "padding_vl": 0, "padding_hz": 0, "layer": "AvgPooling2D", "kernel_height": 3}], "model_type": "Sequential"}

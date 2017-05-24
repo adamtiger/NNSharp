@@ -61,10 +61,28 @@ namespace NNSharp.IO
                             (int)layer.SelectToken("stride"),
                             (int)layer.SelectToken("kernel_size"));
                         break;
+                    case "GlobalAveragePooling1D":
+                        descriptor = new GlobalAvgPooling1D();
+                        break;
                     case "AvgPooling2D":
                         descriptor = new AvgPooling2D((int)layer.SelectToken("padding_vl"), (int)layer.SelectToken("padding_hz"),
                             (int)layer.SelectToken("stride_vl"), (int)layer.SelectToken("stride_hz"),
                             (int)layer.SelectToken("kernel_height"), (int)layer.SelectToken("kernel_width"));
+                        break;
+                    case "GlobalAveragePooling2D":
+                        descriptor = new GlobalAvgPooling2D();
+                        break;
+                    case "Cropping1D":
+                        descriptor = new Cropping1D(
+                            (int)layer.SelectToken("trimBegin"),
+                            (int)layer.SelectToken("trimEnd"));
+                        break;
+                    case "Cropping2D":
+                        descriptor = new Cropping2D(
+                            (int)layer.SelectToken("topTrim"),
+                            (int)layer.SelectToken("bottomTrim"),
+                            (int)layer.SelectToken("leftTrim"),
+                            (int)layer.SelectToken("rightTrim"));
                         break;
                     case "MaxPooling1D":
                         descriptor = new MaxPooling1D(
@@ -72,10 +90,16 @@ namespace NNSharp.IO
                             (int)layer.SelectToken("stride"), 
                             (int)layer.SelectToken("kernel_size"));
                         break;
+                    case "GlobalMaxPooling1D":
+                        descriptor = new GlobalMaxPooling1D();
+                        break;
                     case "MaxPooling2D":
                         descriptor = new MaxPooling2D((int)layer.SelectToken("padding_vl"), (int)layer.SelectToken("padding_hz"),
                             (int)layer.SelectToken("stride_vl"), (int)layer.SelectToken("stride_hz"),
                             (int)layer.SelectToken("kernel_height"), (int)layer.SelectToken("kernel_width"));
+                        break;
+                    case "GlobalMaxPooling2D":
+                        descriptor = new GlobalMaxPooling2D();
                         break;
                     case "Convolution1D":
                         descriptor = new Convolution1D(
@@ -99,6 +123,23 @@ namespace NNSharp.IO
                         break;
                     case "Bias2D":
                         descriptor = new Bias2D();
+                        break;
+                    case "Permute":
+                        descriptor = new Permute(
+                            (int)layer.SelectToken("dim1"),
+                            (int)layer.SelectToken("dim2"),
+                            (int)layer.SelectToken("dim3"));
+                        break;
+                    case "Reshape":
+                        descriptor = new Reshape2D(
+                            (int)layer.SelectToken("height"),
+                            (int)layer.SelectToken("width"),
+                            (int)layer.SelectToken("channel"),
+                            1);
+                        break;
+                    case "RepeatVector":
+                        descriptor = new RepeatVector(
+                            (int)layer.SelectToken("num"));
                         break;
                     case "ELu":
                         descriptor = new ELu(1);

@@ -1,0 +1,1 @@
+{"weights": [], "descriptors": [{"height": 3, "width": 3, "channel": 2, "layer": "Input2D", "batch": 1}, {"layer": "GlobalMaxPooling2D"}], "model_type": "Sequential"}

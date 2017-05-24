@@ -1,1 +1,1 @@
-{"model_type": "Sequential", "descriptors": [{"layer": "Input2D", "batch": 1, "height": 4, "width": 5, "channel": 2}, {"layer": "Flatten"}], "weights": []}
+{"weights": [], "descriptors": [{"height": 4, "width": 5, "channel": 2, "layer": "Input2D", "batch": 1}, {"layer": "Flatten"}], "model_type": "Sequential"}

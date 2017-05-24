@@ -3,6 +3,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NNSharp.DataTypes;
 using NNSharp.SequentialBased.SequentialLayers;
 using static NNSharp.DataTypes.Data2D;
+using NNSharp.IO;
+using NNSharp.Models;
 
 namespace UnitTests
 {
@@ -86,7 +88,7 @@ namespace UnitTests
 
         [TestMethod]
         [ExpectedException(typeof(System.Exception))]
-        public void Test_Repeatvector_WrongSizesHeight()
+        public void Test_RepeatVector_WrongSizesHeight()
         {
             Data2D data = new Data2D(2, 1, 5, 2);
             RepeatVectorLayer rep = new RepeatVectorLayer(3);
@@ -95,11 +97,68 @@ namespace UnitTests
 
         [TestMethod]
         [ExpectedException(typeof(System.Exception))]
-        public void Test_Repeatvector_WrongSizesWidth()
+        public void Test_RepeatVector_WrongSizesWidth()
         {
             Data2D data = new Data2D(1, 3, 5, 2);
             RepeatVectorLayer rep = new RepeatVectorLayer(3);
             rep.SetInput(data);
+        }
+
+        [TestMethod]
+        public void Test_RepeatVector_KerasModel()
+        {
+            string path = @"tests\test_repeatvector_model.json";
+            var reader = new ReaderKerasModel(path);
+            SequentialModel model = reader.GetSequentialExecutor();
+
+            Data2D data = new Data2D(1, 1, 4, 2);
+
+            for (int c = 0; c < 4; ++c)
+            {
+                data[0, 0, c, 0] = c + 1;
+                data[0, 0, c, 1] = -(c + 1);
+            }
+
+
+            Data2D output = model.ExecuteNetwork(data) as Data2D;
+
+            // Checking sizes
+            Dimension dim = output.GetDimension();
+            Assert.AreEqual(dim.b, 2);
+            Assert.AreEqual(dim.c, 4);
+            Assert.AreEqual(dim.h, 1);
+            Assert.AreEqual(dim.w, 3);
+
+            // Checking calculation
+            Assert.AreEqual(output[0, 0, 0, 0], 1, 0.0000001);
+            Assert.AreEqual(output[0, 0, 1, 0], 2, 0.0000001);
+            Assert.AreEqual(output[0, 0, 2, 0], 3, 0.0000001);
+            Assert.AreEqual(output[0, 0, 3, 0], 4, 0.0000001);
+
+            Assert.AreEqual(output[0, 1, 0, 0], 1, 0.0000001);
+            Assert.AreEqual(output[0, 1, 1, 0], 2, 0.0000001);
+            Assert.AreEqual(output[0, 1, 2, 0], 3, 0.0000001);
+            Assert.AreEqual(output[0, 1, 3, 0], 4, 0.0000001);
+
+            Assert.AreEqual(output[0, 2, 0, 0], 1, 0.0000001);
+            Assert.AreEqual(output[0, 2, 1, 0], 2, 0.0000001);
+            Assert.AreEqual(output[0, 2, 2, 0], 3, 0.0000001);
+            Assert.AreEqual(output[0, 2, 3, 0], 4, 0.0000001);
+
+            Assert.AreEqual(output[0, 0, 0, 1], -1, 0.0000001);
+            Assert.AreEqual(output[0, 0, 1, 1], -2, 0.0000001);
+            Assert.AreEqual(output[0, 0, 2, 1], -3, 0.0000001);
+            Assert.AreEqual(output[0, 0, 3, 1], -4, 0.0000001);
+
+            Assert.AreEqual(output[0, 1, 0, 1], -1, 0.0000001);
+            Assert.AreEqual(output[0, 1, 1, 1], -2, 0.0000001);
+            Assert.AreEqual(output[0, 1, 2, 1], -3, 0.0000001);
+            Assert.AreEqual(output[0, 1, 3, 1], -4, 0.0000001);
+
+            Assert.AreEqual(output[0, 2, 0, 1], -1, 0.0000001);
+            Assert.AreEqual(output[0, 2, 1, 1], -2, 0.0000001);
+            Assert.AreEqual(output[0, 2, 2, 1], -3, 0.0000001);
+            Assert.AreEqual(output[0, 2, 3, 1], -4, 0.0000001);
         }
     }
 }

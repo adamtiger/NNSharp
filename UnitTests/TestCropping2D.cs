@@ -3,6 +3,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NNSharp.DataTypes;
 using NNSharp.SequentialBased.SequentialLayers;
 using static NNSharp.DataTypes.Data2D;
+using NNSharp.IO;
+using NNSharp.Models;
 
 namespace UnitTests
 {
@@ -59,7 +61,7 @@ namespace UnitTests
 
         [TestMethod]
         [ExpectedException(typeof(System.Exception))]
-        public void Test_Cropping1D_DifferentData_Input()
+        public void Test_Cropping2D_DifferentData_Input()
         {
             DataArray data = new DataArray(5);
             Cropping2DLayer crop = new Cropping2DLayer(2, 2, 1, 1);
@@ -77,11 +79,48 @@ namespace UnitTests
 
         [TestMethod]
         [ExpectedException(typeof(System.Exception))]
-        public void Test_Cropping1D_TooMuchCropping_Trim()
+        public void Test_Cropping2D_TooMuchCropping_Trim()
         {
             Data2D data = new Data2D(4, 4, 3, 5);
             Cropping2DLayer crop = new Cropping2DLayer(2, 3, 1, 1);
             crop.SetInput(data);
+        }
+
+        [TestMethod]
+        public void Test_Cropping2D_KerasModel()
+        {
+            string path = @"tests\test_crop_2D_model.json";
+            var reader = new ReaderKerasModel(path);
+            SequentialModel model = reader.GetSequentialExecutor();
+
+            Data2D inp = new Data2D(4, 5, 2, 1);
+
+            int l = 0;
+            for (int h = 0; h < 4; ++h)
+            {
+                for (int w = 0; w < 5; ++w)
+                {
+                    l += 1;
+                    inp[h, w, 0, 0] = l + 1;
+                    inp[h, w, 1, 0] = -(l + 1);
+                }
+            }
+
+            Data2D ou = model.ExecuteNetwork(inp) as Data2D;
+
+            Assert.AreEqual(ou.GetDimension().c, 2);
+            Assert.AreEqual(ou.GetDimension().w, 2);
+            Assert.AreEqual(ou.GetDimension().h, 2);
+
+            Assert.AreEqual(ou[0, 0, 0, 0], 8.0, 0.00001);
+            Assert.AreEqual(ou[0, 0, 1, 0], -8.0, 0.00001);
+            Assert.AreEqual(ou[0, 1, 0, 0], 9.0, 0.00001);
+            Assert.AreEqual(ou[0, 1, 1, 0], -9.0, 0.00001);
+
+            Assert.AreEqual(ou[1, 0, 0, 0], 13.0, 0.00001);
+            Assert.AreEqual(ou[1, 0, 1, 0], -13.0, 0.00001);
+            Assert.AreEqual(ou[1, 1, 0, 0], 14.0, 0.00001);
+            Assert.AreEqual(ou[1, 1, 1, 0], -14.0, 0.00001);
         }
     }
 }
