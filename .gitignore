@@ -11,6 +11,9 @@
 *.jpeg
 *.svg
 
+# Python related files
+PythonUtils/__pycache__/
+
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
@@ -72,6 +75,7 @@ artifacts/
 *.pidb
 *.svclog
 *.scc
+*.json
 
 # Chutzpah Test files
 _Chutzpah*

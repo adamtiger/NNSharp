@@ -2,6 +2,8 @@ import numpy as np
 import KerasModeltoJSON as js
 from keras.models import Sequential
 from keras.layers import Conv1D, Conv2D, Dense, Activation, Flatten, MaxPooling1D, MaxPooling2D, AveragePooling1D, AveragePooling2D
+from keras.layers import Reshape, Permute, RepeatVector, GlobalMaxPooling1D, GlobalMaxPooling2D, GlobalAveragePooling1D, GlobalAveragePooling2D
+from keras.layers import Cropping1D, Cropping2D
 import json
 
 # json writer
@@ -14,62 +16,91 @@ def generate_test_files():
     # CONVOLUTIONS
 
     # convolution1D tests
-    gen_conv_1D_stride_1()
-    gen_conv_1D_stride_2()
+    gen_conv_1D_stride_1() # OK
+    gen_conv_1D_stride_2() # OK
 
     # convolution2D tests
-    gen_conv_2D_stride_1_1()
-    gen_conv_2D_stride_1_2()
+    gen_conv_2D_stride_1_1() # OK
+    gen_conv_2D_stride_1_2() # OK
+    
+    # cropping1D tests
+    gen_cropping1D_tests() # OK
+    
+    # cropping2D tests
+    gen_cropping2D_tests() # OK
 
     # POOLING
 
     # avgpooling1D_tests
-    gen_avgpool_1D_stride_1()
-    gen_avgpool_1D_stride_2()
+    gen_avgpool_1D_stride_1() # OK
+    gen_avgpool_1D_stride_2() # OK
 
     # avgpooling2D_tests
-    gen_avgpool_2D_stride_1_1()
-    gen_avgpool_2D_stride_1_2()
+    gen_avgpool_2D_stride_1_1() # OK
+    gen_avgpool_2D_stride_1_2() # OK
 
     # maxpooling1D tests
-    gen_maxpool_1D_stride_1()
-    gen_maxpool_1D_stride_2()
+    gen_maxpool_1D_stride_1() # OK
+    gen_maxpool_1D_stride_2() # OK
 
     # maxpooling2D tests
-    gen_maxpool_2D_stride_1_1()
-    gen_maxpool_2D_stride_1_2()
-
+    gen_maxpool_2D_stride_1_1() # OK
+    gen_maxpool_2D_stride_1_2() # OK
+    
+    # globalmaxpooling1D tests
+    gen_globalmaxpooling1D() # OK
+    
+    # globalmaxpooling2D tests
+    gen_globalmaxpooling2D() # OK
+    
+    # globalaveragepooling1D tests
+    gen_globalaveragepooling1D() # OK
+    
+    # globalaveragepooling2D tests
+    gen_globalaveragepooling2D() # OK
+    
+    # CORE
+    
     # flatten tests
-    gen_flatten()
+    gen_flatten() # OK
 
     # dense tests
-    gen_dense_units_4()
+    gen_dense_units_4() # OK
+    
+    # reshape tests
+    gen_reshape_tests() # OK
+    
+    # permute tests
+    gen_permute_tests() # OK
+    
+    # repeatvector tests
+    gen_repeatvector_tests()
 
     # ACTIVATIONS
 
     # ELu test
-    gen_elu()
+    gen_elu() # OK
 
     # HardSigmoid test
-    gen_hard_sigmoid()
+    gen_hard_sigmoid() # OK
 
     # ReLu test
-    gen_relu()
+    gen_relu() # OK
 
     # Sigmoid test
-    gen_sigmoid()
+    gen_sigmoid() # OK
 
     # Softmax test
-    gen_softmax()
+    gen_softmax() # OK
 
     # SoftPlus test
-    gen_softplus()
+    gen_softplus() # OK
 
     # SoftSign test
-    gen_softsign()
+    gen_softsign() # OK
 
     # TanH test
-    gen_tanh()
+    gen_tanh() # OK
 
 # ---------------------------------------------------------
 
@@ -496,7 +527,52 @@ def gen_conv_2D_stride_1_2():
     
     write("tests/test_conv_2D_2_output.json", output.tolist())
     
-# MAXPOOLING
+def gen_cropping1D_tests():
+    
+    model = Sequential()
+    
+    model.add(Cropping1D(cropping=(1, 2), input_shape=(5,2)))
+    model.compile(optimizer='rmsprop', loss='mse')
+    
+    inp = np.ndarray((1,5,2))
+    
+    for l in range(0, 5):
+        inp[0, l, 0] = l + 1
+        inp[0, l, 1] = -(l + 1)
+    
+    wrt = js.JSONwriter(model, "tests/test_crop_1D_model.json")
+    wrt.save()
+    
+    output = model.predict(inp, batch_size=1)
+    print(output.shape)
+    
+    write("tests/test_crop_1D_output.json", output.tolist())
+    
+def gen_cropping2D_tests():
+    
+    model = Sequential()
+    
+    model.add(Cropping2D(cropping=((1, 1), (1, 2)), input_shape=(4, 5, 2)))
+    model.compile(optimizer='rmsprop', loss='mse')
+    
+    inp = np.ndarray((1,4, 5, 2))
+    
+    l = 0
+    for h in range(0, 4):
+        for w in range(0, 5):
+            l += 1
+            inp[0, h, w, 0] = l + 1
+            inp[0, h, w, 1] = -(l + 1)
+    
+    wrt = js.JSONwriter(model, "tests/test_crop_2D_model.json")
+    wrt.save()
+    
+    output = model.predict(inp, batch_size=1)
+    print(output.shape)
+    
+    write("tests/test_crop_2D_output.json", output.tolist())
+    
+# POOLING
 
 # avgpooling1D_tests
 def gen_avgpool_1D_stride_1():
@@ -850,6 +926,141 @@ def gen_maxpool_2D_stride_1_2():
     
     write("tests/test_maxpool_2D_2_output.json", output.tolist())    
 
+def gen_globalmaxpooling1D():
+    
+    model = Sequential()
+    
+    model.add(GlobalMaxPooling1D(input_shape=(3, 2)))
+    model.compile(optimizer='rmsprop', loss='mse')
+    
+    inp = np.ndarray((1, 3, 2))
+    
+    inp[0, 0, 0] = 1
+    inp[0, 1, 0] = 2
+    inp[0, 2, 0] = 0
+    
+    inp[0, 0, 1] = 3
+    inp[0, 1, 1] = 4
+    inp[0, 2, 1] = 0
+    
+    wrt = js.JSONwriter(model, "tests/test_globalmaxpool_1D_model.json")
+    wrt.save()
+    
+    output = model.predict(inp, batch_size=1)
+    print(output.shape)
+    
+    write("tests/test_globalmaxpool_1D_output.json", output.tolist())
+    
+def gen_globalmaxpooling2D():
+    
+    model = Sequential()
+    
+    model.add(GlobalMaxPooling2D(input_shape=(3, 3, 2)))
+    model.compile(optimizer='rmsprop', loss='mse')
+    
+    inp = np.ndarray((1, 3, 3, 2))
+    
+    inp[0, 0, 0, 0] = 1;
+    inp[0, 1, 0, 0] = 2;
+    inp[0, 2, 0, 0] = 0;
+
+    inp[0, 0, 1, 0] = 3;
+    inp[0, 1, 1, 0] = 4;
+    inp[0, 2, 1, 0] = 0;
+
+    inp[0, 0, 2, 0] = 2;
+    inp[0, 1, 2, 0] = 2;
+    inp[0, 2, 2, 0] = 0;
+
+
+    inp[0, 0, 0, 1] = 0;
+    inp[0, 1, 0, 1] = 3;
+    inp[0, 2, 0, 1] = 1;
+
+    inp[0, 0, 1, 1] = 1;
+    inp[0, 1, 1, 1] = 1;
+    inp[0, 2, 1, 1] = -1;
+
+    inp[0, 0, 2, 1] = -3;
+    inp[0, 1, 2, 1] = -1;
+    inp[0, 2, 2, 1] = 0;
+    
+    wrt = js.JSONwriter(model, "tests/test_globalmaxpool_2D_model.json")
+    wrt.save()
+    
+    output = model.predict(inp, batch_size=1)
+    print(output.shape)
+    
+    write("tests/test_globalmaxpool_2D_output.json", output.tolist())
+
+def gen_globalaveragepooling1D():
+    
+    model = Sequential()
+    
+    model.add(GlobalAveragePooling1D(input_shape=(3, 2)))
+    model.compile(optimizer='rmsprop', loss='mse')
+    
+    inp = np.ndarray((1, 3, 2))
+    
+    inp[0, 0, 0] = 1
+    inp[0, 1, 0] = 2
+    inp[0, 2, 0] = 0
+    
+    inp[0, 0, 1] = 3
+    inp[0, 1, 1] = 4
+    inp[0, 2, 1] = 0
+    
+    wrt = js.JSONwriter(model, "tests/test_globalavgpool_1D_model.json")
+    wrt.save()
+    
+    output = model.predict(inp, batch_size=1)
+    print(output.shape)
+    
+    write("tests/test_globalavgpool_1D_output.json", output.tolist())
+    
+def gen_globalaveragepooling2D():
+    
+    model = Sequential()
+    
+    model.add(GlobalAveragePooling2D(input_shape=(3, 3, 2)))
+    model.compile(optimizer='rmsprop', loss='mse')
+    
+    inp = np.ndarray((1, 3, 3, 2))
+    
+    inp[0, 0, 0, 0] = 1;
+    inp[0, 1, 0, 0] = 2;
+    inp[0, 2, 0, 0] = 0;
+
+    inp[0, 0, 1, 0] = 3;
+    inp[0, 1, 1, 0] = 4;
+    inp[0, 2, 1, 0] = 0;
+
+    inp[0, 0, 2, 0] = 2;
+    inp[0, 1, 2, 0] = 2;
+    inp[0, 2, 2, 0] = 0;
+
+
+    inp[0, 0, 0, 1] = 0;
+    inp[0, 1, 0, 1] = 3;
+    inp[0, 2, 0, 1] = 1;
+
+    inp[0, 0, 1, 1] = 1;
+    inp[0, 1, 1, 1] = 1;
+    inp[0, 2, 1, 1] = -1;
+
+    inp[0, 0, 2, 1] = -3;
+    inp[0, 1, 2, 1] = -1;
+    inp[0, 2, 2, 1] = 0;
+    
+    wrt = js.JSONwriter(model, "tests/test_globalavgpool_2D_model.json")
+    wrt.save()
+    
+    output = model.predict(inp, batch_size=1)
+    print(output.shape)
+    
+    write("tests/test_globalavgpool_2D_output.json", output.tolist())
+
+# CORE LAYERS
 
 # FLATTEN
 def gen_flatten():
@@ -993,6 +1204,75 @@ def gen_dense_units_4():
     
     write("tests/test_dense_output.json", output.tolist())
 
+def gen_reshape_tests():
+
+    model = Sequential()
+    
+    model.add(Reshape((3, 2, 3), input_shape=(3, 3, 2)))
+    model.compile(optimizer='rmsprop', loss='mse')
+    
+    inp = np.ndarray((1, 3, 3, 2))
+    
+    l = 0
+    for h in range(0, 3):
+        for w in range(0, 3):
+            for c in range(0, 2):
+                l += 1 
+                inp[0, h, w, c] = l + 1
+    
+    wrt = js.JSONwriter(model, "tests/test_reshape_model.json")
+    wrt.save()
+    
+    output = model.predict(inp, batch_size=1)
+    print(output.shape)
+    
+    write("tests/test_reshape_output.json", output.tolist())
+    
+def gen_permute_tests():
+
+    model = Sequential()
+    
+    model.add(Permute((3, 1, 2), input_shape=(2, 3, 4)))
+    model.compile(optimizer='rmsprop', loss='mse')
+    
+    inp = np.ndarray((1, 2, 3, 4))
+    
+    l = 0
+    for h in range(0, 2):
+        for w in range(0, 3):
+            for c in range(0, 4):
+                l += 1 
+                inp[0, h, w, c] = l + 1
+    
+    wrt = js.JSONwriter(model, "tests/test_permute_model.json")
+    wrt.save()
+    
+    output = model.predict(inp, batch_size=1)
+    print(output.shape)
+    
+    write("tests/test_permute_output.json", output.tolist())      
+    
+def gen_repeatvector_tests():
+
+    model = Sequential()
+    
+    model.add(RepeatVector(3, input_shape=(4,)))
+    model.compile(optimizer='rmsprop', loss='mse')
+    
+    inp = np.ndarray((2, 4))
+
+    for l in range(0, 4):
+        inp[0, l] = l + 1
+        inp[1, l] = -(l + 1)
+    
+    wrt = js.JSONwriter(model, "tests/test_repeatvector_model.json")
+    wrt.save()
+    
+    output = model.predict(inp, batch_size=1)
+    print(output.shape)
+    
+    write("tests/test_repeatvector_output.json", output.tolist())        
+    
 # -------------------------------------------------------------------------------------------------------------
 
 # ACTIVATIONS:
