@@ -1607,7 +1607,86 @@ def gen_sigmoid():
 
 # Softmax test
 def gen_softmax():
-    pass
+
+    model = Sequential()
+    
+    model.add(Flatten(input_shape=(8,1,1)))
+    model.add(Dense(4))
+    model.add(Activation('softmax'))
+    model.compile(optimizer='rmsprop', loss='mse')
+    
+    inp = np.ndarray((1,8, 1, 1))
+    
+    inp[0,0,0,0] = 1
+    inp[0,1,0,0] = 2
+    inp[0,2,0,0] = -1
+    inp[0,3,0,0] = 0
+    
+    inp[0,4,0,0] = 3
+    inp[0,5,0,0] = 1
+    inp[0,6,0,0] = 1
+    inp[0,7,0,0] = 2
+    
+    weight = np.ndarray((8,4))
+    
+    weight[0,0] = 0 
+    weight[0,1] = 1.5
+    weight[0,2] = 2 
+    weight[0,3] = 0.5
+    
+    weight[1,0] = -1 
+    weight[1,1] = -2
+    weight[1,2] = 3 
+    weight[1,3] = 0
+    
+    weight[2,0] = 1 
+    weight[2,1] = 1
+    weight[2,2] = -3 
+    weight[2,3] = 2.5
+    
+    weight[3,0] = 1.5 
+    weight[3,1] = 0.5
+    weight[3,2] = -2 
+    weight[3,3] = 1.5
+    
+    
+    weight[4,0] = -0.5
+    weight[4,1] = 2.5
+    weight[4,2] = 2.5 
+    weight[4,3] = 0.5
+    
+    weight[5,0] = -1.5 
+    weight[5,1] = -1
+    weight[5,2] = 3 
+    weight[5,3] = 0.5
+    
+    weight[6,0] = 1.5 
+    weight[6,1] = 1
+    weight[6,2] = 0 
+    weight[6,3] = 0
+    
+    weight[7,0] = 1.5 
+    weight[7,1] = 0
+    weight[7,2] = -2 
+    weight[7,3] = 3
+    
+    bias = np.ndarray(4)
+    
+    bias[0] = 0.5
+    bias[1] = 1.5
+    bias[2] = 1.0
+    bias[3] = 3.0
+    
+    w = [weight, bias]
+    model.set_weights(w)
+    
+    wrt = js.JSONwriter(model, "tests/test_softmax_model.json")
+    wrt.save()
+    
+    output = model.predict(inp, batch_size=1)
+    print(output.shape)
+    
+    write("tests/test_softmax_output.json", output.tolist())
 
 # SoftPlus test
 def gen_softplus():

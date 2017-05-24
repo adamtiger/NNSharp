@@ -158,6 +158,8 @@ class JSONwriter:
             h = layer_descr['config']['target_shape'][0]
             w = layer_descr['config']['target_shape'][1]
             c = layer_descr['config']['target_shape'][2]
+            if c is None:
+                c = 1
             layers.append({'layer':'Reshape', 'height':h, 'width':w, 'channel':c})
             return layers
         
@@ -165,6 +167,8 @@ class JSONwriter:
             dim1 = layer_descr['config']['dims'][0]
             dim2 = layer_descr['config']['dims'][1]
             dim3 = layer_descr['config']['dims'][2]
+            if dim3 is None:
+                dim3 = 3
             layers.append({'layer':'Permute', 'dim1':dim1, 'dim2':dim2, 'dim3':dim3})
             return layers
             
