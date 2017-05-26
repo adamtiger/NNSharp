@@ -4,9 +4,27 @@
     
     <url>
      <loc>None/</loc>
-     <lastmod>2017-05-24</lastmod>
+     <lastmod>2017-05-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
+    
+
+    
+    <url>
+     <loc>None/install/</loc>
+     <lastmod>2017-05-26</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+        
+    <url>
+     <loc>None/convolutions/</loc>
+     <lastmod>2017-05-26</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
     
 
 </urlset>
