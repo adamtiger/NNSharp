@@ -1,1 +1,9 @@
-site_name: My Docs
+site_name: NNSharp Documentation
+pages:
+    - Overview: index.md
+    - Installation: install.md
+    - Keras: 
+        - Convolutions: convolutions.md
+theme: readthedocs
+theme_dir: custom_theme
+repo_url: https://github.com/adamtiger/NNSharp

@@ -11,6 +11,9 @@
 *.jpeg
 *.svg
 
+# Documentation page
+docs/site/
+
 # Python related files
 PythonUtils/__pycache__/
 
