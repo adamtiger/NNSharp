@@ -57,7 +57,12 @@ class JSONwriter:
         layers = []
         name = layer_descr['class_name']
         
-        if 'Conv1D' == name:
+        if 'BatchNormalization' == name:
+            eps = layer_descr['config']['epsilon']
+            layers.append({'layer':'BatchNormalization', 'epsilon':eps})
+            return layers
+
+        elif 'Conv1D' == name:
             k_s = layer_descr['config']['kernel_size'][0]
             k_num = layer_descr['config']['filters']
             stride = layer_descr['config']['strides'][0]
@@ -183,7 +188,16 @@ class JSONwriter:
     def __get_weight(self, weights, w_org, config):
         name = config['class_name']
         
-        if 'Conv1D' == name:
+        if 'BatchNormalization' == name:
+            w = np.ndarray((1,1, w_org[self.idx].shape[0], 4))
+            w[0,0,:,0] = w_org[self.idx][:]
+            w[0,0,:,1] = w_org[self.idx + 1][:]
+            w[0,0,:,2] = w_org[self.idx + 2][:]
+            w[0,0,:,3] = w_org[self.idx + 3][:]
+            weights.append(w.tolist())
+            self.idx += 4
+
+        elif 'Conv1D' == name:
             w = np.ndarray((1,w_org[self.idx].shape[0], w_org[self.idx].shape[1], w_org[self.idx].shape[2]))
             w[0,:,:, :] = w_org[self.idx][:,:,:]
             weights.append(w.tolist())

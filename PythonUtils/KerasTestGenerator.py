@@ -3,7 +3,7 @@ import KerasModeltoJSON as js
 from keras.models import Sequential
 from keras.layers import Conv1D, Conv2D, Dense, Activation, Flatten, MaxPooling1D, MaxPooling2D, AveragePooling1D, AveragePooling2D
 from keras.layers import Reshape, Permute, RepeatVector, GlobalMaxPooling1D, GlobalMaxPooling2D, GlobalAveragePooling1D, GlobalAveragePooling2D
-from keras.layers import Cropping1D, Cropping2D
+from keras.layers import Cropping1D, Cropping2D, BatchNormalization
 import json
 
 # json writer
@@ -101,6 +101,11 @@ def generate_test_files():
 
     # TanH test
     gen_tanh() # OK
+
+	# NORMALIZATION
+
+	# BatchNormalization
+    gen_batchnorm()
 
 # ---------------------------------------------------------
 
@@ -1934,6 +1939,40 @@ def gen_tanh():
     
     write("tests/test_tanh_output.json", output.tolist())
 
+# NORMALIZATION
+
+def gen_batchnorm():
+	model = Sequential()
+	model.add(BatchNormalization(input_shape=(2, 1, 3)))
+	model.compile(optimizer='sgd', loss='mse')
+
+	params = [0] * 4 
+
+	params[0] = np.array([3,3,3]) # gamma
+	params[1] = np.array([1,2,-1]) # beta
+	params[2] = np.array([2,2,2]) # bias
+	params[3] = np.array([5,5,5]) # variance
+
+	data = np.ndarray((4, 2, 1, 3))
+
+	l = 0
+	for b in range(0, 4):
+		for h in range(0, 2):
+			for w in range(0, 1):
+				for c in range(0, 3):
+					l += 1
+					data[b, h, w, c] = l % 7 - 3
+
+	model.set_weights(params)
+	output = model.predict(data, batch_size=1)
+	
+	wrt = js.JSONwriter(model, "tests/test_batchnorm_model.json")
+	wrt.save()
+    
+	print(output.shape)
+
+	write("tests/test_batchnorm_output.json", output.tolist())
+	
 
 # Generate ALL the tests:
 

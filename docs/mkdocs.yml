@@ -1,9 +1,17 @@
 site_name: NNSharp Documentation
+site_author: Adam Budai
 pages:
     - Overview: index.md
     - Installation: install.md
     - Keras: 
+        - Quick start: startkeras.md
         - Convolutions: convolutions.md
+        - BatchNormalization: batchnormalization.md
+    - PyTorch:
+        - Quick start: startpytorch.md
+
+
+
 theme: readthedocs
 theme_dir: custom_theme
 repo_url: https://github.com/adamtiger/NNSharp
