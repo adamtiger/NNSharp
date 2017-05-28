@@ -3,14 +3,17 @@ site_author: Adam Budai
 pages:
     - Overview: index.md
     - Installation: install.md
+    - Models: models.md
     - Keras: 
         - Quick start: startkeras.md
+        - Core: core.md
         - Convolutions: convolutions.md
+        - Pooling: pooling.md
+        - Activations: activations.md
+        - Recurrent layers: recurrents.md
         - BatchNormalization: batchnormalization.md
     - PyTorch:
         - Quick start: startpytorch.md
-
-
 
 theme: readthedocs
 theme_dir: custom_theme
