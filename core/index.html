@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Installation - NNSharp Documentation</title>
+  <title>Core - NNSharp Documentation</title>
   
 
   <link rel="shortcut icon" href="../img/favicon.ico">
@@ -20,7 +20,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Installation";
+    var mkdocs_page_name = "Core";
   </script>
   
   <script src="../js/jquery-2.1.1.min.js"></script>
@@ -57,15 +57,8 @@
 <li>
           
             <li>
-    <li class="toctree-l1 current">
-        <a class="current" href="./">Installation</a>
-        
-            <ul>
-            
-                <li class="toctree-l3"><a href="#installation">Installation</a></li>
-                
-            
-            </ul>
+    <li class="toctree-l1 ">
+        <a class="" href="../install/">Installation</a>
         
     </li>
 <li>
@@ -90,8 +83,25 @@
 
         
             
-    <li class="toctree-l1 ">
-        <a class="" href="../core/">Core</a>
+    <li class="toctree-l1 current">
+        <a class="current" href="./">Core</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#core-layers">Core layers</a></li>
+                
+                    <li><a class="toctree-l4" href="#fully-connected-dense-layer">Fully connected (Dense layer)</a></li>
+                
+                    <li><a class="toctree-l4" href="#flatten">Flatten</a></li>
+                
+                    <li><a class="toctree-l4" href="#reshape2d">Reshape2D</a></li>
+                
+                    <li><a class="toctree-l4" href="#permute">Permute</a></li>
+                
+                    <li><a class="toctree-l4" href="#repeatvector">RepeatVector</a></li>
+                
+            
+            </ul>
         
     </li>
 
@@ -170,8 +180,12 @@
     <li><a href="..">Docs</a> &raquo;</li>
     
       
+        
+          <li>Keras &raquo;</li>
+        
+      
     
-    <li>Installation</li>
+    <li>Core</li>
     <li class="wy-breadcrumbs-aside">
       
         
@@ -185,8 +199,18 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="installation">Installation</h1>
-<p>NNSharp is available as a <a href="https://www.nuget.org/packages/NNSharp/">nuget package</a>. It was built on Visual Studio 2015 with .NET Framework 4.5.2. The easiest way to install is to use the <a href="https://docs.microsoft.com/en-us/nuget/tools/package-manager-ui">nuget package manager</a> in Visual Studio. As an other option the necessary dll can be built from the source code (<a href="https://github.com/adamtiger/NNSharp/archive/v1.1.zip">download link</a>). The current release is the v1.1. It has only one dependency: <a href="https://www.nuget.org/packages/Newtonsoft.Json/">Newtonsoft.Json</a>.</p>
+                <h1 id="core-layers">Core layers</h1>
+<p>The core layers contains layers to transform the shape of the input and the fully connected layer as a usual ingridient of a neural networks. </p>
+<h2 id="fully-connected-dense-layer">Fully connected (Dense layer)</h2>
+<p><span style="float:right;"> <a href="https://github.com/adamtiger/NNSharp/blob/master/NNSharp/Kernels/CPUKernels/Dense2DKernel.cs">[source]</a> </span></p>
+<h2 id="flatten">Flatten</h2>
+<p><span style="float:right;"> <a href="https://github.com/adamtiger/NNSharp/blob/master/NNSharp/Kernels/CPUKernels/FlattenKernel.cs">[source]</a> </span></p>
+<h2 id="reshape2d">Reshape2D</h2>
+<p><span style="float:right;"> <a href="https://github.com/adamtiger/NNSharp/blob/master/NNSharp/Kernels/CPUKernels/Reshape2DKernel.cs">[source]</a> </span></p>
+<h2 id="permute">Permute</h2>
+<p><span style="float:right;"> <a href="https://github.com/adamtiger/NNSharp/blob/master/NNSharp/Kernels/CPUKernels/PermuteKernel.cs">[source]</a> </span></p>
+<h2 id="repeatvector">RepeatVector</h2>
+<p><span style="float:right;"> <a href="https://github.com/adamtiger/NNSharp/blob/master/NNSharp/Kernels/CPUKernels/RepeatVectorKernel.cs">[source]</a> </span></p>
               
             </div>
           </div>
@@ -194,10 +218,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../models/" class="btn btn-neutral float-right" title="Models"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../convolutions/" class="btn btn-neutral float-right" title="Convolutions"/>Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href=".." class="btn btn-neutral" title="Overview"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../startkeras/" class="btn btn-neutral" title="Quick start"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -225,10 +249,10 @@
           <a class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href=".." style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../startkeras/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../models/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../convolutions/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

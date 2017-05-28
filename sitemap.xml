@@ -4,7 +4,7 @@
     
     <url>
      <loc>None/</loc>
-     <lastmod>2017-05-26</lastmod>
+     <lastmod>2017-05-29</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -12,7 +12,15 @@
     
     <url>
      <loc>None/install/</loc>
-     <lastmod>2017-05-26</lastmod>
+     <lastmod>2017-05-29</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/models/</loc>
+     <lastmod>2017-05-29</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -20,8 +28,54 @@
     
         
     <url>
+     <loc>None/startkeras/</loc>
+     <lastmod>2017-05-29</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>None/core/</loc>
+     <lastmod>2017-05-29</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
      <loc>None/convolutions/</loc>
-     <lastmod>2017-05-26</lastmod>
+     <lastmod>2017-05-29</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>None/pooling/</loc>
+     <lastmod>2017-05-29</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>None/activations/</loc>
+     <lastmod>2017-05-29</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>None/recurrents/</loc>
+     <lastmod>2017-05-29</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>None/batchnormalization/</loc>
+     <lastmod>2017-05-29</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    
+
+    
+        
+    <url>
+     <loc>None/startpytorch/</loc>
+     <lastmod>2017-05-29</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
