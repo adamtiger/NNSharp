@@ -12,7 +12,7 @@ using static NNSharp.DataTypes.Data2D;
 namespace NNSharp.Models
 {
     [Serializable()]
-    public class SequentialModel
+    public class SequentialModel : IModel
     {
         public SequentialModel()
         {
@@ -50,11 +50,10 @@ namespace NNSharp.Models
             return dim;
         }
 
-        public SequentialModelData GetSummary()
+        public IModelData GetSummary()
         {
             return compiled.GetSummary();
         }
-
 
         [field: NonSerialized()]
         private List<IKernelDescriptor> descriptors;
