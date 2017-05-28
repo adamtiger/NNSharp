@@ -110,6 +110,7 @@
     <Compile Include="Kernels\CPUKernels\SoftPlusKernel.cs" />
     <Compile Include="Kernels\CPUKernels\SoftsignKernel.cs" />
     <Compile Include="Kernels\CPUKernels\TanHKernel.cs" />
+    <Compile Include="Models\IModel.cs" />
     <Compile Include="SequentialBased\SequentialExecutors\DeafultAbstractLayerFactory.cs" />
     <Compile Include="SequentialBased\SequentialLayers\AvgPool1DLayer.cs" />
     <Compile Include="SequentialBased\SequentialLayers\AvgPool1DLayerFactory.cs" />
