@@ -87,6 +87,7 @@
     <Compile Include="TestPermute.cs" />
     <Compile Include="TestCropping1D.cs" />
     <Compile Include="TestCropping2D.cs" />
+    <Compile Include="TestBatchNormalization.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NNSharp\NNSharp.csproj">

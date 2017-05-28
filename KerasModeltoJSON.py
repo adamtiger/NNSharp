@@ -32,6 +32,8 @@ class JSONwriter:
             layer_input = {'layer':'Input2D', 'height':1, 'width':inp_sizes[1], 'channel':inp_sizes[2]}
         elif len(inp_sizes) == 4:
             layer_input = {'layer':'Input2D', 'height':inp_sizes[1], 'width':inp_sizes[2], 'channel':inp_sizes[3]}
+        elif len(inp_sizes) == 2:
+            layer_input = {'layer':'Input2D', 'height':1, 'width':1, 'channel':inp_sizes[1]}
         if inp_sizes[0] is None:
             layer_input['batch'] = 1
         else:
@@ -79,6 +81,20 @@ class JSONwriter:
             self.__get_activation(layers, layer_descr)
             return layers 
             
+        elif 'Cropping1D' == name:
+            trimB = layer_descr['config']['cropping'][0]
+            trimE = layer_descr['config']['cropping'][1]
+            layers.append({'layer':'Cropping1D', 'trimBegin':trimB, 'trimEnd':trimE})
+            return layers
+            
+        elif 'Cropping2D' == name:
+            topTrim = layer_descr['config']['cropping'][0][0]
+            bottomTrim = layer_descr['config']['cropping'][0][1]
+            leftTrim = layer_descr['config']['cropping'][1][0]
+            rightTrim = layer_descr['config']['cropping'][1][1]
+            layers.append({'layer':'Cropping2D', 'topTrim':topTrim, 'bottomTrim':bottomTrim, 'leftTrim':leftTrim, 'rightTrim':rightTrim})
+            return layers
+            
         elif 'Activation' == name:
             self.__get_activation(layers, layer_descr)
             return layers
@@ -116,13 +132,51 @@ class JSONwriter:
             s_h = layer_descr['config']['strides'][1]
             s_v = layer_descr['config']['strides'][0]
             layers.append({'layer':'MaxPooling2D', 'kernel_height':k_h, 'kernel_width':k_w, 'stride_hz':s_h, 'stride_vl':s_v, 'padding_hz':0, 'padding_vl':0})
+            return layers
+            
+        elif 'GlobalMaxPooling1D' == name:
+            layers.append({'layer':'GlobalMaxPooling1D'})
             return layers 
         
-            
+        elif 'GlobalMaxPooling2D' == name:
+            layers.append({'layer':'GlobalMaxPooling2D'})
+            return layers
+        
+        elif 'GlobalAveragePooling1D' == name:
+            layers.append({'layer':'GlobalAveragePooling1D'})
+            return layers 
+        
+        elif 'GlobalAveragePooling2D' == name:
+            layers.append({'layer':'GlobalAveragePooling2D'})
+            return layers
+        
         elif 'Flatten' == name:
             layers.append({'layer':'Flatten'})
-            
             return layers
+            
+        elif 'Reshape' == name:
+            h = layer_descr['config']['target_shape'][0]
+            w = layer_descr['config']['target_shape'][1]
+            c = layer_descr['config']['target_shape'][2]
+            if c is None:
+                c = 1
+            layers.append({'layer':'Reshape', 'height':h, 'width':w, 'channel':c})
+            return layers
+        
+        elif 'Permute' == name:
+            dim1 = layer_descr['config']['dims'][0]
+            dim2 = layer_descr['config']['dims'][1]
+            dim3 = layer_descr['config']['dims'][2]
+            if dim3 is None:
+                dim3 = 3
+            layers.append({'layer':'Permute', 'dim1':dim1, 'dim2':dim2, 'dim3':dim3})
+            return layers
+            
+        elif 'RepeatVector' == name:
+            num = layer_descr['config']['n']
+            layers.append({'layer':'RepeatVector', 'num':num})
+            return layers
+            
         else:
             raise NotImplementedError("Unknown layer type: " + name)  
     

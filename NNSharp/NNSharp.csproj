@@ -56,6 +56,7 @@
     <Compile Include="IO\ReaderKerasModel.cs" />
     <Compile Include="KernelDescriptors\AvgPooling1D.cs" />
     <Compile Include="KernelDescriptors\AvgPooling2D.cs" />
+    <Compile Include="KernelDescriptors\BatchNormalization.cs" />
     <Compile Include="KernelDescriptors\Bias2D.cs" />
     <Compile Include="KernelDescriptors\Convolution2D.cs" />
     <Compile Include="KernelDescriptors\Convolution1D.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="KernelDescriptors\TanH.cs" />
     <Compile Include="Kernels\CPUKernels\AvgPool1DKernel.cs" />
     <Compile Include="Kernels\CPUKernels\AvgPool2DKernel.cs" />
+    <Compile Include="Kernels\CPUKernels\BatchNormKernel.cs" />
     <Compile Include="Kernels\CPUKernels\Bias2DKernel.cs" />
     <Compile Include="Kernels\CPUKernels\Conv1DKernel.cs" />
     <Compile Include="Kernels\CPUKernels\Conv2DKernel.cs" />
@@ -113,6 +115,8 @@
     <Compile Include="SequentialBased\SequentialLayers\AvgPool1DLayerFactory.cs" />
     <Compile Include="SequentialBased\SequentialLayers\AvgPool2DLayer.cs" />
     <Compile Include="SequentialBased\SequentialLayers\AvgPool2DLayerFactory.cs" />
+    <Compile Include="SequentialBased\SequentialLayers\BatchNormLayer.cs" />
+    <Compile Include="SequentialBased\SequentialLayers\BatchNormLayerFactory.cs" />
     <Compile Include="SequentialBased\SequentialLayers\Bias2DLayer.cs" />
     <Compile Include="SequentialBased\SequentialLayers\Bias2DLayerFactory.cs" />
     <Compile Include="SequentialBased\SequentialLayers\Conv1DLayer.cs" />

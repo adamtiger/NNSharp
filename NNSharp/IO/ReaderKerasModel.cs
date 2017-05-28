@@ -72,6 +72,10 @@ namespace NNSharp.IO
                     case "GlobalAveragePooling2D":
                         descriptor = new GlobalAvgPooling2D();
                         break;
+                    case "BatchNormalization":
+                        descriptor = new BatchNormalization(
+                            (int)layer.SelectToken("epsilon"));
+                        break;
                     case "Cropping1D":
                         descriptor = new Cropping1D(
                             (int)layer.SelectToken("trimBegin"),
@@ -197,7 +201,8 @@ namespace NNSharp.IO
             int idx = 0;
             for (int i = 1; i < dscps.Count; ++i)
             {
-                if ((dscps[i] is Convolution2D) || (dscps[i] is Dense2D) || (dscps[i] is Convolution1D))
+                if ((dscps[i] is Convolution2D) || (dscps[i] is Dense2D) || (dscps[i] is Convolution1D) || 
+                    dscps[i] is BatchNormalization)
                 {
                     int rowNum = weightsList[idx].Count;
                     int colNum = weightsList[idx][0].Count;
