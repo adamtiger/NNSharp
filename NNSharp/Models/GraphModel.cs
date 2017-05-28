@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace NNSharp.Models
 {
-    class GraphModel
+    class GraphModel : IModel
     {
+        public IModelData GetSummary()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
