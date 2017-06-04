@@ -26,8 +26,7 @@ The structure of the documentation is the following:
 * **Installation** shows how to get access to the package.
 * **Models** introduces the model types and methods to access information about the model like the contained layers or nodes, execution time etc.
 * **Keras** shows the implemented Keras layers. Each layer introduced with its input, output and its underlying process.
-* **PyTorch** shows the same for PyTorch.
-* **Sonnet**.
+* **TensorFlow** shows how to use pre-trained TensorFlow models in NNSharp.
 
 ## Future 
 
