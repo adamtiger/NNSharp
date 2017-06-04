@@ -12,8 +12,8 @@ pages:
         - Activations: activations.md
         - Recurrent layers: recurrents.md
         - BatchNormalization: batchnormalization.md
-    - PyTorch:
-        - Quick start: startpytorch.md
+    - TensorFlow:
+        - Quick start: starttensorflow.md
 
 theme: readthedocs
 theme_dir: custom_theme
