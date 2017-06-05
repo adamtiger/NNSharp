@@ -142,12 +142,12 @@
           
             <li>
     <ul class="subnav">
-    <li><span>PyTorch</span></li>
+    <li><span>TensorFlow</span></li>
 
         
             
     <li class="toctree-l1 ">
-        <a class="" href="../startpytorch/">Quick start</a>
+        <a class="" href="../starttensorflow/">Quick start</a>
         
     </li>
 
@@ -193,7 +193,36 @@
               
                 <h1 id="models">Models</h1>
 <h2 id="interface-imodel">Interface: IModel</h2>
+<p>This is the interface for all of the models. It contains only one function which returns the structure of the model. This is important to get access to the model details.</p>
 <h2 id="sequential-model">Sequential model</h2>
+<p><span style="float:right;"> <a href="https://github.com/adamtiger/NNSharp/blob/dev/NNSharp/Models/SequentialModel.cs#L15">[source]</a> </span></p>
+<p><br>
+The smallest building block of the sequential model is the <strong>layer</strong>. The layers are organised consequtively. The output of a layer is the input to the next layer.</p>
+<p>NNSharp architecture is based on general descriptors of the possible operations (called kernels in this context) and then it applies a compiler to get the executable model. The compilation is done when a reader function (see Keras part for example) is called. The reader function reads the descriptors, builds a model then compiles it. After compilation calculations on new date reuires to call:</p>
+<pre><code>IData ExecuteNetwork(IData input)
+</code></pre>
+<p>Where IData can be a Data2D data type (or later Data3D). At the detailed descriptions the exact meaning of the data format for the particular operation is described. </p>
+<pre><code>Dimension GetInputDimension()
+</code></pre>
+<p>Gives a structure, Dimension, containing the dimension of the expected input data.</p>
+<pre><code>IModelData GetSummary()
+</code></pre>
+<p>Gives an object of <strong>SequentialModelData</strong> type. Therefore it is necessary to cast the output for that type. SequentialModelData has the following methods to access information about the layers and the model:</p>
+<pre><code>int GetNumberofLayers()
+</code></pre>
+<p>Gives the number of layers in the model. The InputLayer is not taken into account.</p>
+<pre><code>string GetLayerNameAt(int idx)
+</code></pre>
+<p>Gives the name of the layer at place <em>idx</em>. The counting starts at zero.</p>
+<pre><code>double GetExecutionTime()
+</code></pre>
+<p>Gives the evaluation time of the network for one forward pass in <em>milli seconds</em>.</p>
+<pre><code>string GetStringRepresentation()
+</code></pre>
+<p>Gives a string containing all the information of the layers.</p>
+<pre><code>LayerData GetLayerDataAt(int idx)
+</code></pre>
+<p>Gives the LayerData for a concrete layer. LayerData contains the parameters of the input and the output data. The name of the layer is also available.</p>
 <h2 id="graph-model">Graph model</h2>
               
             </div>
