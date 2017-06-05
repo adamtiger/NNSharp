@@ -1,6 +1,6 @@
 # Welcome to NNSharp
 
-This is the full documentation of NNSharp which is a lightweight library for running pre-trained neural networks. The training should be done in [Keras](https://keras.io/), [Pytorch](http://pytorch.org/docs/) or [Sonnet](https://github.com/deepmind/sonnet) then the weights and the network architecture should be saved into a file (json). NNSharp is able to read and run the network especially on Windows and Visual Studio. 
+This is the full documentation of NNSharp which is a lightweight library for running pre-trained neural networks. The training should be done in [Keras](https://keras.io/), [TensorFlow](https://www.tensorflow.org/), [Pytorch](http://pytorch.org/docs/) or [Sonnet](https://github.com/deepmind/sonnet) then the weights and the network architecture should be saved into a file (json). NNSharp is able to read and run the network especially on Windows and Visual Studio. 
 
 ## Current abilities
 
@@ -33,6 +33,7 @@ The structure of the documentation is the following:
 In the future the library should provide the following features:
 
 * Supports the whole Keras API.
+* Supports TensorFlow models.
 * Supports PyTorch regarding neural netowrks.
 * Supports Sonnet.
 * Multi-threading for faster kernels.
