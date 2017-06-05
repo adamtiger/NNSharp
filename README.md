@@ -16,34 +16,6 @@ Therefore this library aims for using the weights and structure created with the
 
 The package is [available](https://www.nuget.org/packages/NNSharp/) as a NuGet package from nuget.org. The current NuGet package was built on Windows8.1, Visual Studio 2015 and .Net Framework4.5.2.
 
-## Current abilities
-
-The library supports the following layers (only forward direction):
-
-* Convolution (1-dimensional)
-* Convolution (2-dimensional)
-* AveragePooling (1 D)
-* GlobalAvgPooling (1 D)
-* AveragePooling (2 D)
-* GlobalAvgPooling (2 D)
-* MaxPooling (1 D)
-* GlobalMaxPooling (1 D)
-* MaxPooling (2 D)
-* GlobalMaxPooling (2 D)
-* MinPooling (2 D)
-* Flatten ([Keras](https://keras.io/) like)
-* Dense
-* ELu
-* ReLu
-* Sigmoid
-* HardSigmoid
-* Softmax
-* SoftPlus
-* Softsign
-* Tanh
-
-This release version supports Keras models with Tensorflow backend.
-
 ## Getting started
 
 It is very easy to use the library. The master branch contains a python script named KerasModeltoJSON.py. It takes the created and compiled Keras *model* and the *output file name* as arguments. The json file can be created as follows:
@@ -69,11 +41,10 @@ Data2D input = new Data2D(height, width, channel, batch);
 IData output = model.ExecuteNetwork(input);
 ```
 
-Of course new models can be built but the weights should come from outside. 
+For the detailed documentation see the [NNSharp documentation](https://adamtiger.github.io/NNSharp/). 
 
 ## Plans and contributions
 
-* Extend the library for Theano backend.
 * Extend to PyTorch, Sonnet and raw Tensorflow models.
 * Better kernels in C#. Currently simple implementations are used. 
 * Multi-Threading
