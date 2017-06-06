@@ -127,18 +127,13 @@
         },
         {
             "location": "/batchnormalization/",
-            "text": "Normalization layer\n\n\nBatch Normalization \n[source]",
+            "text": "[source]\n \n\n\nBatch Normalization",
             "title": "BatchNormalization"
         },
         {
-            "location": "/batchnormalization/#normalization-layer",
+            "location": "/batchnormalization/#batch-normalization",
             "text": "",
-            "title": "Normalization layer"
-        },
-        {
-            "location": "/batchnormalization/#batch-normalization-source",
-            "text": "",
-            "title": "Batch Normalization [source]"
+            "title": "Batch Normalization"
         },
         {
             "location": "/starttensorflow/",
