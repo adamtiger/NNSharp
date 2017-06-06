@@ -72,7 +72,7 @@
         },
         {
             "location": "/core/",
-            "text": "The core layers contains layers to transform the shape of the input and the fully connected layer as a usual ingridient of a neural networks. \n\n\n \n[source]\n \n\n\nFully connected (Dense layer)\n\n\n \n[source]\n \n\n\nFlatten\n\n\n \n[source]\n \n\n\nReshape2D\n\n\n \n[source]\n \n\n\nPermute\n\n\n \n[source]\n \n\n\nRepeatVector",
+            "text": "The core layers contains layers to transform the shape of the input and the fully connected layer as a usual ingridient of a neural networks. \n\n\n \n[source]\n \n\n\nFully connected (Dense layer)\n\n\n \n[source]\n \n\n\nFlatten\n\n\n \n[source]\n \n\n\nReshape2D\n\n\n \n[source]\n \n\n\nPermute\n\n\n \n[source]\n \n\n\nRepeatVector\n\n\n \n[source]\n \n\n\nBias",
             "title": "Core"
         },
         {
@@ -97,33 +97,138 @@
         },
         {
             "location": "/core/#repeatvector",
-            "text": "",
+            "text": "[source]",
             "title": "RepeatVector"
         },
         {
+            "location": "/core/#bias",
+            "text": "",
+            "title": "Bias"
+        },
+        {
             "location": "/convolutions/",
-            "text": "[source]\n \n\n\nConvolution1D\n\n\nThe convolution...",
+            "text": "[source]\n \n\n\nConvolution1D\n\n\nThe convolution...\n\n\n \n[source]\n \n\n\nConvolution2D\n\n\n \n[source]\n \n\n\nCropping1D\n\n\n \n[source]\n \n\n\nCropping2D",
             "title": "Convolutions"
         },
         {
             "location": "/convolutions/#convolution1d",
-            "text": "The convolution...",
+            "text": "The convolution...    [source]",
             "title": "Convolution1D"
         },
         {
-            "location": "/pooling/",
+            "location": "/convolutions/#convolution2d",
+            "text": "[source]",
+            "title": "Convolution2D"
+        },
+        {
+            "location": "/convolutions/#cropping1d",
+            "text": "[source]",
+            "title": "Cropping1D"
+        },
+        {
+            "location": "/convolutions/#cropping2d",
             "text": "",
+            "title": "Cropping2D"
+        },
+        {
+            "location": "/pooling/",
+            "text": "[source]\n\n\nAveragePooling1D\n\n\n[source]\n\n\nAveragePooling2D\n\n\n[source]\n\n\nGlobalAveragePooling1D\n\n\n[source]\n\n\nGlobalAveragePooling2D\n\n\n[source]\n\n\nGlobalMaxPooling1D\n\n\n[source]\n\n\nGlobalMaxPooling2D\n\n\n[source]\n\n\nMaxPooling1D\n\n\n[source]\n\n\nMaxPooling2D",
             "title": "Pooling"
         },
         {
-            "location": "/activations/",
+            "location": "/pooling/#averagepooling1d",
+            "text": "[source]",
+            "title": "AveragePooling1D"
+        },
+        {
+            "location": "/pooling/#averagepooling2d",
+            "text": "[source]",
+            "title": "AveragePooling2D"
+        },
+        {
+            "location": "/pooling/#globalaveragepooling1d",
+            "text": "[source]",
+            "title": "GlobalAveragePooling1D"
+        },
+        {
+            "location": "/pooling/#globalaveragepooling2d",
+            "text": "[source]",
+            "title": "GlobalAveragePooling2D"
+        },
+        {
+            "location": "/pooling/#globalmaxpooling1d",
+            "text": "[source]",
+            "title": "GlobalMaxPooling1D"
+        },
+        {
+            "location": "/pooling/#globalmaxpooling2d",
+            "text": "[source]",
+            "title": "GlobalMaxPooling2D"
+        },
+        {
+            "location": "/pooling/#maxpooling1d",
+            "text": "[source]",
+            "title": "MaxPooling1D"
+        },
+        {
+            "location": "/pooling/#maxpooling2d",
             "text": "",
+            "title": "MaxPooling2D"
+        },
+        {
+            "location": "/activations/",
+            "text": "[source]\n \n\n\nELu\n\n\n \n[source]\n \n\n\nHardSigmoid\n\n\n \n[source]\n \n\n\nReLu\n\n\n \n[source]\n \n\n\nSigmoid\n\n\n \n[source]\n \n\n\nSoftPlus\n\n\n \n[source]\n \n\n\nSoftmax\n\n\n \n[source]\n \n\n\nSoftsign\n\n\n \n[source]\n \n\n\nTanH",
             "title": "Activations"
         },
         {
-            "location": "/recurrents/",
+            "location": "/activations/#elu",
+            "text": "[source]",
+            "title": "ELu"
+        },
+        {
+            "location": "/activations/#hardsigmoid",
+            "text": "[source]",
+            "title": "HardSigmoid"
+        },
+        {
+            "location": "/activations/#relu",
+            "text": "[source]",
+            "title": "ReLu"
+        },
+        {
+            "location": "/activations/#sigmoid",
+            "text": "[source]",
+            "title": "Sigmoid"
+        },
+        {
+            "location": "/activations/#softplus",
+            "text": "[source]",
+            "title": "SoftPlus"
+        },
+        {
+            "location": "/activations/#softmax",
+            "text": "[source]",
+            "title": "Softmax"
+        },
+        {
+            "location": "/activations/#softsign",
+            "text": "[source]",
+            "title": "Softsign"
+        },
+        {
+            "location": "/activations/#tanh",
             "text": "",
+            "title": "TanH"
+        },
+        {
+            "location": "/recurrents/",
+            "text": "[source]\n\n\nSimpleRNN",
             "title": "Recurrent layers"
+        },
+        {
+            "location": "/recurrents/#simplernn",
+            "text": "",
+            "title": "SimpleRNN"
         },
         {
             "location": "/batchnormalization/",
