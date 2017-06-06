@@ -12,17 +12,22 @@ namespace NNSharp.Kernels.CPUKernels
     {
         public void Execute()
         {
-            input.ApplyToAll(p => {
+            ELuLambda(input);
 
+            output = input;
+        }
+
+        public static void ELuLambda(IData data)
+        {
+            data.ApplyToAll( p =>
+            {
                 if (p >= 0.0)
                     return p;
                 else
                 {
-                    return alpha * (Math.Exp(p) - 1.0);
+                    return 1.0 * (Math.Exp(p) - 1.0);
                 }
             });
-
-            output = input;
         }
 
         protected IData input;

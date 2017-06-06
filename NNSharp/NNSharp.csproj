@@ -78,6 +78,7 @@
     <Compile Include="KernelDescriptors\RepeatVector.cs" />
     <Compile Include="KernelDescriptors\Reshape2D.cs" />
     <Compile Include="KernelDescriptors\Sigmoid.cs" />
+    <Compile Include="KernelDescriptors\SimpleRNN.cs" />
     <Compile Include="KernelDescriptors\Softmax.cs" />
     <Compile Include="KernelDescriptors\SoftPlus.cs" />
     <Compile Include="KernelDescriptors\SoftSign.cs" />
@@ -106,6 +107,7 @@
     <Compile Include="Kernels\CPUKernels\RepeatVectorKernel.cs" />
     <Compile Include="Kernels\CPUKernels\Reshape2DKernel.cs" />
     <Compile Include="Kernels\CPUKernels\SigmoidKernel.cs" />
+    <Compile Include="Kernels\CPUKernels\SimpleRNNKernel.cs" />
     <Compile Include="Kernels\CPUKernels\SoftmaxKernel.cs" />
     <Compile Include="Kernels\CPUKernels\SoftPlusKernel.cs" />
     <Compile Include="Kernels\CPUKernels\SoftsignKernel.cs" />
@@ -146,6 +148,8 @@
     <Compile Include="SequentialBased\SequentialLayers\Reshape2DLayerFactory.cs" />
     <Compile Include="SequentialBased\SequentialLayers\SigmoidLayer.cs" />
     <Compile Include="SequentialBased\SequentialLayers\SigmoidLayerFactory.cs" />
+    <Compile Include="SequentialBased\SequentialLayers\SimpleRNNLayer.cs" />
+    <Compile Include="SequentialBased\SequentialLayers\SimpleRNNLayerFactory.cs" />
     <Compile Include="SequentialBased\SequentialLayers\SoftPlusLayer.cs" />
     <Compile Include="SequentialBased\SequentialLayers\SoftPlusLayerFactory.cs" />
     <Compile Include="SequentialBased\SequentialLayers\SoftsignLayer.cs" />

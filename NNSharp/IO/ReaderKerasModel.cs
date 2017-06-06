@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using NNSharp.DataTypes;
 using NNSharp.KernelDescriptors;
+using NNSharp.Kernels.CPUKernels;
 using NNSharp.Models;
 using NNSharp.SequentialBased.SequentialExecutors;
 using System;
@@ -145,6 +146,12 @@ namespace NNSharp.IO
                         descriptor = new RepeatVector(
                             (int)layer.SelectToken("num"));
                         break;
+                    case "SimpleRNN":
+                        descriptor = new SimpleRNN(
+                            (int)layer.SelectToken("units"),
+                            (int)layer.SelectToken("input_dim"),
+                            ANR((string)layer.SelectToken("activation")));
+                        break;
                     case "ELu":
                         descriptor = new ELu(1);
                         break;
@@ -202,7 +209,7 @@ namespace NNSharp.IO
             for (int i = 1; i < dscps.Count; ++i)
             {
                 if ((dscps[i] is Convolution2D) || (dscps[i] is Dense2D) || (dscps[i] is Convolution1D) || 
-                    dscps[i] is BatchNormalization)
+                    dscps[i] is BatchNormalization || dscps[i] is SimpleRNN)
                 {
                     int rowNum = weightsList[idx].Count;
                     int colNum = weightsList[idx][0].Count;
@@ -252,5 +259,34 @@ namespace NNSharp.IO
         }
 
         private SequentialModel sequential;
+
+        // Activation Name Resolver
+        private ActivationLambda ANR(string name)
+        {
+            switch (name)
+            {
+                case "linear":
+                    return (x => { });
+                case "softmax":
+                    return SoftmaxKernel.SoftmaxLambda;
+                case "tanh":
+                    return TanHKernel.TanHLambda;
+                case "elu":
+                    return ELuKernel.ELuLambda; // alpha = 1.0
+                case "softplus":
+                    return SoftPlusKernel.SoftPlusLambda;
+                case "softsign":
+                    return SoftsignKernel.SoftsignLambda;
+                case "relu":
+                    return ReLuKernel.ReLuLambda;
+                case "sigmoid":
+                    return SigmoidKernel.SigmoidLambda;
+                case "hard_sigmoid":
+                    return HardSigmoidKernel.HardSigmoidLambda;
+                default:
+                    throw new Exception("Unknown activation.");
+
+            }
+        }
     }
 }

@@ -7,13 +7,22 @@ using System.Threading.Tasks;
 
 namespace NNSharp.Kernels.CPUKernels
 {
+
     [Serializable()]
     public class TanHKernel : IKernel
     {
         public void Execute()
         {
-            input.ApplyToAll(p => { return 2.0/(1 + Math.Exp(-2.0*p)) - 1.0; });
+            TanHLambda(input);
             output = input;
+        }
+
+        public static void TanHLambda(IData data)
+        {
+            data.ApplyToAll(p =>
+            {
+                return 2.0 / (1 + Math.Exp(-2.0 * p)) - 1.0;
+            });
         }
 
         protected IData input;

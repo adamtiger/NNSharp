@@ -12,9 +12,18 @@ namespace NNSharp.Kernels.CPUKernels
     {
         public void Execute()
         {
-            input.ApplyToAll(p => { return Math.Log(1 + Math.Exp(p)); });
+            SoftPlusLambda(input);
             output = input;
         }
+
+        public static void SoftPlusLambda(IData data)
+        {
+            data.ApplyToAll(p =>
+            {
+                return Math.Log(1 + Math.Exp(p));
+            });
+        }
+
         protected IData input;
         protected IData output;
     }

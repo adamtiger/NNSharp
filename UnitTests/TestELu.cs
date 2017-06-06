@@ -18,7 +18,7 @@ namespace UnitTests
         [TestMethod]
         public void Test_ELu_Execute()
         {
-            double alpha = 0.5;
+            double alpha = 1.0;
             elu = new ELuLayer(alpha);
 
             Data2D data = new Data2D(2, 3, 1, 1);

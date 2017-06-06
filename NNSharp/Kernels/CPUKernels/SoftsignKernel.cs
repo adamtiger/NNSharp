@@ -12,9 +12,18 @@ namespace NNSharp.Kernels.CPUKernels
     {
         public void Execute()
         {
-            input.ApplyToAll(p => { return p / (1 + Math.Abs(p)); });
+            SoftsignLambda(input);
             output = input;
         }
+
+        public static void SoftsignLambda(IData data)
+        {
+            data.ApplyToAll(p =>
+            {
+                return p / (1 + Math.Abs(p));
+            });
+        }
+
         protected IData input;
         protected IData output;
     }

@@ -40,6 +40,7 @@ namespace NNSharp.SequentialBased.SequentialExecutors
             factories.Add(new RepeatVectorLayerFactory());
             factories.Add(new Reshape2DLayerFactory());
             factories.Add(new SigmoidLayerFactory());
+            factories.Add(new SimpleRNNLayerFactory());
             factories.Add(new SoftmaxLayerFactory());
             factories.Add(new SoftPlusLayerFactory());
             factories.Add(new SoftsignLayerFactory());
