@@ -181,6 +181,13 @@ class JSONwriter:
             num = layer_descr['config']['n']
             layers.append({'layer':'RepeatVector', 'num':num})
             return layers
+
+        elif 'SimpleRNN' == name:
+            units = layer_descr['config']['units']
+            input_dim = self.model.get_weights()[self.idx].shape[0]
+            activation = layer_descr['config']['activation']
+            layers.append({'layer':'SimpleRNN', 'units':units, 'input_dim':input_dim, 'activation':activation})
+            return layers
             
         else:
             raise NotImplementedError("Unknown layer type: " + name)  
@@ -227,6 +234,16 @@ class JSONwriter:
                 w[0,0,0, :] = w_org[self.idx][:]
                 weights.append(w.tolist())
                 self.idx += 1
+
+        elif 'SimpleRNN' == name:
+            w = np.zeros((1, max([w_org[self.idx].shape[0], w_org[self.idx].shape[1]]) , w_org[self.idx].shape[1], 3))
+            for v in range(0, w_org[self.idx].shape[0]):
+               w[0,v,:,0] = w_org[self.idx][v, :]
+            for v in range(0, w_org[self.idx + 1].shape[0]):
+               w[0,v,:,1] = w_org[self.idx + 1][v, :]
+            w[0,0,:,2] = w_org[self.idx + 2][:]
+            weights.append(w.tolist())
+            self.idx += 3
             
     def __get_activation(self, layers, layer_dscp):
         activation_name = layer_dscp['config']['activation']
