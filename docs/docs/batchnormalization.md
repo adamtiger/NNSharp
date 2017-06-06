@@ -1,3 +1,2 @@
-# Normalization layer
-
-## Batch Normalization <span="float:right;">[[source]]()
+<span style="float:right;">[[source]](https://github.com/adamtiger/NNSharp/blob/master/NNSharp/Kernels/CPUKernels/BatchNormKernel.cs#L11) </span>
+## Batch Normalization 

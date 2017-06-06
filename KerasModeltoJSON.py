@@ -57,7 +57,12 @@ class JSONwriter:
         layers = []
         name = layer_descr['class_name']
         
-        if 'Conv1D' == name:
+        if 'BatchNormalization' == name:
+            eps = layer_descr['config']['epsilon']
+            layers.append({'layer':'BatchNormalization', 'epsilon':eps})
+            return layers
+
+        elif 'Conv1D' == name:
             k_s = layer_descr['config']['kernel_size'][0]
             k_num = layer_descr['config']['filters']
             stride = layer_descr['config']['strides'][0]
@@ -176,6 +181,13 @@ class JSONwriter:
             num = layer_descr['config']['n']
             layers.append({'layer':'RepeatVector', 'num':num})
             return layers
+
+        elif 'SimpleRNN' == name:
+            units = layer_descr['config']['units']
+            input_dim = self.model.get_weights()[self.idx].shape[0]
+            activation = layer_descr['config']['activation']
+            layers.append({'layer':'SimpleRNN', 'units':units, 'input_dim':input_dim, 'activation':activation})
+            return layers
             
         else:
             raise NotImplementedError("Unknown layer type: " + name)  
@@ -183,7 +195,16 @@ class JSONwriter:
     def __get_weight(self, weights, w_org, config):
         name = config['class_name']
         
-        if 'Conv1D' == name:
+        if 'BatchNormalization' == name:
+            w = np.ndarray((1,1, w_org[self.idx].shape[0], 4))
+            w[0,0,:,0] = w_org[self.idx][:]
+            w[0,0,:,1] = w_org[self.idx + 1][:]
+            w[0,0,:,2] = w_org[self.idx + 2][:]
+            w[0,0,:,3] = w_org[self.idx + 3][:]
+            weights.append(w.tolist())
+            self.idx += 4
+
+        elif 'Conv1D' == name:
             w = np.ndarray((1,w_org[self.idx].shape[0], w_org[self.idx].shape[1], w_org[self.idx].shape[2]))
             w[0,:,:, :] = w_org[self.idx][:,:,:]
             weights.append(w.tolist())
@@ -213,6 +234,16 @@ class JSONwriter:
                 w[0,0,0, :] = w_org[self.idx][:]
                 weights.append(w.tolist())
                 self.idx += 1
+
+        elif 'SimpleRNN' == name:
+            w = np.zeros((1, max([w_org[self.idx].shape[0], w_org[self.idx].shape[1]]) , w_org[self.idx].shape[1], 3))
+            for v in range(0, w_org[self.idx].shape[0]):
+               w[0,v,:,0] = w_org[self.idx][v, :]
+            for v in range(0, w_org[self.idx + 1].shape[0]):
+               w[0,v,:,1] = w_org[self.idx + 1][v, :]
+            w[0,0,:,2] = w_org[self.idx + 2][:]
+            weights.append(w.tolist())
+            self.idx += 3
             
     def __get_activation(self, layers, layer_dscp):
         activation_name = layer_dscp['config']['activation']
