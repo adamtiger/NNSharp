@@ -12,17 +12,23 @@ namespace NNSharp.Kernels.CPUKernels
     {
         public void Execute()
         {
-            for (int b = 0; b < data.GetDimension().b; ++b)
+            SoftmaxLambda(data);
+        }
+
+        public static void SoftmaxLambda(IData data)
+        {
+            Data2D dat = data as Data2D;
+            for (int b = 0; b < dat.GetDimension().b; ++b)
             {
                 double sum = 0.0;
-                for (int i = 0; i < data.GetDimension().c; ++i)
+                for (int i = 0; i < dat.GetDimension().c; ++i)
                 {
-                    sum += Math.Exp(data[0, 0, i, b]);
+                    sum += Math.Exp(dat[0, 0, i, b]);
                 }
 
-                for (int i = 0; i < data.GetDimension().c; ++i)
+                for (int i = 0; i < dat.GetDimension().c; ++i)
                 {
-                    data[0, 0, i, b] = Math.Exp(data[0, 0, i, b]) / sum;
+                    dat[0, 0, i, b] = Math.Exp(dat[0, 0, i, b]) / sum;
                 }
             }
         }

@@ -13,14 +13,17 @@ namespace NNSharp.Kernels.CPUKernels
     {
         public void Execute()
         {
-            input.ApplyToAll(p => { return TanHLambda(p); });
+            TanHLambda(input);
             output = input;
         }
 
-        public static double TanHLambda(double p)
+        public static void TanHLambda(IData data)
         {
-            return 2.0 / (1 + Math.Exp(-2.0 * p)) - 1.0;
-        } 
+            data.ApplyToAll(p =>
+            {
+                return 2.0 / (1 + Math.Exp(-2.0 * p)) - 1.0;
+            });
+        }
 
         protected IData input;
         protected IData output;

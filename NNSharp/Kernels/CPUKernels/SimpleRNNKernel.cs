@@ -69,7 +69,7 @@ namespace NNSharp.Kernels.CPUKernels
         {
             for (int u = 0; u < kernel.GetDimension().c; ++u)
             {
-                result[0, 0, u, 0] = 0;
+                result[0, 0, u, batch] = 0;
                 for (int d = 0; d < prevOut.GetDimension().c; ++d)
                 {
                     result[0, 0, u, batch] += prevOut[0, 0, d, 0] * recKern[0, d, u, 0];
@@ -89,7 +89,7 @@ namespace NNSharp.Kernels.CPUKernels
 
         private void Activation(Data2D data)
         {
-            data.ApplyToAll(p => { return lambda(p); });
+            lambda(data); 
         }
 
         #endregion

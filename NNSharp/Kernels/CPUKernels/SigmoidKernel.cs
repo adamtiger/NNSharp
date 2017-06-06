@@ -12,8 +12,16 @@ namespace NNSharp.Kernels.CPUKernels
     {
         public void Execute()
         {
-            input.ApplyToAll(p => { return 1.0 / (1.0 + Math.Exp(-p)); });
+            SigmoidLambda(input);
             output = input;
+        }
+
+        public static void SigmoidLambda(IData data)
+        {
+            data.ApplyToAll(p =>
+            {
+                return 1.0 / (1.0 + Math.Exp(-p));
+            });
         }
 
         protected IData input;

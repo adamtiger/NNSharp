@@ -14,12 +14,14 @@ namespace NNSharp.SequentialBased.SequentialLayers
     [Serializable()]
     public class SimpleRNNLayer : SimpleRNNKernel, ILayer
     {
-        
         public SimpleRNNLayer(int units, int inputDim, ActivationLambda lambda)
         {
             this.units = units;
             this.inputDim = inputDim;
             this.lambda = lambda;
+
+            prevOutput = new Data2D(1, 1, units, 1);
+            h = new Data2D(1, 1, units, 1);
         }
 
         public IData GetOutput()
