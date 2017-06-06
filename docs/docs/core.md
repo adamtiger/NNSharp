@@ -16,3 +16,7 @@ The core layers contains layers to transform the shape of the input and the full
 <span style="float:right;"> [[source]](https://github.com/adamtiger/NNSharp/blob/master/NNSharp/Kernels/CPUKernels/RepeatVectorKernel.cs) </span>
 ## RepeatVector
 
+<span style="float:right;"> [[source]](https://github.com/adamtiger/NNSharp/blob/master/NNSharp/Kernels/CPUKernels/Bias2DKernel.cs#L12) </span>
+## Bias
+
+
