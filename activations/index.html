@@ -210,22 +210,36 @@
           <div role="main">
             <div class="section">
               
-                <p><span style="float:right;"> <a href="https://github.com/adamtiger/NNSharp/blob/master/NNSharp/Kernels/CPUKernels/ELuKernel.cs">[source]</a> </span></p>
+                <p>Activation functions are applied in an element-wise maner on the input. <em>Therefore the dimension of the input and output is the same.</em> The goal of the activation functions is to break the linearity of the network. This can provide a function space (in terms of the trainable weights) which can approximate a large body of mapping rules from the inputs to the outputs. For mathematical details see the following references: </p>
+<ul>
+<li>Funahashi, K. I. "On the Approximate Realization of Continuous Mappings by Neural Networks", Neural Networks, Vol. 2. No. 3. pp. 183-192. 1989.</li>
+<li>Leshno, M. - Lin, V. Y. - Pinkus, A. - Schocken, S. "Multilayer Feedforward Networks With a Nonpolynomial Activation Function Can Approximate Any Function", Neural Networks, Vol. 6. pp. 861-867. 1993.</li>
+</ul>
+<p>The last one contains the following <strong>theorem</strong>:</p>
+<p>Assume the neural network contains one non-linear layer. An <em>f</em>  function (domain and range are real numbers) can be approximated with arbitrary accuracy if and only if the applied activation function is not a polynom and it is locally bounded.</p>
+<p><span style="float:right;"> <a href="https://github.com/adamtiger/NNSharp/blob/master/NNSharp/Kernels/CPUKernels/ELuKernel.cs">[source]</a> </span></p>
 <h2 id="elu">ELu</h2>
+<p><img alt="elugraph" src="https://drive.google.com/uc?export=download&amp;id=0B97L9zqg-lnwUjZKVldXSHAtc0U" /></p>
 <p><span style="float:right;"> <a href="https://github.com/adamtiger/NNSharp/blob/master/NNSharp/Kernels/CPUKernels/HardSigmoidKernel.cs">[source]</a> </span></p>
 <h2 id="hardsigmoid">HardSigmoid</h2>
+<p><img alt="hardsigmoidgraph" src="https://drive.google.com/uc?export=download&amp;id=0B97L9zqg-lnwNFo2YloxbEFhT00" /></p>
 <p><span style="float:right;"> <a href="https://github.com/adamtiger/NNSharp/blob/master/NNSharp/Kernels/CPUKernels/ReLuKernel.cs">[source]</a> </span></p>
 <h2 id="relu">ReLu</h2>
+<p><img alt="relugraph" src="https://drive.google.com/uc?export=download&amp;id=0B97L9zqg-lnwRFlVSnpoUXM4X2c" /></p>
 <p><span style="float:right;"> <a href="https://github.com/adamtiger/NNSharp/blob/master/NNSharp/Kernels/CPUKernels/SigmoidKernel.cs">[source]</a> </span></p>
 <h2 id="sigmoid">Sigmoid</h2>
+<p><img alt="sigmoidgraph" src="https://drive.google.com/uc?export=download&amp;id=0B97L9zqg-lnwc2FmSmhiTEt3N0E" /></p>
 <p><span style="float:right;"> <a href="https://github.com/adamtiger/NNSharp/blob/master/NNSharp/Kernels/CPUKernels/SoftPlusKernel.cs">[source]</a> </span></p>
 <h2 id="softplus">SoftPlus</h2>
+<p><img alt="softplusgraph" src="https://drive.google.com/uc?export=download&amp;id=0B97L9zqg-lnwQXNOaXBRZGxSUjA" /></p>
 <p><span style="float:right;"> <a href="https://github.com/adamtiger/NNSharp/blob/master/NNSharp/Kernels/CPUKernels/SoftmaxKernel.cs">[source]</a> </span></p>
 <h2 id="softmax">Softmax</h2>
 <p><span style="float:right;"> <a href="https://github.com/adamtiger/NNSharp/blob/master/NNSharp/Kernels/CPUKernels/SoftsignKernel.cs">[source]</a> </span></p>
 <h2 id="softsign">Softsign</h2>
+<p><img alt="softsigngraph" src="https://drive.google.com/uc?export=download&amp;id=0B97L9zqg-lnwTUppTHhKeEVKTkk" /></p>
 <p><span style="float:right;"> <a href="https://github.com/adamtiger/NNSharp/blob/master/NNSharp/Kernels/CPUKernels/TanHKernel.cs">[source]</a> </span></p>
 <h2 id="tanh">TanH</h2>
+<p><img alt="tanhgraph" src="https://drive.google.com/uc?export=download&amp;id=0B97L9zqg-lnwLU1zQlBqbldaX3c" /></p>
               
             </div>
           </div>
