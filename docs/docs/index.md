@@ -16,10 +16,10 @@ The *data format* supports 2-dimensional data.
 
 ## The structure of the documentation
 
-The pusrpose of the documentation is twofold:
+The purpose of the documentation is twofold:
 
 1. As a user guide to show how to use the package.
-2. Providing some further insight how the kernels work in a concise manner. Therefore developers and researchers can immediately understand what the kernel does without inspecting the code or looking for other sources on the net. This can be helpful for contributors as a developer documentation. On the other hand users can understand what to feed into the network and how to use (and construe) the output.
+2. Providing some further insight how the kernels work in a concise manner. Therefore developers and researchers can immediately understand what the kernel does without inspecting the code or looking for other sources on the net. This can be helpful for contributors as a developer documentation. On the other hand users can understand what to feed into the network and how to use (and construct) the output.
 
 The structure of the documentation is the following:
 
