@@ -34,7 +34,7 @@ In the future the library should provide the following features:
 
 * Supports the whole Keras API.
 * Supports TensorFlow models.
-* Supports PyTorch regarding neural netowrks.
+* Supports PyTorch regarding neural networks.
 * Supports Sonnet.
 * Multi-threading for faster kernels.
 * Keras-like API over TensorFlow for building, training and running networks. This requires an extended C++ API in TensorFlow and reliable compilation for Windows.

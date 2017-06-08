@@ -6,6 +6,7 @@ pages:
     - Models: models.md
     - Keras: 
         - Quick start: startkeras.md
+        - Data structure: data.md
         - Core: core.md
         - Convolutions: convolutions.md
         - Pooling: pooling.md
