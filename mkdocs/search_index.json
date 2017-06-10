@@ -2,7 +2,7 @@
     "docs": [
         {
             "location": "/",
-            "text": "Welcome to NNSharp\n\n\nThis is the full documentation of NNSharp which is a lightweight library for running pre-trained neural networks. The training should be done in \nKeras\n, \nTensorFlow\n, \nPytorch\n or \nSonnet\n then the weights and the network architecture should be saved into a file (json). NNSharp is able to read and run the network especially on Windows and Visual Studio. \n\n\nCurrent abilities\n\n\nNNSharp recently supports Keras models with both Tensorflow and Theano backend. The list of the supported \nKeras layers\n:\n\n\n\n\nCore layers\n: Dense, Reshape (2D), Permute, RepeatVector. \n\n\nConvolution layers\n: Conv1D, Conv2D, Cropping1D, Cropping2D. \n\n\nPooling layers\n: AveragePooling1D, AveragePooling2D, MaxPooling1D, MaxPooling2D, GlobalAveragePooling1D, GlobalAveragePooling2D, GlobalMaxPooling1D, GlobalMaxPooling2D.\n\n\nActivations\n: softmax, elu, softplus, softsign, relu, tanh, sigmoid, hard_sigmoid. \n\n\nNormalization\n: BatchNormalization.\n\n\n\n\nThe \ndata format\n supports 2-dimensional data. \n\n\nThe structure of the documentation\n\n\nThe purpose of the documentation is twofold:\n\n\n\n\nAs a user guide to show how to use the package.\n\n\nProviding some further insight how the kernels work in a concise manner. Therefore developers and researchers can immediately understand what the kernel does without inspecting the code or looking for other sources on the net. This can be helpful for contributors as a developer documentation. On the other hand users can understand what to feed into the network and how to use (and construct) the output.\n\n\n\n\nThe structure of the documentation is the following:\n\n\n\n\nInstallation\n shows how to get access to the package.\n\n\nModels\n introduces the model types and methods to access information about the model like the contained layers or nodes, execution time etc.\n\n\nKeras\n shows the implemented Keras layers. Each layer introduced with its input, output and its underlying process.\n\n\nTensorFlow\n shows how to use pre-trained TensorFlow models in NNSharp.\n\n\n\n\nFuture\n\n\nIn the future the library should provide the following features:\n\n\n\n\nSupports the whole Keras API.\n\n\nSupports TensorFlow models.\n\n\nSupports PyTorch regarding neural netowrks.\n\n\nSupports Sonnet.\n\n\nMulti-threading for faster kernels.\n\n\nKeras-like API over TensorFlow for building, training and running networks. This requires an extended C++ API in TensorFlow and reliable compilation for Windows.\n\n\n\n\nContributions are always welcomed! For the current purposes see the \ngithub repository\n of the project.",
+            "text": "Welcome to NNSharp\n\n\nThis is the full documentation of NNSharp which is a lightweight library for running pre-trained neural networks. The training should be done in \nKeras\n, \nTensorFlow\n, \nPytorch\n or \nSonnet\n then the weights and the network architecture should be saved into a file (json). NNSharp is able to read and run the network especially on Windows and Visual Studio. \n\n\nCurrent abilities\n\n\nNNSharp recently supports Keras models with both Tensorflow and Theano backend. The list of the supported \nKeras layers\n:\n\n\n\n\nCore layers\n: Dense, Reshape (2D), Permute, RepeatVector. \n\n\nConvolution layers\n: Conv1D, Conv2D, Cropping1D, Cropping2D. \n\n\nPooling layers\n: AveragePooling1D, AveragePooling2D, MaxPooling1D, MaxPooling2D, GlobalAveragePooling1D, GlobalAveragePooling2D, GlobalMaxPooling1D, GlobalMaxPooling2D.\n\n\nActivations\n: softmax, elu, softplus, softsign, relu, tanh, sigmoid, hard_sigmoid. \n\n\nNormalization\n: BatchNormalization.\n\n\n\n\nThe \ndata format\n supports 2-dimensional data. \n\n\nThe structure of the documentation\n\n\nThe purpose of the documentation is twofold:\n\n\n\n\nAs a user guide to show how to use the package.\n\n\nProviding some further insight how the kernels work in a concise manner. Therefore developers and researchers can immediately understand what the kernel does without inspecting the code or looking for other sources on the net. This can be helpful for contributors as a developer documentation. On the other hand users can understand what to feed into the network and how to use (and construct) the output.\n\n\n\n\nThe structure of the documentation is the following:\n\n\n\n\nInstallation\n shows how to get access to the package.\n\n\nModels\n introduces the model types and methods to access information about the model like the contained layers or nodes, execution time etc.\n\n\nKeras\n shows the implemented Keras layers. Each layer introduced with its input, output and its underlying process.\n\n\nTensorFlow\n shows how to use pre-trained TensorFlow models in NNSharp.\n\n\n\n\nFuture\n\n\nIn the future the library should provide the following features:\n\n\n\n\nSupports the whole Keras API.\n\n\nSupports TensorFlow models.\n\n\nSupports PyTorch regarding neural networks.\n\n\nSupports Sonnet.\n\n\nMulti-threading for faster kernels.\n\n\nKeras-like API over TensorFlow for building, training and running networks. This requires an extended C++ API in TensorFlow and reliable compilation for Windows.\n\n\n\n\nContributions are always welcomed! For the current purposes see the \ngithub repository\n of the project.",
             "title": "Overview"
         },
         {
@@ -22,7 +22,7 @@
         },
         {
             "location": "/#future",
-            "text": "In the future the library should provide the following features:   Supports the whole Keras API.  Supports TensorFlow models.  Supports PyTorch regarding neural netowrks.  Supports Sonnet.  Multi-threading for faster kernels.  Keras-like API over TensorFlow for building, training and running networks. This requires an extended C++ API in TensorFlow and reliable compilation for Windows.   Contributions are always welcomed! For the current purposes see the  github repository  of the project.",
+            "text": "In the future the library should provide the following features:   Supports the whole Keras API.  Supports TensorFlow models.  Supports PyTorch regarding neural networks.  Supports Sonnet.  Multi-threading for faster kernels.  Keras-like API over TensorFlow for building, training and running networks. This requires an extended C++ API in TensorFlow and reliable compilation for Windows.   Contributions are always welcomed! For the current purposes see the  github repository  of the project.",
             "title": "Future"
         },
         {
@@ -71,8 +71,13 @@
             "title": "Getting Started with Keras models"
         },
         {
+            "location": "/data/",
+            "text": "",
+            "title": "Data structure"
+        },
+        {
             "location": "/core/",
-            "text": "The core layers contains layers to transform the shape of the input and the fully connected layer as a usual ingridient of a neural networks. \n\n\n \n[source]\n \n\n\nFully connected (Dense layer)\n\n\n \n[source]\n \n\n\nFlatten\n\n\n \n[source]\n \n\n\nReshape2D\n\n\n \n[source]\n \n\n\nPermute\n\n\n \n[source]\n \n\n\nRepeatVector\n\n\n \n[source]\n \n\n\nBias",
+            "text": "The core layers contain layers to transform the shape of the input and the fully connected layer as a usual ingridient of a neural networks. \n\n\n \n[source]\n \n\n\nFully connected (Dense layer)\n\n\n \n[source]\n \n\n\nFlatten\n\n\nThe \nFlatten layer\n creates a 1-dimensional output (array) from the input. \n\n\nInput:\n\n\nA Data2D type data with arbitrary shape (rows, columns, channels, batches can be anything).\n\n\nOutput:\n\n\nA Data2D type data with the following shape: (1, 1, rows * columns * channels, batches). This represents a 1-dimensional vector.\n\n\nMethod:\n\n\nThe mapping occurs in the following way. The \nbatch\n remains unchanged. For a given \nbatch\n the reading order is: 1) channel, 2) column, 3) row. Therefore when \nrow\n and \ncolumn\n are fixed, \nchannel\n is changing. When \nchannel\n achieves its bound, \ncolumn\n is increased while \nrow\n is still fixed. Then \nchannel\n is iterated again and so on.\n\n\n \n[source]\n \n\n\nReshape2D\n\n\n(Next release)\n\n\nThe \nReshape2D layer\n creates an output with the prescribed shape.\n\n\nInput:\n\n\nA Data2D type data with arbitrary shape (rows, columns, channels, batches can be anything).\n\n\nOutput:\n\n\nA Data2D type data with the required (prescribed) shape.\n\n\nMethod:\n\n\nReshaping assumes a strict reading order for accessing all of the elements. It has the following priority regarding the dimensions: 1) channel, 2) column, 3) row, 4) batch. If the elements are accessed by this manner, a one dimensional array (let's call it \nvirtual array\n) will contain all the elements. The algorithm will reshape the original data into a new one that after using the same access method on it, the same virtual array would appear. (The same element in the original and the new data should be mapped to the same place in the virtual array by the access method.)\n\n\n \n[source]\n \n\n\nPermute\n\n\n(Next release)\n\n\nThe \nPermute layer\n creates an output with the same number of elements but the roles of the dimensions are changed.\n\n\nInput:\n\n\nA Data2D type data with arbitrary shape (rows, columns, channels, batches can be anything).\n\n\nOutput:\n\n\nA Data2D type data with permuted shape (new rows, new columns, new channels, batches). The \nbatches can not\n be changed by permutation. \n\n\nMethod:\n\n\nLet's suppose that the rows and channels are permuted in the output. Then an element in the input will be written to the permuted places as the example shows:\n\n\nIndicies in the input: h, w, c, b --> element = input[h, w, c, b].\nThen in the output data: output[c, w, h, b] = element.\n\n\n\n \n[source]\n \n\n\nRepeatVector\n\n\n(Next release)\n\n\n \n[source]\n \n\n\nBias",
             "title": "Core"
         },
         {
@@ -82,22 +87,22 @@
         },
         {
             "location": "/core/#flatten",
-            "text": "[source]",
+            "text": "The  Flatten layer  creates a 1-dimensional output (array) from the input.   Input:  A Data2D type data with arbitrary shape (rows, columns, channels, batches can be anything).  Output:  A Data2D type data with the following shape: (1, 1, rows * columns * channels, batches). This represents a 1-dimensional vector.  Method:  The mapping occurs in the following way. The  batch  remains unchanged. For a given  batch  the reading order is: 1) channel, 2) column, 3) row. Therefore when  row  and  column  are fixed,  channel  is changing. When  channel  achieves its bound,  column  is increased while  row  is still fixed. Then  channel  is iterated again and so on.    [source]",
             "title": "Flatten"
         },
         {
             "location": "/core/#reshape2d",
-            "text": "[source]",
+            "text": "(Next release)  The  Reshape2D layer  creates an output with the prescribed shape.  Input:  A Data2D type data with arbitrary shape (rows, columns, channels, batches can be anything).  Output:  A Data2D type data with the required (prescribed) shape.  Method:  Reshaping assumes a strict reading order for accessing all of the elements. It has the following priority regarding the dimensions: 1) channel, 2) column, 3) row, 4) batch. If the elements are accessed by this manner, a one dimensional array (let's call it  virtual array ) will contain all the elements. The algorithm will reshape the original data into a new one that after using the same access method on it, the same virtual array would appear. (The same element in the original and the new data should be mapped to the same place in the virtual array by the access method.)    [source]",
             "title": "Reshape2D"
         },
         {
             "location": "/core/#permute",
-            "text": "[source]",
+            "text": "(Next release)  The  Permute layer  creates an output with the same number of elements but the roles of the dimensions are changed.  Input:  A Data2D type data with arbitrary shape (rows, columns, channels, batches can be anything).  Output:  A Data2D type data with permuted shape (new rows, new columns, new channels, batches). The  batches can not  be changed by permutation.   Method:  Let's suppose that the rows and channels are permuted in the output. Then an element in the input will be written to the permuted places as the example shows:  Indicies in the input: h, w, c, b --> element = input[h, w, c, b].\nThen in the output data: output[c, w, h, b] = element.    [source]",
             "title": "Permute"
         },
         {
             "location": "/core/#repeatvector",
-            "text": "[source]",
+            "text": "(Next release)    [source]",
             "title": "RepeatVector"
         },
         {
@@ -107,12 +112,12 @@
         },
         {
             "location": "/convolutions/",
-            "text": "[source]\n \n\n\nConvolution1D\n\n\nThe convolution...\n\n\n \n[source]\n \n\n\nConvolution2D\n\n\n \n[source]\n \n\n\nCropping1D\n\n\n \n[source]\n \n\n\nCropping2D",
+            "text": "[source]\n \n\n\nConvolution1D\n\n\n \n[source]\n \n\n\nConvolution2D\n\n\n \n[source]\n \n\n\nCropping1D\n\n\n(Next release)\n\n\n \n[source]\n \n\n\nCropping2D\n\n\n(Next release)",
             "title": "Convolutions"
         },
         {
             "location": "/convolutions/#convolution1d",
-            "text": "The convolution...    [source]",
+            "text": "[source]",
             "title": "Convolution1D"
         },
         {
@@ -122,17 +127,17 @@
         },
         {
             "location": "/convolutions/#cropping1d",
-            "text": "[source]",
+            "text": "(Next release)    [source]",
             "title": "Cropping1D"
         },
         {
             "location": "/convolutions/#cropping2d",
-            "text": "",
+            "text": "(Next release)",
             "title": "Cropping2D"
         },
         {
             "location": "/pooling/",
-            "text": "[source]\n\n\nAveragePooling1D\n\n\n[source]\n\n\nAveragePooling2D\n\n\n[source]\n\n\nGlobalAveragePooling1D\n\n\n[source]\n\n\nGlobalAveragePooling2D\n\n\n[source]\n\n\nGlobalMaxPooling1D\n\n\n[source]\n\n\nGlobalMaxPooling2D\n\n\n[source]\n\n\nMaxPooling1D\n\n\n[source]\n\n\nMaxPooling2D",
+            "text": "[source]\n\n\nAveragePooling1D\n\n\n[source]\n\n\nAveragePooling2D\n\n\n[source]\n\n\nGlobalAveragePooling1D\n\n\n(Next release)\n\n\n[source]\n\n\nGlobalAveragePooling2D\n\n\n(Next release)\n\n\n[source]\n\n\nGlobalMaxPooling1D\n\n\n(Next release)\n\n\n[source]\n\n\nGlobalMaxPooling2D\n\n\n(Next release)\n\n\n[source]\n\n\nMaxPooling1D\n\n\n[source]\n\n\nMaxPooling2D",
             "title": "Pooling"
         },
         {
@@ -147,22 +152,22 @@
         },
         {
             "location": "/pooling/#globalaveragepooling1d",
-            "text": "[source]",
+            "text": "(Next release)  [source]",
             "title": "GlobalAveragePooling1D"
         },
         {
             "location": "/pooling/#globalaveragepooling2d",
-            "text": "[source]",
+            "text": "(Next release)  [source]",
             "title": "GlobalAveragePooling2D"
         },
         {
             "location": "/pooling/#globalmaxpooling1d",
-            "text": "[source]",
+            "text": "(Next release)  [source]",
             "title": "GlobalMaxPooling1D"
         },
         {
             "location": "/pooling/#globalmaxpooling2d",
-            "text": "[source]",
+            "text": "(Next release)  [source]",
             "title": "GlobalMaxPooling2D"
         },
         {
@@ -222,22 +227,22 @@
         },
         {
             "location": "/recurrents/",
-            "text": "[source]\n\n\nSimpleRNN",
+            "text": "[source]\n\n\nSimpleRNN\n\n\n(Next release)",
             "title": "Recurrent layers"
         },
         {
             "location": "/recurrents/#simplernn",
-            "text": "",
+            "text": "(Next release)",
             "title": "SimpleRNN"
         },
         {
             "location": "/batchnormalization/",
-            "text": "[source]\n \n\n\nBatch Normalization",
+            "text": "[source]\n \n\n\nBatch Normalization\n\n\n(Next release)",
             "title": "BatchNormalization"
         },
         {
             "location": "/batchnormalization/#batch-normalization",
-            "text": "",
+            "text": "(Next release)",
             "title": "Batch Normalization"
         },
         {

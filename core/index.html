@@ -83,6 +83,13 @@
 
         
             
+    <li class="toctree-l1 ">
+        <a class="" href="../data/">Data structure</a>
+        
+    </li>
+
+        
+            
     <li class="toctree-l1 current">
         <a class="current" href="./">Core</a>
         
@@ -204,17 +211,44 @@
           <div role="main">
             <div class="section">
               
-                <p>The core layers contains layers to transform the shape of the input and the fully connected layer as a usual ingridient of a neural networks. </p>
+                <p>The core layers contain layers to transform the shape of the input and the fully connected layer as a usual ingridient of a neural networks. </p>
 <p><span style="float:right;"> <a href="https://github.com/adamtiger/NNSharp/blob/master/NNSharp/Kernels/CPUKernels/Dense2DKernel.cs">[source]</a> </span></p>
 <h2 id="fully-connected-dense-layer">Fully connected (Dense layer)</h2>
 <p><span style="float:right;"> <a href="https://github.com/adamtiger/NNSharp/blob/master/NNSharp/Kernels/CPUKernels/FlattenKernel.cs">[source]</a> </span></p>
 <h2 id="flatten">Flatten</h2>
+<p>The <em>Flatten layer</em> creates a 1-dimensional output (array) from the input. </p>
+<p><strong>Input:</strong></p>
+<p>A Data2D type data with arbitrary shape (rows, columns, channels, batches can be anything).</p>
+<p><strong>Output:</strong></p>
+<p>A Data2D type data with the following shape: (1, 1, rows * columns * channels, batches). This represents a 1-dimensional vector.</p>
+<p><strong>Method:</strong></p>
+<p>The mapping occurs in the following way. The <code>batch</code> remains unchanged. For a given <code>batch</code> the reading order is: 1) channel, 2) column, 3) row. Therefore when <code>row</code> and <code>column</code> are fixed, <code>channel</code> is changing. When <code>channel</code> achieves its bound, <code>column</code> is increased while <code>row</code> is still fixed. Then <code>channel</code> is iterated again and so on.</p>
 <p><span style="float:right;"> <a href="https://github.com/adamtiger/NNSharp/blob/master/NNSharp/Kernels/CPUKernels/Reshape2DKernel.cs">[source]</a> </span></p>
 <h2 id="reshape2d">Reshape2D</h2>
+<p>(Next release)</p>
+<p>The <em>Reshape2D layer</em> creates an output with the prescribed shape.</p>
+<p><strong>Input:</strong></p>
+<p>A Data2D type data with arbitrary shape (rows, columns, channels, batches can be anything).</p>
+<p><strong>Output:</strong></p>
+<p>A Data2D type data with the required (prescribed) shape.</p>
+<p><strong>Method:</strong></p>
+<p>Reshaping assumes a strict reading order for accessing all of the elements. It has the following priority regarding the dimensions: 1) channel, 2) column, 3) row, 4) batch. If the elements are accessed by this manner, a one dimensional array (let's call it <em>virtual array</em>) will contain all the elements. The algorithm will reshape the original data into a new one that after using the same access method on it, the same virtual array would appear. (The same element in the original and the new data should be mapped to the same place in the virtual array by the access method.)</p>
 <p><span style="float:right;"> <a href="https://github.com/adamtiger/NNSharp/blob/master/NNSharp/Kernels/CPUKernels/PermuteKernel.cs">[source]</a> </span></p>
 <h2 id="permute">Permute</h2>
+<p>(Next release)</p>
+<p>The <em>Permute layer</em> creates an output with the same number of elements but the roles of the dimensions are changed.</p>
+<p><strong>Input:</strong></p>
+<p>A Data2D type data with arbitrary shape (rows, columns, channels, batches can be anything).</p>
+<p><strong>Output:</strong></p>
+<p>A Data2D type data with permuted shape (new rows, new columns, new channels, batches). The <em>batches can not</em> be changed by permutation. </p>
+<p><strong>Method:</strong></p>
+<p>Let's suppose that the rows and channels are permuted in the output. Then an element in the input will be written to the permuted places as the example shows:</p>
+<pre><code>Indicies in the input: h, w, c, b --&gt; element = input[h, w, c, b].
+Then in the output data: output[c, w, h, b] = element.
+</code></pre>
 <p><span style="float:right;"> <a href="https://github.com/adamtiger/NNSharp/blob/master/NNSharp/Kernels/CPUKernels/RepeatVectorKernel.cs">[source]</a> </span></p>
 <h2 id="repeatvector">RepeatVector</h2>
+<p>(Next release)</p>
 <p><span style="float:right;"> <a href="https://github.com/adamtiger/NNSharp/blob/master/NNSharp/Kernels/CPUKernels/Bias2DKernel.cs#L12">[source]</a> </span></p>
 <h2 id="bias">Bias</h2>
               
@@ -227,7 +261,7 @@
         <a href="../convolutions/" class="btn btn-neutral float-right" title="Convolutions"/>Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../startkeras/" class="btn btn-neutral" title="Quick start"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../data/" class="btn btn-neutral" title="Data structure"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -255,7 +289,7 @@
           <a class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="../startkeras/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../data/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
         <span style="margin-left: 15px"><a href="../convolutions/" style="color: #fcfcfc">Next &raquo;</a></span>

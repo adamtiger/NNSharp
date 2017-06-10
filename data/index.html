@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Quick start - NNSharp Documentation</title>
+  <title>Data structure - NNSharp Documentation</title>
   
 
   <link rel="shortcut icon" href="../img/favicon.ico">
@@ -20,7 +20,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Quick start";
+    var mkdocs_page_name = "Data structure";
   </script>
   
   <script src="../js/jquery-2.1.1.min.js"></script>
@@ -76,22 +76,19 @@
 
         
             
-    <li class="toctree-l1 current">
-        <a class="current" href="./">Quick start</a>
-        
-            <ul>
-            
-                <li class="toctree-l3"><a href="#getting-started-with-keras-models">Getting Started with Keras models</a></li>
-                
-            
-            </ul>
+    <li class="toctree-l1 ">
+        <a class="" href="../startkeras/">Quick start</a>
         
     </li>
 
         
             
-    <li class="toctree-l1 ">
-        <a class="" href="../data/">Data structure</a>
+    <li class="toctree-l1 current">
+        <a class="current" href="./">Data structure</a>
+        
+            <ul>
+            
+            </ul>
         
     </li>
 
@@ -182,7 +179,7 @@
         
       
     
-    <li>Quick start</li>
+    <li>Data structure</li>
     <li class="wy-breadcrumbs-aside">
       
         
@@ -196,27 +193,7 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="getting-started-with-keras-models">Getting Started with Keras models</h1>
-<p>If the training was done with Keras then the model can be saved by using the python script named <strong>KerasModeltoJSON.py</strong>. It will create a json file which can be read by NNSharp. NNSharp will build the model in C# and provides function to execute it. The python script takes the created and compiled Keras <em>model</em> and the <em>output file name</em> as arguments. Then the json file can be created in the following way in your Python program:</p>
-<pre><code class="python">import KerasModeltoJSON as js
-wrt = js.JSONwriter(model, file_path)
-wrt.save()
-</code></pre>
-
-<p>Then in the C# program use the following:</p>
-<pre><code class="csharp">// Read the previously created json.
-var reader = new ReaderKerasModel(filePath); 
-SequentialModel model = reader.GetSequentialExecutor();
-
-// Then create the data to run the executer on.
-// batch: should be set in the Keras model.
-Data2D input = new Data2D(height, width, channel, batch);
-
-// Calculate the network's output.
-IData output = model.ExecuteNetwork(input);
-</code></pre>
-
-<p>In order to know what data should be the <em>input</em> and the <em>output</em> see the corresponding documentations for the <em>layer at input</em> and the <em>layer at output</em>, respectively.</p>
+                
               
             </div>
           </div>
@@ -224,10 +201,10 @@ IData output = model.ExecuteNetwork(input);
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../data/" class="btn btn-neutral float-right" title="Data structure"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../core/" class="btn btn-neutral float-right" title="Core"/>Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../models/" class="btn btn-neutral" title="Models"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../startkeras/" class="btn btn-neutral" title="Quick start"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -255,10 +232,10 @@ IData output = model.ExecuteNetwork(input);
           <a class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="../models/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../startkeras/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../data/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../core/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
