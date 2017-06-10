@@ -22,6 +22,7 @@ The mapping occurs in the following way. The `batch` remains unchanged. For a gi
 
 <span style="float:right;"> [[source]](https://github.com/adamtiger/NNSharp/blob/master/NNSharp/Kernels/CPUKernels/Reshape2DKernel.cs) </span>
 ## Reshape2D
+(Next release)
 
 The *Reshape2D layer* creates an output with the prescribed shape.
 
@@ -39,6 +40,7 @@ Reshaping assumes a strict reading order for accessing all of the elements. It h
 
 <span style="float:right;"> [[source]](https://github.com/adamtiger/NNSharp/blob/master/NNSharp/Kernels/CPUKernels/PermuteKernel.cs) </span>
 ## Permute
+(Next release)
 
 The *Permute layer* creates an output with the same number of elements but the roles of the dimensions are changed.
 
@@ -60,6 +62,7 @@ Let's suppose that the rows and channels are permuted in the output. Then an ele
 
 <span style="float:right;"> [[source]](https://github.com/adamtiger/NNSharp/blob/master/NNSharp/Kernels/CPUKernels/RepeatVectorKernel.cs) </span>
 ## RepeatVector
+(Next release)
 
 <span style="float:right;"> [[source]](https://github.com/adamtiger/NNSharp/blob/master/NNSharp/Kernels/CPUKernels/Bias2DKernel.cs#L12) </span>
 ## Bias
