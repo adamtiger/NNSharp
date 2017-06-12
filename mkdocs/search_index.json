@@ -27,7 +27,7 @@
         },
         {
             "location": "/install/",
-            "text": "Installation\n\n\nNNSharp is available as a \nnuget package\n. It was built on Visual Studio 2015 with .NET Framework 4.5.2. The easiest way to install is to use the \nnuget package manager\n in Visual Studio. As an other option the necessary dll can be built from the source code (\ndownload link\n). The current release is the v1.1. It has only one dependency: \nNewtonsoft.Json\n.",
+            "text": "Installation\n\n\n\n\nNNSharp is available as a \nnuget package\n. It was built on Visual Studio 2015 with .NET Framework 4.5.2. The easiest way to install is to use the \nnuget package manager\n in Visual Studio. As an other option the necessary dll can be built from the source code (\ndownload link\n). The current release is the v1.1. It has only one dependency: \nNewtonsoft.Json\n.",
             "title": "Installation"
         },
         {
@@ -61,6 +61,26 @@
             "title": "Graph model"
         },
         {
+            "location": "/data/",
+            "text": "[source]\n \n\n\nData2D\n\n\n \n[source]\n \n\n\nDataArray\n\n\n \n[source]\n \n\n\nSequentialModelData",
+            "title": "Data structure"
+        },
+        {
+            "location": "/data/#data2d",
+            "text": "[source]",
+            "title": "Data2D"
+        },
+        {
+            "location": "/data/#dataarray",
+            "text": "[source]",
+            "title": "DataArray"
+        },
+        {
+            "location": "/data/#sequentialmodeldata",
+            "text": "",
+            "title": "SequentialModelData"
+        },
+        {
             "location": "/startkeras/",
             "text": "Getting Started with Keras models\n\n\nIf the training was done with Keras then the model can be saved by using the python script named \nKerasModeltoJSON.py\n. It will create a json file which can be read by NNSharp. NNSharp will build the model in C# and provides function to execute it. The python script takes the created and compiled Keras \nmodel\n and the \noutput file name\n as arguments. Then the json file can be created in the following way in your Python program:\n\n\nimport KerasModeltoJSON as js\nwrt = js.JSONwriter(model, file_path)\nwrt.save()\n\n\n\n\nThen in the C# program use the following:\n\n\n// Read the previously created json.\nvar reader = new ReaderKerasModel(filePath); \nSequentialModel model = reader.GetSequentialExecutor();\n\n// Then create the data to run the executer on.\n// batch: should be set in the Keras model.\nData2D input = new Data2D(height, width, channel, batch);\n\n// Calculate the network's output.\nIData output = model.ExecuteNetwork(input);\n\n\n\n\nIn order to know what data should be the \ninput\n and the \noutput\n see the corresponding documentations for the \nlayer at input\n and the \nlayer at output\n, respectively.",
             "title": "Quick start"
@@ -71,18 +91,13 @@
             "title": "Getting Started with Keras models"
         },
         {
-            "location": "/data/",
-            "text": "",
-            "title": "Data structure"
-        },
-        {
             "location": "/core/",
-            "text": "The core layers contain layers to transform the shape of the input and the fully connected layer as a usual ingridient of a neural networks. \n\n\n \n[source]\n \n\n\nFully connected (Dense layer)\n\n\n \n[source]\n \n\n\nFlatten\n\n\nThe \nFlatten layer\n creates a 1-dimensional output (array) from the input. \n\n\nInput:\n\n\nA Data2D type data with arbitrary shape (rows, columns, channels, batches can be anything).\n\n\nOutput:\n\n\nA Data2D type data with the following shape: (1, 1, rows * columns * channels, batches). This represents a 1-dimensional vector.\n\n\nMethod:\n\n\nThe mapping occurs in the following way. The \nbatch\n remains unchanged. For a given \nbatch\n the reading order is: 1) channel, 2) column, 3) row. Therefore when \nrow\n and \ncolumn\n are fixed, \nchannel\n is changing. When \nchannel\n achieves its bound, \ncolumn\n is increased while \nrow\n is still fixed. Then \nchannel\n is iterated again and so on.\n\n\n \n[source]\n \n\n\nReshape2D\n\n\n(Next release)\n\n\nThe \nReshape2D layer\n creates an output with the prescribed shape.\n\n\nInput:\n\n\nA Data2D type data with arbitrary shape (rows, columns, channels, batches can be anything).\n\n\nOutput:\n\n\nA Data2D type data with the required (prescribed) shape.\n\n\nMethod:\n\n\nReshaping assumes a strict reading order for accessing all of the elements. It has the following priority regarding the dimensions: 1) channel, 2) column, 3) row, 4) batch. If the elements are accessed by this manner, a one dimensional array (let's call it \nvirtual array\n) will contain all the elements. The algorithm will reshape the original data into a new one that after using the same access method on it, the same virtual array would appear. (The same element in the original and the new data should be mapped to the same place in the virtual array by the access method.)\n\n\n \n[source]\n \n\n\nPermute\n\n\n(Next release)\n\n\nThe \nPermute layer\n creates an output with the same number of elements but the roles of the dimensions are changed.\n\n\nInput:\n\n\nA Data2D type data with arbitrary shape (rows, columns, channels, batches can be anything).\n\n\nOutput:\n\n\nA Data2D type data with permuted shape (new rows, new columns, new channels, batches). The \nbatches can not\n be changed by permutation. \n\n\nMethod:\n\n\nLet's suppose that the rows and channels are permuted in the output. Then an element in the input will be written to the permuted places as the example shows:\n\n\nIndicies in the input: h, w, c, b --> element = input[h, w, c, b].\nThen in the output data: output[c, w, h, b] = element.\n\n\n\n \n[source]\n \n\n\nRepeatVector\n\n\n(Next release)\n\n\n \n[source]\n \n\n\nBias",
+            "text": "The core layers contain layers to transform the shape of the input and the fully connected layer as a usual ingridient of a neural network. \n\n\n \n[source]\n \n\n\nFully connected (Dense layer)\n\n\nThe structure of \nFully connected layer\n can be seen on the following image:\n\n\n\n\nInput:\n\n\nA Data2D type with the shape: (1, 1, channels, batches).\n\n\nOutput:\n\n\nA Data2D type with the shape: (1, 1, units, batches).\n\n\nMethods:\n\n\nAs it can be seen on the picture this layer uses as many weight vectors (kernels) as many units have the layer. The number of units is equal with the number of output units. The fully connected layer is a linear transformation. A weight multiplies the corresponding input value (blue circle), then the output value (orange circle) is the sum of the previously weighted inputs. For further details see the source code where kernels are used in terms of units.\n\n\n \n[source]\n \n\n\nFlatten\n\n\nThe \nFlatten layer\n creates a 1-dimensional output (array) from the input. \n\n\nInput:\n\n\nA Data2D type data with arbitrary shape (rows, columns, channels, batches can be anything).\n\n\nOutput:\n\n\nA Data2D type data with the following shape: (1, 1, rows * columns * channels, batches). This represents a 1-dimensional vector.\n\n\nMethod:\n\n\nThe mapping occurs in the following way. The \nbatch\n remains unchanged. For a given \nbatch\n the reading order is: 1) channel, 2) column, 3) row. Therefore when \nrow\n and \ncolumn\n are fixed, \nchannel\n is changing. When \nchannel\n achieves its bound, \ncolumn\n is increased while \nrow\n is still fixed. Then \nchannel\n is iterated again and so on.\n\n\n \n[source]\n \n\n\nReshape2D\n\n\n(Next release)\n\n\nThe \nReshape2D layer\n creates an output with the prescribed shape.\n\n\nInput:\n\n\nA Data2D type data with arbitrary shape (rows, columns, channels, batches can be anything).\n\n\nOutput:\n\n\nA Data2D type data with the required (prescribed) shape.\n\n\nMethod:\n\n\nReshaping assumes a strict reading order for accessing all of the elements. It has the following priority regarding the dimensions: 1) channel, 2) column, 3) row, 4) batch. If the elements are accessed by this manner, a one dimensional array (let's call it \nvirtual array\n) will contain all the elements. The algorithm will reshape the original data into a new one that after using the same access method on it, the same virtual array would appear. (The same element in the original and the new data should be mapped to the same place in the virtual array by the access method.)\n\n\n \n[source]\n \n\n\nPermute\n\n\n(Next release)\n\n\nThe \nPermute layer\n creates an output with the same number of elements but the roles of the dimensions are changed.\n\n\nInput:\n\n\nA Data2D type data with arbitrary shape (rows, columns, channels, batches can be anything).\n\n\nOutput:\n\n\nA Data2D type data with permuted shape (new rows, new columns, new channels, batches). The \nbatches can not\n be changed by permutation. \n\n\nMethod:\n\n\nLet's suppose that the rows and channels are permuted in the output. Then an element in the input will be written to the permuted places as the example shows:\n\n\nIndicies in the input: h, w, c, b --> element = input[h, w, c, b].\nThen in the output data: output[c, w, h, b] = element.\n\n\n\n \n[source]\n \n\n\nRepeatVector\n\n\n(Next release)\n\n\nThe \nRepeatVector layer\n repeats a 1-dimensional vector n times.\n\n\nInput:\n\n\nA Data2D type data with shape: (1, 1, channels, batches).\n\n\nOutput:\n\n\nA Data2D type data with shape: (1, n, channels, batches).\n\n\nMethod:\n\n\nRepeats the same 1-dimensional input for each channel and batch. \n\n\n \n[source]\n \n\n\nBias\n\n\nThe \nBias layer\n adds bias values to the input data. Elements with the same channel are increased by the same bias value. The input and the output shapes \nare the same\n.\n\n\nInput:\n\n\nA Data2D type data with arbitrary shape (rows, columns, channels, batches can be anything).\n\n\nOutput:\n\n\nIt is the same as the input.\n\n\nMethod:\n\n\nAdding bias  means the following:\n\n\noutput[h, w, c, b] += input[h, w, c, b] + bias[c]",
             "title": "Core"
         },
         {
             "location": "/core/#fully-connected-dense-layer",
-            "text": "[source]",
+            "text": "The structure of  Fully connected layer  can be seen on the following image:   Input:  A Data2D type with the shape: (1, 1, channels, batches).  Output:  A Data2D type with the shape: (1, 1, units, batches).  Methods:  As it can be seen on the picture this layer uses as many weight vectors (kernels) as many units have the layer. The number of units is equal with the number of output units. The fully connected layer is a linear transformation. A weight multiplies the corresponding input value (blue circle), then the output value (orange circle) is the sum of the previously weighted inputs. For further details see the source code where kernels are used in terms of units.    [source]",
             "title": "Fully connected (Dense layer)"
         },
         {
@@ -102,12 +117,12 @@
         },
         {
             "location": "/core/#repeatvector",
-            "text": "(Next release)    [source]",
+            "text": "(Next release)  The  RepeatVector layer  repeats a 1-dimensional vector n times.  Input:  A Data2D type data with shape: (1, 1, channels, batches).  Output:  A Data2D type data with shape: (1, n, channels, batches).  Method:  Repeats the same 1-dimensional input for each channel and batch.     [source]",
             "title": "RepeatVector"
         },
         {
             "location": "/core/#bias",
-            "text": "",
+            "text": "The  Bias layer  adds bias values to the input data. Elements with the same channel are increased by the same bias value. The input and the output shapes  are the same .  Input:  A Data2D type data with arbitrary shape (rows, columns, channels, batches can be anything).  Output:  It is the same as the input.  Method:  Adding bias  means the following:  output[h, w, c, b] += input[h, w, c, b] + bias[c]",
             "title": "Bias"
         },
         {

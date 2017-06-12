@@ -71,6 +71,13 @@
 <li>
           
             <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../data/">Data structure</a>
+        
+    </li>
+<li>
+          
+            <li>
     <ul class="subnav">
     <li><span>Keras</span></li>
 
@@ -78,13 +85,6 @@
             
     <li class="toctree-l1 ">
         <a class="" href="../startkeras/">Quick start</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../data/">Data structure</a>
         
     </li>
 
@@ -211,9 +211,17 @@
           <div role="main">
             <div class="section">
               
-                <p>The core layers contain layers to transform the shape of the input and the fully connected layer as a usual ingridient of a neural networks. </p>
+                <p>The core layers contain layers to transform the shape of the input and the fully connected layer as a usual ingridient of a neural network. </p>
 <p><span style="float:right;"> <a href="https://github.com/adamtiger/NNSharp/blob/master/NNSharp/Kernels/CPUKernels/Dense2DKernel.cs">[source]</a> </span></p>
 <h2 id="fully-connected-dense-layer">Fully connected (Dense layer)</h2>
+<p>The structure of <em>Fully connected layer</em> can be seen on the following image:</p>
+<p><img alt="dense" src="https://drive.google.com/uc?export=download&amp;id=0B97L9zqg-lnwdUtReFNsTHl4Rlk" /></p>
+<p><strong>Input:</strong></p>
+<p>A Data2D type with the shape: (1, 1, channels, batches).</p>
+<p><strong>Output:</strong></p>
+<p>A Data2D type with the shape: (1, 1, units, batches).</p>
+<p><strong>Methods:</strong></p>
+<p>As it can be seen on the picture this layer uses as many weight vectors (kernels) as many units have the layer. The number of units is equal with the number of output units. The fully connected layer is a linear transformation. A weight multiplies the corresponding input value (blue circle), then the output value (orange circle) is the sum of the previously weighted inputs. For further details see the source code where kernels are used in terms of units.</p>
 <p><span style="float:right;"> <a href="https://github.com/adamtiger/NNSharp/blob/master/NNSharp/Kernels/CPUKernels/FlattenKernel.cs">[source]</a> </span></p>
 <h2 id="flatten">Flatten</h2>
 <p>The <em>Flatten layer</em> creates a 1-dimensional output (array) from the input. </p>
@@ -249,8 +257,24 @@ Then in the output data: output[c, w, h, b] = element.
 <p><span style="float:right;"> <a href="https://github.com/adamtiger/NNSharp/blob/master/NNSharp/Kernels/CPUKernels/RepeatVectorKernel.cs">[source]</a> </span></p>
 <h2 id="repeatvector">RepeatVector</h2>
 <p>(Next release)</p>
+<p>The <em>RepeatVector layer</em> repeats a 1-dimensional vector n times.</p>
+<p><strong>Input:</strong></p>
+<p>A Data2D type data with shape: (1, 1, channels, batches).</p>
+<p><strong>Output:</strong></p>
+<p>A Data2D type data with shape: (1, n, channels, batches).</p>
+<p><strong>Method:</strong></p>
+<p>Repeats the same 1-dimensional input for each channel and batch. </p>
 <p><span style="float:right;"> <a href="https://github.com/adamtiger/NNSharp/blob/master/NNSharp/Kernels/CPUKernels/Bias2DKernel.cs#L12">[source]</a> </span></p>
 <h2 id="bias">Bias</h2>
+<p>The <em>Bias layer</em> adds bias values to the input data. Elements with the same channel are increased by the same bias value. The input and the output shapes <em>are the same</em>.</p>
+<p><strong>Input:</strong></p>
+<p>A Data2D type data with arbitrary shape (rows, columns, channels, batches can be anything).</p>
+<p><strong>Output:</strong></p>
+<p>It is the same as the input.</p>
+<p><strong>Method:</strong></p>
+<p>Adding bias  means the following:</p>
+<pre><code>output[h, w, c, b] += input[h, w, c, b] + bias[c]
+</code></pre>
               
             </div>
           </div>
@@ -261,7 +285,7 @@ Then in the output data: output[c, w, h, b] = element.
         <a href="../convolutions/" class="btn btn-neutral float-right" title="Convolutions"/>Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../data/" class="btn btn-neutral" title="Data structure"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../startkeras/" class="btn btn-neutral" title="Quick start"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -289,7 +313,7 @@ Then in the output data: output[c, w, h, b] = element.
           <a class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="../data/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../startkeras/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
         <span style="margin-left: 15px"><a href="../convolutions/" style="color: #fcfcfc">Next &raquo;</a></span>
