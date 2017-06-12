@@ -4,9 +4,9 @@ pages:
     - Overview: index.md
     - Installation: install.md
     - Models: models.md
+    - Data structure: data.md
     - Keras: 
         - Quick start: startkeras.md
-        - Data structure: data.md
         - Core: core.md
         - Convolutions: convolutions.md
         - Pooling: pooling.md

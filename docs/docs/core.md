@@ -1,7 +1,23 @@
-The core layers contain layers to transform the shape of the input and the fully connected layer as a usual ingridient of a neural networks. 
+The core layers contain layers to transform the shape of the input and the fully connected layer as a usual ingridient of a neural network. 
 
 <span style="float:right;"> [[source]](https://github.com/adamtiger/NNSharp/blob/master/NNSharp/Kernels/CPUKernels/Dense2DKernel.cs) </span>
 ## Fully connected (Dense layer) 
+
+The structure of *Fully connected layer* can be seen on the following image:
+
+![dense](https://drive.google.com/uc?export=download&id=0B97L9zqg-lnwdUtReFNsTHl4Rlk)
+
+**Input:**
+
+A Data2D type with the shape: (1, 1, channels, batches).
+
+**Output:**
+
+A Data2D type with the shape: (1, 1, units, batches).
+
+**Methods:**
+
+As it can be seen on the picture this layer uses as many weight vectors (kernels) as many units have the layer. The number of units is equal with the number of output units. The fully connected layer is a linear transformation. A weight multiplies the corresponding input value (blue circle), then the output value (orange circle) is the sum of the previously weighted inputs. For further details see the source code where kernels are used in terms of units.
 
 <span style="float:right;"> [[source]](https://github.com/adamtiger/NNSharp/blob/master/NNSharp/Kernels/CPUKernels/FlattenKernel.cs) </span>
 ## Flatten
@@ -64,7 +80,36 @@ Let's suppose that the rows and channels are permuted in the output. Then an ele
 ## RepeatVector
 (Next release)
 
+The *RepeatVector layer* repeats a 1-dimensional vector n times.
+
+**Input:**
+
+A Data2D type data with shape: (1, 1, channels, batches).
+
+**Output:**
+
+A Data2D type data with shape: (1, n, channels, batches).
+
+**Method:**
+
+Repeats the same 1-dimensional input for each channel and batch. 
+
 <span style="float:right;"> [[source]](https://github.com/adamtiger/NNSharp/blob/master/NNSharp/Kernels/CPUKernels/Bias2DKernel.cs#L12) </span>
 ## Bias
 
+The *Bias layer* adds bias values to the input data. Elements with the same channel are increased by the same bias value. The input and the output shapes *are the same*.
+
+**Input:**
+
+A Data2D type data with arbitrary shape (rows, columns, channels, batches can be anything).
+
+**Output:**
+
+It is the same as the input.
+
+**Method:**
+
+Adding bias  means the following:
+
+	output[h, w, c, b] += input[h, w, c, b] + bias[c]
 
