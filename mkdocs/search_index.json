@@ -127,7 +127,7 @@
         },
         {
             "location": "/convolutions/",
-            "text": "[source]\n \n\n\nConvolution1D\n\n\n \n[source]\n \n\n\nConvolution2D\n\n\n \n[source]\n \n\n\nCropping1D\n\n\n(Next release)\n\n\n \n[source]\n \n\n\nCropping2D\n\n\n(Next release)",
+            "text": "[source]\n \n\n\nConvolution1D\n\n\n \n[source]\n \n\n\nConvolution2D\n\n\n\n\n \n[source]\n \n\n\nCropping1D\n\n\n(Next release)\n\n\n \n[source]\n \n\n\nCropping2D\n\n\n(Next release)",
             "title": "Convolutions"
         },
         {
