@@ -4,7 +4,7 @@
 
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](https://github.com/adamtiger/NNSharp/blob/master/LICENSE)
 
-A lightweight package for running pre-trained neural networks. 
+A lightweight package for running pre-trained neural networks. For the **detailed documentation** see the [NNSharp documentation](https://adamtiger.github.io/NNSharp/). 
 
 ## Philosophy
 
