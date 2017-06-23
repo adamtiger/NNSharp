@@ -39,4 +39,9 @@ In the future the library should provide the following features:
 * Multi-threading for faster kernels.
 * Keras-like API over TensorFlow for building, training and running networks. This requires an extended C++ API in TensorFlow and reliable compilation for Windows.
 
-Contributions are always welcomed! For the current purposes see the [github repository](https://github.com/adamtiger/NNSharp) of the project.
+**Contributions are always welcomed!** For the current purposes see the [github repository](https://github.com/adamtiger/NNSharp) of the project.
+
+## Contact
+
+You can do contact me via email if you have questions: adam.8.budai at gmail dot com
+

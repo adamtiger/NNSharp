@@ -35,6 +35,10 @@ Assume the neural network contains one non-linear layer. An *f*  function (domai
 <span style="float:right;"> [[source]](https://github.com/adamtiger/NNSharp/blob/master/NNSharp/Kernels/CPUKernels/SoftmaxKernel.cs) </span>
 ## Softmax
 
+Supports only 1 dimensional inputs.
+
+![softmaxgraph](https://drive.google.com/uc?export=download&id=0B97L9zqg-lnwdkpGZDFNNmFwd2M)
+
 <span style="float:right;"> [[source]](https://github.com/adamtiger/NNSharp/blob/master/NNSharp/Kernels/CPUKernels/SoftsignKernel.cs) </span>
 ## Softsign
 
