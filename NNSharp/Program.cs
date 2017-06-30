@@ -7,6 +7,7 @@ using NNSharp.SequentialBased.SequentialLayers;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using static NNSharp.DataTypes.Data2D;
 
 namespace NNSharp
 {
@@ -26,7 +27,7 @@ namespace NNSharp
             Console.WriteLine(idx[1]);
             Console.ReadKey();*/
 
-            Conv2DLayer layer = new Conv2DLayer(0, 0, 1, 1);
+            /*Conv2DLayer layer = new Conv2DLayer(0, 0, 1, 1);
 
             Data2D input = new Data2D(6, 5, 3, 1);
 
@@ -69,7 +70,15 @@ namespace NNSharp
             layer.SetInput(input);
             layer.Execute();
 
-            Data2D output = layer.GetOutput() as Data2D;
+            Data2D output = layer.GetOutput() as Data2D;*/
+
+            Dimension a1 = new Dimension(1, 3, 5, 2);
+            Dimension a2 = new Dimension(1, 3, 5, 2);
+
+            if (a1.Equals(a2))
+                Console.WriteLine("Helyes.");
+            else
+                Console.WriteLine("Hibás.");
 
             Console.ReadKey();
 

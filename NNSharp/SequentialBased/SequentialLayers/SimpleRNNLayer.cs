@@ -8,6 +8,7 @@ using NNSharp.DataTypes;
 using NNSharp.KernelDescriptors;
 using static NNSharp.DataTypes.Data2D;
 using static NNSharp.DataTypes.SequentialModelData;
+using NNSharp.Kernels;
 
 namespace NNSharp.SequentialBased.SequentialLayers
 {

@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using NNSharp.DataTypes;
 using NNSharp.KernelDescriptors;
+using NNSharp.Kernels;
 using NNSharp.Kernels.CPUKernels;
 using NNSharp.Models;
 using NNSharp.SequentialBased.SequentialExecutors;
