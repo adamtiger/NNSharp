@@ -12,6 +12,7 @@ namespace NNSharp.Kernels.CPUKernels
     {
         public void Execute()
         {
+            output.ToZeros();
             for (int batch = 0; batch < input.GetDimension().b; ++batch)
             {
                 h.ToZeros();
@@ -26,6 +27,8 @@ namespace NNSharp.Kernels.CPUKernels
                     ReCalculateC();
                     ReCalculateH();
                 }
+
+                CopyToOutput(batch);
             }
         }
 
@@ -36,7 +39,7 @@ namespace NNSharp.Kernels.CPUKernels
         protected Data2D uI, uF, uC, uO; // u_: units x units x 1 x 1
         protected Data2D bI, bF, bC, bO; // b_: 1 x units x 1 x 1
 
-        protected Data2D h, C;
+        protected Data2D h, C, ou;
         protected Data2D i, f, C0;
 
         protected ActivationLambda activation, recurrentActivation;
@@ -133,10 +136,10 @@ namespace NNSharp.Kernels.CPUKernels
 
                 result += bO[0, 0, units, 0];
 
-                output[0, 0, units, batch] = result;
+                ou[0, 0, units, 0] = result;
             }
 
-            recurrentActivation(output);
+            recurrentActivation(ou);
         }
 
         private void ReCalculateC()
@@ -154,7 +157,15 @@ namespace NNSharp.Kernels.CPUKernels
 
             for (int units = 0; units < h.GetDimension().c; ++units)
             {
-                h[0, 0, units, 0] = output[0, 0, units, 0] * C[0, 0, units, 0];
+                h[0, 0, units, 0] = ou[0, 0, units, 0] * C[0, 0, units, 0];
+            }
+        }
+
+        private void CopyToOutput(int batch)
+        {
+            for (int units = 0; units < output.GetDimension().c; ++units)
+            {
+                output[0, 0, units, batch] = h[0, 0, units, 0];
             }
         }
 

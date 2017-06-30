@@ -24,6 +24,7 @@ namespace NNSharp.SequentialBased.SequentialLayers
 
             h = new Data2D(1, 1, units, 1);
             C = new Data2D(1, 1, units, 1);
+            ou = new Data2D(1, 1, units, 1);
             C0 = new Data2D(1, 1, units, 1);
             i = new Data2D(1, 1, units, 1);
             f = new Data2D(1, 1, units, 1);
@@ -44,52 +45,6 @@ namespace NNSharp.SequentialBased.SequentialLayers
             this.input = input as Data2D;
 
             Dimension dimI = this.input.GetDimension();
-
-            if (units != wI.GetDimension().h)
-            {
-                throw new Exception("LSTMLayer: kernel height is not equal with units.");
-            }
-
-            if (dimI.c != wI.GetDimension().w)
-            {
-                throw new Exception("LSTMLayer: kernel width is not equal with input dim.");
-            }
-
-            if (units != uI.GetDimension().h)
-            {
-                throw new Exception("LSTMLayer: recurrent kernel height is not equal with units.");
-            }
-
-            if (units != uI.GetDimension().w)
-            {
-                throw new Exception("LSTMLayer: recurrent kernel width is not equal with units.");
-            }
-
-            if (units != bI.GetDimension().c)
-            {
-                throw new Exception("LSTMLayer: bias length is not equal with units.");
-            }
-
-            if (wI.GetDimension().Equals(wF.GetDimension()) && 
-                wI.GetDimension().Equals(wO.GetDimension()) &&
-                wI.GetDimension().Equals(wC.GetDimension()))
-            {
-                throw new Exception("LSTMLayer: kernel dimensions are not equal.");
-            }
-
-            if (uI.GetDimension().Equals(uF.GetDimension()) &&
-                uI.GetDimension().Equals(uO.GetDimension()) &&
-                uI.GetDimension().Equals(uC.GetDimension()))
-            {
-                throw new Exception("LSTMLayer: recurrent kernel dimensions are not equal.");
-            }
-
-            if (bI.GetDimension().Equals(bF.GetDimension()) &&
-                bI.GetDimension().Equals(bO.GetDimension()) &&
-                bI.GetDimension().Equals(bC.GetDimension()))
-            {
-                throw new Exception("LSTMLayer: bias dimensions are not equal.");
-            }
 
             int outputH = 1;
             int outputW = 1;
@@ -171,11 +126,14 @@ namespace NNSharp.SequentialBased.SequentialLayers
 
         private void Copy(Data2D left, Data2D right, int batch)
         {
-            for (int x = 0; x < left.GetDimension().w; ++x)
+            for (int x = 0; x < left.GetDimension().h; ++x)
             {
-                for (int y = 0; y < left.GetDimension().c; ++y)
+                for (int y = 0; y < left.GetDimension().w; ++y)
                 {
-                    left[0, x, y, 0] = right[0, x, y, batch];
+                    for (int z = 0; z < left.GetDimension().c; ++z)
+                    {
+                        left[x, y, z, 0] = right[x, y, z, batch];
+                    }
                 }
             }
         }
