@@ -6,10 +6,11 @@ This is the full documentation of NNSharp which is a lightweight library for run
 
 NNSharp recently supports Keras models with both Tensorflow and Theano backend. The list of the supported *Keras layers*:
 
-* **Core layers**: Dense, Reshape (2D), Permute, RepeatVector. 
+* **Core layers**: Dense, Flatten, Reshape (2D), Permute, RepeatVector. 
 * **Convolution layers**: Conv1D, Conv2D, Cropping1D, Cropping2D. 
 * **Pooling layers**: AveragePooling1D, AveragePooling2D, MaxPooling1D, MaxPooling2D, GlobalAveragePooling1D, GlobalAveragePooling2D, GlobalMaxPooling1D, GlobalMaxPooling2D.
 * **Activations**: softmax, elu, softplus, softsign, relu, tanh, sigmoid, hard_sigmoid. 
+* **Recurrent layers**: SimpleRNN, LSTM, GRU.
 * **Normalization**: BatchNormalization.
 
 The *data format* supports 2-dimensional data. 
@@ -19,7 +20,7 @@ The *data format* supports 2-dimensional data.
 The purpose of the documentation is twofold:
 
 1. As a user guide to show how to use the package.
-2. Providing some further insight how the kernels work in a concise manner. Therefore developers and researchers can immediately understand what the kernel does without inspecting the code or looking for other sources on the net. This can be helpful for contributors as a developer documentation. On the other hand users can understand what to feed into the network and how to use (and construct) the output.
+2. Providing some further insight how the kernels work in a concise manner. Therefore developers and researchers can immediately understand what the kernel does without inspecting the code or looking for other sources on the net. This can be helpful for contributors as a developer documentation too. On the other hand users can understand what to feed into the network and how to use (and construct) the output.
 
 The structure of the documentation is the following:
 
@@ -34,10 +35,9 @@ In the future the library should provide the following features:
 
 * Supports the whole Keras API.
 * Supports TensorFlow models.
-* Supports PyTorch regarding neural networks.
 * Supports Sonnet.
 * Multi-threading for faster kernels.
-* Keras-like API over TensorFlow for building, training and running networks. This requires an extended C++ API in TensorFlow and reliable compilation for Windows.
+* Keras-like API over TensorFlow (and may be CNTK) for building, training and running networks. This requires an extended C++ API in TensorFlow and reliable compilation for Windows.
 
 **Contributions are always welcomed!** For the current purposes see the [github repository](https://github.com/adamtiger/NNSharp) of the project.
 
