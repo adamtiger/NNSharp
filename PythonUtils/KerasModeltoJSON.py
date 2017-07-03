@@ -196,6 +196,14 @@ class JSONwriter:
             rec_act = layer_descr['config']['recurrent_activation']
             layers.append({'layer':'LSTM', 'units':units, 'input_dim':input_dim, 'activation':activation, 'rec_act':rec_act})
             return layers
+
+        elif 'GRU' == name:
+            units = layer_descr['config']['units']
+            input_dim = self.model.get_weights()[self.idx].shape[0]
+            activation = layer_descr['config']['activation']
+            rec_act = layer_descr['config']['recurrent_activation']
+            layers.append({'layer':'GRU', 'units':units, 'input_dim':input_dim, 'activation':activation, 'rec_act':rec_act})
+            return layers
            
         else:
             raise NotImplementedError("Unknown layer type: " + name)  
@@ -271,6 +279,24 @@ class JSONwriter:
             w[0, 0, :, 9] = w_org[self.idx+2][units:2*units] # b_F
             w[0, 0, :, 10] = w_org[self.idx+2][2*units:3*units] # b_C
             w[0, 0, :, 11] = w_org[self.idx+2][3*units:4*units] # b_O
+            weights.append(w.tolist())
+            self.idx += 3 
+
+        elif 'GRU' == name:
+            in_dim = w_org[self.idx].shape[0]
+            units = int(w_org[self.idx].shape[1]/3)
+            w = np.zeros((units, max([w_org[self.idx].shape[0], units]), units, 9))
+            w[:, 0:in_dim, 0, 0] = np.transpose(w_org[self.idx][:, 0:units]) # W_Z
+            w[:, 0:in_dim, 0, 1] = np.transpose(w_org[self.idx][:, units:2*units]) # W_R
+            w[:, 0:in_dim, 0, 2] = np.transpose(w_org[self.idx][:, 2*units:3*units]) # W_HH
+            
+            w[:, 0:units, 0, 3] = np.transpose(w_org[self.idx+1][:, 0:units]) # U_Z
+            w[:, 0:units, 0, 4] = np.transpose(w_org[self.idx+1][:, units:2*units]) # U_R
+            w[:, 0:units, 0, 5] = np.transpose(w_org[self.idx+1][:, 2*units:3*units]) # U_HH
+
+            w[0, 0, :, 6] = w_org[self.idx+2][0:units] # b_Z
+            w[0, 0, :, 7] = w_org[self.idx+2][units:2*units] # b_R
+            w[0, 0, :, 8] = w_org[self.idx+2][2*units:3*units] # b_HH
             weights.append(w.tolist())
             self.idx += 3            
 
