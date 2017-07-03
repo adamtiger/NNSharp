@@ -205,10 +205,11 @@
 <h2 id="current-abilities">Current abilities</h2>
 <p>NNSharp recently supports Keras models with both Tensorflow and Theano backend. The list of the supported <em>Keras layers</em>:</p>
 <ul>
-<li><strong>Core layers</strong>: Dense, Reshape (2D), Permute, RepeatVector. </li>
+<li><strong>Core layers</strong>: Dense, Flatten, Reshape (2D), Permute, RepeatVector. </li>
 <li><strong>Convolution layers</strong>: Conv1D, Conv2D, Cropping1D, Cropping2D. </li>
 <li><strong>Pooling layers</strong>: AveragePooling1D, AveragePooling2D, MaxPooling1D, MaxPooling2D, GlobalAveragePooling1D, GlobalAveragePooling2D, GlobalMaxPooling1D, GlobalMaxPooling2D.</li>
 <li><strong>Activations</strong>: softmax, elu, softplus, softsign, relu, tanh, sigmoid, hard_sigmoid. </li>
+<li><strong>Recurrent layers</strong>: SimpleRNN, LSTM, GRU.</li>
 <li><strong>Normalization</strong>: BatchNormalization.</li>
 </ul>
 <p>The <em>data format</em> supports 2-dimensional data. </p>
@@ -216,7 +217,7 @@
 <p>The purpose of the documentation is twofold:</p>
 <ol>
 <li>As a user guide to show how to use the package.</li>
-<li>Providing some further insight how the kernels work in a concise manner. Therefore developers and researchers can immediately understand what the kernel does without inspecting the code or looking for other sources on the net. This can be helpful for contributors as a developer documentation. On the other hand users can understand what to feed into the network and how to use (and construct) the output.</li>
+<li>Providing some further insight how the kernels work in a concise manner. Therefore developers and researchers can immediately understand what the kernel does without inspecting the code or looking for other sources on the net. This can be helpful for contributors as a developer documentation too. On the other hand users can understand what to feed into the network and how to use (and construct) the output.</li>
 </ol>
 <p>The structure of the documentation is the following:</p>
 <ul>
@@ -230,10 +231,9 @@
 <ul>
 <li>Supports the whole Keras API.</li>
 <li>Supports TensorFlow models.</li>
-<li>Supports PyTorch regarding neural networks.</li>
 <li>Supports Sonnet.</li>
 <li>Multi-threading for faster kernels.</li>
-<li>Keras-like API over TensorFlow for building, training and running networks. This requires an extended C++ API in TensorFlow and reliable compilation for Windows.</li>
+<li>Keras-like API over TensorFlow (and may be CNTK) for building, training and running networks. This requires an extended C++ API in TensorFlow and reliable compilation for Windows.</li>
 </ul>
 <p><strong>Contributions are always welcomed!</strong> For the current purposes see the <a href="https://github.com/adamtiger/NNSharp">github repository</a> of the project.</p>
 <h2 id="contact">Contact</h2>
@@ -285,5 +285,5 @@
 
 <!--
 MkDocs version : 0.14.0
-Build Date UTC : 2017-06-23 15:54:59.287298
+Build Date UTC : 2017-07-03 12:17:25.217669
 -->

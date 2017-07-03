@@ -233,7 +233,6 @@
 <p>The mapping occurs in the following way. The <code>batch</code> remains unchanged. For a given <code>batch</code> the reading order is: 1) channel, 2) column, 3) row. Therefore when <code>row</code> and <code>column</code> are fixed, <code>channel</code> is changing. When <code>channel</code> achieves its bound, <code>column</code> is increased while <code>row</code> is still fixed. Then <code>channel</code> is iterated again and so on.</p>
 <p><span style="float:right;"> <a href="https://github.com/adamtiger/NNSharp/blob/master/NNSharp/Kernels/CPUKernels/Reshape2DKernel.cs">[source]</a> </span></p>
 <h2 id="reshape2d">Reshape2D</h2>
-<p>(Next release)</p>
 <p>The <em>Reshape2D layer</em> creates an output with the prescribed shape.</p>
 <p><strong>Input:</strong></p>
 <p>A Data2D type data with arbitrary shape (rows, columns, channels, batches can be anything).</p>
@@ -243,7 +242,6 @@
 <p>Reshaping assumes a strict reading order for accessing all of the elements. It has the following priority regarding the dimensions: 1) channel, 2) column, 3) row, 4) batch. If the elements are accessed by this manner, a one dimensional array (let's call it <em>virtual array</em>) will contain all the elements. The algorithm will reshape the original data into a new one that after using the same access method on it, the same virtual array would appear. (The same element in the original and the new data should be mapped to the same place in the virtual array by the access method.)</p>
 <p><span style="float:right;"> <a href="https://github.com/adamtiger/NNSharp/blob/master/NNSharp/Kernels/CPUKernels/PermuteKernel.cs">[source]</a> </span></p>
 <h2 id="permute">Permute</h2>
-<p>(Next release)</p>
 <p>The <em>Permute layer</em> creates an output with the same number of elements but the roles of the dimensions are changed.</p>
 <p><strong>Input:</strong></p>
 <p>A Data2D type data with arbitrary shape (rows, columns, channels, batches can be anything).</p>
@@ -256,7 +254,6 @@ Then in the output data: output[c, w, h, b] = element.
 </code></pre>
 <p><span style="float:right;"> <a href="https://github.com/adamtiger/NNSharp/blob/master/NNSharp/Kernels/CPUKernels/RepeatVectorKernel.cs">[source]</a> </span></p>
 <h2 id="repeatvector">RepeatVector</h2>
-<p>(Next release)</p>
 <p>The <em>RepeatVector layer</em> repeats a 1-dimensional vector n times.</p>
 <p><strong>Input:</strong></p>
 <p>A Data2D type data with shape: (1, 1, channels, batches).</p>
