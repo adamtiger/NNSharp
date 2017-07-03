@@ -5,16 +5,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NNSharp.DataTypes;
-using static NNSharp.DataTypes.SequentialModelData;
-using static NNSharp.DataTypes.Data2D;
 using NNSharp.Kernels;
+using static NNSharp.DataTypes.Data2D;
+using static NNSharp.DataTypes.SequentialModelData;
 
 namespace NNSharp.SequentialBased.SequentialLayers
 {
     [Serializable()]
-    public class LSTMLayer : LSTMKernel, ILayer
+    public class GRULayer : GRUKernel, ILayer
     {
-        public LSTMLayer(int units, int inputDim, ActivationLambda activation,
+
+        public GRULayer(int units, int inputDim, ActivationLambda activation,
             ActivationLambda recurrentActivation)
         {
             this.units = units;
@@ -22,12 +23,10 @@ namespace NNSharp.SequentialBased.SequentialLayers
             this.activation = activation;
             this.recurrentActivation = recurrentActivation;
 
+            z = new Data2D(1, 1, units, 1);
+            r = new Data2D(1, 1, units, 1);
+            hh = new Data2D(1, 1, units, 1);
             h = new Data2D(1, 1, units, 1);
-            C = new Data2D(1, 1, units, 1);
-            ou = new Data2D(1, 1, units, 1);
-            C0 = new Data2D(1, 1, units, 1);
-            i = new Data2D(1, 1, units, 1);
-            f = new Data2D(1, 1, units, 1);
         }
 
         public IData GetOutput()
@@ -38,9 +37,9 @@ namespace NNSharp.SequentialBased.SequentialLayers
         public void SetInput(IData input)
         {
             if (input == null)
-                throw new Exception("LSTMLayer: input is null.");
+                throw new Exception("GRULayer: input is null.");
             else if (!(input is Data2D))
-                throw new Exception("LSTMLayer: input is not Data2D.");
+                throw new Exception("GRULayer: input is not Data2D.");
 
             this.input = input as Data2D;
 
@@ -57,61 +56,55 @@ namespace NNSharp.SequentialBased.SequentialLayers
         public void SetWeights(IData parameters)
         {
             if (parameters == null)
-                throw new Exception("LSTMLayer: parameters is null.");
+                throw new Exception("GRULayer: parameters is null.");
             else if (!(parameters is Data2D))
-                throw new Exception("LSTMLayer: parameters is not Data2D.");
+                throw new Exception("GRULayer: parameters is not Data2D.");
 
             Data2D pms = parameters as Data2D;
 
-            if (pms.GetDimension().b != 12)
+            if (pms.GetDimension().b != 9)
             {
-                throw new Exception("LSTMLayer: paramters should have 3 of batch size.");
+                throw new Exception("GRULayer: paramters should have 3 of batch size.");
             }
 
             if (pms.GetDimension().c != units)
             {
-                throw new Exception("LSTMLayer: paramters should have channel size with units number.");
+                throw new Exception("GRULayer: paramters should have channel size with units number.");
             }
 
             if (pms.GetDimension().w != Math.Max(units, inputDim))
             {
-                throw new Exception("LSTMLayer: paramters has improper width size.");
+                throw new Exception("GRULayer: paramters has improper width size.");
             }
 
             if (pms.GetDimension().h != units)
             {
-                throw new Exception("LSTMLayer: paramters has improper width size.");
+                throw new Exception("GRULayer: paramters has improper width size.");
             }
 
-            wI = new Data2D(units, inputDim, 1, 1);
-            wF = new Data2D(units, inputDim, 1, 1);
-            wC = new Data2D(units, inputDim, 1, 1);
-            wO = new Data2D(units, inputDim, 1, 1);
+            wZ = new Data2D(units, inputDim, 1, 1);
+            wR = new Data2D(units, inputDim, 1, 1);
+            wHH = new Data2D(units, inputDim, 1, 1);
 
-            uI = new Data2D(units, units, 1, 1);
-            uF = new Data2D(units, units, 1, 1);
-            uC = new Data2D(units, units, 1, 1);
-            uO = new Data2D(units, units, 1, 1);
+            uZ = new Data2D(units, units, 1, 1);
+            uR = new Data2D(units, units, 1, 1);
+            uHH = new Data2D(units, units, 1, 1);
 
-            bI = new Data2D(1, 1, units, 1);
-            bF = new Data2D(1, 1, units, 1);
-            bC = new Data2D(1, 1, units, 1);
-            bO = new Data2D(1, 1, units, 1);
+            bZ = new Data2D(1, 1, units, 1);
+            bR = new Data2D(1, 1, units, 1);
+            bHH = new Data2D(1, 1, units, 1);
 
-            Copy(wI, pms, 0);
-            Copy(wF, pms, 1);
-            Copy(wC, pms, 2);
-            Copy(wO, pms, 3);
+            Copy(wZ, pms, 0);
+            Copy(wR, pms, 1);
+            Copy(wHH, pms, 2);
 
-            Copy(uI, pms, 4);
-            Copy(uF, pms, 5);
-            Copy(uC, pms, 6);
-            Copy(uO, pms, 7);
+            Copy(uZ, pms, 3);
+            Copy(uR, pms, 4);
+            Copy(uHH, pms, 5);
 
-            Copy(bI, pms, 8);
-            Copy(bF, pms, 9);
-            Copy(bC, pms, 10);
-            Copy(bO, pms, 11);
+            Copy(bZ, pms, 6);
+            Copy(bR, pms, 7);
+            Copy(bHH, pms, 8);
         }
 
         public LayerData GetLayerSummary()

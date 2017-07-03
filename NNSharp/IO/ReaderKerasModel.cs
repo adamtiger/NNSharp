@@ -160,6 +160,13 @@ namespace NNSharp.IO
                             ANR((string)layer.SelectToken("activation")),
                             ANR((string)layer.SelectToken("rec_act")));
                         break;
+                    case "GRU":
+                        descriptor = new GRU(
+                            (int)layer.SelectToken("units"),
+                            (int)layer.SelectToken("input_dim"),
+                            ANR((string)layer.SelectToken("activation")),
+                            ANR((string)layer.SelectToken("rec_act")));
+                        break;
                     case "ELu":
                         descriptor = new ELu(1);
                         break;
@@ -217,7 +224,8 @@ namespace NNSharp.IO
             for (int i = 1; i < dscps.Count; ++i)
             {
                 if ((dscps[i] is Convolution2D) || (dscps[i] is Dense2D) || (dscps[i] is Convolution1D) || 
-                    dscps[i] is BatchNormalization || dscps[i] is SimpleRNN || dscps[i] is LSTM)
+                    dscps[i] is BatchNormalization || dscps[i] is SimpleRNN || dscps[i] is LSTM ||
+                    dscps[i] is GRU)
                 {
                     int rowNum = weightsList[idx].Count;
                     int colNum = weightsList[idx][0].Count;
