@@ -188,7 +188,15 @@ class JSONwriter:
             activation = layer_descr['config']['activation']
             layers.append({'layer':'SimpleRNN', 'units':units, 'input_dim':input_dim, 'activation':activation})
             return layers
-            
+
+        elif 'LSTM' == name:
+            units = layer_descr['config']['units']
+            input_dim = self.model.get_weights()[self.idx].shape[0]
+            activation = layer_descr['config']['activation']
+            rec_act = layer_descr['config']['recurrent_activation']
+            layers.append({'layer':'LSTM', 'units':units, 'input_dim':input_dim, 'activation':activation, 'rec_act':rec_act})
+            return layers
+           
         else:
             raise NotImplementedError("Unknown layer type: " + name)  
     
@@ -244,7 +252,28 @@ class JSONwriter:
             w[0,0,:,2] = w_org[self.idx + 2][:]
             weights.append(w.tolist())
             self.idx += 3
+
+        elif 'LSTM' == name:
+            in_dim = w_org[self.idx].shape[0]
+            units = int(w_org[self.idx].shape[1]/4)
+            w = np.zeros((units, max([w_org[self.idx].shape[0], units]), units, 12))
+            w[:, 0:in_dim, 0, 0] = np.transpose(w_org[self.idx][:, 0:units]) # W_I
+            w[:, 0:in_dim, 0, 1] = np.transpose(w_org[self.idx][:, units:2*units]) # W_F
+            w[:, 0:in_dim, 0, 2] = np.transpose(w_org[self.idx][:, 2*units:3*units]) # W_C
+            w[:, 0:in_dim, 0, 3] = np.transpose(w_org[self.idx][:, 3*units:4*units]) # W_O
             
+            w[:, 0:units, 0, 4] = np.transpose(w_org[self.idx+1][:, 0:units]) # U_I
+            w[:, 0:units, 0, 5] = np.transpose(w_org[self.idx+1][:, units:2*units]) # U_F
+            w[:, 0:units, 0, 6] = np.transpose(w_org[self.idx+1][:, 2*units:3*units]) # U_C
+            w[:, 0:units, 0, 7] = np.transpose(w_org[self.idx+1][:, 3*units:4*units]) # U_O
+
+            w[0, 0, :, 8] = w_org[self.idx+2][0:units] # b_I
+            w[0, 0, :, 9] = w_org[self.idx+2][units:2*units] # b_F
+            w[0, 0, :, 10] = w_org[self.idx+2][2*units:3*units] # b_C
+            w[0, 0, :, 11] = w_org[self.idx+2][3*units:4*units] # b_O
+            weights.append(w.tolist())
+            self.idx += 3            
+
     def __get_activation(self, layers, layer_dscp):
         activation_name = layer_dscp['config']['activation']
         if activation_name == 'linear':

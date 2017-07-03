@@ -100,6 +100,7 @@ namespace NNSharp.DataTypes
                 this.h = h; this.w = w;
                 this.c = c; this.b = b;
             }
+
             public int h; // height
             public int w;
             public int c;
