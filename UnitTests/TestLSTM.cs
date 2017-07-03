@@ -275,7 +275,7 @@ namespace UnitTests
                     for (int c = 0; c < 3; ++c)
                     {
                         l += 1;
-                        data[0, w, c, b] = l % 5 + 1;
+                        data[0, w, c, b] = (l % 5 + 1)/10.0;
                     }
                 }
             }
