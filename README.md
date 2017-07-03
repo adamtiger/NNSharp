@@ -45,7 +45,8 @@ For the detailed documentation see the [NNSharp documentation](https://adamtiger
 
 ## Plans and contributions
 
-* Extend to PyTorch, Sonnet and raw Tensorflow models.
+* Examples, e.g.: VGG net.
+* Extend to raw Tensorflow models and CNTK.
 * Better kernels in C#. Currently simple implementations are used. 
 * Multi-Threading
 * More documentation.
