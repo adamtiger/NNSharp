@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using NNSharp.DataTypes;
 using NNSharp.KernelDescriptors;
+using NNSharp.Kernels;
 using NNSharp.Kernels.CPUKernels;
 using NNSharp.Models;
 using NNSharp.SequentialBased.SequentialExecutors;
@@ -152,6 +153,13 @@ namespace NNSharp.IO
                             (int)layer.SelectToken("input_dim"),
                             ANR((string)layer.SelectToken("activation")));
                         break;
+                    case "LSTM":
+                        descriptor = new LSTM(
+                            (int)layer.SelectToken("units"),
+                            (int)layer.SelectToken("input_dim"),
+                            ANR((string)layer.SelectToken("activation")),
+                            ANR((string)layer.SelectToken("rec_act")));
+                        break;
                     case "ELu":
                         descriptor = new ELu(1);
                         break;
@@ -209,7 +217,7 @@ namespace NNSharp.IO
             for (int i = 1; i < dscps.Count; ++i)
             {
                 if ((dscps[i] is Convolution2D) || (dscps[i] is Dense2D) || (dscps[i] is Convolution1D) || 
-                    dscps[i] is BatchNormalization || dscps[i] is SimpleRNN)
+                    dscps[i] is BatchNormalization || dscps[i] is SimpleRNN || dscps[i] is LSTM)
                 {
                     int rowNum = weightsList[idx].Count;
                     int colNum = weightsList[idx][0].Count;

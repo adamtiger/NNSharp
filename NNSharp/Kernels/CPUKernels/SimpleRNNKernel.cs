@@ -16,6 +16,7 @@ namespace NNSharp.Kernels.CPUKernels
             for (int b = 0; b < input.GetDimension().b; ++b)
             {
                 prevOutput.ToZeros();
+                h.ToZeros();
 
                 for (int step = 0; step < input.GetDimension().w; ++step)
                 {

@@ -7,6 +7,7 @@ using NNSharp.SequentialBased.SequentialLayers;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using static NNSharp.DataTypes.Data2D;
 
 namespace NNSharp
 {
@@ -70,8 +71,6 @@ namespace NNSharp
             layer.Execute();
 
             Data2D output = layer.GetOutput() as Data2D;
-
-            Console.ReadKey();
 
         }
     }
