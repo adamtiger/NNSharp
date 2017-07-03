@@ -3,7 +3,7 @@ import KerasModeltoJSON as js
 from keras.models import Sequential
 from keras.layers import Conv1D, Conv2D, Dense, Activation, Flatten, MaxPooling1D, MaxPooling2D, AveragePooling1D, AveragePooling2D
 from keras.layers import Reshape, Permute, RepeatVector, GlobalMaxPooling1D, GlobalMaxPooling2D, GlobalAveragePooling1D, GlobalAveragePooling2D
-from keras.layers import Cropping1D, Cropping2D, BatchNormalization, SimpleRNN
+from keras.layers import Cropping1D, Cropping2D, BatchNormalization, SimpleRNN, LSTM
 import json
 
 # json writer
@@ -102,14 +102,17 @@ def generate_test_files():
     # TanH test
     gen_tanh() # OK
 
-	# NORMALIZATION
+    # NORMALIZATION
 
-	# BatchNormalization
+    # BatchNormalization
     gen_batchnorm()
 
     # RNN LAYERS
     # SimpleRNN
     gen_simplernn()
+
+    # LSTM
+    gen_lstm()
 
 # ---------------------------------------------------------
 
@@ -2020,6 +2023,51 @@ def gen_simplernn():
 	print(output.shape)
 
 	write("tests/test_simplernn_output.json", output.tolist())
+
+def gen_lstm():
+	model = Sequential()
+	model.add(LSTM(2, activation='tanh', recurrent_activation='relu',implementation = 1, stateful=False, batch_input_shape=(5, 3, 3)))
+	model.compile(optimizer='sgd', loss='mse')
+
+	kernel = np.ones((3, 8))
+	rec_kernel = np.ones((2, 8))
+	bias = np.array([1, 2, -1, 0, 3, 4, 5, -2])/10
+
+	k = 0
+	for h in range(0, 3):
+		for w in range(0, 8):
+			k += 1
+			kernel[h, w] = (k % 5 - 2)/10
+
+
+	k = 0
+	for h in range(0, 2):
+		for w in range(0, 8):
+			k += 1
+			rec_kernel[h, w] = (k % 5 - 2)/10
+
+
+	parameters = [kernel, rec_kernel, bias]
+	model.set_weights(parameters)
+
+	data = np.ndarray((5, 3, 3))
+
+	l = 0
+	for b in range(0, 5):
+		for h in range(0, 3):
+			for c in range(0, 3):
+				l += 1
+				data[b, h, c] = (l % 5 + 1)/10
+
+
+	output = model.predict(data, batch_size=5) # the batch_size has no impact on the result here # the batch_size has no impact on the result here
+
+	wrt = js.JSONwriter(model, "tests/test_lstm_model.json")
+	wrt.save()
+    
+	print(output.shape)
+
+	write("tests/test_lstm_output.json", output.tolist())
 
 # Generate ALL the tests:
 
