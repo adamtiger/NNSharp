@@ -202,11 +202,45 @@
           <div role="main">
             <div class="section">
               
-                <p><span style="float:right;"><a href="https://github.com/adamtiger/NNSharp/blob/master/NNSharp/Kernels/CPUKernels/SimpleRNNKernel.cs#L12">[source]</a></span></p>
+                <p>The main idea behind a recurrent neural network (RNN) is to grab the relations in a process where the input is a time-sequence with consequtive data pieces. Therefore the order of the pieces is strict. The relation connects to the time. An examplary problem can be when a software tries to predict the next data piece by knowing the previous 5 pieces. </p>
+<p>Generally the input of an rnn is a set of vectors (e.g.: a vector for each time point) and the output is also a set of vector but may be it has different size then the input. Each vector is processed by a cell (only one type of cell is applied) but in a strict order and with some delay. Therefore as the computation goes each cell processes a vector, gives (or not) an output and calculates some further state values which will be fed into the next cell. The next cell receives the state values and the next input vector from the sequence, executes the calculations and so on. </p>
+<p>Shortly, an RNN is a finite long sequence of cells. Each cell has the same structure. The input vectors processed consequtively and some hidden variables are computed and forwarded as well. Some references for further insight:</p>
+<p><a href="http://karpathy.github.io/2015/05/21/rnn-effectiveness/">The Unreasonable Effectiveness of Recurrent Neural Networks</a><br>
+<a href="https://deeplearning4j.org/lstm#a-beginners-guide-to-recurrent-networks-and-lstms">A Beginner’s Guide to Recurrent Networks and LSTMs</a><br>
+<a href="http://www.wildml.com/2015/09/recurrent-neural-networks-tutorial-part-1-introduction-to-rnns/">Recurrent Neural Networks Tutorial on WILDML</a>.</p>
+<p><span style="float:right;"><a href="https://github.com/adamtiger/NNSharp/blob/master/NNSharp/Kernels/CPUKernels/SimpleRNNKernel.cs#L12">[source]</a></span></p>
 <h2 id="simplernn">SimpleRNN</h2>
+<p>The structure of the so called simple RNN layer in Keras is the following:</p>
 <p><img alt="simplernn" src="https://drive.google.com/uc?export=download&amp;id=0B97L9zqg-lnwUXZjSUVOUjBJZEE" /></p>
+<p>The <strong>h</strong> is the hidden variable, <strong>R</strong> is the recurrent kernel, <strong>W</strong> is the kernel, <strong>b</strong> is the bias and <strong>f</strong> is the activation function. </p>
+<p><strong>Input:</strong></p>
+<p>A Data2D type with the shape: (1, timesteps, input dimension, batches).</p>
+<p><strong>Output:</strong></p>
+<p>A Data2D type with shape: (1, 1, units, batches). </p>
+<p><strong>Methods:</strong></p>
+<p>The SimpleRNN cell implements the operations shown in the picture and feeds the output to the next cell. The unrolled cells are implemented by a <em>for</em> cycle. It can be useful to inspect the <a href="https://github.com/fchollet/keras/blob/master/keras/layers/recurrent.py#L555">Keras implementation</a> as well.</p>
+<p><span style="float:right;"><a href="https://github.com/adamtiger/NNSharp/blob/master/NNSharp/Kernels/CPUKernels/LSTMKernel.cs#L11">[source]</a></span></p>
 <h2 id="lstm">LSTM</h2>
+<p>The structure of the LSTM cell is the following:</p>
+<p><img alt="lstm" src="https://drive.google.com/uc?export=download&amp;id=0B97L9zqg-lnwMFZWRFJrSXFtd28" /></p>
+<p>The <strong>g</strong> is the recurrent activation, <strong>p</strong> is the activation, <strong>W</strong>s are the kernels, <strong>U</strong>s are the recurrent kernels, <strong>h</strong> is the hidden variable which is the output too and the notation * is an element-wise multiplication.</p>
+<p><strong>Input:</strong></p>
+<p>A Data2D type with the shape: (1, timesteps, input dimension, batches).</p>
+<p><strong>Output:</strong></p>
+<p>A Data2D type with shape: (1, 1, units, batches).</p>
+<p><strong>Methods:</strong></p>
+<p>The Keras implementation can help as well: <a href="https://github.com/fchollet/keras/blob/master/keras/layers/recurrent.py#L1123">see</a> the step function in the LSTM implementation. Basically the products are dot products between matricies.</p>
+<p><span style="float:right;"><a href="https://github.com/adamtiger/NNSharp/blob/master/NNSharp/Kernels/CPUKernels/GRUKernel.cs#L11">[source]</a></span></p>
 <h2 id="gru">GRU</h2>
+<p>The structure of the GRU cell is the following:</p>
+<p><img alt="gru" src="https://drive.google.com/uc?export=download&amp;id=0B97L9zqg-lnwcU4tVVVQS0d3VmM" /></p>
+<p>The meaning of the notations are the same as in case of LSTM. 1-z means an element-wise subtraction. </p>
+<p><strong>Input:</strong></p>
+<p>A Data2D type with the shape: (1, timesteps, input dimension, batches).</p>
+<p><strong>Output:</strong></p>
+<p>A Data2D type with shape: (1, 1, units, batches).</p>
+<p><strong>Methods:</strong></p>
+<p>The Keras implementation can help as well: <a href="https://github.com/fchollet/keras/blob/master/keras/layers/recurrent.py#L828">see</a> the step function in the LSTM implementation. <a href="http://www.wildml.com/2015/10/recurrent-neural-network-tutorial-part-4-implementing-a-grulstm-rnn-with-python-and-theano/">This</a> blog article can be useful as well.</p>
               
             </div>
           </div>
