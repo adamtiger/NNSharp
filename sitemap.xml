@@ -4,7 +4,7 @@
     
     <url>
      <loc>None/</loc>
-     <lastmod>2017-07-04</lastmod>
+     <lastmod>2017-07-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -12,7 +12,7 @@
     
     <url>
      <loc>None/install/</loc>
-     <lastmod>2017-07-04</lastmod>
+     <lastmod>2017-07-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -20,7 +20,7 @@
     
     <url>
      <loc>None/models/</loc>
-     <lastmod>2017-07-04</lastmod>
+     <lastmod>2017-07-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -28,7 +28,7 @@
     
     <url>
      <loc>None/data/</loc>
-     <lastmod>2017-07-04</lastmod>
+     <lastmod>2017-07-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -37,43 +37,43 @@
         
     <url>
      <loc>None/startkeras/</loc>
-     <lastmod>2017-07-04</lastmod>
+     <lastmod>2017-07-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/core/</loc>
-     <lastmod>2017-07-04</lastmod>
+     <lastmod>2017-07-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/convolutions/</loc>
-     <lastmod>2017-07-04</lastmod>
+     <lastmod>2017-07-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/pooling/</loc>
-     <lastmod>2017-07-04</lastmod>
+     <lastmod>2017-07-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/activations/</loc>
-     <lastmod>2017-07-04</lastmod>
+     <lastmod>2017-07-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/recurrents/</loc>
-     <lastmod>2017-07-04</lastmod>
+     <lastmod>2017-07-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/batchnormalization/</loc>
-     <lastmod>2017-07-04</lastmod>
+     <lastmod>2017-07-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -83,7 +83,7 @@
         
     <url>
      <loc>None/starttensorflow/</loc>
-     <lastmod>2017-07-04</lastmod>
+     <lastmod>2017-07-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         

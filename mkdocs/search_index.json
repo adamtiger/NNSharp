@@ -267,12 +267,12 @@
         },
         {
             "location": "/batchnormalization/",
-            "text": "[source]\n \n\n\nBatch Normalization",
+            "text": "[source]\n \n\n\nBatch Normalization\n\n\nThe intuition behind Batch Normalization is that the distribution of each layer's inputs changes during training, as the parameters of the previous layers change. This tends to slow down the learning process. Normalization transforms the input data in a way that its mean becomes 0 and its standard deviation becomes 1. For further details see the original article:\n\n\nBatch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift\n.\n\n\nInput:\n\n\nA Data2D array with arbitrary shape.\n\n\nOutput:\n\n\nThe same as the input. The numbers are normalized in the channels separately. \n\n\nMethods:\n\n\nThe following equations are implemented. \nThe normalization is performed according to the feature (channel) axis.\n\n\n\n\nThe \ngamma\n, \nbeta\n are parameters to learn, \nsigma\n is the variance, \nb\n is the bias. The \nepsilon\n is a small number to avoid the problem with small variances. (Ensures numerical stability.)",
             "title": "BatchNormalization"
         },
         {
             "location": "/batchnormalization/#batch-normalization",
-            "text": "",
+            "text": "The intuition behind Batch Normalization is that the distribution of each layer's inputs changes during training, as the parameters of the previous layers change. This tends to slow down the learning process. Normalization transforms the input data in a way that its mean becomes 0 and its standard deviation becomes 1. For further details see the original article:  Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift .  Input:  A Data2D array with arbitrary shape.  Output:  The same as the input. The numbers are normalized in the channels separately.   Methods:  The following equations are implemented.  The normalization is performed according to the feature (channel) axis.   The  gamma ,  beta  are parameters to learn,  sigma  is the variance,  b  is the bias. The  epsilon  is a small number to avoid the problem with small variances. (Ensures numerical stability.)",
             "title": "Batch Normalization"
         },
         {
