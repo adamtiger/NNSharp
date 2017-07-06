@@ -22,27 +22,7 @@ Gives a structure, Dimension, containing the dimension of the expected input dat
 
 	IModelData GetSummary()
 
-Gives an object of **SequentialModelData** type. Therefore it is necessary to cast the output for that type. SequentialModelData has the following methods to access information about the layers and the model:
-
-	int GetNumberofLayers()
-
-Gives the number of layers in the model. The InputLayer is not taken into account.
-
-	string GetLayerNameAt(int idx)
-
-Gives the name of the layer at place *idx*. The counting starts at zero.
-
-	double GetExecutionTime()
-
-Gives the evaluation time of the network for one forward pass in *milli seconds*.
-
-	string GetStringRepresentation()
-
-Gives a string containing all the information of the layers.
-
-	LayerData GetLayerDataAt(int idx)
-
-Gives the LayerData for a concrete layer. LayerData contains the parameters of the input and the output data. The name of the layer is also available.
+Gives an object of **SequentialModelData** type. Therefore it is necessary to cast the output for that type. For the details of **SequentialModelData** see the documentation's *Data structure* part.
 
 
 ## Graph model

@@ -108,5 +108,5 @@ It is the same as the input.
 
 Adding bias  means the following:
 
-	output[h, w, c, b] += input[h, w, c, b] + bias[c]
+	output[h, w, c, b] = input[h, w, c, b] + bias[c]
 
