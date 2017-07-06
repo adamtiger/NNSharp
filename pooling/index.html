@@ -217,22 +217,72 @@
           <div role="main">
             <div class="section">
               
-                <p><span style="float:right;"><a href="https://github.com/adamtiger/NNSharp/blob/master/NNSharp/Kernels/CPUKernels/AvgPool1DKernel.cs#L12">[source]</a></span></p>
+                <p>The pooling layers similar to the convolutional layers except an important difference: the pooling occurs for the channels separately.</p>
+<p><span style="float:right;"><a href="https://github.com/adamtiger/NNSharp/blob/master/NNSharp/Kernels/CPUKernels/AvgPool1DKernel.cs#L12">[source]</a></span></p>
 <h2 id="averagepooling1d">AveragePooling1D</h2>
+<p>This layer calculates the average value in the kernel (sliding window). </p>
+<p><strong>Input:</strong></p>
+<p>A Data2D type data with shape: (1, length, channels, batches).</p>
+<p><strong>Output:</strong></p>
+<p>A Data2D type data with shape: (1, new length, channels, batches). </p>
+<p>The shape of the filter: (1, kernel size, 1, 1). Then the output length (new  length):
+<code>new length = 1 + (length + 2 * padding - kernel size)/stride</code>.</p>
 <p><span style="float:right;"><a href="https://github.com/adamtiger/NNSharp/blob/master/NNSharp/Kernels/CPUKernels/AvgPool2DKernel.cs#L12">[source]</a></span></p>
 <h2 id="averagepooling2d">AveragePooling2D</h2>
+<p><strong>Input:</strong></p>
+<p>A Data2D type data with shape: (height, width, channels, batches).</p>
+<p><strong>Output:</strong></p>
+<p>A Data2D type data with shape: (new height, new width, channels, batches). </p>
+<p>The shape of the filter: (kernel height, kernel width, 1, 1). Then the output sizes:
+<code>new height = 1 + (height + 2 * padding vertical - kernel height)/stride vertical</code>,
+<code>new width = 1 + (width + 2 * padding horizontal - kernel width)/stride horizontal</code>.</p>
 <p><span style="float:right;"><a href="https://github.com/adamtiger/NNSharp/blob/master/NNSharp/Kernels/CPUKernels/GlobalAvgPool1DKernel.cs#L12">[source]</a></span></p>
 <h2 id="globalaveragepooling1d">GlobalAveragePooling1D</h2>
+<p>Calculates the average value for each channel in the input data. </p>
+<p><strong>Input:</strong></p>
+<p>A Data2D type data with shape: (1, length, channels, batches).</p>
+<p><strong>Output:</strong></p>
+<p>A Data2D type data with shape: (1, 1, channels, batches). </p>
 <p><span style="float:right;"><a href="https://github.com/adamtiger/NNSharp/blob/master/NNSharp/Kernels/CPUKernels/GlobalAvgPool2DKernel.cs#L12">[source]</a></span></p>
 <h2 id="globalaveragepooling2d">GlobalAveragePooling2D</h2>
+<p>Calculates the average value for each channel in the input data. </p>
+<p><strong>Input:</strong></p>
+<p>A Data2D type data with shape: (height, width, channels, batches).</p>
+<p><strong>Output:</strong></p>
+<p>A Data2D type data with shape: (1, 1, channels, batches).</p>
 <p><span style="float:right;"><a href="https://github.com/adamtiger/NNSharp/blob/master/NNSharp/Kernels/CPUKernels/GlobalMaxPool1DKernel.cs#L12">[source]</a></span></p>
 <h2 id="globalmaxpooling1d">GlobalMaxPooling1D</h2>
+<p>Calculates the maximum value for each channel in the input data. </p>
+<p><strong>Input:</strong></p>
+<p>A Data2D type data with shape: (1, length, channels, batches).</p>
+<p><strong>Output:</strong></p>
+<p>A Data2D type data with shape: (1, 1, channels, batches). </p>
 <p><span style="float:right;"><a href="https://github.com/adamtiger/NNSharp/blob/master/NNSharp/Kernels/CPUKernels/GlobalMaxPool2DKernel.cs#L12">[source]</a></span></p>
 <h2 id="globalmaxpooling2d">GlobalMaxPooling2D</h2>
+<p>Calculates the maximum value for each channel in the input data. </p>
+<p><strong>Input:</strong></p>
+<p>A Data2D type data with shape: (height, width, channels, batches).</p>
+<p><strong>Output:</strong></p>
+<p>A Data2D type data with shape: (1, 1, channels, batches).</p>
 <p><span style="float:right;"><a href="https://github.com/adamtiger/NNSharp/blob/master/NNSharp/Kernels/CPUKernels/MaxPool1DKernel.cs#L12">[source]</a></span></p>
 <h2 id="maxpooling1d">MaxPooling1D</h2>
+<p>This layer calculates the maximum value in the kernel (sliding window). </p>
+<p><strong>Input:</strong></p>
+<p>A Data2D type data with shape: (1, length, channels, batches).</p>
+<p><strong>Output:</strong></p>
+<p>A Data2D type data with shape: (1, new length, channels, batches). </p>
+<p>The shape of the filter: (1, kernel size, 1, 1). Then the output length (new  length):
+<code>new length = 1 + (length + 2 * padding - kernel size)/stride</code>.</p>
 <p><span style="float:right;"><a href="https://github.com/adamtiger/NNSharp/blob/master/NNSharp/Kernels/CPUKernels/MaxPool2DKernel.cs#L12">[source]</a></span></p>
 <h2 id="maxpooling2d">MaxPooling2D</h2>
+<p>This layer calculates the maximum value in the kernel (sliding window).</p>
+<p><strong>Input:</strong></p>
+<p>A Data2D type data with shape: (height, width, channels, batches).</p>
+<p><strong>Output:</strong></p>
+<p>A Data2D type data with shape: (new height, new width, channels, batches). </p>
+<p>The shape of the filter: (kernel height, kernel width, 1, 1). Then the output sizes:
+<code>new height = 1 + (height + 2 * padding vertical - kernel height)/stride vertical</code>,
+<code>new width = 1 + (width + 2 * padding horizontal - kernel width)/stride horizontal</code>.</p>
               
             </div>
           </div>

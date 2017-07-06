@@ -270,7 +270,7 @@ Then in the output data: output[c, w, h, b] = element.
 <p>It is the same as the input.</p>
 <p><strong>Method:</strong></p>
 <p>Adding bias  means the following:</p>
-<pre><code>output[h, w, c, b] += input[h, w, c, b] + bias[c]
+<pre><code>output[h, w, c, b] = input[h, w, c, b] + bias[c]
 </code></pre>
               
             </div>

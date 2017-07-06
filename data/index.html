@@ -200,10 +200,47 @@
               
                 <p><span style="float:right;"> <a href="https://github.com/adamtiger/NNSharp/blob/master/NNSharp/DataTypes/Data2D.cs">[source]</a> </span></p>
 <h2 id="data2d">Data2D</h2>
+<p>This is a data type for stroring data with 2 dimensions like images. It has 2 further dimensions for storing the channels and batches. Therefore this type has four indicies with the following meaning: (height, width, channel, batch). The available functions:</p>
+<pre><code>void ApplyToAll(Operation op)
+</code></pre>
+<p>Operation is a function which receives a <em>double</em> and gives back a <em>double</em>. The operation will be applied on each element in the data independently.</p>
+<pre><code>void ToZeros()
+</code></pre>
+<p>All of the elements become zero after applying this function.</p>
+<pre><code>Dimension GetDimension()
+</code></pre>
+<p>The Dimension is a structure with the following public attributes <em>h</em>, <em>w</em>, <em>c</em>, <em>b</em>.</p>
 <p><span style="float:right;"> <a href="https://github.com/adamtiger/NNSharp/blob/master/NNSharp/DataTypes/DataArray.cs">[source]</a> </span></p>
 <h2 id="dataarray">DataArray</h2>
+<p>This is a special array. The data is accessable by one index. It has the following functions:</p>
+<pre><code>void ApplyToAll(Operation op)
+</code></pre>
+<p>The same as before.</p>
+<pre><code>void ToZeros()
+</code></pre>
+<p>The same as before.</p>
+<pre><code>int GetLength()
+</code></pre>
+<p>The length of the array.</p>
+<p>This array is enumerable as well.</p>
 <p><span style="float:right;"> <a href="https://github.com/adamtiger/NNSharp/blob/master/NNSharp/DataTypes/SequentialModelData.cs">[source]</a> </span></p>
 <h2 id="sequentialmodeldata">SequentialModelData</h2>
+<p>equentialModelData has the following methods to access information about the layers and the model:</p>
+<pre><code>int GetNumberofLayers()
+</code></pre>
+<p>Gives the number of layers in the model. The InputLayer is not taken into account.</p>
+<pre><code>string GetLayerNameAt(int idx)
+</code></pre>
+<p>Gives the name of the layer at place <em>idx</em>. The counting starts at zero.</p>
+<pre><code>double GetExecutionTime()
+</code></pre>
+<p>Gives the evaluation time of the network for one forward pass in <em>milli seconds</em>.</p>
+<pre><code>string GetStringRepresentation()
+</code></pre>
+<p>Gives a string containing all the information of the layers.</p>
+<pre><code>LayerData GetLayerDataAt(int idx)
+</code></pre>
+<p>Gives the LayerData for a concrete layer. LayerData contains the parameters of the input and the output data. The name of the layer is also available.</p>
               
             </div>
           </div>
