@@ -51,7 +51,10 @@ The roadmap of the development can be seen on the following picture:
 
 The first stage is almost finished. The C++ API is planned to be similar like the Keras API in Python but with some further extensions (concrete architectures, file readers from different library outputs, wrapper for threading etc.)
 
-For the current tasks see the issues. If you want to contribute write a letter to the following address: adam.8.budai at gmail dot com. 
+**Bug:** Please create an issue with the label *bug*.
+**Recommending features:** Just create an issue with the label *question*. 
+
+For the current tasks see the issues with the label *enhancement*. If you want to contribute to the development write a letter to the following address: adam.8.budai at gmail dot com. 
 
 ## Summary
 
