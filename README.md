@@ -8,9 +8,9 @@ A lightweight package for running pre-trained neural networks. For the **detaile
 
 ## Philosophy
 
-This library was created in order to run pre-trained neural networks. Training is the most time consuming part of a deep learning framework. Probably C# is not the best for training neural networks. There are a lot of very good solution can be found like [Tensorflow](https://www.tensorflow.org/), [Theano](http://deeplearning.net/software/theano/), [PyTorch](http://pytorch.org/), [Sonnet](https://github.com/deepmind/sonnet) ans so on. Most of them suit the Python programming language and mainly support Linux. 
+This library was created in order to run pre-trained neural networks. Training is the most time consuming part of a deep learning framework. Probably C# is not the best for training neural networks. There are a lot of very good solution can be found like [Tensorflow](https://www.tensorflow.org/), [CNTK](https://www.cntk.ai/pythondocs/index.html), [Theano](http://deeplearning.net/software/theano/), [PyTorch](http://pytorch.org/), [Sonnet](https://github.com/deepmind/sonnet) ans so on. Most of them suit the Python programming language and mainly support Linux. 
 
-Therefore this library aims for using the weights and structure created with the above softwares and just run it in C# with **Windows**.
+Therefore this library aims for using the weights and structure created with the above softwares and just run it in C# on **Windows**.
 
 ## Installation
 
@@ -45,11 +45,13 @@ For the detailed documentation see the [NNSharp documentation](https://adamtiger
 
 ## Plans and contributions
 
-* Examples, e.g.: VGG net.
-* Extend to raw Tensorflow models and CNTK.
-* Better kernels in C#. Currently simple implementations are used. 
-* Multi-Threading
-* More documentation.
+The roadmap of the development can be seen on the following picture:
+
+![roadmap](https://drive.google.com/uc?export=download&id=0B97L9zqg-lnwZnRPQVFhYzZDMDQ  "Roadmap")
+
+The first stage is almost finished. The C++ API is planned to be similar like the Keras API in Python but with some further extensions (concrete architectures, file readers from different library outputs, wrapper for threading etc.)
+
+For the current tasks see the issues. If you want to contribute write a letter to the following address: adam.8.budai at gmail dot com. 
 
 ## Summary
 
