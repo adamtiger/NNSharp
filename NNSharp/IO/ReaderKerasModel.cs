@@ -123,6 +123,14 @@ namespace NNSharp.IO
                     case "Dense2D":
                         descriptor = new Dense2D((int)layer.SelectToken("units"));
                         break;
+                    case "Dropout":
+                        int h = (int)layer.SelectToken("height");
+                        int w = (int)layer.SelectToken("weight");
+                        int c = (int)layer.SelectToken("channel");
+                        int b = (int)layer.SelectToken("batch");
+                        Data2D noiseShape = new Data2D(h, w, c, b);
+                        descriptor = new Dropout((double)layer.SelectToken("rate"), noiseShape);
+                        break;
                     case "Input2D":
                         descriptor = new Input2D((int)layer.SelectToken("height"), (int)layer.SelectToken("width"),
                             (int)layer.SelectToken("channel"), (int)layer.SelectToken("batch"));
@@ -301,7 +309,6 @@ namespace NNSharp.IO
                     return HardSigmoidKernel.HardSigmoidLambda;
                 default:
                     throw new Exception("Unknown activation.");
-
             }
         }
     }
