@@ -110,6 +110,10 @@ class JSONwriter:
                 layers.append({'layer':'Bias2D', 'units':layer_descr['config']['units']})
             self.__get_activation(layers, layer_descr)
             return layers
+
+        elif 'Dropout' == name:
+            layers.append({'layer':'Dropout', 'rate':layer_descr['config']['rate']})
+            return layers
             
         elif 'AveragePooling1D' == name:
             k_s = layer_descr['config']['pool_size'][0]
