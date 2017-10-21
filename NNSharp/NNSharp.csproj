@@ -63,6 +63,7 @@
     <Compile Include="KernelDescriptors\Cropping1D.cs" />
     <Compile Include="KernelDescriptors\Cropping2D.cs" />
     <Compile Include="KernelDescriptors\Dense2D.cs" />
+    <Compile Include="KernelDescriptors\Dropout.cs" />
     <Compile Include="KernelDescriptors\ELu.cs" />
     <Compile Include="KernelDescriptors\Flatten.cs" />
     <Compile Include="KernelDescriptors\GlobalAvgPooling1D.cs" />
@@ -94,6 +95,7 @@
     <Compile Include="Kernels\CPUKernels\Cropping1DKernel.cs" />
     <Compile Include="Kernels\CPUKernels\Cropping2DKernel.cs" />
     <Compile Include="Kernels\CPUKernels\Dense2DKernel.cs" />
+    <Compile Include="Kernels\CPUKernels\DropoutKernel.cs" />
     <Compile Include="Kernels\CPUKernels\ELuKernel.cs" />
     <Compile Include="Kernels\CPUKernels\FlattenKernel.cs" />
     <Compile Include="Kernels\CPUKernels\GlobalAvgPool1DKernel.cs" />
@@ -132,6 +134,8 @@
     <Compile Include="SequentialBased\SequentialLayers\Cropping1DLayerFactory.cs" />
     <Compile Include="SequentialBased\SequentialLayers\Cropping2DLayer.cs" />
     <Compile Include="SequentialBased\SequentialLayers\Cropping2DLayerFactory.cs" />
+    <Compile Include="SequentialBased\SequentialLayers\DropoutLayer.cs" />
+    <Compile Include="SequentialBased\SequentialLayers\DropoutLayerFactory.cs" />
     <Compile Include="SequentialBased\SequentialLayers\GlobalAvgPool1DLayer.cs" />
     <Compile Include="SequentialBased\SequentialLayers\GlobalAvgPool1DLayerFactory.cs" />
     <Compile Include="SequentialBased\SequentialLayers\GlobalAvgPool2DLayer.cs" />

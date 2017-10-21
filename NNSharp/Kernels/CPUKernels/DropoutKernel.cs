@@ -12,6 +12,7 @@ namespace NNSharp.Kernels.CPUKernels
         public void Execute()
         {
             // does nothing in the forward direction
+            output = input;
         }
 
         protected Data2D input;

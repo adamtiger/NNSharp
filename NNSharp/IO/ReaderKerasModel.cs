@@ -124,11 +124,11 @@ namespace NNSharp.IO
                         descriptor = new Dense2D((int)layer.SelectToken("units"));
                         break;
                     case "Dropout":
-                        int h = (int)layer.SelectToken("height");
+                        /*int h = (int)layer.SelectToken("height");
                         int w = (int)layer.SelectToken("weight");
                         int c = (int)layer.SelectToken("channel");
-                        int b = (int)layer.SelectToken("batch");
-                        Data2D noiseShape = new Data2D(h, w, c, b);
+                        int b = (int)layer.SelectToken("batch");*/
+                        Data2D noiseShape = new Data2D(1, 2, 3, 2);
                         descriptor = new Dropout((double)layer.SelectToken("rate"), noiseShape);
                         break;
                     case "Input2D":

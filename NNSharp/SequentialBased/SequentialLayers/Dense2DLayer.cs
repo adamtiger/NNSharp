@@ -38,15 +38,15 @@ namespace NNSharp.SequentialBased.SequentialLayers
 
             if (dimI.c != dimK.c)
                 throw new Exception("Wrong kernel and input sizes: sizes of channels should match." +
-                   " Now: dimI: " + dimI.c + " != dimK: " + dimK.c);
+                   " Now: dimI.c: " + dimI.c + " != dimK.c: " + dimK.c);
 
             if (dimI.h != dimK.h)
                 throw new Exception("Wrong kernel and input sizes: sizes of heights should match." +
-                   " Now: dimI: " + dimI.h + " != dimK: " + dimK.h);
+                   " Now: dimI.h: " + dimI.h + " != dimK.h: " + dimK.h);
 
             if (dimI.w != dimK.w)
                 throw new Exception("Wrong kernel and input sizes: sizes of widths should match." +
-                   " Now: dimI: " + dimI.w + " != dimK: " + dimK.w);
+                   " Now: dimI.w: " + dimI.w + " != dimK.w: " + dimK.w);
 
             output = new Data2D(1, 1, dimK.b, dimI.b);
         }

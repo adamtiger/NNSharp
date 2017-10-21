@@ -5,9 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using NNSharp.DataTypes;
 using NNSharp.Kernels.CPUKernels;
+using static NNSharp.DataTypes.SequentialModelData;
+using static NNSharp.DataTypes.Data2D;
 
 namespace NNSharp.SequentialBased.SequentialLayers
 {
+    [Serializable()]
     public class DropoutLayer : DropoutKernel, ILayer
     {
 
@@ -34,7 +37,12 @@ namespace NNSharp.SequentialBased.SequentialLayers
 
         public SequentialModelData.LayerData GetLayerSummary()
         {
-            throw new NotImplementedException();
+            Dimension dimI = input.GetDimension();
+            Dimension dimO = output.GetDimension();
+            return new LayerData(
+                this.ToString(),
+                dimI.h, dimI.w, 1, dimI.c, dimI.b,
+                dimO.h, dimO.w, 1, dimO.c, dimO.b);
         }
     }
 }

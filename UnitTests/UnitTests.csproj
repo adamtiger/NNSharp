@@ -60,6 +60,7 @@
     <Compile Include="TestData2D.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestDataArray.cs" />
+    <Compile Include="TestDropout.cs" />
     <Compile Include="TestELu.cs" />
     <Compile Include="TestReLu.cs" />
     <Compile Include="TestSimpleRNN.cs" />
