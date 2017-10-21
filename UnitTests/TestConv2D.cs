@@ -5,6 +5,7 @@ using NNSharp.SequentialBased.SequentialLayers;
 using static NNSharp.DataTypes.Data2D;
 using NNSharp.IO;
 using NNSharp.Models;
+using UnitTests.Properties;
 
 namespace UnitTests
 {
@@ -120,7 +121,7 @@ namespace UnitTests
         [TestMethod]
         public void Test_Conv2D_1_KerasModel()
         {
-            string path = @"tests\test_conv_2D_1_model.json";
+            string path = Resources.TestsFolder + "test_conv_2D_1_model.json";
             var reader = new ReaderKerasModel(path);
             SequentialModel model = reader.GetSequentialExecutor();
 
@@ -193,7 +194,7 @@ namespace UnitTests
         [TestMethod]
         public void Test_Conv2D_2_KerasModel()
         {
-            string path = @"tests\test_conv_2D_2_model.json";
+            string path = Resources.TestsFolder + "test_conv_2D_2_model.json";
             var reader = new ReaderKerasModel(path);
             SequentialModel model = reader.GetSequentialExecutor();
 

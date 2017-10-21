@@ -5,6 +5,7 @@ using NNSharp.IO;
 using NNSharp.Models;
 using NNSharp.SequentialBased.SequentialLayers;
 using static NNSharp.DataTypes.Data2D;
+using UnitTests.Properties;
 
 namespace UnitTests
 {
@@ -147,7 +148,7 @@ namespace UnitTests
         [TestMethod]
         public void Test_BatchNorm_KerasModel()
         {
-            string path = @"tests\test_batchnorm_model.json";
+            string path = Resources.TestsFolder + "test_batchnorm_model.json";
             var reader = new ReaderKerasModel(path);
             SequentialModel model = reader.GetSequentialExecutor();
 

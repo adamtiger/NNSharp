@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnitTests.Properties;
 
 namespace UnitTests
 {
@@ -48,7 +49,7 @@ namespace UnitTests
         [TestMethod]
         public void Test_ELu_KerasModel()
         {
-            string path = @"tests\test_elu_model.json";
+            string path = Resources.TestsFolder + "test_elu_model.json";
             var reader = new ReaderKerasModel(path);
 
             SequentialModel model = reader.GetSequentialExecutor();

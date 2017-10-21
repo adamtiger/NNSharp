@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnitTests.Properties;
 using static NNSharp.DataTypes.Data2D;
 
 namespace UnitTests
@@ -242,7 +243,7 @@ namespace UnitTests
         [TestMethod]
         public void Test_SimpleRNN_KerasModel()
         {
-            string path = @"tests\test_simplernn_model.json";
+            string path = Resources.TestsFolder + "test_simplernn_model.json";
             var reader = new ReaderKerasModel(path);
             SequentialModel model = reader.GetSequentialExecutor();
 

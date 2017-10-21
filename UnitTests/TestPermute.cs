@@ -5,6 +5,7 @@ using NNSharp.SequentialBased.SequentialLayers;
 using static NNSharp.DataTypes.Data2D;
 using NNSharp.IO;
 using NNSharp.Models;
+using UnitTests.Properties;
 
 namespace UnitTests
 {
@@ -130,7 +131,7 @@ namespace UnitTests
         [TestMethod]
         public void Test_Permute_KerasModel()
         {
-            string path = @"tests\test_permute_model.json";
+            string path = Resources.TestsFolder + "test_permute_model.json";
             var reader = new ReaderKerasModel(path);
             SequentialModel model = reader.GetSequentialExecutor();
 

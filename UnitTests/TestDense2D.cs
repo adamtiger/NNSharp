@@ -5,6 +5,7 @@ using static NNSharp.DataTypes.Data2D;
 using NNSharp.SequentialBased.SequentialLayers;
 using NNSharp.IO;
 using NNSharp.Models;
+using UnitTests.Properties;
 
 namespace UnitTests
 {
@@ -155,7 +156,7 @@ namespace UnitTests
         [TestMethod]
         public void Test_Dense2D_KerasModel()
         {
-            string path = @"tests\test_dense_model.json";
+            string path = Resources.TestsFolder + "test_dense_model.json";
             var reader = new ReaderKerasModel(path);
 
             SequentialModel model = reader.GetSequentialExecutor();

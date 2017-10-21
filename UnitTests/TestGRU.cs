@@ -6,6 +6,7 @@ using static NNSharp.DataTypes.Data2D;
 using NNSharp.Models;
 using NNSharp.SequentialBased.SequentialLayers;
 using NNSharp.Kernels.CPUKernels;
+using UnitTests.Properties;
 
 namespace UnitTests
 {
@@ -256,7 +257,7 @@ namespace UnitTests
         [TestMethod]
         public void Test_GRU_KerasModel()
         {
-            string path = @"tests\test_gru_model.json";
+            string path = Resources.TestsFolder + "test_gru_model.json";
             var reader = new ReaderKerasModel(path);
             SequentialModel model = reader.GetSequentialExecutor();
 

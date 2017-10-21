@@ -5,6 +5,7 @@ using NNSharp.SequentialBased.SequentialLayers;
 using static NNSharp.DataTypes.Data2D;
 using NNSharp.IO;
 using NNSharp.Models;
+using UnitTests.Properties;
 
 namespace UnitTests
 {
@@ -62,7 +63,7 @@ namespace UnitTests
         [TestMethod]
         public void Test_GlobalMaxPool1D_KerasModel()
         {
-            string path = @"tests\test_globalmaxpool_1D_model.json";
+            string path = Resources.TestsFolder + "test_globalmaxpool_1D_model.json";
             var reader = new ReaderKerasModel(path);
             SequentialModel model = reader.GetSequentialExecutor();
 

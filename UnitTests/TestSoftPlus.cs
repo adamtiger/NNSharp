@@ -4,6 +4,7 @@ using NNSharp.SequentialBased.SequentialLayers;
 using NNSharp.DataTypes;
 using NNSharp.IO;
 using NNSharp.Models;
+using UnitTests.Properties;
 
 namespace UnitTests
 {
@@ -47,7 +48,7 @@ namespace UnitTests
         [TestMethod]
         public void Test_SoftPlus_KerasModel()
         {
-            string path = @"tests\test_softplus_model.json";
+            string path = Resources.TestsFolder + "test_softplus_model.json";
             var reader = new ReaderKerasModel(path);
 
             SequentialModel model = reader.GetSequentialExecutor();

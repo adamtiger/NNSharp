@@ -67,7 +67,7 @@ namespace UnitTests
         [TestMethod]
         public void Test_AvgPool1D_1_KerasModel()
         {
-            string path = @"tests\test_avgpool_1D_1_model.json";
+            string path = Resources.TestsFolder + "test_avgpool_1D_1_model.json";
             var reader = new ReaderKerasModel(path);
             SequentialModel model = reader.GetSequentialExecutor();
 
@@ -100,7 +100,7 @@ namespace UnitTests
         [TestMethod]
         public void Test_AvgPool1D_2_KerasModel()
         {
-            string path = @"tests\test_avgpool_1D_2_model.json";
+            string path = Resources.TestsFolder + "test_avgpool_1D_2_model.json";
             var reader = new ReaderKerasModel(path);
             SequentialModel model = reader.GetSequentialExecutor();
 
