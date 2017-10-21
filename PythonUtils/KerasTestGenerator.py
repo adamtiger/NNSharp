@@ -17,7 +17,8 @@ def write(fname, output):
 
 
 def generate_test_files():
-    gen_dropout()
+
+    gen_dropout() # OK
 
     # CONVOLUTIONS
 
@@ -129,13 +130,14 @@ def generate_test_files():
 
 def gen_dropout():
     model = Sequential()
-    model.add(Convolution2D(8, (2, 2), strides=(2, 2), input_shape=(12, 12, 3), activation='relu'))
+    model.add(Convolution2D(8, (2, 2), strides=(2, 2), input_shape=(4, 4, 1), activation='relu'))
     model.add(Dropout(0.8))
+    model.add(Flatten())
     model.add(Dense(2, activation='linear'))
 
     model.compile(optimizer='sgd', loss='mse')
 
-    inp = np.random.randint(0, 255, size=(1, 12, 12, 3))
+    inp = np.random.randint(0, 255, size=(1, 4, 4, 1))
 
     wrt = js.JSONwriter(model, "tests/test_dropout_model.json")
     wrt.save()
@@ -143,6 +145,7 @@ def gen_dropout():
     output = model.predict(inp, batch_size=1)
     print(output.shape)
 
+    write("tests/test_dropout_input.json", inp.tolist())
     write("tests/test_dropout_output.json", output.tolist())
 
 
@@ -235,6 +238,7 @@ def gen_conv_1D_stride_1():
     output = model.predict(inp, batch_size=1)
     print(output.shape)
 
+    write("tests/test_conv_1D_1_input.json", inp.tolist())
     write("tests/test_conv_1D_1_output.json", output.tolist())
 
 
@@ -325,6 +329,7 @@ def gen_conv_1D_stride_2():
     output = model.predict(inp, batch_size=1)
     print(output.shape)
 
+    write("tests/test_conv_1D_2_input.json", inp.tolist())
     write("tests/test_conv_1D_2_output.json", output.tolist())
 
 
@@ -456,6 +461,7 @@ def gen_conv_2D_stride_1_1():
     output = model.predict(inp, batch_size=1)
     print(output.shape)
 
+    write("tests/test_conv_2D_1_input.json", inp.tolist())
     write("tests/test_conv_2D_1_output.json", output.tolist())
 
 
@@ -567,6 +573,7 @@ def gen_conv_2D_stride_1_2():
     output = model.predict(inp, batch_size=1)
     print(output.shape)
 
+    write("tests/test_conv_2D_2_input.json", inp.tolist())
     write("tests/test_conv_2D_2_output.json", output.tolist())
 
 
@@ -588,6 +595,7 @@ def gen_cropping1D_tests():
     output = model.predict(inp, batch_size=1)
     print(output.shape)
 
+    write("tests/test_crop_1D_input.json", inp.tolist())
     write("tests/test_crop_1D_output.json", output.tolist())
 
 
@@ -643,6 +651,7 @@ def gen_avgpool_1D_stride_1():
     output = model.predict(inp, batch_size=1)
     print(output.shape)
 
+    write("tests/test_avgpool_1D_1_input.json", inp.tolist())
     write("tests/test_avgpool_1D_1_output.json", output.tolist())
 
 
@@ -671,6 +680,7 @@ def gen_avgpool_1D_stride_2():
     output = model.predict(inp, batch_size=1)
     print(output.shape)
 
+    write("tests/test_avgpool_1D_2_input.json", inp.tolist())
     write("tests/test_avgpool_1D_2_output.json", output.tolist())
 
 
@@ -733,6 +743,7 @@ def gen_avgpool_2D_stride_1_1():
     output = model.predict(inp, batch_size=1)
     print(output.shape)
 
+    write("tests/test_avgpool_2D_1_input.json", inp.tolist())
     write("tests/test_avgpool_2D_1_output.json", output.tolist())
 
 
@@ -794,6 +805,7 @@ def gen_avgpool_2D_stride_1_2():
     output = model.predict(inp, batch_size=1)
     print(output.shape)
 
+    write("tests/test_avgpool_2D_2_input.json", inp.tolist())
     write("tests/test_avgpool_2D_2_output.json", output.tolist())
 
 
@@ -823,6 +835,7 @@ def gen_maxpool_1D_stride_1():
     output = model.predict(inp, batch_size=1)
     print(output.shape)
 
+    write("tests/test_maxpool_1D_1_input.json", inp.tolist())
     write("tests/test_maxpool_1D_1_output.json", output.tolist())
 
 
@@ -912,6 +925,7 @@ def gen_maxpool_2D_stride_1_1():
     output = model.predict(inp, batch_size=1)
     print(output.shape)
 
+    write("tests/test_maxpool_2D_1_input.json", inp.tolist())
     write("tests/test_maxpool_2D_1_output.json", output.tolist())
 
 
@@ -973,6 +987,7 @@ def gen_maxpool_2D_stride_1_2():
     output = model.predict(inp, batch_size=1)
     print(output.shape)
 
+    write("tests/test_maxpool_2D_2_input.json", inp.tolist())
     write("tests/test_maxpool_2D_2_output.json", output.tolist())
 
 
@@ -998,6 +1013,7 @@ def gen_globalmaxpooling1D():
     output = model.predict(inp, batch_size=1)
     print(output.shape)
 
+    write("tests/test_globalmaxpool_1D_input.json", inp.tolist())
     write("tests/test_globalmaxpool_1D_output.json", output.tolist())
 
 
@@ -1039,6 +1055,7 @@ def gen_globalmaxpooling2D():
     output = model.predict(inp, batch_size=1)
     print(output.shape)
 
+    write("tests/test_globalmaxpool_2D_input.json", inp.tolist())
     write("tests/test_globalmaxpool_2D_output.json", output.tolist())
 
 
@@ -1064,6 +1081,7 @@ def gen_globalaveragepooling1D():
     output = model.predict(inp, batch_size=1)
     print(output.shape)
 
+    write("tests/test_globalavgpool_1D_input.json", inp.tolist())
     write("tests/test_globalavgpool_1D_output.json", output.tolist())
 
 
@@ -1105,6 +1123,7 @@ def gen_globalaveragepooling2D():
     output = model.predict(inp, batch_size=1)
     print(output.shape)
 
+    write("tests/test_globalavgpool_2D_input.json", inp.tolist())
     write("tests/test_globalavgpool_2D_output.json", output.tolist())
 
 
@@ -1169,6 +1188,7 @@ def gen_flatten():
     output = model.predict(inp, batch_size=1)
     print(output.shape)
 
+    write("tests/test_flat_input.json", inp.tolist())
     write("tests/test_flat_output.json", output.tolist())
 
 
@@ -1250,6 +1270,7 @@ def gen_dense_units_4():
     output = model.predict(inp, batch_size=1)
     print(output.shape)
 
+    write("tests/test_dense_input.json", inp.tolist())
     write("tests/test_dense_output.json", output.tolist())
 
 
@@ -1274,6 +1295,7 @@ def gen_reshape_tests():
     output = model.predict(inp, batch_size=1)
     print(output.shape)
 
+    write("tests/test_reshape_input.json", inp.tolist())
     write("tests/test_reshape_output.json", output.tolist())
 
 
@@ -1298,6 +1320,7 @@ def gen_permute_tests():
     output = model.predict(inp, batch_size=1)
     print(output.shape)
 
+    write("tests/test_permute_input.json", inp.tolist())
     write("tests/test_permute_output.json", output.tolist())
 
 
@@ -1319,6 +1342,7 @@ def gen_repeatvector_tests():
     output = model.predict(inp, batch_size=1)
     print(output.shape)
 
+    write("tests/test_repeatvector_input.json", inp.tolist())
     write("tests/test_repeatvector_output.json", output.tolist())
 
 
@@ -1405,6 +1429,7 @@ def gen_elu():
     output = model.predict(inp, batch_size=1)
     print(output.shape)
 
+    write("tests/test_elu_input.json", inp.tolist())
     write("tests/test_elu_output.json", output.tolist())
 
 
@@ -1487,6 +1512,7 @@ def gen_hard_sigmoid():
     output = model.predict(inp, batch_size=1)
     print(output.shape)
 
+    write("tests/test_hard_sigmoid_input.json", inp.tolist())
     write("tests/test_hard_sigmoid_output.json", output.tolist())
 
 
@@ -1569,6 +1595,7 @@ def gen_relu():
     output = model.predict(inp, batch_size=1)
     print(output.shape)
 
+    write("tests/test_relu_input.json", inp.tolist())
     write("tests/test_relu_output.json", output.tolist())
 
 
@@ -1651,6 +1678,7 @@ def gen_sigmoid():
     output = model.predict(inp, batch_size=1)
     print(output.shape)
 
+    write("tests/test_sigmoid_input.json", inp.tolist())
     write("tests/test_sigmoid_output.json", output.tolist())
 
 
@@ -1733,6 +1761,7 @@ def gen_softmax():
     output = model.predict(inp, batch_size=1)
     print(output.shape)
 
+    write("tests/test_softmax_input.json", inp.tolist())
     write("tests/test_softmax_output.json", output.tolist())
 
 
@@ -1815,6 +1844,7 @@ def gen_softplus():
     output = model.predict(inp, batch_size=1)
     print(output.shape)
 
+    write("tests/test_softplus_input.json", inp.tolist())
     write("tests/test_softplus_output.json", output.tolist())
 
 
@@ -1897,6 +1927,7 @@ def gen_softsign():
     output = model.predict(inp, batch_size=1)
     print(output.shape)
 
+    write("tests/test_softsign_input.json", inp.tolist())
     write("tests/test_softsign_output.json", output.tolist())
 
 
@@ -1979,6 +2010,7 @@ def gen_tanh():
     output = model.predict(inp, batch_size=1)
     print(output.shape)
 
+    write("tests/test_tanh_input.json", inp.tolist())
     write("tests/test_tanh_output.json", output.tolist())
 
 
@@ -2014,6 +2046,7 @@ def gen_batchnorm():
 
     print(output.shape)
 
+    write("tests/test_batchnorm_input.json", data.tolist())
     write("tests/test_batchnorm_output.json", output.tolist())
 
 
@@ -2059,6 +2092,7 @@ def gen_simplernn():
 
     print(output.shape)
 
+    write("tests/test_simplernn_input.json", data.tolist())
     write("tests/test_simplernn_output.json", output.tolist())
 
 
@@ -2104,6 +2138,7 @@ def gen_lstm():
 
     print(output.shape)
 
+    write("tests/test_lstm_input.json", data.tolist())
     write("tests/test_lstm_output.json", output.tolist())
 
 
@@ -2149,6 +2184,7 @@ def gen_gru():
 
     print(output.shape)
 
+    write("tests/test_gru_input.json", data.tolist())
     write("tests/test_gru_output.json", output.tolist())
 
 
