@@ -12,7 +12,6 @@ namespace UnitTests
     [TestClass]
     public class TestDropout
     {
-        // Finish this !!!!
         [TestMethod]
         public void Test_Dropout_KerasModel()
         {

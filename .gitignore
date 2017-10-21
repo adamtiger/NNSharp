@@ -10,6 +10,7 @@
 *.jpg
 *.jpeg
 *.svg
+*.exe
 
 # Documentation page
 docs/site/
