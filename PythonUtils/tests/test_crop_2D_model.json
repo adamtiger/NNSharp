@@ -1,0 +1,1 @@
+{"weights": [], "descriptors": [{"batch": 1, "channel": 2, "height": 4, "layer": "Input2D", "width": 5}, {"topTrim": 1, "leftTrim": 1, "bottomTrim": 1, "layer": "Cropping2D", "rightTrim": 2}], "model_type": "Sequential"}

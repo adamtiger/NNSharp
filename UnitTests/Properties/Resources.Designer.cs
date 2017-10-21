@@ -59,5 +59,14 @@ namespace UnitTests.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ..\..\..\PythonUtils\tests\.
+        /// </summary>
+        internal static string TestsFolder {
+            get {
+                return ResourceManager.GetString("TestsFolder", resourceCulture);
+            }
+        }
     }
 }

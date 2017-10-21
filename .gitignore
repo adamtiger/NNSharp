@@ -11,6 +11,7 @@
 *.jpeg
 *.svg
 *.exe
+!PythonUtils/test/*.json
 
 # Documentation page
 docs/site/

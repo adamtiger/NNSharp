@@ -6,6 +6,7 @@ using NNSharp.IO;
 using NNSharp.DataTypes;
 using NNSharp.Models;
 using static NNSharp.DataTypes.Data2D;
+using UnitTests.Properties;
 
 namespace UnitTests
 {
@@ -15,46 +16,26 @@ namespace UnitTests
         [TestMethod]
         public void Test_Dropout_KerasModel()
         {
-            string path = @"tests\test_dropout_model.json";
-            var reader = new ReaderKerasModel(path);
+            string pathModel = Resources.TestsFolder + "test_dropout_model.json";
+            string pathInput = Resources.TestsFolder + "test_dropout_input.json";
+            string pathOutput = Resources.TestsFolder + "test_dropout_output.json";
+
+            var reader = new ReaderKerasModel(pathModel);
             SequentialModel model = reader.GetSequentialExecutor();
 
             // Initialize data.
-            Data2D data = new Data2D(4, 4, 1, 1);
+            Data2D data = Utils.ReadDataFromFile(pathInput); 
 
-            data[0, 0, 0, 0] = 200;
-            data[0, 1, 0, 0] = 139;
-            data[0, 2, 0, 0] = 165;
-            data[0, 3, 0, 0] = 98;
-
-            data[1, 0, 0, 0] = 144;
-            data[1, 1, 0, 0] = 21;
-            data[1, 2, 0, 0] = 62;
-            data[1, 3, 0, 0] = 62;
-
-            data[2, 0, 0, 0] = 37;
-            data[2, 1, 0, 0] = 59;
-            data[2, 2, 0, 0] = 251;
-            data[2, 3, 0, 0] = 169;
-
-            data[3, 0, 0, 0] = 150;
-            data[3, 1, 0, 0] = 233;
-            data[3, 2, 0, 0] = 105;
-            data[3, 3, 0, 0] = 47;
-
-
+            // Load expected output and calculate the actual output.
+            Data2D expected = Utils.ReadDataFromFile(pathOutput);
             Data2D output = model.ExecuteNetwork(data) as Data2D;
 
             // Checking sizes
-            Dimension dim = output.GetDimension();
-            Assert.AreEqual(dim.b, 1);
-            Assert.AreEqual(dim.c, 2);
-            Assert.AreEqual(dim.h, 1);
-            Assert.AreEqual(dim.w, 1);
+            Utils.CheckDimensions(output, expected);
 
             // Checking calculation
-            Assert.AreEqual(output[0, 0, 0, 0], -11.5065536499, 0.00001);
-            Assert.AreEqual(output[0, 0, 1, 0], 18.6881141, 0.00001);
+            double accuracy = 0.00001;
+            Utils.CheckResults(output, expected, accuracy);
         }
     }
 }

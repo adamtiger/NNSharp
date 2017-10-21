@@ -1,1 +1,0 @@
-{"weights": [], "descriptors": [{"height": 2, "width": 3, "channel": 4, "layer": "Input2D", "batch": 1}, {"dim3": 2, "dim2": 1, "dim1": 3, "layer": "Permute"}], "model_type": "Sequential"}
