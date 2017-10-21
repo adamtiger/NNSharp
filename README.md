@@ -1,6 +1,6 @@
 ![logo](https://drive.google.com/uc?export=download&id=0B97L9zqg-lnweGpHSXFoT2JWS2c)
 
-[![Build status](https://ci.appveyor.com/api/projects/status/m7albu3gen3orswj/branch/master?svg=true)](https://ci.appveyor.com/project/adamtiger/nnsharp/branch/master)
+[![Build status](https://ci.appveyor.com/api/projects/status/m7albu3gen3orswj/branch/dev?svg=true)](https://ci.appveyor.com/project/adamtiger/nnsharp/branch/dev)
 
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](https://github.com/adamtiger/NNSharp/blob/master/LICENSE)
 
