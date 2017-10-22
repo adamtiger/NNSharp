@@ -13,6 +13,10 @@
 *.exe
 !PythonUtils/test/*.json
 
+cppcore/generated/*
+cppcore/thirdparty/tf/*
+cppcore/thirdparty/cntk/*
+
 # Documentation page
 docs/site/
 
