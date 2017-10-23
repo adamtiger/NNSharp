@@ -19,7 +19,7 @@ namespace UnitTests
         {
             JObject model = JObject.Parse(File.ReadAllText(filePath));
 
-            List<List<List<List<double>>>> weight = model.SelectToken("weight").Select(
+            List<List<List<List<double>>>> weight = model.SelectToken("data").Select(
                             batch => batch.Select(
                                     row => row.Select(
                                             col => col.Select(
