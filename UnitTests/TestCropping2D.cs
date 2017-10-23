@@ -90,38 +90,11 @@ namespace UnitTests
         [TestMethod]
         public void Test_Cropping2D_KerasModel()
         {
-            string path = Resources.TestsFolder + "test_crop_2D_model.json";
-            var reader = new ReaderKerasModel(path);
-            SequentialModel model = reader.GetSequentialExecutor();
+            string pathModel = Resources.TestsFolder + "test_crop_2D_model.json";
+            string pathInput = Resources.TestsFolder + "test_crop_2D_input.json";
+            string pathOutput = Resources.TestsFolder + "test_crop_2D_output.json";
 
-            Data2D inp = new Data2D(4, 5, 2, 1);
-
-            int l = 0;
-            for (int h = 0; h < 4; ++h)
-            {
-                for (int w = 0; w < 5; ++w)
-                {
-                    l += 1;
-                    inp[h, w, 0, 0] = l + 1;
-                    inp[h, w, 1, 0] = -(l + 1);
-                }
-            }
-
-            Data2D ou = model.ExecuteNetwork(inp) as Data2D;
-
-            Assert.AreEqual(ou.GetDimension().c, 2);
-            Assert.AreEqual(ou.GetDimension().w, 2);
-            Assert.AreEqual(ou.GetDimension().h, 2);
-
-            Assert.AreEqual(ou[0, 0, 0, 0], 8.0, 0.00001);
-            Assert.AreEqual(ou[0, 0, 1, 0], -8.0, 0.00001);
-            Assert.AreEqual(ou[0, 1, 0, 0], 9.0, 0.00001);
-            Assert.AreEqual(ou[0, 1, 1, 0], -9.0, 0.00001);
-
-            Assert.AreEqual(ou[1, 0, 0, 0], 13.0, 0.00001);
-            Assert.AreEqual(ou[1, 0, 1, 0], -13.0, 0.00001);
-            Assert.AreEqual(ou[1, 1, 0, 0], 14.0, 0.00001);
-            Assert.AreEqual(ou[1, 1, 1, 0], -14.0, 0.00001);
+            Utils.KerasModelTest(pathInput, pathModel, pathOutput);
         }
     }
 }

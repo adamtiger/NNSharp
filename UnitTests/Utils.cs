@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using static NNSharp.DataTypes.Data2D;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NNSharp.IO;
+using NNSharp.Models;
 
 namespace UnitTests
 {
@@ -79,6 +81,26 @@ namespace UnitTests
                     }
                 }
             }
+        }
+
+        static public void KerasModelTest(string pathIn, string pathModel, string pathOut)
+        {
+            var reader = new ReaderKerasModel(pathModel);
+            SequentialModel model = reader.GetSequentialExecutor();
+
+            // Initialize data.
+            Data2D data = Utils.ReadDataFromFile(pathIn);
+
+            // Load expected output and calculate the actual output.
+            Data2D expected = Utils.ReadDataFromFile(pathOut);
+            Data2D output = model.ExecuteNetwork(data) as Data2D;
+
+            // Checking sizes
+            Utils.CheckDimensions(output, expected);
+
+            // Checking calculation
+            double accuracy = 0.00001;
+            Utils.CheckResults(output, expected, accuracy);
         }
     }
 }

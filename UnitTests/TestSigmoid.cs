@@ -48,32 +48,11 @@ namespace UnitTests
         [TestMethod]
         public void Test_Sigmoid_KerasModel()
         {
-            string path = Resources.TestsFolder + "test_sigmoid_model.json";
-            var reader = new ReaderKerasModel(path);
+            string pathModel = Resources.TestsFolder + "test_sigmoid_model.json";
+            string pathInput = Resources.TestsFolder + "test_sigmoid_input.json";
+            string pathOutput = Resources.TestsFolder + "test_sigmoid_output.json";
 
-            SequentialModel model = reader.GetSequentialExecutor();
-
-            Data2D inp = new Data2D(1, 8, 1, 1);
-
-            inp[0, 0, 0, 0] = 1;
-            inp[0, 1, 0, 0] = 2;
-            inp[0, 2, 0, 0] = -1;
-            inp[0, 3, 0, 0] = 0;
-
-            inp[0, 4, 0, 0] = 3;
-            inp[0, 5, 0, 0] = 1;
-            inp[0, 6, 0, 0] = 1;
-            inp[0, 7, 0, 0] = 2;
-
-            Data2D ou = model.ExecuteNetwork(inp) as Data2D;
-
-            Assert.AreEqual(ou.GetDimension().c, 4);
-            Assert.AreEqual(ou.GetDimension().w, 1);
-
-            Assert.AreEqual(ou[0, 0, 0, 0], 0.2689414322376251, 0.00001);
-            Assert.AreEqual(ou[0, 0, 1, 0], 0.9959298968315125, 0.00001);
-            Assert.AreEqual(ou[0, 0, 2, 0], 1.0, 0.00001);
-            Assert.AreEqual(ou[0, 0, 3, 0], 0.9998766183853149, 0.00001);
+            Utils.KerasModelTest(pathInput, pathModel, pathOutput);
         }
 
         private SigmoidLayer sigmoid;

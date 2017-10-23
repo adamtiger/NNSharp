@@ -63,27 +63,11 @@ namespace UnitTests
         [TestMethod]
         public void Test_GlobalMaxPool1D_KerasModel()
         {
-            string path = Resources.TestsFolder + "test_globalmaxpool_1D_model.json";
-            var reader = new ReaderKerasModel(path);
-            SequentialModel model = reader.GetSequentialExecutor();
+            string pathModel = Resources.TestsFolder + "test_globalmaxpool_1D_model.json";
+            string pathInput = Resources.TestsFolder + "test_globalmaxpool_1D_input.json";
+            string pathOutput = Resources.TestsFolder + "test_globalmaxpool_1D_output.json";
 
-            Data2D inp = new Data2D(1, 3, 2, 1);
-
-            inp[0, 0, 0, 0] = 1;
-            inp[0, 1, 0, 0] = 2;
-            inp[0, 2, 0, 0] = 0;
-
-            inp[0, 0, 1, 0] = 3;
-            inp[0, 1, 1, 0] = 4;
-            inp[0, 2, 1, 0] = 0;
-
-            Data2D ou = model.ExecuteNetwork(inp) as Data2D;
-
-            Assert.AreEqual(ou.GetDimension().c, 2);
-            Assert.AreEqual(ou.GetDimension().w, 1);
-
-            Assert.AreEqual(ou[0, 0, 0, 0], 2.0, 0.00001);
-            Assert.AreEqual(ou[0, 0, 1, 0], 4.0, 0.00001);
+            Utils.KerasModelTest(pathInput, pathModel, pathOutput);
         }
     }
 }

@@ -108,58 +108,11 @@ namespace UnitTests
         [TestMethod]
         public void Test_RepeatVector_KerasModel()
         {
-            string path = Resources.TestsFolder + "test_repeatvector_model.json";
-            var reader = new ReaderKerasModel(path);
-            SequentialModel model = reader.GetSequentialExecutor();
+            string pathModel = Resources.TestsFolder + "test_repeatvector_model.json";
+            string pathInput = Resources.TestsFolder + "test_repeatvector_input.json";
+            string pathOutput = Resources.TestsFolder + "test_repeatvector_output.json";
 
-            Data2D data = new Data2D(1, 1, 4, 2);
-
-            for (int c = 0; c < 4; ++c)
-            {
-                data[0, 0, c, 0] = c + 1;
-                data[0, 0, c, 1] = -(c + 1);
-            }
-
-
-            Data2D output = model.ExecuteNetwork(data) as Data2D;
-
-            // Checking sizes
-            Dimension dim = output.GetDimension();
-            Assert.AreEqual(dim.b, 2);
-            Assert.AreEqual(dim.c, 4);
-            Assert.AreEqual(dim.h, 1);
-            Assert.AreEqual(dim.w, 3);
-
-            // Checking calculation
-            Assert.AreEqual(output[0, 0, 0, 0], 1, 0.0000001);
-            Assert.AreEqual(output[0, 0, 1, 0], 2, 0.0000001);
-            Assert.AreEqual(output[0, 0, 2, 0], 3, 0.0000001);
-            Assert.AreEqual(output[0, 0, 3, 0], 4, 0.0000001);
-
-            Assert.AreEqual(output[0, 1, 0, 0], 1, 0.0000001);
-            Assert.AreEqual(output[0, 1, 1, 0], 2, 0.0000001);
-            Assert.AreEqual(output[0, 1, 2, 0], 3, 0.0000001);
-            Assert.AreEqual(output[0, 1, 3, 0], 4, 0.0000001);
-
-            Assert.AreEqual(output[0, 2, 0, 0], 1, 0.0000001);
-            Assert.AreEqual(output[0, 2, 1, 0], 2, 0.0000001);
-            Assert.AreEqual(output[0, 2, 2, 0], 3, 0.0000001);
-            Assert.AreEqual(output[0, 2, 3, 0], 4, 0.0000001);
-
-            Assert.AreEqual(output[0, 0, 0, 1], -1, 0.0000001);
-            Assert.AreEqual(output[0, 0, 1, 1], -2, 0.0000001);
-            Assert.AreEqual(output[0, 0, 2, 1], -3, 0.0000001);
-            Assert.AreEqual(output[0, 0, 3, 1], -4, 0.0000001);
-
-            Assert.AreEqual(output[0, 1, 0, 1], -1, 0.0000001);
-            Assert.AreEqual(output[0, 1, 1, 1], -2, 0.0000001);
-            Assert.AreEqual(output[0, 1, 2, 1], -3, 0.0000001);
-            Assert.AreEqual(output[0, 1, 3, 1], -4, 0.0000001);
-
-            Assert.AreEqual(output[0, 2, 0, 1], -1, 0.0000001);
-            Assert.AreEqual(output[0, 2, 1, 1], -2, 0.0000001);
-            Assert.AreEqual(output[0, 2, 2, 1], -3, 0.0000001);
-            Assert.AreEqual(output[0, 2, 3, 1], -4, 0.0000001);
+            Utils.KerasModelTest(pathInput, pathModel, pathOutput);
         }
     }
 }

@@ -261,50 +261,11 @@ namespace UnitTests
         [TestMethod]
         public void Test_LSTM_KerasModel()
         {
-            string path = Resources.TestsFolder + "test_lstm_model.json";
-            var reader = new ReaderKerasModel(path);
-            SequentialModel model = reader.GetSequentialExecutor();
+            string pathModel = Resources.TestsFolder + "test_lstm_model.json";
+            string pathInput = Resources.TestsFolder + "test_lstm_input.json";
+            string pathOutput = Resources.TestsFolder + "test_lstm_output.json";
 
-            // Initialize data.
-            Data2D data = new Data2D(1, 3, 3, 5);
-
-            int l = 0;
-            for (int b = 0; b < 5; ++b)
-            {
-                for (int w = 0; w < 3; ++w)
-                {
-                    for (int c = 0; c < 3; ++c)
-                    {
-                        l += 1;
-                        data[0, w, c, b] = (l % 5 + 1)/10.0;
-                    }
-                }
-            }
-
-            Data2D output = model.ExecuteNetwork(data) as Data2D;
-
-            // Checking sizes
-            Dimension dim = output.GetDimension();
-            Assert.AreEqual(dim.b, 5);
-            Assert.AreEqual(dim.c, 2);
-            Assert.AreEqual(dim.h, 1);
-            Assert.AreEqual(dim.w, 1);
-
-            // Checking calculation
-            Assert.AreEqual(output[0, 0, 0, 0], 0.015777, 0.00001);
-            Assert.AreEqual(output[0, 0, 1, 0], 0.0, 0.00001);
-
-            Assert.AreEqual(output[0, 0, 0, 1], 0.01605, 0.00001);
-            Assert.AreEqual(output[0, 0, 1, 1], 0.0, 0.00001);
-
-            Assert.AreEqual(output[0, 0, 0, 2], 0.016398, 0.00001);
-            Assert.AreEqual(output[0, 0, 1, 2], 0.0, 0.00001);
-
-            Assert.AreEqual(output[0, 0, 0, 3], 0.006314, 0.00001);
-            Assert.AreEqual(output[0, 0, 1, 3], 0.0, 0.00001);
-
-            Assert.AreEqual(output[0, 0, 0, 4], 0.016303, 0.00001);
-            Assert.AreEqual(output[0, 0, 1, 4], 0.0, 0.00001);
+            Utils.KerasModelTest(pathInput, pathModel, pathOutput);
         }
     }
 }

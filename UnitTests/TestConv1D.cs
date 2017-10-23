@@ -94,123 +94,21 @@ namespace UnitTests
         [TestMethod]
         public void Test_Conv1D_1_KerasModel()
         {
-            string path = Resources.TestsFolder + "test_conv_1D_1_model.json";
-            var reader = new ReaderKerasModel(path);
-            SequentialModel model = reader.GetSequentialExecutor();
+            string pathModel = Resources.TestsFolder + "test_conv_1D_1_model.json";
+            string pathInput = Resources.TestsFolder + "test_conv_1D_1_input.json";
+            string pathOutput = Resources.TestsFolder + "test_conv_1D_1_output.json";
 
-            Data2D inp = new Data2D(1, 6, 4, 1);
-
-            inp[0, 0, 0, 0] = 0;
-            inp[0, 0, 1, 0] = 1;
-            inp[0, 0, 2, 0] = 2;
-            inp[0, 0, 3, 0] = 1.5;
-
-            inp[0, 1, 0, 0] = 1;
-            inp[0, 1, 1, 0] = 0;
-            inp[0, 1, 2, 0] = 0;
-            inp[0, 1, 3, 0] = 0.6;
-
-            inp[0, 2, 0, 0] = 2;
-            inp[0, 2, 1, 0] = 1;
-            inp[0, 2, 2, 0] = 2;
-            inp[0, 2, 3, 0] = 2.5;
-
-            inp[0, 3, 0, 0] = 1;
-            inp[0, 3, 1, 0] = 0;
-            inp[0, 3, 2, 0] = -1;
-            inp[0, 3, 3, 0] = 0;
-
-            inp[0, 4, 0, 0] = 1;
-            inp[0, 4, 1, 0] = -2;
-            inp[0, 4, 2, 0] = 3;
-            inp[0, 4, 3, 0] = 3.5;
-
-            inp[0, 5, 0, 0] = 2;
-            inp[0, 5, 1, 0] = 1;
-            inp[0, 5, 2, 0] = 4;
-            inp[0, 5, 3, 0] = 3.5;
-
-            Data2D ou = model.ExecuteNetwork(inp) as Data2D;
-
-            Assert.AreEqual(ou.GetDimension().c, 3);
-            Assert.AreEqual(ou.GetDimension().w, 5);
-
-            Assert.AreEqual(ou[0, 0, 0, 0], 9.399999618530273, 0.00001);
-            Assert.AreEqual(ou[0, 0, 1, 0], -1.6999998092651367, 0.00001);
-            Assert.AreEqual(ou[0, 0, 2, 0], 4.550000190734863, 0.00001);
-
-            Assert.AreEqual(ou[0, 1, 0, 0], 8.100000381469727, 0.00001);
-            Assert.AreEqual(ou[0, 1, 1, 0], 10.199999809265137, 0.00001);
-            Assert.AreEqual(ou[0, 1, 2, 0], 2.75, 0.00001);
-
-            Assert.AreEqual(ou[0, 2, 0, 0], 8.5, 0.00001);
-            Assert.AreEqual(ou[0, 2, 1, 0], -4.0, 0.00001);
-            Assert.AreEqual(ou[0, 2, 2, 0], 12.25, 0.00001);
-
-            Assert.AreEqual(ou[0, 3, 0, 0], 0.0, 0.00001);
-            Assert.AreEqual(ou[0, 3, 1, 0], 16.5, 0.00001);
-            Assert.AreEqual(ou[0, 3, 2, 0], -6.25, 0.00001);
-
-            Assert.AreEqual(ou[0, 4, 0, 0], 23.0, 0.00001);
-            Assert.AreEqual(ou[0, 4, 1, 0], 7.5, 0.00001);
-            Assert.AreEqual(ou[0, 4, 2, 0], 14.5, 0.00001);
+            Utils.KerasModelTest(pathInput, pathModel, pathOutput);
         }
 
         [TestMethod]
         public void Test_Conv1D_2_KerasModel()
         {
-            string path = Resources.TestsFolder + "test_conv_1D_2_model.json";
-            var reader = new ReaderKerasModel(path);
-            SequentialModel model = reader.GetSequentialExecutor();
+            string pathModel = Resources.TestsFolder + "test_conv_1D_2_model.json";
+            string pathInput = Resources.TestsFolder + "test_conv_1D_2_input.json";
+            string pathOutput = Resources.TestsFolder + "test_conv_1D_2_output.json";
 
-            Data2D inp = new Data2D(1, 6, 4, 1);
-
-            inp[0, 0, 0, 0] = 0;
-            inp[0, 0, 1, 0] = 1;
-            inp[0, 0, 2, 0] = 2;
-            inp[0, 0, 3, 0] = 1.5;
-
-            inp[0, 1, 0, 0] = 1;
-            inp[0, 1, 1, 0] = 0;
-            inp[0, 1, 2, 0] = 0;
-            inp[0, 1, 3, 0] = 0.6;
-
-            inp[0, 2, 0, 0] = 2;
-            inp[0, 2, 1, 0] = 1;
-            inp[0, 2, 2, 0] = 2;
-            inp[0, 2, 3, 0] = 2.5;
-
-            inp[0, 3, 0, 0] = 1;
-            inp[0, 3, 1, 0] = 0;
-            inp[0, 3, 2, 0] = -1;
-            inp[0, 3, 3, 0] = 0;
-
-            inp[0, 4, 0, 0] = 1;
-            inp[0, 4, 1, 0] = -2;
-            inp[0, 4, 2, 0] = 3;
-            inp[0, 4, 3, 0] = 3.5;
-
-            inp[0, 5, 0, 0] = 2;
-            inp[0, 5, 1, 0] = 1;
-            inp[0, 5, 2, 0] = 4;
-            inp[0, 5, 3, 0] = 3.5;
-
-            Data2D ou = model.ExecuteNetwork(inp) as Data2D;
-
-            Assert.AreEqual(ou.GetDimension().c, 3);
-            Assert.AreEqual(ou.GetDimension().w, 3);
-
-            Assert.AreEqual(ou[0, 0, 0, 0], 9.399999618530273, 0.00001);
-            Assert.AreEqual(ou[0, 0, 1, 0], -1.6999998092651367, 0.00001);
-            Assert.AreEqual(ou[0, 0, 2, 0], 4.550000190734863, 0.00001);
-
-            Assert.AreEqual(ou[0, 1, 0, 0], 8.5, 0.00001);
-            Assert.AreEqual(ou[0, 1, 1, 0], -4.0, 0.00001);
-            Assert.AreEqual(ou[0, 1, 2, 0], 12.25, 0.00001);
-
-            Assert.AreEqual(ou[0, 2, 0, 0], 23.0, 0.00001);
-            Assert.AreEqual(ou[0, 2, 1, 0], 7.5, 0.00001);
-            Assert.AreEqual(ou[0, 2, 2, 0], 14.5, 0.00001);
+            Utils.KerasModelTest(pathInput, pathModel, pathOutput);
         }
     }
 }

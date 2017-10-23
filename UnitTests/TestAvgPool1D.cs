@@ -66,66 +66,22 @@ namespace UnitTests
 
         [TestMethod]
         public void Test_AvgPool1D_1_KerasModel()
-        {
-            string path = Resources.TestsFolder + "test_avgpool_1D_1_model.json";
-            var reader = new ReaderKerasModel(path);
-            SequentialModel model = reader.GetSequentialExecutor();
+        { 
+            string pathModel = Resources.TestsFolder + "test_avgpool_1D_1_model.json";
+            string pathInput = Resources.TestsFolder + "test_avgpool_1D_1_input.json";
+            string pathOutput = Resources.TestsFolder + "test_avgpool_1D_1_output.json";
 
-            Data2D inp = new Data2D(1, 5, 2, 1);
-
-            inp[0, 0, 0, 0] = 0;
-            inp[0, 0, 1, 0] = 1;
-            inp[0, 1, 0, 0] = 2;
-            inp[0, 1, 1, 0] = 1;
-            inp[0, 2, 0, 0] = 0;
-            inp[0, 2, 1, 0] = 0;
-            inp[0, 3, 0, 0] = 2;
-            inp[0, 3, 1, 0] = 1;
-            inp[0, 4, 0, 0] = 2;
-            inp[0, 4, 1, 0] = 1;
-
-            Data2D ou = model.ExecuteNetwork(inp) as Data2D;
-
-            Assert.AreEqual(ou.GetDimension().c, 2);
-            Assert.AreEqual(ou.GetDimension().w, 3);
-
-            Assert.AreEqual(ou[0, 0, 0, 0], 0.6666666865348816, 0.00001);
-            Assert.AreEqual(ou[0, 0, 1, 0], 0.6666666865348816, 0.00001);
-            Assert.AreEqual(ou[0, 1, 0, 0], 1.3333333730697632, 0.00001);
-            Assert.AreEqual(ou[0, 1, 1, 0], 0.6666666865348816, 0.00001);
-            Assert.AreEqual(ou[0, 2, 0, 0], 1.3333333730697632, 0.00001);
-            Assert.AreEqual(ou[0, 2, 1, 0], 0.6666666865348816, 0.00001);
+            Utils.KerasModelTest(pathInput, pathModel, pathOutput);
         }
 
         [TestMethod]
         public void Test_AvgPool1D_2_KerasModel()
         {
-            string path = Resources.TestsFolder + "test_avgpool_1D_2_model.json";
-            var reader = new ReaderKerasModel(path);
-            SequentialModel model = reader.GetSequentialExecutor();
+            string pathModel = Resources.TestsFolder + "test_avgpool_1D_2_model.json";
+            string pathInput = Resources.TestsFolder + "test_avgpool_1D_2_input.json";
+            string pathOutput = Resources.TestsFolder + "test_avgpool_1D_2_output.json";
 
-            Data2D inp = new Data2D(1, 5, 2, 1);
-
-            inp[0, 0, 0, 0] = 0;
-            inp[0, 0, 1, 0] = 1;
-            inp[0, 1, 0, 0] = 2;
-            inp[0, 1, 1, 0] = 1;
-            inp[0, 2, 0, 0] = 0;
-            inp[0, 2, 1, 0] = 0;
-            inp[0, 3, 0, 0] = 2;
-            inp[0, 3, 1, 0] = 1;
-            inp[0, 4, 0, 0] = 2;
-            inp[0, 4, 1, 0] = 1;
-
-            Data2D ou = model.ExecuteNetwork(inp) as Data2D;
-
-            Assert.AreEqual(ou.GetDimension().c, 2);
-            Assert.AreEqual(ou.GetDimension().w, 2);
-
-            Assert.AreEqual(ou[0, 0, 0, 0], 0.6666666865348816, 0.00001);
-            Assert.AreEqual(ou[0, 0, 1, 0], 0.6666666865348816, 0.00001);
-            Assert.AreEqual(ou[0, 1, 0, 0], 1.3333333730697632, 0.00001);
-            Assert.AreEqual(ou[0, 1, 1, 0], 0.6666666865348816, 0.00001);
+            Utils.KerasModelTest(pathInput, pathModel, pathOutput);
         }
     }
 }

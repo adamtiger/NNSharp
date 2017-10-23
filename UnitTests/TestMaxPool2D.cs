@@ -87,147 +87,21 @@ namespace UnitTests
         [TestMethod]
         public void Test_MaxPool2D_1_KerasModel()
         {
-            string path = Resources.TestsFolder + "test_maxpool_2D_1_model.json";
-            var reader = new ReaderKerasModel(path);
-            SequentialModel model = reader.GetSequentialExecutor();
+            string pathModel = Resources.TestsFolder + "test_maxpool_2D_1_model.json";
+            string pathInput = Resources.TestsFolder + "test_maxpool_2D_1_input.json";
+            string pathOutput = Resources.TestsFolder + "test_maxpool_2D_1_output.json";
 
-            Data2D inp = new Data2D(4, 5, 2, 1);
-
-            inp[0, 0, 0, 0] = 0;
-            inp[0, 0, 1, 0] = 1;
-            inp[0, 1, 0, 0] = 2;
-            inp[0, 1, 1, 0] = 1;
-            inp[0, 2, 0, 0] = 0;
-            inp[0, 2, 1, 0] = 0;
-            inp[0, 3, 0, 0] = 2;
-            inp[0, 3, 1, 0] = 1;
-            inp[0, 4, 0, 0] = 2;
-            inp[0, 4, 1, 0] = 1;
-
-
-            inp[1, 0, 0, 0] = 0;
-            inp[1, 0, 1, 0] = -1;
-            inp[1, 1, 0, 0] = 1;
-            inp[1, 1, 1, 0] = -2;
-            inp[1, 2, 0, 0] = 3;
-            inp[1, 2, 1, 0] = 1;
-            inp[1, 3, 0, 0] = 2;
-            inp[1, 3, 1, 0] = 0;
-            inp[1, 4, 0, 0] = 2;
-            inp[1, 4, 1, 0] = -3;
-
-
-            inp[2, 0, 0, 0] = 1;
-            inp[2, 0, 1, 0] = 2;
-            inp[2, 1, 0, 0] = -2;
-            inp[2, 1, 1, 0] = 0;
-            inp[2, 2, 0, 0] = 3;
-            inp[2, 2, 1, 0] = -3;
-            inp[2, 3, 0, 0] = 2;
-            inp[2, 3, 1, 0] = 1;
-            inp[2, 4, 0, 0] = 2;
-            inp[2, 4, 1, 0] = 0;
-
-
-            inp[3, 0, 0, 0] = 1;
-            inp[3, 0, 1, 0] = 2;
-            inp[3, 1, 0, 0] = 0;
-            inp[3, 1, 1, 0] = -2;
-            inp[3, 2, 0, 0] = 3;
-            inp[3, 2, 1, 0] = 1;
-            inp[3, 3, 0, 0] = 2;
-            inp[3, 3, 1, 0] = 3;
-            inp[3, 4, 0, 0] = -3;
-            inp[3, 4, 1, 0] = 1;
-
-            Data2D ou = model.ExecuteNetwork(inp) as Data2D;
-
-            Assert.AreEqual(ou.GetDimension().c, 2);
-            Assert.AreEqual(ou.GetDimension().w, 2);
-            Assert.AreEqual(ou.GetDimension().h, 2);
-
-            Assert.AreEqual(ou[0, 0, 0, 0], 3.0, 0.0001);
-            Assert.AreEqual(ou[0, 0, 1, 0], 2.0, 0.0001);
-            Assert.AreEqual(ou[0, 1, 0, 0], 3.0, 0.0001);
-            Assert.AreEqual(ou[0, 1, 1, 0], 1.0, 0.0001);
-
-            Assert.AreEqual(ou[1, 0, 0, 0], 3.0, 0.0001);
-            Assert.AreEqual(ou[1, 0, 1, 0], 3.0, 0.0001);
-            Assert.AreEqual(ou[1, 1, 0, 0], 3.0, 0.0001);
-            Assert.AreEqual(ou[1, 1, 1, 0], 3.0, 0.0001);
+            Utils.KerasModelTest(pathInput, pathModel, pathOutput);
         }
 
         [TestMethod]
         public void Test_MaxPool2D_2_KerasModel()
         {
-            string path = Resources.TestsFolder + "test_maxpool_2D_2_model.json";
-            var reader = new ReaderKerasModel(path);
-            SequentialModel model = reader.GetSequentialExecutor();
+            string pathModel = Resources.TestsFolder + "test_maxpool_2D_2_model.json";
+            string pathInput = Resources.TestsFolder + "test_maxpool_2D_2_input.json";
+            string pathOutput = Resources.TestsFolder + "test_maxpool_2D_2_output.json";
 
-            Data2D inp = new Data2D(4, 5, 2, 1);
-
-            inp[0, 0, 0, 0] = 0;
-            inp[0, 0, 1, 0] = 1;
-            inp[0, 1, 0, 0] = 2;
-            inp[0, 1, 1, 0] = 1;
-            inp[0, 2, 0, 0] = 0;
-            inp[0, 2, 1, 0] = 0;
-            inp[0, 3, 0, 0] = 2;
-            inp[0, 3, 1, 0] = 1;
-            inp[0, 4, 0, 0] = 2;
-            inp[0, 4, 1, 0] = 1;
-
-
-            inp[1, 0, 0, 0] = 0;
-            inp[1, 0, 1, 0] = -1;
-            inp[1, 1, 0, 0] = 1;
-            inp[1, 1, 1, 0] = -2;
-            inp[1, 2, 0, 0] = 3;
-            inp[1, 2, 1, 0] = 1;
-            inp[1, 3, 0, 0] = 2;
-            inp[1, 3, 1, 0] = 0;
-            inp[1, 4, 0, 0] = 2;
-            inp[1, 4, 1, 0] = -3;
-
-
-            inp[2, 0, 0, 0] = 1;
-            inp[2, 0, 1, 0] = 2;
-            inp[2, 1, 0, 0] = -2;
-            inp[2, 1, 1, 0] = 0;
-            inp[2, 2, 0, 0] = 3;
-            inp[2, 2, 1, 0] = -3;
-            inp[2, 3, 0, 0] = 2;
-            inp[2, 3, 1, 0] = 1;
-            inp[2, 4, 0, 0] = 2;
-            inp[2, 4, 1, 0] = 0;
-
-
-            inp[3, 0, 0, 0] = 1;
-            inp[3, 0, 1, 0] = 2;
-            inp[3, 1, 0, 0] = 0;
-            inp[3, 1, 1, 0] = -2;
-            inp[3, 2, 0, 0] = 3;
-            inp[3, 2, 1, 0] = 1;
-            inp[3, 3, 0, 0] = 2;
-            inp[3, 3, 1, 0] = 3;
-            inp[3, 4, 0, 0] = -3;
-            inp[3, 4, 1, 0] = 1;
-
-            Data2D ou = model.ExecuteNetwork(inp) as Data2D;
-
-            Assert.AreEqual(ou.GetDimension().c, 2);
-            Assert.AreEqual(ou.GetDimension().w, 2);
-            Assert.AreEqual(ou.GetDimension().h, 2);
-
-            Assert.AreEqual(ou[0, 0, 0, 0], 3.0, 0.0001);
-            Assert.AreEqual(ou[0, 0, 1, 0], 1.0, 0.0001);
-            Assert.AreEqual(ou[0, 1, 0, 0], 3.0, 0.0001);
-            Assert.AreEqual(ou[0, 1, 1, 0], 1.0, 0.0001);
-
-            Assert.AreEqual(ou[1, 0, 0, 0], 3.0, 0.0001);
-            Assert.AreEqual(ou[1, 0, 1, 0], 3.0, 0.0001);
-            Assert.AreEqual(ou[1, 1, 0, 0], 3.0, 0.0001);
-            Assert.AreEqual(ou[1, 1, 1, 0], 3.0, 0.0001);
+            Utils.KerasModelTest(pathInput, pathModel, pathOutput);
         }
     }
 }
