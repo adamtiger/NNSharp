@@ -20,5 +20,12 @@ if(WIN32)
    mark_as_advanced(TF_ROOT)
    find_package_handle_standard_args(TF DEFAULT_MSG TF_INCLUDE_DIR TF_LIB TF_DLL)
 
+else()
+   if (EXISTS "${TF_ROOT}/tensorflow.h")
+       set(TF_INCLUDE_DIR "${TF_ROOT}")
+       set(TF_LIB "${TF_ROOT}/libtensorflow.so")
+   endif()
+   mark_as_advanced(TF_ROOT)
+   find_package_handle_standard_args(TF DEFAULT_MSG TF_INCLUDE_DIR TF_LIB)
 
 endif()
