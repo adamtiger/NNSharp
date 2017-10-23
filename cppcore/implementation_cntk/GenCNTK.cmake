@@ -12,6 +12,9 @@ add_executable(cppcore nnsharp.h implementation_cntk/cppcore.cpp)
 
 target_link_libraries(cppcore ${CNTK_LIB})
 
+set(GCC_COMPILE_FLAG "-std=c++11")
+add_definitions(${GCC_COMPILE_FLAG})
+
 # Copy CNTK DLLs to output folder on Windows
 if(WIN32)
     foreach(DLL ${CNTK_DLL})
