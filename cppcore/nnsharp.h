@@ -1,7 +1,11 @@
 #ifndef __NNSHARP__
 #define __NNSHARP__
 
+#if defined (COMPILER_MSVC)
 #define CORE_EXPORT __declspec(dllexport)
+#else 
+#define CORE_EXPORT __attribute__((visibility("default")))
+#endif
 
 	// #include <CNTKLibrary.h> These will be included only in the cpp files. 
 	// #include <Tesorflow.h>

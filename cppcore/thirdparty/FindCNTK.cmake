@@ -20,5 +20,13 @@ if(WIN32)
    mark_as_advanced(CNTK_ROOT)
    find_package_handle_standard_args(CNTK DEFAULT_MSG CNTK_INCLUDE_DIR CNTK_LIB CNTK_DLL)
 
+else()
+   if (EXISTS "${CNTK_ROOT}/include/CNTKLibrary.h")
+       set(CNTK_INCLUDE_DIR "${CNTK_ROOT}/include")
+       set(CNTK_LIB "${CNTK_ROOT}/lib/libCntk.Core-2.2.so" "${CNTK_ROOT}/lib/libCntk.Eval-2.2.so" "${CNTK_ROOT}/lib/libCntk.Math-2.2.so" "${CNTK_ROOT}/lib/libCntk.PerformanceProfiler-2.2.so" "${CNTK_ROOT}/lib/libfst.so.3" "${CNTK_ROOT}/lib/libiomp5.so" "${CNTK_ROOT}/lib/libkaldi-base.so" "${CNTK_ROOT}/lib/libkaldi-cudamatrix.so" "${CNTK_ROOT}/lib/libkaldi-hmm.so" "${CNTK_ROOT}/lib/libkaldi-lat.so" "${CNTK_ROOT}/lib/libkaldi-matrix.so" "${CNTK_ROOT}/lib/libkaldi-nnet.so" "${CNTK_ROOT}/lib/libkaldi-tree.so" "${CNTK_ROOT}/lib/libkaldi-util.so" "${CNTK_ROOT}/lib/libmkl_cntk_p.so" "${CNTK_ROOT}/lib/libmultiverso.so" "${CNTK_ROOT}/lib/libopenblas.so.0" "${CNTK_ROOT}/lib/libopencv_core.so.3.1" "${CNTK_ROOT}/lib/libopencv_imgproc.so.3.1" "${CNTK_ROOT}/lib/libzip.so.4")
+   endif()
+   mark_as_advanced(CNTK_ROOT)
+   find_package_handle_standard_args(CNTK DEFAULT_MSG CNTK_INCLUDE_DIR CNTK_LIB)
 
 endif()
+

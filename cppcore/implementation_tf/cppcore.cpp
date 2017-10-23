@@ -1,17 +1,18 @@
 // TryCNTKcpp.cpp : Defines the entry point for the console application.
 //
 
-//#include "stdafx.h"
 #include <vector>
 #include <iostream>
 
 //region: TF MINI TEST
 
-#define COMPILER_MSVC
+//#define COMPILER_MSVC
 #include "tensorflow.h"
-#include "nnsharp.h"
+//#include "nnsharp.h"
 
 void tf_test() {
+	
+	std::cout << "Hi!" << std::endl;
 
 	const char* version = TF_Version();
 	std::cout << version[0] << version[1] << version[2] << version[3] << version[4] << std::endl;

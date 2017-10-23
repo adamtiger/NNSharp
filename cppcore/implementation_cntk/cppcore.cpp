@@ -4,7 +4,7 @@
 #include <vector>
 #include <iostream>
 
-#include <CNTKLibrary.h>
+#include "CNTKLibrary.h"
 
 using namespace CNTK;
 using namespace Microsoft::MSR::CNTK;

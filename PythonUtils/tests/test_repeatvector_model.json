@@ -1,1 +1,1 @@
-{"weights": [], "descriptors": [{"batch": 1, "channel": 4, "height": 1, "layer": "Input2D", "width": 1}, {"num": 3, "layer": "RepeatVector"}], "model_type": "Sequential"}
+{"model_type": "Sequential", "weights": [], "descriptors": [{"channel": 4, "height": 1, "batch": 1, "layer": "Input2D", "width": 1}, {"num": 3, "layer": "RepeatVector"}]}

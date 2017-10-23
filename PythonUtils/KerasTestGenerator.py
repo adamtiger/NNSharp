@@ -13,7 +13,30 @@ import json
 # json writer
 def write(fname, output):
     with open(fname, 'w') as fp:
-        json.dump(output, fp)
+        shape = output.shape
+        if len(shape) == 3:
+            temp = np.ndarray((1, shape[0], shape[1], shape[2]))
+            temp[0, :, :, :] = output[:, :, :]
+            output = temp
+        elif len(shape) == 2:
+            temp = np.ndarray((1, 1, shape[0], shape[1]))
+            temp[0, 0, :, :] = output[:, :]
+            output = temp
+        output_dict = {"data": output.tolist()}
+        json.dump(output_dict, fp)
+
+# data generator
+def data_generator(input_size, weight_size):
+
+    input_d = 0
+    weight_d = 0
+    if not(input_size is None):
+        input_d = np.random.randint(0, 255, input_size)
+
+    if not(weight_size is None):
+        weight_d = np.random.randint(-5, 5, weight_size)
+
+    return input_d, weight_d
 
 
 def generate_test_files():
@@ -137,7 +160,7 @@ def gen_dropout():
 
     model.compile(optimizer='sgd', loss='mse')
 
-    inp = np.random.randint(0, 255, size=(1, 4, 4, 1))
+    inp, _ = data_generator((1, 4, 4, 1), None)
 
     wrt = js.JSONwriter(model, "tests/test_dropout_model.json")
     wrt.save()
@@ -145,8 +168,8 @@ def gen_dropout():
     output = model.predict(inp, batch_size=1)
     print(output.shape)
 
-    write("tests/test_dropout_input.json", inp.tolist())
-    write("tests/test_dropout_output.json", output.tolist())
+    write("tests/test_dropout_input.json", inp)
+    write("tests/test_dropout_output.json", output)
 
 
 # CONVOLUTION
@@ -157,39 +180,7 @@ def gen_conv_1D_stride_1():
     model.add(Conv1D(3, 2, strides=1, input_shape=(6, 4)))
     model.compile(optimizer='rmsprop', loss='mse')
 
-    weight = np.ndarray((2, 4, 3))
-
-    weight[0, 0, 0] = 0
-    weight[0, 0, 1] = 1.5
-    weight[0, 0, 2] = 2
-
-    weight[0, 1, 0] = 0.5
-    weight[0, 1, 1] = -1
-    weight[0, 1, 2] = -2
-
-    weight[0, 2, 0] = 3
-    weight[0, 2, 1] = 0
-    weight[0, 2, 2] = 1
-
-    weight[0, 3, 0] = 1
-    weight[0, 3, 1] = -3
-    weight[0, 3, 2] = 2.5
-
-    weight[1, 0, 0] = 1.5
-    weight[1, 0, 1] = 0.5
-    weight[1, 0, 2] = -2
-
-    weight[1, 1, 0] = 1.5
-    weight[1, 1, 1] = -0.5
-    weight[1, 1, 2] = 2.5
-
-    weight[1, 2, 0] = 2.5
-    weight[1, 2, 1] = 0.5
-    weight[1, 2, 2] = -1.5
-
-    weight[1, 3, 0] = -1
-    weight[1, 3, 1] = 3
-    weight[1, 3, 2] = 0.5
+    inp, weight = data_generator((1, 6, 4), (2, 4, 3))
 
     bias = np.ndarray(3)
 
@@ -200,46 +191,14 @@ def gen_conv_1D_stride_1():
     w = [weight, bias]
     model.set_weights(w)
 
-    inp = np.ndarray((1, 6, 4))
-
-    inp[0, 0, 0] = 0
-    inp[0, 0, 1] = 1
-    inp[0, 0, 2] = 2
-    inp[0, 0, 3] = 1.5
-
-    inp[0, 1, 0] = 1
-    inp[0, 1, 1] = 0
-    inp[0, 1, 2] = 0
-    inp[0, 1, 3] = 0.6
-
-    inp[0, 2, 0] = 2
-    inp[0, 2, 1] = 1
-    inp[0, 2, 2] = 2
-    inp[0, 2, 3] = 2.5
-
-    inp[0, 3, 0] = 1
-    inp[0, 3, 1] = 0
-    inp[0, 3, 2] = -1
-    inp[0, 3, 3] = 0
-
-    inp[0, 4, 0] = 1
-    inp[0, 4, 1] = -2
-    inp[0, 4, 2] = 3
-    inp[0, 4, 3] = 3.5
-
-    inp[0, 5, 0] = 2
-    inp[0, 5, 1] = 1
-    inp[0, 5, 2] = 4
-    inp[0, 5, 3] = 3.5
-
     wrt = js.JSONwriter(model, "tests/test_conv_1D_1_model.json")
     wrt.save()
 
     output = model.predict(inp, batch_size=1)
     print(output.shape)
 
-    write("tests/test_conv_1D_1_input.json", inp.tolist())
-    write("tests/test_conv_1D_1_output.json", output.tolist())
+    write("tests/test_conv_1D_1_input.json", inp)
+    write("tests/test_conv_1D_1_output.json", output)
 
 
 def gen_conv_1D_stride_2():
@@ -248,39 +207,7 @@ def gen_conv_1D_stride_2():
     model.add(Conv1D(3, 2, strides=2, input_shape=(6, 4)))
     model.compile(optimizer='rmsprop', loss='mse')
 
-    weight = np.ndarray((2, 4, 3))
-
-    weight[0, 0, 0] = 0
-    weight[0, 0, 1] = 1.5
-    weight[0, 0, 2] = 2
-
-    weight[0, 1, 0] = 0.5
-    weight[0, 1, 1] = -1
-    weight[0, 1, 2] = -2
-
-    weight[0, 2, 0] = 3
-    weight[0, 2, 1] = 0
-    weight[0, 2, 2] = 1
-
-    weight[0, 3, 0] = 1
-    weight[0, 3, 1] = -3
-    weight[0, 3, 2] = 2.5
-
-    weight[1, 0, 0] = 1.5
-    weight[1, 0, 1] = 0.5
-    weight[1, 0, 2] = -2
-
-    weight[1, 1, 0] = 1.5
-    weight[1, 1, 1] = -0.5
-    weight[1, 1, 2] = 2.5
-
-    weight[1, 2, 0] = 2.5
-    weight[1, 2, 1] = 0.5
-    weight[1, 2, 2] = -1.5
-
-    weight[1, 3, 0] = -1
-    weight[1, 3, 1] = 3
-    weight[1, 3, 2] = 0.5
+    inp, weight = data_generator((1, 6, 4), (2, 4, 3))
 
     bias = np.ndarray(3)
 
@@ -291,46 +218,14 @@ def gen_conv_1D_stride_2():
     w = [weight, bias]
     model.set_weights(w)
 
-    inp = np.ndarray((1, 6, 4))
-
-    inp[0, 0, 0] = 0
-    inp[0, 0, 1] = 1
-    inp[0, 0, 2] = 2
-    inp[0, 0, 3] = 1.5
-
-    inp[0, 1, 0] = 1
-    inp[0, 1, 1] = 0
-    inp[0, 1, 2] = 0
-    inp[0, 1, 3] = 0.6
-
-    inp[0, 2, 0] = 2
-    inp[0, 2, 1] = 1
-    inp[0, 2, 2] = 2
-    inp[0, 2, 3] = 2.5
-
-    inp[0, 3, 0] = 1
-    inp[0, 3, 1] = 0
-    inp[0, 3, 2] = -1
-    inp[0, 3, 3] = 0
-
-    inp[0, 4, 0] = 1
-    inp[0, 4, 1] = -2
-    inp[0, 4, 2] = 3
-    inp[0, 4, 3] = 3.5
-
-    inp[0, 5, 0] = 2
-    inp[0, 5, 1] = 1
-    inp[0, 5, 2] = 4
-    inp[0, 5, 3] = 3.5
-
     wrt = js.JSONwriter(model, "tests/test_conv_1D_2_model.json")
     wrt.save()
 
     output = model.predict(inp, batch_size=1)
     print(output.shape)
 
-    write("tests/test_conv_1D_2_input.json", inp.tolist())
-    write("tests/test_conv_1D_2_output.json", output.tolist())
+    write("tests/test_conv_1D_2_input.json", inp)
+    write("tests/test_conv_1D_2_output.json", output)
 
 
 def gen_conv_2D_stride_1_1():
@@ -339,67 +234,7 @@ def gen_conv_2D_stride_1_1():
     model.add(Conv2D(2, (3, 4), strides=(1, 1), input_shape=(4, 5, 2)))
     model.compile(optimizer='rmsprop', loss='mse')
 
-    weight = np.ndarray((3, 4, 2, 2))
-
-    weight[0, 0, 0, 0] = 0
-    weight[0, 0, 0, 1] = 1.5
-    weight[0, 0, 1, 0] = 2
-    weight[0, 0, 1, 1] = 0.5
-
-    weight[0, 1, 0, 0] = -1
-    weight[0, 1, 0, 1] = -2
-    weight[0, 1, 1, 0] = 3
-    weight[0, 1, 1, 1] = 0
-
-    weight[0, 2, 0, 0] = 1
-    weight[0, 2, 0, 1] = 1
-    weight[0, 2, 1, 0] = -3
-    weight[0, 2, 1, 1] = 2.5
-
-    weight[0, 3, 0, 0] = 1.5
-    weight[0, 3, 0, 1] = 0.5
-    weight[0, 3, 1, 0] = -2
-    weight[0, 3, 1, 1] = 1.5
-
-    weight[1, 0, 0, 0] = -0.5
-    weight[1, 0, 0, 1] = 2.5
-    weight[1, 0, 1, 0] = 2.5
-    weight[1, 0, 1, 1] = 0.5
-
-    weight[1, 1, 0, 0] = -1.5
-    weight[1, 1, 0, 1] = -1
-    weight[1, 1, 1, 0] = 3
-    weight[1, 1, 1, 1] = 0.5
-
-    weight[1, 2, 0, 0] = 1.5
-    weight[1, 2, 0, 1] = 1
-    weight[1, 2, 1, 0] = 0
-    weight[1, 2, 1, 1] = 0
-
-    weight[1, 3, 0, 0] = 1.5
-    weight[1, 3, 0, 1] = 0
-    weight[1, 3, 1, 0] = -2
-    weight[1, 3, 1, 1] = 3
-
-    weight[2, 0, 0, 0] = 1
-    weight[2, 0, 0, 1] = 1
-    weight[2, 0, 1, 0] = 2
-    weight[2, 0, 1, 1] = -2
-
-    weight[2, 1, 0, 0] = -1
-    weight[2, 1, 0, 1] = 2
-    weight[2, 1, 1, 0] = -3
-    weight[2, 1, 1, 1] = 1
-
-    weight[2, 2, 0, 0] = 0
-    weight[2, 2, 0, 1] = 1
-    weight[2, 2, 1, 0] = -3
-    weight[2, 2, 1, 1] = 2.5
-
-    weight[2, 3, 0, 0] = 1.5
-    weight[2, 3, 0, 1] = 2.5
-    weight[2, 3, 1, 0] = -2
-    weight[2, 3, 1, 1] = 1.5
+    inp, weight = data_generator((1, 4, 5, 2), (3, 4, 2, 2))
 
     bias = np.ndarray(2)
 
@@ -409,60 +244,14 @@ def gen_conv_2D_stride_1_1():
     w = [weight, bias]
     model.set_weights(w)
 
-    inp = np.ndarray((1, 4, 5, 2))
-
-    inp[0, 0, 0, 0] = 0
-    inp[0, 0, 0, 1] = 1
-    inp[0, 0, 1, 0] = 2
-    inp[0, 0, 1, 1] = 1
-    inp[0, 0, 2, 0] = 0
-    inp[0, 0, 2, 1] = 0
-    inp[0, 0, 3, 0] = 2
-    inp[0, 0, 3, 1] = 1
-    inp[0, 0, 4, 0] = 2
-    inp[0, 0, 4, 1] = 1
-
-    inp[0, 1, 0, 0] = 0
-    inp[0, 1, 0, 1] = -1
-    inp[0, 1, 1, 0] = 1
-    inp[0, 1, 1, 1] = -2
-    inp[0, 1, 2, 0] = 3
-    inp[0, 1, 2, 1] = 1
-    inp[0, 1, 3, 0] = 2
-    inp[0, 1, 3, 1] = 0
-    inp[0, 1, 4, 0] = 2
-    inp[0, 1, 4, 1] = -3
-
-    inp[0, 2, 0, 0] = 1
-    inp[0, 2, 0, 1] = 2
-    inp[0, 2, 1, 0] = -2
-    inp[0, 2, 1, 1] = 0
-    inp[0, 2, 2, 0] = 3
-    inp[0, 2, 2, 1] = -3
-    inp[0, 2, 3, 0] = 2
-    inp[0, 2, 3, 1] = 1
-    inp[0, 2, 4, 0] = 2
-    inp[0, 2, 4, 1] = 0
-
-    inp[0, 3, 0, 0] = 1
-    inp[0, 3, 0, 1] = 2
-    inp[0, 3, 1, 0] = 0
-    inp[0, 3, 1, 1] = -2
-    inp[0, 3, 2, 0] = 3
-    inp[0, 3, 2, 1] = 1
-    inp[0, 3, 3, 0] = 2
-    inp[0, 3, 3, 1] = 3
-    inp[0, 3, 4, 0] = -3
-    inp[0, 3, 4, 1] = 1
-
     wrt = js.JSONwriter(model, "tests/test_conv_2D_1_model.json")
     wrt.save()
 
     output = model.predict(inp, batch_size=1)
     print(output.shape)
 
-    write("tests/test_conv_2D_1_input.json", inp.tolist())
-    write("tests/test_conv_2D_1_output.json", output.tolist())
+    write("tests/test_conv_2D_1_input.json", inp)
+    write("tests/test_conv_2D_1_output.json", output)
 
 
 def gen_conv_2D_stride_1_2():
@@ -471,47 +260,7 @@ def gen_conv_2D_stride_1_2():
     model.add(Conv2D(2, (2, 4), strides=(2, 1), input_shape=(4, 5, 2)))
     model.compile(optimizer='rmsprop', loss='mse')
 
-    weight = np.ndarray((2, 4, 2, 2))
-
-    weight[0, 0, 0, 0] = 0
-    weight[0, 0, 0, 1] = 1.5
-    weight[0, 0, 1, 0] = 2
-    weight[0, 0, 1, 1] = 0.5
-
-    weight[0, 1, 0, 0] = -1
-    weight[0, 1, 0, 1] = -2
-    weight[0, 1, 1, 0] = 3
-    weight[0, 1, 1, 1] = 0
-
-    weight[0, 2, 0, 0] = 1
-    weight[0, 2, 0, 1] = 1
-    weight[0, 2, 1, 0] = -3
-    weight[0, 2, 1, 1] = 2.5
-
-    weight[0, 3, 0, 0] = 1.5
-    weight[0, 3, 0, 1] = 0.5
-    weight[0, 3, 1, 0] = -2
-    weight[0, 3, 1, 1] = 1.5
-
-    weight[1, 0, 0, 0] = -0.5
-    weight[1, 0, 0, 1] = 2.5
-    weight[1, 0, 1, 0] = 2.5
-    weight[1, 0, 1, 1] = 0.5
-
-    weight[1, 1, 0, 0] = -1.5
-    weight[1, 1, 0, 1] = -1
-    weight[1, 1, 1, 0] = 3
-    weight[1, 1, 1, 1] = 0.5
-
-    weight[1, 2, 0, 0] = 1.5
-    weight[1, 2, 0, 1] = 1
-    weight[1, 2, 1, 0] = 0
-    weight[1, 2, 1, 1] = 0
-
-    weight[1, 3, 0, 0] = 1.5
-    weight[1, 3, 0, 1] = 0
-    weight[1, 3, 1, 0] = -2
-    weight[1, 3, 1, 1] = 3
+    inp, weight = data_generator((1, 4, 5, 2), (2, 4, 2, 2))
 
     bias = np.ndarray(2)
 
@@ -521,60 +270,14 @@ def gen_conv_2D_stride_1_2():
     w = [weight, bias]
     model.set_weights(w)
 
-    inp = np.ndarray((1, 4, 5, 2))
-
-    inp[0, 0, 0, 0] = 0
-    inp[0, 0, 0, 1] = 1
-    inp[0, 0, 1, 0] = 2
-    inp[0, 0, 1, 1] = 1
-    inp[0, 0, 2, 0] = 0
-    inp[0, 0, 2, 1] = 0
-    inp[0, 0, 3, 0] = 2
-    inp[0, 0, 3, 1] = 1
-    inp[0, 0, 4, 0] = 2
-    inp[0, 0, 4, 1] = 1
-
-    inp[0, 1, 0, 0] = 0
-    inp[0, 1, 0, 1] = -1
-    inp[0, 1, 1, 0] = 1
-    inp[0, 1, 1, 1] = -2
-    inp[0, 1, 2, 0] = 3
-    inp[0, 1, 2, 1] = 1
-    inp[0, 1, 3, 0] = 2
-    inp[0, 1, 3, 1] = 0
-    inp[0, 1, 4, 0] = 2
-    inp[0, 1, 4, 1] = -3
-
-    inp[0, 2, 0, 0] = 1
-    inp[0, 2, 0, 1] = 2
-    inp[0, 2, 1, 0] = -2
-    inp[0, 2, 1, 1] = 0
-    inp[0, 2, 2, 0] = 3
-    inp[0, 2, 2, 1] = -3
-    inp[0, 2, 3, 0] = 2
-    inp[0, 2, 3, 1] = 1
-    inp[0, 2, 4, 0] = 2
-    inp[0, 2, 4, 1] = 0
-
-    inp[0, 3, 0, 0] = 1
-    inp[0, 3, 0, 1] = 2
-    inp[0, 3, 1, 0] = 0
-    inp[0, 3, 1, 1] = -2
-    inp[0, 3, 2, 0] = 3
-    inp[0, 3, 2, 1] = 1
-    inp[0, 3, 3, 0] = 2
-    inp[0, 3, 3, 1] = 3
-    inp[0, 3, 4, 0] = -3
-    inp[0, 3, 4, 1] = 1
-
     wrt = js.JSONwriter(model, "tests/test_conv_2D_2_model.json")
     wrt.save()
 
     output = model.predict(inp, batch_size=1)
     print(output.shape)
 
-    write("tests/test_conv_2D_2_input.json", inp.tolist())
-    write("tests/test_conv_2D_2_output.json", output.tolist())
+    write("tests/test_conv_2D_2_input.json", inp)
+    write("tests/test_conv_2D_2_output.json", output)
 
 
 def gen_cropping1D_tests():
@@ -583,11 +286,7 @@ def gen_cropping1D_tests():
     model.add(Cropping1D(cropping=(1, 2), input_shape=(5, 2)))
     model.compile(optimizer='rmsprop', loss='mse')
 
-    inp = np.ndarray((1, 5, 2))
-
-    for l in range(0, 5):
-        inp[0, l, 0] = l + 1
-        inp[0, l, 1] = -(l + 1)
+    inp, _ = data_generator((1, 5, 2), None)
 
     wrt = js.JSONwriter(model, "tests/test_crop_1D_model.json")
     wrt.save()
@@ -595,8 +294,8 @@ def gen_cropping1D_tests():
     output = model.predict(inp, batch_size=1)
     print(output.shape)
 
-    write("tests/test_crop_1D_input.json", inp.tolist())
-    write("tests/test_crop_1D_output.json", output.tolist())
+    write("tests/test_crop_1D_input.json", inp)
+    write("tests/test_crop_1D_output.json", output)
 
 
 def gen_cropping2D_tests():
@@ -605,14 +304,7 @@ def gen_cropping2D_tests():
     model.add(Cropping2D(cropping=((1, 1), (1, 2)), input_shape=(4, 5, 2)))
     model.compile(optimizer='rmsprop', loss='mse')
 
-    inp = np.ndarray((1, 4, 5, 2))
-
-    l = 0
-    for h in range(0, 4):
-        for w in range(0, 5):
-            l += 1
-            inp[0, h, w, 0] = l + 1
-            inp[0, h, w, 1] = -(l + 1)
+    inp, _ = data_generator((1, 4, 5, 2), None)
 
     wrt = js.JSONwriter(model, "tests/test_crop_2D_model.json")
     wrt.save()
@@ -620,7 +312,8 @@ def gen_cropping2D_tests():
     output = model.predict(inp, batch_size=1)
     print(output.shape)
 
-    write("tests/test_crop_2D_output.json", output.tolist())
+    write("tests/test_crop_2D_input.json", inp)
+    write("tests/test_crop_2D_output.json", output)
 
 
 # POOLING
@@ -632,18 +325,7 @@ def gen_avgpool_1D_stride_1():
     model.add(AveragePooling1D(pool_size=3, strides=1, input_shape=(5, 2)))
     model.compile(optimizer='rmsprop', loss='mse')
 
-    inp = np.ndarray((1, 5, 2))
-
-    inp[0, 0, 0] = 0
-    inp[0, 0, 1] = 1
-    inp[0, 1, 0] = 2
-    inp[0, 1, 1] = 1
-    inp[0, 2, 0] = 0
-    inp[0, 2, 1] = 0
-    inp[0, 3, 0] = 2
-    inp[0, 3, 1] = 1
-    inp[0, 4, 0] = 2
-    inp[0, 4, 1] = 1
+    inp, _ = data_generator((1, 5, 2), None)
 
     wrt = js.JSONwriter(model, "tests/test_avgpool_1D_1_model.json")
     wrt.save()
@@ -651,8 +333,8 @@ def gen_avgpool_1D_stride_1():
     output = model.predict(inp, batch_size=1)
     print(output.shape)
 
-    write("tests/test_avgpool_1D_1_input.json", inp.tolist())
-    write("tests/test_avgpool_1D_1_output.json", output.tolist())
+    write("tests/test_avgpool_1D_1_input.json", inp)
+    write("tests/test_avgpool_1D_1_output.json", output)
 
 
 def gen_avgpool_1D_stride_2():
@@ -661,18 +343,7 @@ def gen_avgpool_1D_stride_2():
     model.add(AveragePooling1D(pool_size=3, strides=2, input_shape=(5, 2)))
     model.compile(optimizer='rmsprop', loss='mse')
 
-    inp = np.ndarray((1, 5, 2))
-
-    inp[0, 0, 0] = 0
-    inp[0, 0, 1] = 1
-    inp[0, 1, 0] = 2
-    inp[0, 1, 1] = 1
-    inp[0, 2, 0] = 0
-    inp[0, 2, 1] = 0
-    inp[0, 3, 0] = 2
-    inp[0, 3, 1] = 1
-    inp[0, 4, 0] = 2
-    inp[0, 4, 1] = 1
+    inp, _ = data_generator((1, 5, 2), None)
 
     wrt = js.JSONwriter(model, "tests/test_avgpool_1D_2_model.json")
     wrt.save()
@@ -680,8 +351,8 @@ def gen_avgpool_1D_stride_2():
     output = model.predict(inp, batch_size=1)
     print(output.shape)
 
-    write("tests/test_avgpool_1D_2_input.json", inp.tolist())
-    write("tests/test_avgpool_1D_2_output.json", output.tolist())
+    write("tests/test_avgpool_1D_2_input.json", inp)
+    write("tests/test_avgpool_1D_2_output.json", output)
 
 
 # avgpooling2D_tests
@@ -691,51 +362,7 @@ def gen_avgpool_2D_stride_1_1():
     model.add(AveragePooling2D(pool_size=(3, 4), strides=(1, 1), input_shape=(4, 5, 2)))
     model.compile(optimizer='rmsprop', loss='mse')
 
-    inp = np.ndarray((1, 4, 5, 2))
-
-    inp[0, 0, 0, 0] = 0
-    inp[0, 0, 0, 1] = 1
-    inp[0, 0, 1, 0] = 2
-    inp[0, 0, 1, 1] = 1
-    inp[0, 0, 2, 0] = 0
-    inp[0, 0, 2, 1] = 0
-    inp[0, 0, 3, 0] = 2
-    inp[0, 0, 3, 1] = 1
-    inp[0, 0, 4, 0] = 2
-    inp[0, 0, 4, 1] = 1
-
-    inp[0, 1, 0, 0] = 0
-    inp[0, 1, 0, 1] = -1
-    inp[0, 1, 1, 0] = 1
-    inp[0, 1, 1, 1] = -2
-    inp[0, 1, 2, 0] = 3
-    inp[0, 1, 2, 1] = 1
-    inp[0, 1, 3, 0] = 2
-    inp[0, 1, 3, 1] = 0
-    inp[0, 1, 4, 0] = 2
-    inp[0, 1, 4, 1] = -3
-
-    inp[0, 2, 0, 0] = 1
-    inp[0, 2, 0, 1] = 2
-    inp[0, 2, 1, 0] = -2
-    inp[0, 2, 1, 1] = 0
-    inp[0, 2, 2, 0] = 3
-    inp[0, 2, 2, 1] = -3
-    inp[0, 2, 3, 0] = 2
-    inp[0, 2, 3, 1] = 1
-    inp[0, 2, 4, 0] = 2
-    inp[0, 2, 4, 1] = 0
-
-    inp[0, 3, 0, 0] = 1
-    inp[0, 3, 0, 1] = 2
-    inp[0, 3, 1, 0] = 0
-    inp[0, 3, 1, 1] = -2
-    inp[0, 3, 2, 0] = 3
-    inp[0, 3, 2, 1] = 1
-    inp[0, 3, 3, 0] = 2
-    inp[0, 3, 3, 1] = 3
-    inp[0, 3, 4, 0] = -3
-    inp[0, 3, 4, 1] = 1
+    inp, _ = data_generator((1, 4, 5, 2), None)
 
     wrt = js.JSONwriter(model, "tests/test_avgpool_2D_1_model.json")
     wrt.save()
@@ -743,8 +370,8 @@ def gen_avgpool_2D_stride_1_1():
     output = model.predict(inp, batch_size=1)
     print(output.shape)
 
-    write("tests/test_avgpool_2D_1_input.json", inp.tolist())
-    write("tests/test_avgpool_2D_1_output.json", output.tolist())
+    write("tests/test_avgpool_2D_1_input.json", inp)
+    write("tests/test_avgpool_2D_1_output.json", output)
 
 
 def gen_avgpool_2D_stride_1_2():
@@ -753,51 +380,7 @@ def gen_avgpool_2D_stride_1_2():
     model.add(AveragePooling2D(pool_size=(3, 4), strides=(1, 1), input_shape=(4, 5, 2)))
     model.compile(optimizer='rmsprop', loss='mse')
 
-    inp = np.ndarray((1, 4, 5, 2))
-
-    inp[0, 0, 0, 0] = 0
-    inp[0, 0, 0, 1] = 1
-    inp[0, 0, 1, 0] = 2
-    inp[0, 0, 1, 1] = 1
-    inp[0, 0, 2, 0] = 0
-    inp[0, 0, 2, 1] = 0
-    inp[0, 0, 3, 0] = 2
-    inp[0, 0, 3, 1] = 1
-    inp[0, 0, 4, 0] = 2
-    inp[0, 0, 4, 1] = 1
-
-    inp[0, 1, 0, 0] = 0
-    inp[0, 1, 0, 1] = -1
-    inp[0, 1, 1, 0] = 1
-    inp[0, 1, 1, 1] = -2
-    inp[0, 1, 2, 0] = 3
-    inp[0, 1, 2, 1] = 1
-    inp[0, 1, 3, 0] = 2
-    inp[0, 1, 3, 1] = 0
-    inp[0, 1, 4, 0] = 2
-    inp[0, 1, 4, 1] = -3
-
-    inp[0, 2, 0, 0] = 1
-    inp[0, 2, 0, 1] = 2
-    inp[0, 2, 1, 0] = -2
-    inp[0, 2, 1, 1] = 0
-    inp[0, 2, 2, 0] = 3
-    inp[0, 2, 2, 1] = -3
-    inp[0, 2, 3, 0] = 2
-    inp[0, 2, 3, 1] = 1
-    inp[0, 2, 4, 0] = 2
-    inp[0, 2, 4, 1] = 0
-
-    inp[0, 3, 0, 0] = 1
-    inp[0, 3, 0, 1] = 2
-    inp[0, 3, 1, 0] = 0
-    inp[0, 3, 1, 1] = -2
-    inp[0, 3, 2, 0] = 3
-    inp[0, 3, 2, 1] = 1
-    inp[0, 3, 3, 0] = 2
-    inp[0, 3, 3, 1] = 3
-    inp[0, 3, 4, 0] = -3
-    inp[0, 3, 4, 1] = 1
+    inp, _ = data_generator((1, 4, 5, 2), None)
 
     wrt = js.JSONwriter(model, "tests/test_avgpool_2D_2_model.json")
     wrt.save()
@@ -805,8 +388,8 @@ def gen_avgpool_2D_stride_1_2():
     output = model.predict(inp, batch_size=1)
     print(output.shape)
 
-    write("tests/test_avgpool_2D_2_input.json", inp.tolist())
-    write("tests/test_avgpool_2D_2_output.json", output.tolist())
+    write("tests/test_avgpool_2D_2_input.json", inp)
+    write("tests/test_avgpool_2D_2_output.json", output)
 
 
 # maxpooling1D tests
@@ -816,18 +399,7 @@ def gen_maxpool_1D_stride_1():
     model.add(MaxPooling1D(pool_size=3, strides=1, input_shape=(5, 2)))
     model.compile(optimizer='rmsprop', loss='mse')
 
-    inp = np.ndarray((1, 5, 2))
-
-    inp[0, 0, 0] = 0
-    inp[0, 0, 1] = 1
-    inp[0, 1, 0] = 2
-    inp[0, 1, 1] = 1
-    inp[0, 2, 0] = 0
-    inp[0, 2, 1] = 0
-    inp[0, 3, 0] = 2
-    inp[0, 3, 1] = 1
-    inp[0, 4, 0] = 2
-    inp[0, 4, 1] = 1
+    inp, _ = data_generator((1, 5, 2), None)
 
     wrt = js.JSONwriter(model, "tests/test_maxpool_1D_1_model.json")
     wrt.save()
@@ -835,8 +407,8 @@ def gen_maxpool_1D_stride_1():
     output = model.predict(inp, batch_size=1)
     print(output.shape)
 
-    write("tests/test_maxpool_1D_1_input.json", inp.tolist())
-    write("tests/test_maxpool_1D_1_output.json", output.tolist())
+    write("tests/test_maxpool_1D_1_input.json", inp)
+    write("tests/test_maxpool_1D_1_output.json", output)
 
 
 def gen_maxpool_1D_stride_2():
@@ -845,18 +417,7 @@ def gen_maxpool_1D_stride_2():
     model.add(MaxPooling1D(pool_size=3, strides=2, input_shape=(5, 2)))
     model.compile(optimizer='rmsprop', loss='mse')
 
-    inp = np.ndarray((1, 5, 2))
-
-    inp[0, 0, 0] = 0
-    inp[0, 0, 1] = 1
-    inp[0, 1, 0] = 2
-    inp[0, 1, 1] = 1
-    inp[0, 2, 0] = 0
-    inp[0, 2, 1] = 0
-    inp[0, 3, 0] = 2
-    inp[0, 3, 1] = 1
-    inp[0, 4, 0] = 2
-    inp[0, 4, 1] = 1
+    inp, _ = data_generator((1, 5, 2), None)
 
     wrt = js.JSONwriter(model, "tests/test_maxpool_1D_2_model.json")
     wrt.save()
@@ -864,7 +425,8 @@ def gen_maxpool_1D_stride_2():
     output = model.predict(inp, batch_size=1)
     print(output.shape)
 
-    write("tests/test_maxpool_1D_2_output.json", output.tolist())
+    write("tests/test_maxpool_1D_2_input.json", inp)
+    write("tests/test_maxpool_1D_2_output.json", output)
 
 
 def gen_maxpool_2D_stride_1_1():
@@ -873,51 +435,7 @@ def gen_maxpool_2D_stride_1_1():
     model.add(MaxPooling2D(pool_size=(3, 4), strides=(1, 1), input_shape=(4, 5, 2)))
     model.compile(optimizer='rmsprop', loss='mse')
 
-    inp = np.ndarray((1, 4, 5, 2))
-
-    inp[0, 0, 0, 0] = 0
-    inp[0, 0, 0, 1] = 1
-    inp[0, 0, 1, 0] = 2
-    inp[0, 0, 1, 1] = 1
-    inp[0, 0, 2, 0] = 0
-    inp[0, 0, 2, 1] = 0
-    inp[0, 0, 3, 0] = 2
-    inp[0, 0, 3, 1] = 1
-    inp[0, 0, 4, 0] = 2
-    inp[0, 0, 4, 1] = 1
-
-    inp[0, 1, 0, 0] = 0
-    inp[0, 1, 0, 1] = -1
-    inp[0, 1, 1, 0] = 1
-    inp[0, 1, 1, 1] = -2
-    inp[0, 1, 2, 0] = 3
-    inp[0, 1, 2, 1] = 1
-    inp[0, 1, 3, 0] = 2
-    inp[0, 1, 3, 1] = 0
-    inp[0, 1, 4, 0] = 2
-    inp[0, 1, 4, 1] = -3
-
-    inp[0, 2, 0, 0] = 1
-    inp[0, 2, 0, 1] = 2
-    inp[0, 2, 1, 0] = -2
-    inp[0, 2, 1, 1] = 0
-    inp[0, 2, 2, 0] = 3
-    inp[0, 2, 2, 1] = -3
-    inp[0, 2, 3, 0] = 2
-    inp[0, 2, 3, 1] = 1
-    inp[0, 2, 4, 0] = 2
-    inp[0, 2, 4, 1] = 0
-
-    inp[0, 3, 0, 0] = 1
-    inp[0, 3, 0, 1] = 2
-    inp[0, 3, 1, 0] = 0
-    inp[0, 3, 1, 1] = -2
-    inp[0, 3, 2, 0] = 3
-    inp[0, 3, 2, 1] = 1
-    inp[0, 3, 3, 0] = 2
-    inp[0, 3, 3, 1] = 3
-    inp[0, 3, 4, 0] = -3
-    inp[0, 3, 4, 1] = 1
+    inp, _ = data_generator((1, 4, 5, 2), None)
 
     wrt = js.JSONwriter(model, "tests/test_maxpool_2D_1_model.json")
     wrt.save()
@@ -925,8 +443,8 @@ def gen_maxpool_2D_stride_1_1():
     output = model.predict(inp, batch_size=1)
     print(output.shape)
 
-    write("tests/test_maxpool_2D_1_input.json", inp.tolist())
-    write("tests/test_maxpool_2D_1_output.json", output.tolist())
+    write("tests/test_maxpool_2D_1_input.json", inp)
+    write("tests/test_maxpool_2D_1_output.json", output)
 
 
 def gen_maxpool_2D_stride_1_2():
@@ -935,51 +453,7 @@ def gen_maxpool_2D_stride_1_2():
     model.add(MaxPooling2D(pool_size=(2, 4), strides=(2, 1), input_shape=(4, 5, 2)))
     model.compile(optimizer='rmsprop', loss='mse')
 
-    inp = np.ndarray((1, 4, 5, 2))
-
-    inp[0, 0, 0, 0] = 0
-    inp[0, 0, 0, 1] = 1
-    inp[0, 0, 1, 0] = 2
-    inp[0, 0, 1, 1] = 1
-    inp[0, 0, 2, 0] = 0
-    inp[0, 0, 2, 1] = 0
-    inp[0, 0, 3, 0] = 2
-    inp[0, 0, 3, 1] = 1
-    inp[0, 0, 4, 0] = 2
-    inp[0, 0, 4, 1] = 1
-
-    inp[0, 1, 0, 0] = 0
-    inp[0, 1, 0, 1] = -1
-    inp[0, 1, 1, 0] = 1
-    inp[0, 1, 1, 1] = -2
-    inp[0, 1, 2, 0] = 3
-    inp[0, 1, 2, 1] = 1
-    inp[0, 1, 3, 0] = 2
-    inp[0, 1, 3, 1] = 0
-    inp[0, 1, 4, 0] = 2
-    inp[0, 1, 4, 1] = -3
-
-    inp[0, 2, 0, 0] = 1
-    inp[0, 2, 0, 1] = 2
-    inp[0, 2, 1, 0] = -2
-    inp[0, 2, 1, 1] = 0
-    inp[0, 2, 2, 0] = 3
-    inp[0, 2, 2, 1] = -3
-    inp[0, 2, 3, 0] = 2
-    inp[0, 2, 3, 1] = 1
-    inp[0, 2, 4, 0] = 2
-    inp[0, 2, 4, 1] = 0
-
-    inp[0, 3, 0, 0] = 1
-    inp[0, 3, 0, 1] = 2
-    inp[0, 3, 1, 0] = 0
-    inp[0, 3, 1, 1] = -2
-    inp[0, 3, 2, 0] = 3
-    inp[0, 3, 2, 1] = 1
-    inp[0, 3, 3, 0] = 2
-    inp[0, 3, 3, 1] = 3
-    inp[0, 3, 4, 0] = -3
-    inp[0, 3, 4, 1] = 1
+    inp, _ = data_generator((1, 4, 5, 2), None)
 
     wrt = js.JSONwriter(model, "tests/test_maxpool_2D_2_model.json")
     wrt.save()
@@ -987,8 +461,8 @@ def gen_maxpool_2D_stride_1_2():
     output = model.predict(inp, batch_size=1)
     print(output.shape)
 
-    write("tests/test_maxpool_2D_2_input.json", inp.tolist())
-    write("tests/test_maxpool_2D_2_output.json", output.tolist())
+    write("tests/test_maxpool_2D_2_input.json", inp)
+    write("tests/test_maxpool_2D_2_output.json", output)
 
 
 def gen_globalmaxpooling1D():
@@ -1013,8 +487,8 @@ def gen_globalmaxpooling1D():
     output = model.predict(inp, batch_size=1)
     print(output.shape)
 
-    write("tests/test_globalmaxpool_1D_input.json", inp.tolist())
-    write("tests/test_globalmaxpool_1D_output.json", output.tolist())
+    write("tests/test_globalmaxpool_1D_input.json", inp)
+    write("tests/test_globalmaxpool_1D_output.json", output)
 
 
 def gen_globalmaxpooling2D():
@@ -1023,31 +497,7 @@ def gen_globalmaxpooling2D():
     model.add(GlobalMaxPooling2D(input_shape=(3, 3, 2)))
     model.compile(optimizer='rmsprop', loss='mse')
 
-    inp = np.ndarray((1, 3, 3, 2))
-
-    inp[0, 0, 0, 0] = 1
-    inp[0, 1, 0, 0] = 2
-    inp[0, 2, 0, 0] = 0
-
-    inp[0, 0, 1, 0] = 3
-    inp[0, 1, 1, 0] = 4
-    inp[0, 2, 1, 0] = 0
-
-    inp[0, 0, 2, 0] = 2
-    inp[0, 1, 2, 0] = 2
-    inp[0, 2, 2, 0] = 0
-
-    inp[0, 0, 0, 1] = 0
-    inp[0, 1, 0, 1] = 3
-    inp[0, 2, 0, 1] = 1
-
-    inp[0, 0, 1, 1] = 1
-    inp[0, 1, 1, 1] = 1
-    inp[0, 2, 1, 1] = -1
-
-    inp[0, 0, 2, 1] = -3
-    inp[0, 1, 2, 1] = -1
-    inp[0, 2, 2, 1] = 0
+    inp, _ = data_generator((1, 3, 3, 2), None)
 
     wrt = js.JSONwriter(model, "tests/test_globalmaxpool_2D_model.json")
     wrt.save()
@@ -1055,8 +505,8 @@ def gen_globalmaxpooling2D():
     output = model.predict(inp, batch_size=1)
     print(output.shape)
 
-    write("tests/test_globalmaxpool_2D_input.json", inp.tolist())
-    write("tests/test_globalmaxpool_2D_output.json", output.tolist())
+    write("tests/test_globalmaxpool_2D_input.json", inp)
+    write("tests/test_globalmaxpool_2D_output.json", output)
 
 
 def gen_globalaveragepooling1D():
@@ -1081,8 +531,8 @@ def gen_globalaveragepooling1D():
     output = model.predict(inp, batch_size=1)
     print(output.shape)
 
-    write("tests/test_globalavgpool_1D_input.json", inp.tolist())
-    write("tests/test_globalavgpool_1D_output.json", output.tolist())
+    write("tests/test_globalavgpool_1D_input.json", inp)
+    write("tests/test_globalavgpool_1D_output.json", output)
 
 
 def gen_globalaveragepooling2D():
@@ -1091,31 +541,7 @@ def gen_globalaveragepooling2D():
     model.add(GlobalAveragePooling2D(input_shape=(3, 3, 2)))
     model.compile(optimizer='rmsprop', loss='mse')
 
-    inp = np.ndarray((1, 3, 3, 2))
-
-    inp[0, 0, 0, 0] = 1
-    inp[0, 1, 0, 0] = 2
-    inp[0, 2, 0, 0] = 0
-
-    inp[0, 0, 1, 0] = 3
-    inp[0, 1, 1, 0] = 4
-    inp[0, 2, 1, 0] = 0
-
-    inp[0, 0, 2, 0] = 2
-    inp[0, 1, 2, 0] = 2
-    inp[0, 2, 2, 0] = 0
-
-    inp[0, 0, 0, 1] = 0
-    inp[0, 1, 0, 1] = 3
-    inp[0, 2, 0, 1] = 1
-
-    inp[0, 0, 1, 1] = 1
-    inp[0, 1, 1, 1] = 1
-    inp[0, 2, 1, 1] = -1
-
-    inp[0, 0, 2, 1] = -3
-    inp[0, 1, 2, 1] = -1
-    inp[0, 2, 2, 1] = 0
+    inp, _ = data_generator((1, 3, 3, 2), None)
 
     wrt = js.JSONwriter(model, "tests/test_globalavgpool_2D_model.json")
     wrt.save()
@@ -1123,8 +549,8 @@ def gen_globalaveragepooling2D():
     output = model.predict(inp, batch_size=1)
     print(output.shape)
 
-    write("tests/test_globalavgpool_2D_input.json", inp.tolist())
-    write("tests/test_globalavgpool_2D_output.json", output.tolist())
+    write("tests/test_globalavgpool_2D_input.json", inp)
+    write("tests/test_globalavgpool_2D_output.json", output)
 
 
 # CORE LAYERS
@@ -1136,51 +562,7 @@ def gen_flatten():
     model.add(Flatten(input_shape=(4, 5, 2)))
     model.compile(optimizer='rmsprop', loss='mse')
 
-    inp = np.ndarray((1, 4, 5, 2))
-
-    inp[0, 0, 0, 0] = 0
-    inp[0, 0, 0, 1] = 1
-    inp[0, 0, 1, 0] = 2
-    inp[0, 0, 1, 1] = 1
-    inp[0, 0, 2, 0] = 0
-    inp[0, 0, 2, 1] = 0
-    inp[0, 0, 3, 0] = 2
-    inp[0, 0, 3, 1] = 1
-    inp[0, 0, 4, 0] = 2
-    inp[0, 0, 4, 1] = 1
-
-    inp[0, 1, 0, 0] = 0
-    inp[0, 1, 0, 1] = -1
-    inp[0, 1, 1, 0] = 1
-    inp[0, 1, 1, 1] = -2
-    inp[0, 1, 2, 0] = 3
-    inp[0, 1, 2, 1] = 1
-    inp[0, 1, 3, 0] = 2
-    inp[0, 1, 3, 1] = 0
-    inp[0, 1, 4, 0] = 2
-    inp[0, 1, 4, 1] = -3
-
-    inp[0, 2, 0, 0] = 1
-    inp[0, 2, 0, 1] = 2
-    inp[0, 2, 1, 0] = -2
-    inp[0, 2, 1, 1] = 0
-    inp[0, 2, 2, 0] = 3
-    inp[0, 2, 2, 1] = -3
-    inp[0, 2, 3, 0] = 2
-    inp[0, 2, 3, 1] = 1
-    inp[0, 2, 4, 0] = 2
-    inp[0, 2, 4, 1] = 0
-
-    inp[0, 3, 0, 0] = 1
-    inp[0, 3, 0, 1] = 2
-    inp[0, 3, 1, 0] = 0
-    inp[0, 3, 1, 1] = -2
-    inp[0, 3, 2, 0] = 3
-    inp[0, 3, 2, 1] = 1
-    inp[0, 3, 3, 0] = 2
-    inp[0, 3, 3, 1] = 3
-    inp[0, 3, 4, 0] = -3
-    inp[0, 3, 4, 1] = 1
+    inp, _ = data_generator((1, 4, 5, 2), None)
 
     wrt = js.JSONwriter(model, "tests/test_flat_model.json")
     wrt.save()
@@ -1188,8 +570,8 @@ def gen_flatten():
     output = model.predict(inp, batch_size=1)
     print(output.shape)
 
-    write("tests/test_flat_input.json", inp.tolist())
-    write("tests/test_flat_output.json", output.tolist())
+    write("tests/test_flat_input.json", inp)
+    write("tests/test_flat_output.json", output)
 
 
 # DENSE
@@ -1200,59 +582,7 @@ def gen_dense_units_4():
     model.add(Dense(4))
     model.compile(optimizer='rmsprop', loss='mse')
 
-    inp = np.ndarray((1, 8, 1, 1))
-
-    inp[0, 0, 0, 0] = 1
-    inp[0, 1, 0, 0] = 2
-    inp[0, 2, 0, 0] = -1
-    inp[0, 3, 0, 0] = 0
-
-    inp[0, 4, 0, 0] = 3
-    inp[0, 5, 0, 0] = 1
-    inp[0, 6, 0, 0] = 1
-    inp[0, 7, 0, 0] = 2
-
-    weight = np.ndarray((8, 4))
-
-    weight[0, 0] = 0
-    weight[0, 1] = 1.5
-    weight[0, 2] = 2
-    weight[0, 3] = 0.5
-
-    weight[1, 0] = -1
-    weight[1, 1] = -2
-    weight[1, 2] = 3
-    weight[1, 3] = 0
-
-    weight[2, 0] = 1
-    weight[2, 1] = 1
-    weight[2, 2] = -3
-    weight[2, 3] = 2.5
-
-    weight[3, 0] = 1.5
-    weight[3, 1] = 0.5
-    weight[3, 2] = -2
-    weight[3, 3] = 1.5
-
-    weight[4, 0] = -0.5
-    weight[4, 1] = 2.5
-    weight[4, 2] = 2.5
-    weight[4, 3] = 0.5
-
-    weight[5, 0] = -1.5
-    weight[5, 1] = -1
-    weight[5, 2] = 3
-    weight[5, 3] = 0.5
-
-    weight[6, 0] = 1.5
-    weight[6, 1] = 1
-    weight[6, 2] = 0
-    weight[6, 3] = 0
-
-    weight[7, 0] = 1.5
-    weight[7, 1] = 0
-    weight[7, 2] = -2
-    weight[7, 3] = 3
+    inp, weight = data_generator((1, 8, 1, 1), (8, 4))
 
     bias = np.ndarray(4)
 
@@ -1270,8 +600,8 @@ def gen_dense_units_4():
     output = model.predict(inp, batch_size=1)
     print(output.shape)
 
-    write("tests/test_dense_input.json", inp.tolist())
-    write("tests/test_dense_output.json", output.tolist())
+    write("tests/test_dense_input.json", inp)
+    write("tests/test_dense_output.json", output)
 
 
 def gen_reshape_tests():
@@ -1280,14 +610,7 @@ def gen_reshape_tests():
     model.add(Reshape((3, 2, 3), input_shape=(3, 3, 2)))
     model.compile(optimizer='rmsprop', loss='mse')
 
-    inp = np.ndarray((1, 3, 3, 2))
-
-    l = 0
-    for h in range(0, 3):
-        for w in range(0, 3):
-            for c in range(0, 2):
-                l += 1
-                inp[0, h, w, c] = l + 1
+    inp, _ = data_generator((1, 3, 3, 2), None)
 
     wrt = js.JSONwriter(model, "tests/test_reshape_model.json")
     wrt.save()
@@ -1295,8 +618,8 @@ def gen_reshape_tests():
     output = model.predict(inp, batch_size=1)
     print(output.shape)
 
-    write("tests/test_reshape_input.json", inp.tolist())
-    write("tests/test_reshape_output.json", output.tolist())
+    write("tests/test_reshape_input.json", inp)
+    write("tests/test_reshape_output.json", output)
 
 
 def gen_permute_tests():
@@ -1305,14 +628,7 @@ def gen_permute_tests():
     model.add(Permute((3, 1, 2), input_shape=(2, 3, 4)))
     model.compile(optimizer='rmsprop', loss='mse')
 
-    inp = np.ndarray((1, 2, 3, 4))
-
-    l = 0
-    for h in range(0, 2):
-        for w in range(0, 3):
-            for c in range(0, 4):
-                l += 1
-                inp[0, h, w, c] = l + 1
+    inp, _ = data_generator((1, 2, 3, 4), None)
 
     wrt = js.JSONwriter(model, "tests/test_permute_model.json")
     wrt.save()
@@ -1320,8 +636,8 @@ def gen_permute_tests():
     output = model.predict(inp, batch_size=1)
     print(output.shape)
 
-    write("tests/test_permute_input.json", inp.tolist())
-    write("tests/test_permute_output.json", output.tolist())
+    write("tests/test_permute_input.json", inp)
+    write("tests/test_permute_output.json", output)
 
 
 def gen_repeatvector_tests():
@@ -1342,8 +658,8 @@ def gen_repeatvector_tests():
     output = model.predict(inp, batch_size=1)
     print(output.shape)
 
-    write("tests/test_repeatvector_input.json", inp.tolist())
-    write("tests/test_repeatvector_output.json", output.tolist())
+    write("tests/test_repeatvector_input.json", inp)
+    write("tests/test_repeatvector_output.json", output)
 
 
 # -------------------------------------------------------------------------------------------------------------
@@ -1359,59 +675,7 @@ def gen_elu():
     model.add(Activation('elu'))
     model.compile(optimizer='rmsprop', loss='mse')
 
-    inp = np.ndarray((1, 8, 1, 1))
-
-    inp[0, 0, 0, 0] = 1
-    inp[0, 1, 0, 0] = 2
-    inp[0, 2, 0, 0] = -1
-    inp[0, 3, 0, 0] = 0
-
-    inp[0, 4, 0, 0] = 3
-    inp[0, 5, 0, 0] = 1
-    inp[0, 6, 0, 0] = 1
-    inp[0, 7, 0, 0] = 2
-
-    weight = np.ndarray((8, 4))
-
-    weight[0, 0] = 0
-    weight[0, 1] = 1.5
-    weight[0, 2] = 2
-    weight[0, 3] = 0.5
-
-    weight[1, 0] = -1
-    weight[1, 1] = -2
-    weight[1, 2] = 3
-    weight[1, 3] = 0
-
-    weight[2, 0] = 1
-    weight[2, 1] = 1
-    weight[2, 2] = -3
-    weight[2, 3] = 2.5
-
-    weight[3, 0] = 1.5
-    weight[3, 1] = 0.5
-    weight[3, 2] = -2
-    weight[3, 3] = 1.5
-
-    weight[4, 0] = -0.5
-    weight[4, 1] = 2.5
-    weight[4, 2] = 2.5
-    weight[4, 3] = 0.5
-
-    weight[5, 0] = -1.5
-    weight[5, 1] = -1
-    weight[5, 2] = 3
-    weight[5, 3] = 0.5
-
-    weight[6, 0] = 1.5
-    weight[6, 1] = 1
-    weight[6, 2] = 0
-    weight[6, 3] = 0
-
-    weight[7, 0] = 1.5
-    weight[7, 1] = 0
-    weight[7, 2] = -2
-    weight[7, 3] = 3
+    inp, weight = data_generator((1, 8, 1, 1), (8, 4))
 
     bias = np.ndarray(4)
 
@@ -1429,8 +693,8 @@ def gen_elu():
     output = model.predict(inp, batch_size=1)
     print(output.shape)
 
-    write("tests/test_elu_input.json", inp.tolist())
-    write("tests/test_elu_output.json", output.tolist())
+    write("tests/test_elu_input.json", inp)
+    write("tests/test_elu_output.json", output)
 
 
 # HardSigmoid test
@@ -1442,59 +706,7 @@ def gen_hard_sigmoid():
     model.add(Activation('hard_sigmoid'))
     model.compile(optimizer='rmsprop', loss='mse')
 
-    inp = np.ndarray((1, 8, 1, 1))
-
-    inp[0, 0, 0, 0] = 1
-    inp[0, 1, 0, 0] = 2
-    inp[0, 2, 0, 0] = -1
-    inp[0, 3, 0, 0] = 0
-
-    inp[0, 4, 0, 0] = 3
-    inp[0, 5, 0, 0] = 1
-    inp[0, 6, 0, 0] = 1
-    inp[0, 7, 0, 0] = 2
-
-    weight = np.ndarray((8, 4))
-
-    weight[0, 0] = 0
-    weight[0, 1] = 1.5
-    weight[0, 2] = 2
-    weight[0, 3] = 0.5
-
-    weight[1, 0] = -1
-    weight[1, 1] = -2
-    weight[1, 2] = 3
-    weight[1, 3] = 0
-
-    weight[2, 0] = 1
-    weight[2, 1] = 1
-    weight[2, 2] = -3
-    weight[2, 3] = 2.5
-
-    weight[3, 0] = 1.5
-    weight[3, 1] = 0.5
-    weight[3, 2] = -2
-    weight[3, 3] = 1.5
-
-    weight[4, 0] = -0.5
-    weight[4, 1] = 2.5
-    weight[4, 2] = 2.5
-    weight[4, 3] = 0.5
-
-    weight[5, 0] = -1.5
-    weight[5, 1] = -1
-    weight[5, 2] = 3
-    weight[5, 3] = 0.5
-
-    weight[6, 0] = 1.5
-    weight[6, 1] = 1
-    weight[6, 2] = 0
-    weight[6, 3] = 0
-
-    weight[7, 0] = 1.5
-    weight[7, 1] = 0
-    weight[7, 2] = -2
-    weight[7, 3] = 3
+    inp, weight = data_generator((1, 8, 1, 1), (8, 4))
 
     bias = np.ndarray(4)
 
@@ -1512,8 +724,8 @@ def gen_hard_sigmoid():
     output = model.predict(inp, batch_size=1)
     print(output.shape)
 
-    write("tests/test_hard_sigmoid_input.json", inp.tolist())
-    write("tests/test_hard_sigmoid_output.json", output.tolist())
+    write("tests/test_hard_sigmoid_input.json", inp)
+    write("tests/test_hard_sigmoid_output.json", output)
 
 
 # ReLu test
@@ -1525,59 +737,7 @@ def gen_relu():
     model.add(Activation('relu'))
     model.compile(optimizer='rmsprop', loss='mse')
 
-    inp = np.ndarray((1, 8, 1, 1))
-
-    inp[0, 0, 0, 0] = 1
-    inp[0, 1, 0, 0] = 2
-    inp[0, 2, 0, 0] = -1
-    inp[0, 3, 0, 0] = 0
-
-    inp[0, 4, 0, 0] = 3
-    inp[0, 5, 0, 0] = 1
-    inp[0, 6, 0, 0] = 1
-    inp[0, 7, 0, 0] = 2
-
-    weight = np.ndarray((8, 4))
-
-    weight[0, 0] = 0
-    weight[0, 1] = 1.5
-    weight[0, 2] = 2
-    weight[0, 3] = 0.5
-
-    weight[1, 0] = -1
-    weight[1, 1] = -2
-    weight[1, 2] = 3
-    weight[1, 3] = 0
-
-    weight[2, 0] = 1
-    weight[2, 1] = 1
-    weight[2, 2] = -3
-    weight[2, 3] = 2.5
-
-    weight[3, 0] = 1.5
-    weight[3, 1] = 0.5
-    weight[3, 2] = -2
-    weight[3, 3] = 1.5
-
-    weight[4, 0] = -0.5
-    weight[4, 1] = 2.5
-    weight[4, 2] = 2.5
-    weight[4, 3] = 0.5
-
-    weight[5, 0] = -1.5
-    weight[5, 1] = -1
-    weight[5, 2] = 3
-    weight[5, 3] = 0.5
-
-    weight[6, 0] = 1.5
-    weight[6, 1] = 1
-    weight[6, 2] = 0
-    weight[6, 3] = 0
-
-    weight[7, 0] = 1.5
-    weight[7, 1] = 0
-    weight[7, 2] = -2
-    weight[7, 3] = 3
+    inp, weight = data_generator((1, 8, 1, 1), (8, 4))
 
     bias = np.ndarray(4)
 
@@ -1595,8 +755,8 @@ def gen_relu():
     output = model.predict(inp, batch_size=1)
     print(output.shape)
 
-    write("tests/test_relu_input.json", inp.tolist())
-    write("tests/test_relu_output.json", output.tolist())
+    write("tests/test_relu_input.json", inp)
+    write("tests/test_relu_output.json", output)
 
 
 # Sigmoid test
@@ -1608,59 +768,7 @@ def gen_sigmoid():
     model.add(Activation('sigmoid'))
     model.compile(optimizer='rmsprop', loss='mse')
 
-    inp = np.ndarray((1, 8, 1, 1))
-
-    inp[0, 0, 0, 0] = 1
-    inp[0, 1, 0, 0] = 2
-    inp[0, 2, 0, 0] = -1
-    inp[0, 3, 0, 0] = 0
-
-    inp[0, 4, 0, 0] = 3
-    inp[0, 5, 0, 0] = 1
-    inp[0, 6, 0, 0] = 1
-    inp[0, 7, 0, 0] = 2
-
-    weight = np.ndarray((8, 4))
-
-    weight[0, 0] = 0
-    weight[0, 1] = 1.5
-    weight[0, 2] = 2
-    weight[0, 3] = 0.5
-
-    weight[1, 0] = -1
-    weight[1, 1] = -2
-    weight[1, 2] = 3
-    weight[1, 3] = 0
-
-    weight[2, 0] = 1
-    weight[2, 1] = 1
-    weight[2, 2] = -3
-    weight[2, 3] = 2.5
-
-    weight[3, 0] = 1.5
-    weight[3, 1] = 0.5
-    weight[3, 2] = -2
-    weight[3, 3] = 1.5
-
-    weight[4, 0] = -0.5
-    weight[4, 1] = 2.5
-    weight[4, 2] = 2.5
-    weight[4, 3] = 0.5
-
-    weight[5, 0] = -1.5
-    weight[5, 1] = -1
-    weight[5, 2] = 3
-    weight[5, 3] = 0.5
-
-    weight[6, 0] = 1.5
-    weight[6, 1] = 1
-    weight[6, 2] = 0
-    weight[6, 3] = 0
-
-    weight[7, 0] = 1.5
-    weight[7, 1] = 0
-    weight[7, 2] = -2
-    weight[7, 3] = 3
+    inp, weight = data_generator((1, 8, 1, 1), (8, 4))
 
     bias = np.ndarray(4)
 
@@ -1678,8 +786,8 @@ def gen_sigmoid():
     output = model.predict(inp, batch_size=1)
     print(output.shape)
 
-    write("tests/test_sigmoid_input.json", inp.tolist())
-    write("tests/test_sigmoid_output.json", output.tolist())
+    write("tests/test_sigmoid_input.json", inp)
+    write("tests/test_sigmoid_output.json", output)
 
 
 # Softmax test
@@ -1691,59 +799,7 @@ def gen_softmax():
     model.add(Activation('softmax'))
     model.compile(optimizer='rmsprop', loss='mse')
 
-    inp = np.ndarray((1, 8, 1, 1))
-
-    inp[0, 0, 0, 0] = 1
-    inp[0, 1, 0, 0] = 2
-    inp[0, 2, 0, 0] = -1
-    inp[0, 3, 0, 0] = 0
-
-    inp[0, 4, 0, 0] = 3
-    inp[0, 5, 0, 0] = 1
-    inp[0, 6, 0, 0] = 1
-    inp[0, 7, 0, 0] = 2
-
-    weight = np.ndarray((8, 4))
-
-    weight[0, 0] = 0
-    weight[0, 1] = 1.5
-    weight[0, 2] = 2
-    weight[0, 3] = 0.5
-
-    weight[1, 0] = -1
-    weight[1, 1] = -2
-    weight[1, 2] = 3
-    weight[1, 3] = 0
-
-    weight[2, 0] = 1
-    weight[2, 1] = 1
-    weight[2, 2] = -3
-    weight[2, 3] = 2.5
-
-    weight[3, 0] = 1.5
-    weight[3, 1] = 0.5
-    weight[3, 2] = -2
-    weight[3, 3] = 1.5
-
-    weight[4, 0] = -0.5
-    weight[4, 1] = 2.5
-    weight[4, 2] = 2.5
-    weight[4, 3] = 0.5
-
-    weight[5, 0] = -1.5
-    weight[5, 1] = -1
-    weight[5, 2] = 3
-    weight[5, 3] = 0.5
-
-    weight[6, 0] = 1.5
-    weight[6, 1] = 1
-    weight[6, 2] = 0
-    weight[6, 3] = 0
-
-    weight[7, 0] = 1.5
-    weight[7, 1] = 0
-    weight[7, 2] = -2
-    weight[7, 3] = 3
+    inp, weight = data_generator((1, 8, 1, 1), (8, 4))
 
     bias = np.ndarray(4)
 
@@ -1761,8 +817,8 @@ def gen_softmax():
     output = model.predict(inp, batch_size=1)
     print(output.shape)
 
-    write("tests/test_softmax_input.json", inp.tolist())
-    write("tests/test_softmax_output.json", output.tolist())
+    write("tests/test_softmax_input.json", inp)
+    write("tests/test_softmax_output.json", output)
 
 
 # SoftPlus test
@@ -1774,59 +830,7 @@ def gen_softplus():
     model.add(Activation('softplus'))
     model.compile(optimizer='rmsprop', loss='mse')
 
-    inp = np.ndarray((1, 8, 1, 1))
-
-    inp[0, 0, 0, 0] = 1
-    inp[0, 1, 0, 0] = 2
-    inp[0, 2, 0, 0] = -1
-    inp[0, 3, 0, 0] = 0
-
-    inp[0, 4, 0, 0] = 3
-    inp[0, 5, 0, 0] = 1
-    inp[0, 6, 0, 0] = 1
-    inp[0, 7, 0, 0] = 2
-
-    weight = np.ndarray((8, 4))
-
-    weight[0, 0] = 0
-    weight[0, 1] = 1.5
-    weight[0, 2] = 2
-    weight[0, 3] = 0.5
-
-    weight[1, 0] = -1
-    weight[1, 1] = -2
-    weight[1, 2] = 3
-    weight[1, 3] = 0
-
-    weight[2, 0] = 1
-    weight[2, 1] = 1
-    weight[2, 2] = -3
-    weight[2, 3] = 2.5
-
-    weight[3, 0] = 1.5
-    weight[3, 1] = 0.5
-    weight[3, 2] = -2
-    weight[3, 3] = 1.5
-
-    weight[4, 0] = -0.5
-    weight[4, 1] = 2.5
-    weight[4, 2] = 2.5
-    weight[4, 3] = 0.5
-
-    weight[5, 0] = -1.5
-    weight[5, 1] = -1
-    weight[5, 2] = 3
-    weight[5, 3] = 0.5
-
-    weight[6, 0] = 1.5
-    weight[6, 1] = 1
-    weight[6, 2] = 0
-    weight[6, 3] = 0
-
-    weight[7, 0] = 1.5
-    weight[7, 1] = 0
-    weight[7, 2] = -2
-    weight[7, 3] = 3
+    inp, weight = data_generator((1, 8, 1, 1), (8, 4))
 
     bias = np.ndarray(4)
 
@@ -1844,8 +848,8 @@ def gen_softplus():
     output = model.predict(inp, batch_size=1)
     print(output.shape)
 
-    write("tests/test_softplus_input.json", inp.tolist())
-    write("tests/test_softplus_output.json", output.tolist())
+    write("tests/test_softplus_input.json", inp)
+    write("tests/test_softplus_output.json", output)
 
 
 # SoftSign test
@@ -1857,59 +861,7 @@ def gen_softsign():
     model.add(Activation('softsign'))
     model.compile(optimizer='rmsprop', loss='mse')
 
-    inp = np.ndarray((1, 8, 1, 1))
-
-    inp[0, 0, 0, 0] = 1
-    inp[0, 1, 0, 0] = 2
-    inp[0, 2, 0, 0] = -1
-    inp[0, 3, 0, 0] = 0
-
-    inp[0, 4, 0, 0] = 3
-    inp[0, 5, 0, 0] = 1
-    inp[0, 6, 0, 0] = 1
-    inp[0, 7, 0, 0] = 2
-
-    weight = np.ndarray((8, 4))
-
-    weight[0, 0] = 0
-    weight[0, 1] = 1.5
-    weight[0, 2] = 2
-    weight[0, 3] = 0.5
-
-    weight[1, 0] = -1
-    weight[1, 1] = -2
-    weight[1, 2] = 3
-    weight[1, 3] = 0
-
-    weight[2, 0] = 1
-    weight[2, 1] = 1
-    weight[2, 2] = -3
-    weight[2, 3] = 2.5
-
-    weight[3, 0] = 1.5
-    weight[3, 1] = 0.5
-    weight[3, 2] = -2
-    weight[3, 3] = 1.5
-
-    weight[4, 0] = -0.5
-    weight[4, 1] = 2.5
-    weight[4, 2] = 2.5
-    weight[4, 3] = 0.5
-
-    weight[5, 0] = -1.5
-    weight[5, 1] = -1
-    weight[5, 2] = 3
-    weight[5, 3] = 0.5
-
-    weight[6, 0] = 1.5
-    weight[6, 1] = 1
-    weight[6, 2] = 0
-    weight[6, 3] = 0
-
-    weight[7, 0] = 1.5
-    weight[7, 1] = 0
-    weight[7, 2] = -2
-    weight[7, 3] = 3
+    inp, weight = data_generator((1, 8, 1, 1), (8, 4))
 
     bias = np.ndarray(4)
 
@@ -1927,8 +879,8 @@ def gen_softsign():
     output = model.predict(inp, batch_size=1)
     print(output.shape)
 
-    write("tests/test_softsign_input.json", inp.tolist())
-    write("tests/test_softsign_output.json", output.tolist())
+    write("tests/test_softsign_input.json", inp)
+    write("tests/test_softsign_output.json", output)
 
 
 # TanH test
@@ -1940,59 +892,7 @@ def gen_tanh():
     model.add(Activation('tanh'))
     model.compile(optimizer='rmsprop', loss='mse')
 
-    inp = np.ndarray((1, 8, 1, 1))
-
-    inp[0, 0, 0, 0] = 1
-    inp[0, 1, 0, 0] = 2
-    inp[0, 2, 0, 0] = -1
-    inp[0, 3, 0, 0] = 0
-
-    inp[0, 4, 0, 0] = 3
-    inp[0, 5, 0, 0] = 1
-    inp[0, 6, 0, 0] = 1
-    inp[0, 7, 0, 0] = 2
-
-    weight = np.ndarray((8, 4))
-
-    weight[0, 0] = 0
-    weight[0, 1] = 1.5
-    weight[0, 2] = 2
-    weight[0, 3] = 0.5
-
-    weight[1, 0] = -1
-    weight[1, 1] = -2
-    weight[1, 2] = 3
-    weight[1, 3] = 0
-
-    weight[2, 0] = 1
-    weight[2, 1] = 1
-    weight[2, 2] = -3
-    weight[2, 3] = 2.5
-
-    weight[3, 0] = 1.5
-    weight[3, 1] = 0.5
-    weight[3, 2] = -2
-    weight[3, 3] = 1.5
-
-    weight[4, 0] = -0.5
-    weight[4, 1] = 2.5
-    weight[4, 2] = 2.5
-    weight[4, 3] = 0.5
-
-    weight[5, 0] = -1.5
-    weight[5, 1] = -1
-    weight[5, 2] = 3
-    weight[5, 3] = 0.5
-
-    weight[6, 0] = 1.5
-    weight[6, 1] = 1
-    weight[6, 2] = 0
-    weight[6, 3] = 0
-
-    weight[7, 0] = 1.5
-    weight[7, 1] = 0
-    weight[7, 2] = -2
-    weight[7, 3] = 3
+    inp, weight = data_generator((1, 8, 1, 1), (8, 4))
 
     bias = np.ndarray(4)
 
@@ -2010,8 +910,8 @@ def gen_tanh():
     output = model.predict(inp, batch_size=1)
     print(output.shape)
 
-    write("tests/test_tanh_input.json", inp.tolist())
-    write("tests/test_tanh_output.json", output.tolist())
+    write("tests/test_tanh_input.json", inp)
+    write("tests/test_tanh_output.json", output)
 
 
 # NORMALIZATION
@@ -2028,26 +928,18 @@ def gen_batchnorm():
     params[2] = np.array([2, 2, 2])  # bias
     params[3] = np.array([5, 5, 5])  # variance
 
-    data = np.ndarray((4, 2, 1, 3))
-
-    l = 0
-    for b in range(0, 4):
-        for h in range(0, 2):
-            for w in range(0, 1):
-                for c in range(0, 3):
-                    l += 1
-                    data[b, h, w, c] = l % 7 - 3
+    inp, _ = data_generator((4, 2, 1, 3), None)
 
     model.set_weights(params)
-    output = model.predict(data, batch_size=1)
+    output = model.predict(inp, batch_size=1)
 
     wrt = js.JSONwriter(model, "tests/test_batchnorm_model.json")
     wrt.save()
 
     print(output.shape)
 
-    write("tests/test_batchnorm_input.json", data.tolist())
-    write("tests/test_batchnorm_output.json", output.tolist())
+    write("tests/test_batchnorm_input.json", inp)
+    write("tests/test_batchnorm_output.json", output)
 
 
 # RNN LAYERS
@@ -2092,8 +984,8 @@ def gen_simplernn():
 
     print(output.shape)
 
-    write("tests/test_simplernn_input.json", data.tolist())
-    write("tests/test_simplernn_output.json", output.tolist())
+    write("tests/test_simplernn_input.json", data)
+    write("tests/test_simplernn_output.json", output)
 
 
 def gen_lstm():
@@ -2138,8 +1030,8 @@ def gen_lstm():
 
     print(output.shape)
 
-    write("tests/test_lstm_input.json", data.tolist())
-    write("tests/test_lstm_output.json", output.tolist())
+    write("tests/test_lstm_input.json", data)
+    write("tests/test_lstm_output.json", output)
 
 
 def gen_gru():
@@ -2184,8 +1076,8 @@ def gen_gru():
 
     print(output.shape)
 
-    write("tests/test_gru_input.json", data.tolist())
-    write("tests/test_gru_output.json", output.tolist())
+    write("tests/test_gru_input.json", data)
+    write("tests/test_gru_output.json", output)
 
 
 # Generate ALL the tests:
