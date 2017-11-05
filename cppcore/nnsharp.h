@@ -41,7 +41,11 @@
 
 	namespace core {
 
-		struct nnsharp_status {
+		struct CORE_EXPORT nnsharp_status {
+
+			nnsharp_status(int id, char* message) :
+				id(id), message(message) {}
+
 			int id;
 			char* message;
 		};
@@ -60,18 +64,17 @@
 			struct Tensor {
 
 			public:
+				Tensor(DataType data_type, size_t dim, size_t* shape);
 
 				// Creaters.
-				static Tensor* Create(); // Creates a default tensor with 1 dimension and shape {1}. Value is 0.
-				static Tensor* Create(DataType data_type, size_t dim, size_t* shape); // All values are zeros.
+				//static Tensor* Create(); // Creates a default tensor with 1 dimension and shape {1}. Value is 0.
+				/*static Tensor* Create(DataType data_type, size_t dim, size_t* shape); // All values are zeros.
 				static Tensor* Ones(DataType data_type, size_t dim, size_t* shape); // All values are ones.
 				static Tensor* Random(DataType data_type, size_t dim, size_t* shape); // Creates a tensor with random values (0, 1). For test purposes.
-
+				*/
 				~Tensor();
 
 			protected:
-
-				Tensor(DataType data_type, size_t dim, size_t* shape);
 
 				DataType data_type;
 				void* values;
@@ -79,26 +82,20 @@
 				size_t* shape;
 			};
 
-			CORE_EXPORT extern nnsharp_status_p create_tensor_integer(int size, Tensor* tensor_ou);
-			CORE_EXPORT extern nnsharp_status_p ones_tensor_integer(int size, Tensor* tensor_ou);
-			CORE_EXPORT extern nnsharp_status_p random_tensor_integer(int size, Tensor* tensor_ou);
-			CORE_EXPORT extern nnsharp_status_p destroy_tensor_integer(Tensor* tensor);
-
-
-
-			class TensorInteger : public Tensor {
+			class CORE_EXPORT TensorInteger : public Tensor {
 
 			public:
+				TensorInteger(size_t size);
 
-				static TensorInteger* Create();
-				static TensorInteger* Create(size_t dim, size_t* shape); // All values are zeros.
-				static TensorInteger* Ones(size_t dim, size_t* shape); // All values are ones.
-				static TensorInteger* Random(size_t dim, size_t* shape); // Creates a tensor with random values (0, 1). For test purposes.
-
-															   // Access
+				// Access
 				void Get(size_t* indices, int* out_value) const;
 				void Set(size_t* indices, int in_value);
 			};
+
+			CORE_EXPORT extern nnsharp_status_p create_tensor_integer(int size, TensorInteger* tensor_ou);
+			/*CORE_EXPORT extern nnsharp_status_p ones_tensor_integer(int size, Tensor* tensor_ou);
+			CORE_EXPORT extern nnsharp_status_p random_tensor_integer(int size, Tensor* tensor_ou);
+			CORE_EXPORT extern nnsharp_status_p destroy_tensor_integer(Tensor* tensor);*/
 
 			/*class TensorInteger2D : public Tensor {
 
@@ -259,19 +256,19 @@
 
 		} // tensor
 
-		namespace layers {
+		/*namespace layers {
 
 			struct LayerDescriptor {
 				void* parameters;
 				char* layer_name;
 			};
 
-		} // functions
+		} // functions*/
 
 
 		// Model
 
-		namespace model {
+		/*namespace model {
 
 			struct SequentialModel {
 
@@ -284,7 +281,7 @@
 			CORE_EXPORT extern nnsharp_status_p build(SequentialModel* model);
 			CORE_EXPORT extern nnsharp_status_p predict(SequentialModel model, tensor::Tensor* input, tensor::Tensor* output);
 
-		} // model
+		} // model*/
 
 	} // core
 

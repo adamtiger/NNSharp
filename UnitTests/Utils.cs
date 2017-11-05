@@ -83,7 +83,7 @@ namespace UnitTests
             }
         }
 
-        static public void KerasModelTest(string pathIn, string pathModel, string pathOut)
+        static public void KerasModelTest(string pathIn, string pathModel, string pathOut, double accuracy = 0.00001)
         {
             var reader = new ReaderKerasModel(pathModel);
             SequentialModel model = reader.GetSequentialExecutor();
@@ -99,7 +99,6 @@ namespace UnitTests
             Utils.CheckDimensions(output, expected);
 
             // Checking calculation
-            double accuracy = 0.00001;
             Utils.CheckResults(output, expected, accuracy);
         }
     }
