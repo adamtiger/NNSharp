@@ -1,4 +1,5 @@
-﻿using NNSharp.DataTypes;
+﻿using NNSharp.BindingCore;
+using NNSharp.DataTypes;
 using NNSharp.IO;
 using NNSharp.KernelDescriptors;
 using NNSharp.Models;
@@ -27,7 +28,8 @@ namespace NNSharp
             Console.WriteLine(idx[1]);
             Console.ReadKey();*/
 
-            Conv2DLayer layer = new Conv2DLayer(0, 0, 1, 1);
+            // Convolution layer example
+            /*Conv2DLayer layer = new Conv2DLayer(0, 0, 1, 1);
 
             Data2D input = new Data2D(6, 5, 3, 1);
 
@@ -70,8 +72,12 @@ namespace NNSharp
             layer.SetInput(input);
             layer.Execute();
 
-            Data2D output = layer.GetOutput() as Data2D;
+            Data2D output = layer.GetOutput() as Data2D;*/
 
+            // Trying the binding functions.
+            IntPtr ptr = NativeFunctions.create_tensor_integer(5);
+            int v = NativeFunctions.tensor_integer_get(ptr, 0);
+            Console.WriteLine(v);
         }
     }
 }
