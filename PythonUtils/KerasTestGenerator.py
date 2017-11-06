@@ -651,7 +651,8 @@ def gen_repeatvector_tests():
     wrt = js.JSONwriter(model, "tests/test_repeatvector_model.json")
     wrt.save()
 
-    output = model.predict(inp[:, 0, 0, :], batch_size=1)
+    output = np.zeros((2, 1, 3, 4))
+    output[:, 0, :, :] = model.predict(inp[:, 0, 0, :], batch_size=1)
     print(output.shape)
 
     write("tests/test_repeatvector_input.json", inp)
