@@ -1,1 +1,1 @@
-{"model_type": "Sequential", "weights": [], "descriptors": [{"channel": 2, "height": 4, "batch": 1, "layer": "Input2D", "width": 5}, {"bottomTrim": 1, "topTrim": 1, "rightTrim": 2, "layer": "Cropping2D", "leftTrim": 1}]}
+{"descriptors": [{"height": 4, "width": 5, "layer": "Input2D", "channel": 2, "batch": 1}, {"topTrim": 1, "layer": "Cropping2D", "bottomTrim": 1, "rightTrim": 2, "leftTrim": 1}], "weights": [], "model_type": "Sequential"}

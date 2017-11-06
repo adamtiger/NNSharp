@@ -1,1 +1,1 @@
-{"model_type": "Sequential", "weights": [[[[[3.0, 1.0, 2.0, 5.0], [3.0, 2.0, 2.0, 5.0], [3.0, -1.0, 2.0, 5.0]]]]], "descriptors": [{"channel": 3, "height": 2, "batch": 1, "layer": "Input2D", "width": 1}, {"layer": "BatchNormalization", "epsilon": 0.001}]}
+{"descriptors": [{"height": 2, "width": 1, "layer": "Input2D", "channel": 3, "batch": 1}, {"layer": "BatchNormalization", "epsilon": 0.001}], "weights": [[[[[3.0, 1.0, 2.0, 5.0], [3.0, 2.0, 2.0, 5.0], [3.0, -1.0, 2.0, 5.0]]]]], "model_type": "Sequential"}

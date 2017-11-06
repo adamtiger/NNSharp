@@ -646,16 +646,12 @@ def gen_repeatvector_tests():
     model.add(RepeatVector(3, input_shape=(4,)))
     model.compile(optimizer='rmsprop', loss='mse')
 
-    inp = np.ndarray((2, 4))
-
-    for l in range(0, 4):
-        inp[0, l] = l + 1
-        inp[1, l] = -(l + 1)
+    inp, _  = data_generator((2, 1, 1, 4), None)#np.ndarray((2, 4))
 
     wrt = js.JSONwriter(model, "tests/test_repeatvector_model.json")
     wrt.save()
 
-    output = model.predict(inp, batch_size=1)
+    output = model.predict(inp[:, 0, 0, :], batch_size=1)
     print(output.shape)
 
     write("tests/test_repeatvector_input.json", inp)
