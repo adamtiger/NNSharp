@@ -980,7 +980,11 @@ def gen_simplernn():
     wrt.save()
 
     print(output.shape)
-
+    
+    inp = np.zeros((4, 1, 3, 3))
+    inp[:, 0, :, :] = data[:, :, :]
+    ou = np.zeros((4, 1, 1, 4))
+    ou[:, 0, 0, :] = output[:, :]
     write("tests/test_simplernn_input.json", data)
     write("tests/test_simplernn_output.json", output)
 
