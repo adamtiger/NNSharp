@@ -985,8 +985,8 @@ def gen_simplernn():
     inp[:, 0, :, :] = data[:, :, :]
     ou = np.zeros((4, 1, 1, 4))
     ou[:, 0, 0, :] = output[:, :]
-    write("tests/test_simplernn_input.json", data)
-    write("tests/test_simplernn_output.json", output)
+    write("tests/test_simplernn_input.json", inp)
+    write("tests/test_simplernn_output.json", ou)
 
 
 def gen_lstm():
@@ -1030,9 +1030,13 @@ def gen_lstm():
     wrt.save()
 
     print(output.shape)
-
-    write("tests/test_lstm_input.json", data)
-    write("tests/test_lstm_output.json", output)
+    
+    inp = np.zeros((5, 1, 3, 3))
+    ou = np.zeros((5, 1, 1, 2))
+    inp[:, 0, :, :] = data[:, :, :]
+    ou[:, 0, 0, :] = output[:, :]
+    write("tests/test_lstm_input.json", inp)
+    write("tests/test_lstm_output.json", ou)
 
 
 def gen_gru():
@@ -1077,8 +1081,12 @@ def gen_gru():
 
     print(output.shape)
 
-    write("tests/test_gru_input.json", data)
-    write("tests/test_gru_output.json", output)
+    inp = np.zeros((5, 1, 3, 3))
+    ou = np.zeros((5, 1, 1, 2))
+    inp[:, 0, :, :] = data[:, :, :]
+    ou[:, 0, 0, :] = output[:, :]
+    write("tests/test_gru_input.json", inp)
+    write("tests/test_gru_output.json", ou)
 
 
 # Generate ALL the tests:
