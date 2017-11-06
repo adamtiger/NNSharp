@@ -61,7 +61,7 @@ namespace UnitTests.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ..\..\..\PythonUtils\tests\.
+        ///   Looks up a localized string similar to ..\..\..\..\PythonUtils\tests\.
         /// </summary>
         internal static string TestsFolder {
             get {
