@@ -20,7 +20,7 @@ namespace UnitTests
             string pathInput = Resources.TestsFolder + "test_dropout_input.json";
             string pathOutput = Resources.TestsFolder + "test_dropout_output.json";
 
-            Utils.KerasModelTest(pathInput, pathModel, pathOutput);
+            Utils.KerasModelTest(pathInput, pathModel, pathOutput, 0.001);
         }
     }
 }
