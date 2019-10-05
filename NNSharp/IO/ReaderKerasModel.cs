@@ -202,6 +202,9 @@ namespace NNSharp.IO
                     case "TanH":
                         descriptor = new TanH();
                         break;
+                    case "LeakyReLu":
+                        descriptor = new LeakyReLu(1);
+                        break;
                     default:
                         throw new Exception("Unknown layer type!");
                 }
@@ -307,6 +310,8 @@ namespace NNSharp.IO
                     return SigmoidKernel.SigmoidLambda;
                 case "hard_sigmoid":
                     return HardSigmoidKernel.HardSigmoidLambda;
+                case "leakyrelu":
+                    return LeakyReLuKernel.LeakyReLuLambda;
                 default:
                     throw new Exception("Unknown activation.");
             }

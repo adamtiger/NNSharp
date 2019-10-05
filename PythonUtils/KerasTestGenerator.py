@@ -113,6 +113,9 @@ def generate_test_files():
 
     # HardSigmoid test
     gen_hard_sigmoid()  # OK
+	
+	# LeakyReLu test
+    gen_leakyrelu() 
 
     # ReLu test
     gen_relu()  # OK
@@ -723,6 +726,37 @@ def gen_hard_sigmoid():
 
     write("tests/test_hard_sigmoid_input.json", inp)
     write("tests/test_hard_sigmoid_output.json", output)
+	
+	
+# LeakyReLu test
+def gen_leakyrelu():
+    model = Sequential()
+
+    model.add(Flatten(input_shape=(8, 1, 1)))
+    model.add(Dense(4))
+    model.add(Activation('leakyrelu'))
+    model.compile(optimizer='rmsprop', loss='mse')
+
+    inp, weight = data_generator((1, 8, 1, 1), (8, 4))
+
+    bias = np.ndarray(4)
+
+    bias[0] = 0.5
+    bias[1] = 1.5
+    bias[2] = 1.0
+    bias[3] = 3.0
+
+    w = [weight, bias]
+    model.set_weights(w)
+
+    wrt = js.JSONwriter(model, "tests/test_leakyrelu_model.json")
+    wrt.save()
+
+    output = model.predict(inp, batch_size=1)
+    print(output.shape)
+
+    write("tests/test_leakyrelu_input.json", inp)
+    write("tests/test_leakyrelu_output.json", output)
 
 
 # ReLu test

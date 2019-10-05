@@ -85,6 +85,7 @@
     <Compile Include="TestDataArray.cs" />
     <Compile Include="TestDropout.cs" />
     <Compile Include="TestELu.cs" />
+    <Compile Include="TestLeakyReLu.cs" />
     <Compile Include="TestReLu.cs" />
     <Compile Include="TestSimpleRNN.cs" />
     <Compile Include="TestSoftmax.cs" />

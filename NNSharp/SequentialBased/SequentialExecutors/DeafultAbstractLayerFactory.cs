@@ -33,6 +33,7 @@ namespace NNSharp.SequentialBased.SequentialExecutors
             factories.Add(new GlobalMaxPool2DLayerFactory());
             factories.Add(new GRULayerFactory());
             factories.Add(new HardSigmoidLayerFactory());
+            factories.Add(new LeakyReLuLayerFactory());
             factories.Add(new Input2DLayerFactory());
             factories.Add(new LSTMLayerFactory());
             factories.Add(new MaxPool1DLayerFactory());

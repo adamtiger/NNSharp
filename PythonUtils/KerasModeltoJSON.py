@@ -324,6 +324,8 @@ class JSONwriter:
             layers.append({'layer':'SoftSign'})
         elif activation_name == 'tanh':
             layers.append({'layer':'TanH'})
+        elif activation_name == 'leakyrelu':
+            layers.append({'layer':'LeakyReLu'})
         else:
             raise NotImplementedError("Unknown Activation type.")      
     

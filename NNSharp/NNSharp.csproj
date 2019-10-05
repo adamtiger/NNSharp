@@ -108,6 +108,7 @@
     <Compile Include="KernelDescriptors\GRU.cs" />
     <Compile Include="KernelDescriptors\HardSigmoid.cs" />
     <Compile Include="KernelDescriptors\Input2D.cs" />
+    <Compile Include="KernelDescriptors\LeakyReLu.cs" />
     <Compile Include="KernelDescriptors\LSTM.cs" />
     <Compile Include="KernelDescriptors\MaxPooling1D.cs" />
     <Compile Include="KernelDescriptors\MaxPooling2D.cs" />
@@ -139,6 +140,7 @@
     <Compile Include="Kernels\CPUKernels\GlobalMaxPool2DKernel.cs" />
     <Compile Include="Kernels\CPUKernels\GRUKernel.cs" />
     <Compile Include="Kernels\CPUKernels\HardSigmoidKernel.cs" />
+    <Compile Include="Kernels\CPUKernels\LeakyReLuKernel.cs" />
     <Compile Include="Kernels\CPUKernels\LSTMKernel.cs" />
     <Compile Include="Kernels\CPUKernels\MaxPool1DKernel.cs" />
     <Compile Include="Kernels\CPUKernels\MaxPool2DKernel.cs" />
@@ -188,6 +190,8 @@
     <Compile Include="SequentialBased\SequentialLayers\GRULayerFactory.cs" />
     <Compile Include="SequentialBased\SequentialLayers\HardSigmoidLayer.cs" />
     <Compile Include="SequentialBased\SequentialLayers\HardSigmoidLayerFactory.cs" />
+    <Compile Include="SequentialBased\SequentialLayers\LeakyReLuLayer.cs" />
+    <Compile Include="SequentialBased\SequentialLayers\LeakyReLuLayerFactory.cs" />
     <Compile Include="SequentialBased\SequentialLayers\LSTMLayer.cs" />
     <Compile Include="SequentialBased\SequentialLayers\LSTMLayerFactory.cs" />
     <Compile Include="SequentialBased\SequentialLayers\MaxPool1DLayer.cs" />
