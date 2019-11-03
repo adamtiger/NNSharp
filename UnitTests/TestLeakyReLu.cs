@@ -45,10 +45,15 @@ namespace UnitTests
             Assert.AreEqual(output[1, 2, 0, 0], alpha * (-3), 0.00000001);
         }
 
-        /*[TestMethod]
+        [TestMethod]
         public void Test_LeakyReLu_KerasModel()
         {
-        }*/
+            string pathModel = Resources.TestsFolder + "test_leakyrelu_model.json";
+            string pathInput = Resources.TestsFolder + "test_leakyrelu_input.json";
+            string pathOutput = Resources.TestsFolder + "test_leakyrelu_output.json";
+
+            Utils.KerasModelTest(pathInput, pathModel, pathOutput, 0.0001);
+        }
 
         private LeakyReLuLayer leakyrelu;
     }

@@ -202,7 +202,7 @@ namespace NNSharp.IO
                     case "TanH":
                         descriptor = new TanH();
                         break;
-                    case "LeakyReLu":
+                    case "LeakyReLU":
                         descriptor = new LeakyReLu(1);
                         break;
                     default:

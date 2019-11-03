@@ -18,6 +18,7 @@ class JSONwriter:
     def __model_to_JSON(self, model):
         # Initialization
         conf = model.get_config()
+		print(conf)
         md = {'model_type':'Sequential'}
         md['descriptors'] = []
         
@@ -316,6 +317,8 @@ class JSONwriter:
             layers.append({'layer':'ELu'})
         elif activation_name == 'hard_sigmoid':
             layers.append({'layer':'HardSigmoid'})
+        elif activation_name == 'leakyrelu':
+            layers.append({'layer':'LeakyReLu'})
         elif activation_name == 'sigmoid':
             layers.append({'layer':'Sigmoid'})
         elif activation_name == 'softplus':

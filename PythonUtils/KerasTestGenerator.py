@@ -7,6 +7,7 @@ from keras.layers import Reshape, Permute, RepeatVector, GlobalMaxPooling1D, Glo
     GlobalAveragePooling2D
 from keras.layers import Cropping1D, Cropping2D, BatchNormalization, SimpleRNN, LSTM, GRU
 from keras.layers import Dropout, Convolution2D
+from keras.layers.advanced_activations import LeakyReLU
 import json
 
 
@@ -113,8 +114,8 @@ def generate_test_files():
 
     # HardSigmoid test
     gen_hard_sigmoid()  # OK
-	
-	# LeakyReLu test
+    
+    # LeakyReLu test
     gen_leakyrelu() 
 
     # ReLu test
@@ -157,7 +158,7 @@ def generate_test_files():
 def gen_dropout():
     model = Sequential()
     model.add(Convolution2D(8, (2, 2), strides=(2, 2), input_shape=(4, 4, 1), activation='relu'))
-    model.add(Dropout(0.8))
+    model.add(Dropout(rate=0.2))
     model.add(Flatten())
     model.add(Dense(2, activation='linear'))
 
@@ -726,15 +727,15 @@ def gen_hard_sigmoid():
 
     write("tests/test_hard_sigmoid_input.json", inp)
     write("tests/test_hard_sigmoid_output.json", output)
-	
-	
+    
+    
 # LeakyReLu test
 def gen_leakyrelu():
     model = Sequential()
 
     model.add(Flatten(input_shape=(8, 1, 1)))
     model.add(Dense(4))
-    model.add(Activation('leakyrelu'))
+    model.add(LeakyReLU())
     model.compile(optimizer='rmsprop', loss='mse')
 
     inp, weight = data_generator((1, 8, 1, 1), (8, 4))

@@ -17,7 +17,7 @@ class JSONwriter:
     
     def __model_to_JSON(self, model):
         # Initialization
-        conf = model.get_config()
+        conf = model.get_config()['layers']
         md = {'model_type':'Sequential'}
         md['descriptors'] = []
         
@@ -208,7 +208,11 @@ class JSONwriter:
             rec_act = layer_descr['config']['recurrent_activation']
             layers.append({'layer':'GRU', 'units':units, 'input_dim':input_dim, 'activation':activation, 'rec_act':rec_act})
             return layers
-           
+
+        elif 'LeakyReLU' == name:
+            layers.append({'layer': 'LeakyReLU'})
+            return layers
+
         else:
             raise NotImplementedError("Unknown layer type: " + name)  
     
@@ -316,6 +320,8 @@ class JSONwriter:
             layers.append({'layer':'ELu'})
         elif activation_name == 'hard_sigmoid':
             layers.append({'layer':'HardSigmoid'})
+        #elif activation_name == 'leakyrelu':
+           # layers.append({'layer':'LeakyReLu'})
         elif activation_name == 'sigmoid':
             layers.append({'layer':'Sigmoid'})
         elif activation_name == 'softplus':
@@ -324,8 +330,6 @@ class JSONwriter:
             layers.append({'layer':'SoftSign'})
         elif activation_name == 'tanh':
             layers.append({'layer':'TanH'})
-        elif activation_name == 'leakyrelu':
-            layers.append({'layer':'LeakyReLu'})
         else:
             raise NotImplementedError("Unknown Activation type.")      
     
