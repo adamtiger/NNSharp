@@ -1,0 +1,1 @@
+{"model_type": "Sequential", "descriptors": [{"layer": "Input2D", "height": 1, "width": 1, "channel": 4, "batch": 1}, {"layer": "RepeatVector", "num": 3}], "weights": []}
