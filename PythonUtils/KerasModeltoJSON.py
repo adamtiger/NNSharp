@@ -320,8 +320,6 @@ class JSONwriter:
             layers.append({'layer':'ELu'})
         elif activation_name == 'hard_sigmoid':
             layers.append({'layer':'HardSigmoid'})
-        #elif activation_name == 'leakyrelu':
-           # layers.append({'layer':'LeakyReLu'})
         elif activation_name == 'sigmoid':
             layers.append({'layer':'Sigmoid'})
         elif activation_name == 'softplus':
