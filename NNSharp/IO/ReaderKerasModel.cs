@@ -203,7 +203,7 @@ namespace NNSharp.IO
                         descriptor = new TanH();
                         break;
                     case "LeakyReLU":
-                        descriptor = new LeakyReLu(1);
+                        descriptor = new LeakyReLu(0.3);
                         break;
                     default:
                         throw new Exception("Unknown layer type!");
