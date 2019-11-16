@@ -210,7 +210,8 @@ class JSONwriter:
             return layers
 
         elif 'LeakyReLU' == name:
-            layers.append({'layer': 'LeakyReLU'})
+            alpha = layer_descr['config']['alpha']
+            layers.append({'layer': 'LeakyReLU', 'alpha': alpha})
             return layers
 
         else:

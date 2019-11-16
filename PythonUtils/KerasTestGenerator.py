@@ -116,7 +116,7 @@ def generate_test_files():
     gen_hard_sigmoid()  # OK
     
     # LeakyReLu test
-    gen_leakyrelu() 
+    gen_leakyrelu()  #OK
 
     # ReLu test
     gen_relu()  # OK
